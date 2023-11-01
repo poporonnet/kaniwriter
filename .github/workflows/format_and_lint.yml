@@ -1,0 +1,35 @@
+name: Format and Lint
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  format_and_lint:
+    name: Format and Lint Code
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout Repository
+       uses: actions/checkout@v4
+
+     - name: Set up bun
+       uses: oven-sh/setup-bun@v1
+       with:
+         bun-version: latest
+         
+     - name: Cache
+       uses: actions/cache@v3
+       with:
+         path: ~/.bun/install/cache
+         key: ${{ runner.os }}-bun-${{hashFiles('bun.lockb') }}
+         restore-keys: ${{ runner.os }}-bun-
+
+     - name: Install Dependencies
+       run: bun install
+
+     - name: Format Code
+       run: bun prettier
+
+     - name: Lint Code
+       run: bun format

@@ -32,7 +32,6 @@ const targets = [
 
 
 export function Home() {
-  const [step, setStep] = useState<number>(0);
   const [target, setTarget] = useState<string>("");
   let port;
   const [baud, setBaud] = useState<number>(115200);
@@ -134,7 +133,6 @@ export function Home() {
                   checked={target === value.title}
                   onChange={(e) => {
                     setTarget(e.target.value);
-                    if (step === 0) setStep(1);
                   }}
                 />
                 <FormLabel htmlFor={value.title}>
@@ -160,9 +158,7 @@ export function Home() {
 
         <Box sx={{ display: "flex", justifyContent: "center", margin: "1rem" }}>
           <Button
-            //disabled={step !== 2}
             onClick={() => {
-              if (step === 2) setStep(3);
               onConnectButtonClick();
             }}
           >
@@ -173,12 +169,11 @@ export function Home() {
 
         {/* 書き込み中 */}
         <Box sx={{ display: "flex", justifyContent: "center", margin: "1rem" }}>
-          <Button disabled={step !== 3} onClick={sendSerial}>
+          <Button onClick={sendSerial}>
             書き込み
             <Flag />
           </Button>
         </Box>
-        <Button onClick={() => setStep(0)}>リセット</Button>
       </Box>
     </div>
   );

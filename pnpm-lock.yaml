@@ -41,7 +41,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: ^20.8.10
-        version: 20.14.4
+        version: 20.14.5
       '@types/react':
         specifier: ^18.0.28
         version: 18.3.3
@@ -59,7 +59,7 @@ importers:
         version: 5.62.0(eslint@8.57.0)(typescript@5.4.5)
       '@vitejs/plugin-react':
         specifier: ^4.0.0
-        version: 4.3.1(vite@5.3.1(@types/node@20.14.4))
+        version: 4.3.1(vite@5.3.1(@types/node@20.14.5))
       eslint:
         specifier: ^8.41.0
         version: 8.57.0
@@ -86,7 +86,7 @@ importers:
         version: 5.4.5
       vite:
         specifier: ^5.0.0
-        version: 5.3.1(@types/node@20.14.4)
+        version: 5.3.1(@types/node@20.14.5)
 
 packages:
 
@@ -776,8 +776,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@20.14.4':
-    resolution: {integrity: sha512-1ChboN+57suCT2t/f8lwtPY/k3qTpuD/qnqQuYoBg6OQOcPyaw7PiZVdGpaZYAvhDDtqrt0oAaM8+oSu1xsUGw==}
+  '@types/node@20.14.5':
+    resolution: {integrity: sha512-aoRR+fJkZT2l0aGOJhuA8frnCSoNX6W7U2mpNq63+BxBIj5BQFt8rHy627kijCmm63ijdSdwvGgpUsU6MBsZZA==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -2651,7 +2651,7 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@20.14.4':
+  '@types/node@20.14.5':
     dependencies:
       undici-types: 5.26.5
 
@@ -2762,14 +2762,14 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react@4.3.1(vite@5.3.1(@types/node@20.14.4))':
+  '@vitejs/plugin-react@4.3.1(vite@5.3.1(@types/node@20.14.5))':
     dependencies:
       '@babel/core': 7.24.7
       '@babel/plugin-transform-react-jsx-self': 7.24.7(@babel/core@7.24.7)
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.24.7)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.3.1(@types/node@20.14.4)
+      vite: 5.3.1(@types/node@20.14.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -3965,13 +3965,13 @@ snapshots:
     dependencies:
       inherits: 2.0.3
 
-  vite@5.3.1(@types/node@20.14.4):
+  vite@5.3.1(@types/node@20.14.5):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.38
       rollup: 4.18.0
     optionalDependencies:
-      '@types/node': 20.14.4
+      '@types/node': 20.14.5
       fsevents: 2.3.3
 
   which-boxed-primitive@1.0.2:

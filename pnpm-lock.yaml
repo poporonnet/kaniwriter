@@ -25,7 +25,7 @@ importers:
         version: 5.16.7(@emotion/react@11.13.3(@types/react@18.3.9)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.9)(react@18.3.1))(@types/react@18.3.9)(react@18.3.1))(@types/react@18.3.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       anser:
         specifier: ^2.1.1
-        version: 2.2.0
+        version: 2.3.0
       base64-js:
         specifier: ^1.5.1
         version: 1.5.1
@@ -908,8 +908,8 @@ packages:
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
 
-  anser@2.2.0:
-    resolution: {integrity: sha512-iSCG8+SSMC7Ux9QSeO50ZlhqeZOGYFY1jjGgDBLjmbpIsADMTQknuOYTqssera8KQhE/Tt6HTSjY/I+w4GSe+Q==}
+  anser@2.3.0:
+    resolution: {integrity: sha512-pGGR7Nq1K/i9KGs29PvHDXA8AsfZ3OiYRMDClT3FIC085Kbns9CJ7ogq9MEiGnrjd9THOGoh7B+kWzePHzZyJQ==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -2879,7 +2879,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  anser@2.2.0: {}
+  anser@2.3.0: {}
 
   ansi-regex@5.0.1: {}
 

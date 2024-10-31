@@ -12,7 +12,7 @@
     "format": "eslint src --fix && prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\""
   },
-  "packageManager": "pnpm@9.12.2",
+  "packageManager": "pnpm@9.12.3",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",

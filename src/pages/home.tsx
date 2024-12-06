@@ -22,6 +22,7 @@ import { CompilerSelector } from "components/CompilerSelector";
 import { ControlButton } from "components/ControlButton";
 import { Log } from "components/Log";
 import { SourceCodeTab } from "components/SourceCodeTab";
+import { UnsupportedBrowserModal } from "components/UnsupportedBrowserModal";
 import { useCompile } from "hooks/useCompile";
 import { useQuery } from "hooks/useQuery";
 import { Version, useVersions } from "hooks/useVersions";
@@ -225,8 +226,12 @@ export const Home = () => {
     i18n.changeLanguage(locale);
   }, [i18n]);
 
+  // WebSerialAPIに対応するブラウザかどうかを確認する
+  const supported = "serial" in navigator;
+
   return (
     <>
+      {!supported && <UnsupportedBrowserModal />}
       <Box
         sx={{
           mb: "0.5rem",

@@ -2,6 +2,7 @@ import {
   CheckCircleRounded as CheckCircleRoundedIcon,
   Edit as EditIcon,
   Flag as FlagIcon,
+  Plagiarism,
   Usb as UsbIcon,
   UsbOff as UsbOffIcon,
 } from "@mui/icons-material";
@@ -30,6 +31,7 @@ import { isTarget } from "libs/utility";
 import { useTranslation } from "react-i18next";
 import ESP32 from "/images/ESP32.png";
 import RBoard from "/images/Rboard.png";
+import { useCrc8 } from "../hooks/useCrc8";
 
 const targets = [
   {
@@ -51,6 +53,7 @@ const commands = [
   "reset",
   "help",
   "showprog",
+  "verify",
 ] as const;
 
 export const Home = () => {
@@ -98,6 +101,7 @@ export const Home = () => {
     }
   }, [t, connector]);
 
+  const crc8 = useCrc8(code);
   //１秒ごとに書き込みモードに入ることを試みる
   const tryEntry = useCallback(async () => {
     return new Promise<void>((resolve, reject) => {
@@ -159,8 +163,13 @@ export const Home = () => {
           }`
         );
       }
+      if (text == "verify" && res.isSuccess() && res.value.includes("+OK")) {
+        const hash = parseInt(res.value.split("+OK")[1], 16);
+        if (crc8 !== undefined && hash !== undefined)
+          connector.verify(crc8, hash);
+      }
     },
-    [t, connector]
+    [t, connector, crc8]
   );
 
   const writeCode = useCallback(async () => {
@@ -449,6 +458,14 @@ export const Home = () => {
               label={t("書き込み")}
               icon={<EditIcon />}
               onClick={writeCode}
+              disabled={
+                compileStatus.status !== "success" || !connector.isWriteMode
+              }
+            />
+            <ControlButton
+              label={t("検証")}
+              icon={<Plagiarism />}
+              onClick={() => send("verify")}
               disabled={
                 compileStatus.status !== "success" || !connector.isWriteMode
               }

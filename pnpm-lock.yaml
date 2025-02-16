@@ -25,7 +25,7 @@ importers:
         version: 6.4.4(@emotion/react@11.14.0(@types/react@18.3.18)(react@18.3.1))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@18.3.18)(react@18.3.1))(@types/react@18.3.18)(react@18.3.1))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       anser:
         specifier: ^2.1.1
-        version: 2.3.0
+        version: 2.3.2
       base64-js:
         specifier: ^1.5.1
         version: 1.5.1
@@ -823,8 +823,8 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0
 
-  anser@2.3.0:
-    resolution: {integrity: sha512-pGGR7Nq1K/i9KGs29PvHDXA8AsfZ3OiYRMDClT3FIC085Kbns9CJ7ogq9MEiGnrjd9THOGoh7B+kWzePHzZyJQ==}
+  anser@2.3.2:
+    resolution: {integrity: sha512-PMqBCBvrOVDRqLGooQb+z+t1Q0PiPyurUQeZRR5uHBOVZcW8B04KMmnT12USnhpNX2wCPagWzLVppQMUG3u0Dw==}
 
   babel-plugin-macros@3.1.0:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
@@ -1979,7 +1979,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  anser@2.3.0: {}
+  anser@2.3.2: {}
 
   babel-plugin-macros@3.1.0:
     dependencies:

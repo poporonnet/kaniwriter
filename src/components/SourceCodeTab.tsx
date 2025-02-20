@@ -46,10 +46,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
           variant="plain"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <Typography
-            fontFamily={"'M PLUS Rounded 1c', sans-serif"}
-            color="primary"
-          >
+          <Typography color="primary">
             {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
           </Typography>
         </Button>

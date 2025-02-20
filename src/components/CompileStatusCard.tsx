@@ -28,7 +28,6 @@ export const CompileStatusCard = ({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "'M PLUS Rounded 1c', sans-serif",
       }}
     >
       {status === "idle" && (

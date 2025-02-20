@@ -68,7 +68,6 @@ export const Header = () => {
             variant="h4"
             underline="none"
             color="inherit"
-            fontFamily="'M PLUS Rounded 1c', sans-serif"
             sx={{ ":hover": { color: "inherit" } }}
           >
             {t("書き込みツール")}
@@ -88,7 +87,6 @@ export const Header = () => {
             variant="body1"
             underline="none"
             color="inherit"
-            fontFamily="'M PLUS Rounded 1c', sans-serif"
             target="_blank"
             sx={{
               ":hover": { color: "inherit" },
@@ -109,8 +107,6 @@ export const Header = () => {
             <Translate fontSize="large" />
             <Sheet
               sx={{
-                p: "1rem",
-                m: "-1rem",
                 width: "7rem",
                 position: "absolute",
                 top: "calc(1.5rem + 50%)",

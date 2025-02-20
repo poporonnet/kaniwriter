@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0](https://github.com/poporonnet/kaniwriter/compare/v0.1.0...v0.2.0) (2025-02-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* チャンク最適化をv2のものに更新
+
+### Miscellaneous Chores
+
+* release 0.2.0 ([#425](https://github.com/poporonnet/kaniwriter/issues/425)) ([ab5e7f5](https://github.com/poporonnet/kaniwriter/commit/ab5e7f5a4f8294f1be8f12a1c1a03a17c32c1ed5))
+* チャンク最適化をv2のものに更新 ([3c30b31](https://github.com/poporonnet/kaniwriter/commit/3c30b31b0bb34c8254cae133450df5a0ac80e3a2))
+
 ## [0.1.0](https://github.com/poporonnet/kaniwriter/compare/v0.1.0...v0.1.0) (2024-12-04)
 
 

@@ -37,7 +37,7 @@
     "@types/w3c-web-serial": "^1.0.6",
     "@vitejs/plugin-react": "^4.0.0",
     "path": "^0.12.7",
-    "shiki": "^2.0.0",
+    "shiki": "^3.0.0",
     "typescript": "^5.0.2",
     "vite": "^6.0.0"
   },

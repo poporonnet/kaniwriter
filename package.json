@@ -8,7 +8,6 @@
     "build": "tsc && vite build",
     "build:ceres": "tsc && NODE_OPTIONS=--max-old-space-size=4096 vite build --mode ceres",
     "preview": "vite preview",
-    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"
   },

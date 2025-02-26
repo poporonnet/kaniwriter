@@ -1,4 +1,5 @@
 import { WritableStreamDefaultWriter } from "stream/web";
+import { calculateCrc8 } from "../utils/calculateCrc8";
 import { Failure, Result, Success } from "./result";
 
 export const targets = ["ESP32", "RBoard"] as const;
@@ -23,7 +24,7 @@ const enterWriteModeKeyword: Record<Target, RegExp> = {
 } as const;
 
 const exitWriteModeKeyword: Record<Target, RegExp> = {
-  ESP32: /mrubyc-esp32: End mrbwrite mode/,
+  ESP32: /mruby\/c v\d(.\d+)* start/,
   RBoard: /\+OK Execute mruby\/c\./,
 } as const;
 
@@ -237,8 +238,8 @@ export class MrubyWriterConnector {
 
   async writeCode(
     binary: Uint8Array,
-    option?: Partial<{ execute: boolean }>
-  ): Promise<Result<null, Error>> {
+    option?: Partial<{ execute: boolean; autoVerify: boolean }>
+  ): Promise<Result<string, Error>> {
     if (!this.port) {
       return Failure.error("No port.");
     }
@@ -257,12 +258,12 @@ export class MrubyWriterConnector {
 
     const writeRes = await this.sendData(binary);
     if (writeRes.isFailure()) return writeRes;
-
+    if (writeRes.value.startsWith("-ERR")) return writeRes;
     if (option?.execute) {
       await this.sendCommand("execute");
     }
-
-    return Success.value(null);
+    if (option?.autoVerify) await this.verify(binary);
+    return Success.value(writeRes.value);
   }
 
   private async sendData(
@@ -471,6 +472,9 @@ export class MrubyWriterConnector {
 
         await sleep(waitTimeMs);
       }
+      await writer.ready;
+      await writer.write(chunk);
+
       this.log("Writed", { chunk });
 
       return Success.value(null);
@@ -491,5 +495,27 @@ export class MrubyWriterConnector {
     }
 
     return Success.value(line);
+  }
+  async verify(code: Uint8Array) {
+    const crc = calculateCrc8(code);
+    const verifyRes = await this.sendCommand("verify");
+    console.log("verifyRes:", verifyRes);
+    if (verifyRes.isFailure()) return verifyRes;
+
+    const crcRes = verifyRes.value.match(/^\+OK (?<hash>[0-9a-zA-Z]+)\r?\n$/)
+      ?.groups?.hash;
+    console.log("crcRes", crcRes);
+    if (!crcRes) {
+      this.handleText("\r\n\u001b[31m Verify failed. \r\n");
+      return false;
+    }
+    console.log("crc", crc, "crcRes", parseInt(crcRes, 16));
+    if (crc === parseInt(crcRes, 16)) {
+      this.handleText("\r\n\u001b[32m Write success. \u001b[0m\r\n");
+      return true;
+    } else {
+      this.handleText("\r\n\u001b[31m Write failed. \r\n");
+      return false;
+    }
   }
 }

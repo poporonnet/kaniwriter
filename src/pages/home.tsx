@@ -13,8 +13,10 @@ import {
   RadioGroup,
   Sheet,
   radioClasses,
+  Checkbox,
+  Typography,
+  Input as JoyInput,
 } from "@mui/joy";
-import { Checkbox, FormControlLabel, Input, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 
 import { CompileStatusCard } from "components/CompileStatusCard";
@@ -270,7 +272,7 @@ export const Home = () => {
             }}
           >
             <Box sx={{ width: "calc(100% - 2rem)" }}>
-              <Typography variant="caption" color="GrayText">
+              <Typography level="body-xs">
                 {t("コンパイラバージョン")}
               </Typography>
               <CompilerSelector
@@ -301,7 +303,7 @@ export const Home = () => {
             }}
           >
             {!target && (
-              <Typography variant="body1" color="red">
+              <Typography textColor="red">
                 {t("書き込みターゲットを選択してください。")}
               </Typography>
             )}

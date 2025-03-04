@@ -65,7 +65,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       '@types/w3c-web-serial':
         specifier: ^1.0.6
-        version: 1.0.7
+        version: 1.0.8
       '@vitejs/plugin-react':
         specifier: ^4.0.0
         version: 4.3.4(vite@6.2.0(@types/node@22.13.7))
@@ -821,8 +821,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@types/w3c-web-serial@1.0.7':
-    resolution: {integrity: sha512-jzcwm//EZ0Z306L1/O1GXC3GthRd//9eaNB4/Yagm98UjEQViTzDS8bYvL+y+rTk1r9OFt9Yhp5pprUQFzSiiQ==}
+  '@types/w3c-web-serial@1.0.8':
+    resolution: {integrity: sha512-QQOT+bxQJhRGXoZDZGLs3ksLud1dMNnMiSQtBA0w8KXvLpXX4oM4TZb6J0GgJ8UbCaHo5s9/4VQT8uXy9JER2A==}
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
@@ -1976,7 +1976,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@types/w3c-web-serial@1.0.7': {}
+  '@types/w3c-web-serial@1.0.8': {}
 
   '@ungap/structured-clone@1.3.0': {}
 

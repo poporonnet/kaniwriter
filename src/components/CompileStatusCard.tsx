@@ -2,8 +2,7 @@ import {
   Check as CheckIcon,
   ErrorOutline as ErrorOutlineIcon,
 } from "@mui/icons-material";
-import { Box, Typography } from "@mui/joy";
-import { CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/joy";
 import { CompileStatus } from "hooks/useCompile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,13 +32,13 @@ export const CompileStatusCard = ({
       {status === "idle" && (
         <>
           {t("コンパイル待機中")}
-          <CircularProgress size="1.5rem" sx={{ ml: "1rem" }} />
+          <CircularProgress size="sm" thickness={2} sx={{ ml: "1rem" }} />
         </>
       )}
       {status === "compile" && (
         <>
           {t("コンパイル中")}
-          <CircularProgress size="1.5rem" sx={{ ml: "1rem" }} />
+          <CircularProgress size="sm" thickness={2} sx={{ ml: "1rem" }} />
         </>
       )}
       {status === "success" && (

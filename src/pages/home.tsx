@@ -378,27 +378,23 @@ export const Home = () => {
           </Box>
           <Box
             sx={{
+width: "100%",
+              px: "0.5rem",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "left",
+              gap: "1rem",
             }}
           >
-            <FormControlLabel
-              control={
-                <Checkbox
+                            <Checkbox
                   onChange={(ev) => {
                     const checked = ev.currentTarget.checked;
                     setAutoScroll(checked);
                   }}
                   checked={autoScroll}
-                />
-              }
-              label={t("自動スクロール")}
-              sx={{ color: "black" }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
+                              label={t("自動スクロール")}
+                          />
+                            <Checkbox
                   onChange={(ev) => {
                     const checked = ev.currentTarget.checked;
                     setAutoConnectMode(checked);
@@ -407,11 +403,8 @@ export const Home = () => {
                     if (checked) window.location.reload();
                   }}
                   checked={autoConnectMode}
-                />
-              }
-              label={t("自動接続(Experimental)")}
-              sx={{ color: "black" }}
-            />
+                              label={t("自動接続(Experimental)")}
+                          />
           </Box>
         </Box>
         <Box

@@ -15,7 +15,7 @@ import {
   radioClasses,
   Checkbox,
   Typography,
-  Input as JoyInput,
+  Input,
 } from "@mui/joy";
 import { useCallback, useEffect, useState } from "react";
 
@@ -378,7 +378,7 @@ export const Home = () => {
           </Box>
           <Box
             sx={{
-width: "100%",
+              width: "100%",
               px: "0.5rem",
               display: "flex",
               flexDirection: "column",
@@ -386,25 +386,25 @@ width: "100%",
               gap: "1rem",
             }}
           >
-                            <Checkbox
-                  onChange={(ev) => {
-                    const checked = ev.currentTarget.checked;
-                    setAutoScroll(checked);
-                  }}
-                  checked={autoScroll}
-                              label={t("自動スクロール")}
-                          />
-                            <Checkbox
-                  onChange={(ev) => {
-                    const checked = ev.currentTarget.checked;
-                    setAutoConnectMode(checked);
-                    localStorage.setItem("autoConnect", `${checked}`);
+            <Checkbox
+              onChange={(ev) => {
+                const checked = ev.currentTarget.checked;
+                setAutoScroll(checked);
+              }}
+              checked={autoScroll}
+              label={t("自動スクロール")}
+            />
+            <Checkbox
+              onChange={(ev) => {
+                const checked = ev.currentTarget.checked;
+                setAutoConnectMode(checked);
+                localStorage.setItem("autoConnect", `${checked}`);
 
-                    if (checked) window.location.reload();
-                  }}
-                  checked={autoConnectMode}
-                              label={t("自動接続(Experimental)")}
-                          />
+                if (checked) window.location.reload();
+              }}
+              checked={autoConnectMode}
+              label={t("自動接続(Experimental)")}
+            />
           </Box>
         </Box>
         <Box
@@ -490,6 +490,30 @@ width: "100%",
                 send(commandInput, { force: true, ignoreResponse: true })
               }
               value="Send"
+              variant="plain"
+              sx={{
+                padding: 0,
+                borderRadius: 0,
+                "--_Input-focusedHighlight": "transparent",
+                "::before": {
+                  transform: "scaleX(0)",
+                  transition: "transform 200ms",
+                },
+                "::after": {
+                  content: "''",
+                  position: "absolute",
+                  inset: 0,
+                  borderBottom: "1px solid rgba(0,0,0,0.42)",
+                  transition: "border-color 200ms",
+                },
+                ":hover::after": {
+                  borderBottom: "2px solid black",
+                },
+                ":is(.Mui-focused)::before": {
+                  borderBottom: "2px solid #1976d2",
+                  transform: "scaleX(1) translateX(0)",
+                },
+              }}
             />
           </Box>
         </Box>

@@ -12,7 +12,7 @@
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"
   },
-  "packageManager": "pnpm@10.4.1+sha256.4b702887986995933d4300836b04d6d02a43bc72b52e4f7e93a4ca608b959197",
+  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",

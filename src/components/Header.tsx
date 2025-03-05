@@ -139,6 +139,7 @@ export const Header = () => {
                         color: "var(--header-bg)",
                       },
                     }}
+                    key={locale}
                   >
                     {name}
                   </Button>

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/poporonnet/kaniwriter/compare/v0.2.0...v0.3.0) (2025-03-08)
+
+
+### Features
+
+* 日本語フォントをKosugi Maruに変更 ([#426](https://github.com/poporonnet/kaniwriter/issues/426)) ([e9ad42c](https://github.com/poporonnet/kaniwriter/commit/e9ad42ce6a264a742608d73f37a5fcf7c505f95d))
+
 ## [0.2.0](https://github.com/poporonnet/kaniwriter/compare/v0.1.0...v0.2.0) (2025-02-20)
 
 

@@ -1,6 +1,7 @@
 import {
   CheckCircleRounded as CheckCircleRoundedIcon,
   Edit as EditIcon,
+  FindInPage as FindInPageIcon,
   Flag as FlagIcon,
   Usb as UsbIcon,
   UsbOff as UsbOffIcon,
@@ -32,7 +33,6 @@ import { isTarget } from "libs/utility";
 import { useTranslation } from "react-i18next";
 import ESP32 from "/images/ESP32.png";
 import RBoard from "/images/Rboard.png";
-
 const targets = [
   {
     title: "RBoard",
@@ -53,6 +53,7 @@ const commands = [
   "reset",
   "help",
   "showprog",
+  "verify",
 ] as const;
 
 export const Home = () => {
@@ -67,6 +68,10 @@ export const Home = () => {
   const autoConnectItem = localStorage.getItem("autoConnect");
   const [autoConnectMode, setAutoConnectMode] = useState<boolean>(
     autoConnectItem === "true"
+  );
+  const autoVerifyItem = localStorage.getItem("autoVerify");
+  const [autoVerifyMode, setAutoVerifyMode] = useState<boolean>(
+    autoVerifyItem === "true"
   );
 
   const [connector] = useState<MrubyWriterConnector>(
@@ -167,12 +172,13 @@ export const Home = () => {
 
   const writeCode = useCallback(async () => {
     if (!code) return;
-    const res = await connector.writeCode(code);
+    const res = await connector.writeCode(code, { autoVerify: autoVerifyMode });
+    console.log(res);
     if (res.isFailure()) {
       notifyError(t("書き込み中にエラーが発生しました。"), res.error);
       console.error(res.error);
     }
-  }, [t, connector, code, notifyError]);
+  }, [t, connector, code, autoVerifyMode, notifyError]);
 
   const onChangeVersion = useCallback(
     (version: Version) => {
@@ -411,6 +417,20 @@ export const Home = () => {
               label={t("自動接続(Experimental)")}
               sx={{ color: "black" }}
             />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={(ev) => {
+                    const checked = ev.currentTarget.checked;
+                    setAutoVerifyMode(checked);
+                    localStorage.setItem("autoVerify", `${checked}`);
+                  }}
+                  checked={autoVerifyMode}
+                />
+              }
+              label={t("自動検証(Experimental)")}
+              sx={{ color: "black" }}
+            />
           </Box>
         </Box>
         <Box
@@ -444,6 +464,14 @@ export const Home = () => {
               label={t("書き込み")}
               icon={<EditIcon />}
               onClick={writeCode}
+              disabled={
+                compileStatus.status !== "success" || !connector.isWriteMode
+              }
+            />
+            <ControlButton
+              label={t("検証")}
+              icon={<FindInPageIcon />}
+              onClick={() => code && connector.verify(code)}
               disabled={
                 compileStatus.status !== "success" || !connector.isWriteMode
               }

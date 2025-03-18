@@ -7,6 +7,8 @@
 
 * エラーをAlertではなく通知形式での表示に変更 ([#434](https://github.com/poporonnet/kaniwriter/issues/434)) ([6d54b42](https://github.com/poporonnet/kaniwriter/commit/6d54b4202cc1ab3b785692237badf4c0ff98f828))
 * 日本語フォントをKosugi Maruに変更 ([#426](https://github.com/poporonnet/kaniwriter/issues/426)) ([e9ad42c](https://github.com/poporonnet/kaniwriter/commit/e9ad42ce6a264a742608d73f37a5fcf7c505f95d))
+* コードチェック機能の実装 ([#362](https://github.com/poporonnet/kaniwriter/pull/362)) ([d506e05](https://github.com/poporonnet/kaniwriter/commit/d506e05a1e59d7e2903b836a62156351a51d3fcd))
+* WebSerialAPIに対応していないブラウザで開くと警告のモーダルを出す ([#331](https://github.com/poporonnet/kaniwriter/pull/331)) ([091503f](https://github.com/poporonnet/kaniwriter/commit/091503fdc8bdfd6e8fa549601054a8d9cad8a11c))
 
 
 ### Bug Fixes

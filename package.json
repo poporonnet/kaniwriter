@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "build:ceres": "tsc && NODE_OPTIONS=--max-old-space-size=4096 vite build --mode ceres",
+    "dev": "react-router dev",
+    "build": "tsc && react-router build",
+    "build:ceres": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres",
     "preview": "vite preview",
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"

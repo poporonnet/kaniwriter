@@ -3,7 +3,7 @@ import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
-} from "react-router-dom";
+} from "react-router";
 import { Layout } from "routes/layout";
 
 export const router = createBrowserRouter(

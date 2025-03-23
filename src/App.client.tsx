@@ -1,5 +1,3 @@
-import { RouterProvider } from "react-router";
-import { router } from "routes/router";
 import "../i18n/i18n";
 import {
   CssVarsProvider,
@@ -13,6 +11,7 @@ import {
   createTheme,
 } from "@mui/material";
 import { NotificationProvider } from "components/NotificationProvider";
+import { Outlet } from "react-router";
 
 const muiTheme = createTheme({
   typography: {
@@ -33,7 +32,7 @@ export const App = () => (
     <CssVarsProvider theme={{ [JOY_THEME_ID]: joyTheme }}>
       <CssBaseline enableColorScheme />
       <NotificationProvider>
-        <RouterProvider router={router} />
+        <Outlet />
       </NotificationProvider>
     </CssVarsProvider>
   </ThemeProvider>

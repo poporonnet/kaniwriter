@@ -1,5 +1,5 @@
 import path from "path";
-import react from "@vitejs/plugin-react";
+import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig, loadEnv } from "vite";
 
 // https://vitejs.dev/config/
@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
 
   return {
-    plugins: [react()],
+    plugins: [reactRouter()],
     base: process.env.VITE_BASE_URL,
     resolve: {
       alias: {

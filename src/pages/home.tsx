@@ -56,7 +56,7 @@ const commands = [
   "verify",
 ] as const;
 
-export const Home = () => {
+const Home = () => {
   const [t, i18n] = useTranslation("ns1");
   const query = useQuery();
   const id = query.get("id") ?? undefined;
@@ -543,3 +543,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;

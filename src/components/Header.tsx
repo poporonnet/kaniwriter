@@ -1,5 +1,5 @@
 import { GitHub, Translate } from "@mui/icons-material";
-import { Button, Sheet, Box, Link } from "@mui/joy";
+import { Box, Button, Link, Sheet } from "@mui/joy";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import icon from "/images/logo.png";
@@ -120,7 +120,7 @@ export const Header = () => {
                     color: "var(--header-bg)",
                   },
                 }}
-                    key={locale}
+                key={locale}
               >
                 {name}
               </Button>

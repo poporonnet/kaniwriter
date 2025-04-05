@@ -2,7 +2,7 @@ import {
   Check as CheckIcon,
   ErrorOutline as ErrorOutlineIcon,
 } from "@mui/icons-material";
-import { Box, Typography, CircularProgress } from "@mui/joy";
+import { Box, CircularProgress, Typography } from "@mui/joy";
 import { CompileStatus } from "hooks/useCompile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

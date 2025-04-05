@@ -9,13 +9,15 @@ import {
 import {
   Autocomplete,
   Box,
+  Checkbox,
   FormLabel,
+  Input,
   Radio,
   RadioGroup,
   Sheet,
+  Typography,
   radioClasses,
 } from "@mui/joy";
-import { Checkbox, FormControlLabel, Input, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 
 import { CompileStatusCard } from "components/CompileStatusCard";
@@ -288,7 +290,7 @@ export const Home = () => {
             }}
           >
             <Box sx={{ width: "calc(100% - 2rem)" }}>
-              <Typography variant="caption" color="GrayText">
+              <Typography level="body-xs">
                 {t("コンパイラバージョン")}
               </Typography>
               <CompilerSelector
@@ -319,7 +321,7 @@ export const Home = () => {
             }}
           >
             {!target && (
-              <Typography variant="body1" color="red">
+              <Typography textColor="red">
                 {t("書き込みターゲットを選択してください。")}
               </Typography>
             )}
@@ -394,53 +396,41 @@ export const Home = () => {
           </Box>
           <Box
             sx={{
+              width: "100%",
+              px: "0.5rem",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "left",
+              gap: "1rem",
             }}
           >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={(ev) => {
-                    const checked = ev.currentTarget.checked;
-                    setAutoScroll(checked);
-                  }}
-                  checked={autoScroll}
-                />
-              }
+            <Checkbox
+              onChange={(ev) => {
+                const checked = ev.currentTarget.checked;
+                setAutoScroll(checked);
+              }}
+              checked={autoScroll}
               label={t("自動スクロール")}
-              sx={{ color: "black" }}
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={(ev) => {
-                    const checked = ev.currentTarget.checked;
-                    setAutoConnectMode(checked);
-                    localStorage.setItem("autoConnect", `${checked}`);
+            <Checkbox
+              onChange={(ev) => {
+                const checked = ev.currentTarget.checked;
+                setAutoConnectMode(checked);
+                localStorage.setItem("autoConnect", `${checked}`);
 
-                    if (checked) window.location.reload();
-                  }}
-                  checked={autoConnectMode}
-                />
-              }
+                if (checked) window.location.reload();
+              }}
+              checked={autoConnectMode}
               label={t("自動接続(Experimental)")}
-              sx={{ color: "black" }}
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={(ev) => {
-                    const checked = ev.currentTarget.checked;
-                    setAutoVerifyMode(checked);
-                    localStorage.setItem("autoVerify", `${checked}`);
-                  }}
-                  checked={autoVerifyMode}
-                />
-              }
+            <Checkbox
+              onChange={(ev) => {
+                const checked = ev.currentTarget.checked;
+                setAutoVerifyMode(checked);
+                localStorage.setItem("autoVerify", `${checked}`);
+              }}
+              checked={autoVerifyMode}
               label={t("自動検証(Experimental)")}
-              sx={{ color: "black" }}
             />
           </Box>
         </Box>
@@ -535,6 +525,30 @@ export const Home = () => {
                 send(commandInput, { force: true, ignoreResponse: true })
               }
               value="Send"
+              variant="plain"
+              sx={{
+                padding: 0,
+                borderRadius: 0,
+                "--_Input-focusedHighlight": "transparent",
+                "::before": {
+                  transform: "scaleX(0)",
+                  transition: "transform 200ms",
+                },
+                "::after": {
+                  content: "''",
+                  position: "absolute",
+                  inset: 0,
+                  borderBottom: "1px solid rgba(0,0,0,0.42)",
+                  transition: "border-color 200ms",
+                },
+                ":hover::after": {
+                  borderBottom: "2px solid black",
+                },
+                ":is(.Mui-focused)::before": {
+                  borderBottom: "2px solid #1976d2",
+                  transform: "scaleX(1) translateX(0)",
+                },
+              }}
             />
           </Box>
         </Box>

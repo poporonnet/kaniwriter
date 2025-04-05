@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.0.0](https://github.com/poporonnet/kaniwriter/compare/v0.2.0...v1.0.0) (2025-03-18)
+
+
+### Features
+
+* エラーをAlertではなく通知形式での表示に変更 ([#434](https://github.com/poporonnet/kaniwriter/issues/434)) ([6d54b42](https://github.com/poporonnet/kaniwriter/commit/6d54b4202cc1ab3b785692237badf4c0ff98f828))
+* 日本語フォントをKosugi Maruに変更 ([#426](https://github.com/poporonnet/kaniwriter/issues/426)) ([e9ad42c](https://github.com/poporonnet/kaniwriter/commit/e9ad42ce6a264a742608d73f37a5fcf7c505f95d))
+* コードチェック機能の実装 ([#362](https://github.com/poporonnet/kaniwriter/pull/362)) ([d506e05](https://github.com/poporonnet/kaniwriter/commit/d506e05a1e59d7e2903b836a62156351a51d3fcd))
+* WebSerialAPIに対応していないブラウザで開くと警告のモーダルを出す ([#331](https://github.com/poporonnet/kaniwriter/pull/331)) ([091503f](https://github.com/poporonnet/kaniwriter/commit/091503fdc8bdfd6e8fa549601054a8d9cad8a11c))
+
+
+### Bug Fixes
+
+* joyUIのAPI対応 ([ca95c38](https://github.com/poporonnet/kaniwriter/commit/ca95c383d66678139cfe57745197ad3edc385dfe))
+* Safariで背景のblurの表示がおかしくなるのを修正 ([e003043](https://github.com/poporonnet/kaniwriter/commit/e00304316b2493112555566d473e28476e183bae))
+* Typographyをmuiからjoyに修正 ([7ed79a2](https://github.com/poporonnet/kaniwriter/commit/7ed79a28324e112d74fc1e7e4c782f8916b8a103))
+* フォントを修正 ([41495f6](https://github.com/poporonnet/kaniwriter/commit/41495f6f0aff991303aa1474b30945f35546b974))
+* 自動検証の場合の処理を自動実行の前に ([54adee3](https://github.com/poporonnet/kaniwriter/commit/54adee38c2283491aa4857f045575b766cfbc838))
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([#463](https://github.com/poporonnet/kaniwriter/issues/463)) ([0382dc4](https://github.com/poporonnet/kaniwriter/commit/0382dc44c26ca0850c342460259ef8c00376cf33))
+
 ## [0.2.0](https://github.com/poporonnet/kaniwriter/compare/v0.1.0...v0.2.0) (2025-02-20)
 
 

@@ -1,3 +1,4 @@
+import { calculateCrc8 } from "../utils/calculateCrc8";
 import { Failure, Result, Success } from "./result";
 
 export const targets = ["ESP32", "RBoard"] as const;
@@ -22,7 +23,7 @@ const enterWriteModeKeyword: Record<Target, RegExp> = {
 } as const;
 
 const exitWriteModeKeyword: Record<Target, RegExp> = {
-  ESP32: /mrubyc-esp32: End mrbwrite mode/,
+  ESP32: /mruby\/c v\d(.\d+)* start/, // ESP32は終了時メッセージが出ないため、再起動時の開始時メッセージで判定
   RBoard: /\+OK Execute mruby\/c\./,
 } as const;
 
@@ -236,8 +237,8 @@ export class MrubyWriterConnector {
 
   async writeCode(
     binary: Uint8Array,
-    option?: Partial<{ execute: boolean }>
-  ): Promise<Result<null, Error>> {
+    option?: Partial<{ execute: boolean; autoVerify: boolean }>
+  ): Promise<Result<string, Error>> {
     if (!this.port) {
       return Failure.error("No port.");
     }
@@ -256,12 +257,22 @@ export class MrubyWriterConnector {
 
     const writeRes = await this.sendData(binary);
     if (writeRes.isFailure()) return writeRes;
+    if (writeRes.value.startsWith("-"))
+      return Failure.error("Failed to write.");
+
+    if (option?.autoVerify) {
+      const verifyRes = await this.verify(binary);
+      if (verifyRes.isFailure()) {
+        const clearRes = await this.sendCommand("clear");
+        if (clearRes.isFailure()) return clearRes;
+        return Failure.error("Failed to verify.");
+      }
+    }
 
     if (option?.execute) {
       await this.sendCommand("execute");
     }
-
-    return Success.value(null);
+    return Success.value(writeRes.value);
   }
 
   private async sendData(
@@ -490,5 +501,31 @@ export class MrubyWriterConnector {
     }
 
     return Success.value(line);
+  }
+  async verify(code: Uint8Array): Promise<Result<void, Error>> {
+    const correctHash = calculateCrc8(code);
+    const verifyRes = await this.sendCommand("verify");
+    if (verifyRes.isFailure()) return verifyRes;
+
+    const targetHash = verifyRes.value.match(
+      /^\+OK (?<hash>[0-9a-zA-Z]+)\r?\n$/
+    )?.groups?.hash;
+    if (!targetHash) {
+      this.handleText("\r\n\u001b[31m failed to verify. \r\n");
+      return Failure.error("Target hash is not found.");
+    }
+    this.log(
+      "correctHash",
+      correctHash,
+      "targetHash",
+      parseInt(targetHash, 16)
+    );
+    if (correctHash === parseInt(targetHash, 16)) {
+      this.handleText("\r\n\u001b[32m verify succeeded. \u001b[0m\r\n");
+      return Success.value(undefined);
+    } else {
+      this.handleText("\r\n\u001b[31m failed to verify. \r\n");
+      return Failure.error("Failed to verify.");
+    }
   }
 }

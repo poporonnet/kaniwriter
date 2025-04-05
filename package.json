@@ -1,31 +1,30 @@
 {
   "name": "kaniwriter",
   "private": true,
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "build:ceres": "tsc && NODE_OPTIONS=--max-old-space-size=4096 vite build --mode ceres",
     "preview": "vite preview",
-    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"
   },
-  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^6.0.0",
-    "@mui/joy": "5.0.0-beta.51",
-    "@mui/material": "^6.0.0",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/joy": "5.0.0-beta.52",
+    "@mui/material": "^7.0.0",
     "anser": "^2.1.1",
     "base64-js": "^1.5.1",
     "i18next": "^24.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.0.0",
-    "react-router-dom": "^7.0.0"
+    "react-router": "^7.4.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

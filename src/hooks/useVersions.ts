@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useEffect, useState } from "react";
 
 export type Version = string;
-type Status = "idle" | "load" | "success" | "error";
+export type Status = "idle" | "load" | "success" | "error";
 type VersionsResponse = { version: Version }[];
 
 export const useVersions = (): [versions: Version[], status: Status] => {

@@ -3,16 +3,16 @@ import {
   ErrorOutline as ErrorOutlineIcon,
 } from "@mui/icons-material";
 import { Box, CircularProgress, Typography } from "@mui/joy";
-import { CompileStatus } from "hooks/useCompile";
+import { CompileStatus as CompileStatusType } from "hooks/useCompile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ErrorDetailModal } from "./ErrorMessageModal";
 
-export const CompileStatusCard = ({
+export const CompileStatus = ({
   status,
   errorName,
   errorBody,
-}: CompileStatus) => {
+}: CompileStatusType) => {
   const [t] = useTranslation();
   const [isOpenErrorDetail, setIsOpenErrorDetail] = useState(false);
 
@@ -56,13 +56,7 @@ export const CompileStatusCard = ({
           justifyContent="center"
           textAlign="center"
         >
-          <Box
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-          >
+          <Box display="flex" justifyContent="center">
             {t("コンパイル失敗")}
             <ErrorOutlineIcon color="error" />
           </Box>

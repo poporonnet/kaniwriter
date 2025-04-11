@@ -22,14 +22,14 @@ type CodeResponse = {
 
 export const useCompile = (
   id: string | undefined,
-  setCode: (code: Uint8Array) => void
-): [status: CompileStatus, sourceCode: string, compile: Compile] => {
+  setCode: (code: Uint8Array) => void,
+  setSourceCode: (sourceCode: string) => void
+): [status: CompileStatus, compile: Compile] => {
   const [status, setStatus] = useState<CompileStatus>({
     status: "idle",
   });
 
   // 送信したmruby/cのソースコード
-  const [sourceCode, setSourceCode] = useState<string>("");
 
   const compile = useCallback(
     async (version: Version) => {
@@ -92,8 +92,8 @@ export const useCompile = (
       setCode(Base64.toByteArray(compileResult.binary));
       setStatus({ status: "success" });
     },
-    [id, setCode]
+    [id, setCode, setSourceCode]
   );
 
-  return [status, sourceCode, compile];
+  return [status, compile];
 };

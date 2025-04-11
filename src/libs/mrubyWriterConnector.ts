@@ -12,6 +12,8 @@ type Writer = WritableStreamDefaultWriter<Uint8Array>;
 type Event = "SuccessToEnterWriteMode" | "SuccessToExitWriteMode";
 type Job = { job: Promise<Result<unknown, Error>>; description: string };
 
+export type Config = { target?: Target; log: Logger; onListen?: Listener };
+
 const baudRates: Record<Target, number> = {
   ESP32: 115200,
   RBoard: 19200,
@@ -43,7 +45,7 @@ export class MrubyWriterConnector {
   private currentSubReader: Reader | undefined;
   private jobQueue: Job[];
 
-  constructor(config: { target?: Target; log: Logger; onListen?: Listener }) {
+  constructor(config: Config) {
     this.target = config.target;
     this.log = config.log;
     this.onListen = config.onListen;

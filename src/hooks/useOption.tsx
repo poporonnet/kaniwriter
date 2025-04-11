@@ -1,10 +1,10 @@
+import { OptionList } from "components/OptionList";
 import { ComponentType, useState } from "react";
 import { useStoreState } from "./useStoreState";
-import { OptionList } from "components/OptionList";
 
 type UseOptionList = [
   list: ComponentType,
-  { autoScroll: boolean; autoConnect: boolean; autoVerify: boolean }
+  { autoScroll: boolean; autoConnect: boolean; autoVerify: boolean },
 ];
 
 export const useOption = (): UseOptionList => {

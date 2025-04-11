@@ -9,7 +9,7 @@ type UseCompilerCard = [
     code: Uint8Array | undefined;
     sourceCode: string;
     compileStatus: CompileStatus;
-  }
+  },
 ];
 
 export const useCompiler = (id: string | undefined): UseCompilerCard => {

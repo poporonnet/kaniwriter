@@ -41,9 +41,7 @@ export const CompilerCard = ({
       }}
     >
       <Box sx={{ width: "calc(100% - 2rem)" }}>
-        <Typography level="body-xs">
-          {t("コンパイラバージョン")}
-        </Typography>
+        <Typography level="body-xs">{t("コンパイラバージョン")}</Typography>
         <CompilerSelector
           versions={versions.sort()}
           version={version || ""}

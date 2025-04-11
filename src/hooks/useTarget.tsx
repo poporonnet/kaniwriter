@@ -1,12 +1,12 @@
-import { Target } from "libs/mrubyWriterConnector";
-import { useStoreState } from "./useStoreState";
-import { isTarget } from "libs/utility";
 import { TargetSelector } from "components/TargetSelector";
+import { Target } from "libs/mrubyWriterConnector";
+import { isTarget } from "libs/utility";
 import { ComponentType } from "react";
+import { useStoreState } from "./useStoreState";
 
 type UseTargetSelector = [
   selector: ComponentType,
-  { target: Target | undefined }
+  { target: Target | undefined },
 ];
 
 export const useTarget = (

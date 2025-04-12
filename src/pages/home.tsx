@@ -8,6 +8,7 @@ import {
 import { Box } from "@mui/joy";
 import { useCallback, useEffect, useState } from "react";
 
+import { CommandInput } from "components/CommandInput";
 import { ControlButton } from "components/ControlButton";
 import { Log } from "components/Log";
 import { SourceCodeTab } from "components/SourceCodeTab";
@@ -18,7 +19,6 @@ import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
 import { useTranslation } from "react-i18next";
-import { CommandInput } from "components/CommandInput";
 
 export const Home = () => {
   const [t, i18n] = useTranslation("ns1");

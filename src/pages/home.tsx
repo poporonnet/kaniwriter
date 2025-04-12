@@ -5,7 +5,7 @@ import {
   Usb as UsbIcon,
   UsbOff as UsbOffIcon,
 } from "@mui/icons-material";
-import { Autocomplete, Box, Input } from "@mui/joy";
+import { Box } from "@mui/joy";
 import { useCallback, useEffect, useState } from "react";
 
 import { ControlButton } from "components/ControlButton";
@@ -18,28 +18,13 @@ import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
 import { useTranslation } from "react-i18next";
-
-// マイコンに送信可能なコマンド
-const commands = [
-  "version",
-  "clear",
-  "write",
-  "execute",
-  "reset",
-  "help",
-  "showprog",
-  "verify",
-] as const;
+import { CommandInput } from "components/CommandInput";
 
 export const Home = () => {
   const [t, i18n] = useTranslation("ns1");
   const query = useQuery();
   const id = query.get("id") ?? undefined;
 
-  // コマンド入力フィールドのエンターキーで確定された現在の値
-  const [commandValue, setCommandValue] = useState("");
-  // コマンド入力フィールドに現在入力されている文字列
-  const [commandInput, setCommandInput] = useState("");
   const [log, setLog] = useState<string[]>([]);
 
   const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(id);
@@ -177,68 +162,11 @@ export const Home = () => {
               color="danger"
             />
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "right",
-            }}
-          >
-            <Autocomplete
-              placeholder={t("コマンド")}
-              options={commands}
-              variant="plain"
-              color="neutral"
-              value={commandValue}
-              inputValue={commandInput}
-              onChange={(_, v) => setCommandValue(v ?? "")}
-              onInputChange={(_, v) => setCommandInput(v ?? "")}
-              autoHighlight
-              autoComplete
-              freeSolo
-              sx={{
-                borderRadius: "0",
-                borderBottom: "solid",
-                borderWidth: "1px",
-                borderColor: "rgba(0, 0, 0, 0.42)",
-                width: "12rem",
-              }}
-            />
-            <Input
-              type="submit"
-              onClick={() =>
-                method.sendCommand(commandInput, {
-                  force: true,
-                  ignoreResponse: true,
-                })
-              }
-              value="Send"
-              variant="plain"
-              sx={{
-                padding: 0,
-                borderRadius: 0,
-                "--_Input-focusedHighlight": "transparent",
-                "::before": {
-                  transform: "scaleX(0)",
-                  transition: "transform 200ms",
-                },
-                "::after": {
-                  content: "''",
-                  position: "absolute",
-                  inset: 0,
-                  borderBottom: "1px solid rgba(0,0,0,0.42)",
-                  transition: "border-color 200ms",
-                },
-                ":hover::after": {
-                  borderBottom: "2px solid black",
-                },
-                ":is(.Mui-focused)::before": {
-                  borderBottom: "2px solid #1976d2",
-                  transform: "scaleX(1) translateX(0)",
-                },
-              }}
-            />
-          </Box>
+          <CommandInput
+            onSubmit={(command) =>
+              method.sendCommand(command, { force: true, ignoreResponse: true })
+            }
+          />
         </Box>
       </Box>
       <SourceCodeTab sourceCode={sourceCode} />

@@ -1,16 +1,23 @@
 import { OptionList } from "components/OptionList";
-import { ComponentType, useState } from "react";
+import { ComponentType, useMemo, useState } from "react";
 import { useStoreState } from "./useStoreState";
 
-type UseOption = [
-  list: ComponentType,
-  { autoScroll: boolean; autoConnect: boolean; autoVerify: boolean },
-];
+export type Option = {
+  autoScroll: boolean;
+  autoConnect: boolean;
+  autoVerify: boolean;
+};
+
+type UseOption = [list: ComponentType, Option];
 
 export const useOption = (): UseOption => {
   const [autoScroll, setAutoScroll] = useState(true);
   const [autoConnect, setAutoConnect] = useStoreState("autoConnect", false);
   const [autoVerify, setAutoVerify] = useStoreState("autoVerify", false);
+  const option = useMemo(
+    () => ({ autoScroll, autoConnect, autoVerify }),
+    [autoScroll, autoConnect, autoVerify]
+  );
 
   return [
     () => (
@@ -26,6 +33,6 @@ export const useOption = (): UseOption => {
         setAutoVerify={setAutoVerify}
       />
     ),
-    { autoScroll, autoConnect, autoVerify },
+    option,
   ];
 };

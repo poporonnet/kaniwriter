@@ -5,7 +5,7 @@ import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useNotify } from "./useNotify";
 
-type Method = {
+export type Method = {
   connect: (
     ...props: Parameters<MrubyWriterConnector["connect"]>
   ) => Promise<Result<void, Error>>;
@@ -165,9 +165,8 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
     [connector, notify, notifyError]
   );
 
-  return {
-    connector,
-    method: {
+  const method = useMemo(
+    (): Method => ({
       connect,
       disconnect,
       startListen,
@@ -176,6 +175,21 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
       sendCommand,
       writeCode,
       verify,
-    },
+    }),
+    [
+      connect,
+      disconnect,
+      startListen,
+      tryEnterWriteMode,
+      startEnter,
+      sendCommand,
+      writeCode,
+      verify,
+    ]
+  );
+
+  return {
+    connector,
+    method,
   };
 };

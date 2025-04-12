@@ -1,5 +1,11 @@
 import { CompilerCard } from "components/CompilerCard";
-import { ComponentType, useCallback, useEffect, useState } from "react";
+import {
+  ComponentType,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { type CompileStatus, useCompile } from "./useCompile";
 import { Version, useVersions } from "./useVersions";
 
@@ -28,6 +34,11 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
     [compile]
   );
 
+  const results = useMemo(
+    () => ({ code, sourceCode, compileStatus }),
+    [code, sourceCode, compileStatus]
+  );
+
   useEffect(() => {
     if (getVersionsStatus != "success") return;
     const version =
@@ -47,6 +58,6 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
         onChangeVersion={onChangeVersion}
       />
     ),
-    { code, sourceCode, compileStatus },
+    results,
   ];
 };

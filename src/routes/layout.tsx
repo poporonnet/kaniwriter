@@ -5,12 +5,10 @@ import { Outlet } from "react-router";
 export const Layout = () => (
   <Box
     sx={{
-      width: "fit-content",
-      height: "fit-content",
-      minWidth: "100vw",
+      width: "100%",
       minHeight: "100vh",
+      minWidth: "44rem",
       "&": {
-        minWidth: "100dvw",
         minHeight: "100dvh",
       },
       background: "white",
@@ -18,10 +16,21 @@ export const Layout = () => (
       flexDirection: "column",
       gap: "2rem",
       alignItems: "center",
-      justifyContent: "center",
     }}
   >
     <Header />
-    <Outlet />
+    <Box
+      sx={{
+        width: "100%",
+        pl: "2rem",
+        pr: "1rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "2.5rem",
+      }}
+    >
+      <Outlet />
+    </Box>
   </Box>
 );

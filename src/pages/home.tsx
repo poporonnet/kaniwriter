@@ -249,19 +249,17 @@ export const Home = () => {
       <UnsupportedBrowserModal defaultOpen={!isSupported} />
       <Box
         sx={{
-          mb: "0.5rem",
           display: "flex",
           width: "100%",
           minWidth: "30rem",
           maxWidth: "65rem",
-          flexDirection: "row",
           flexGrow: "1",
           gap: "1rem",
+          alignSelf: "center",
         }}
       >
         <Box
           sx={{
-            marginLeft: "2rem",
             width: "15rem",
             minWidth: "15rem",
             display: "flex",

@@ -3,7 +3,7 @@ import { ComponentType, useCallback, useEffect, useState } from "react";
 import { type CompileStatus, useCompile } from "./useCompile";
 import { Version, useVersions } from "./useVersions";
 
-type UseCompilerCard = [
+type UseCompiler = [
   card: ComponentType,
   {
     code: Uint8Array | undefined;
@@ -12,7 +12,7 @@ type UseCompilerCard = [
   },
 ];
 
-export const useCompiler = (id: string | undefined): UseCompilerCard => {
+export const useCompiler = (id: string | undefined): UseCompiler => {
   const [version, setVersion] = useState<Version | undefined>();
   const [versions, getVersionsStatus] = useVersions();
   const [code, setCode] = useState<Uint8Array>();

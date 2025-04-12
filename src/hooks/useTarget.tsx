@@ -4,14 +4,14 @@ import { isTarget } from "libs/utility";
 import { ComponentType } from "react";
 import { useStoreState } from "./useStoreState";
 
-type UseTargetSelector = [
+type UseTarget = [
   selector: ComponentType,
   { target: Target | undefined },
 ];
 
 export const useTarget = (
   onSelect: (target: Target) => void
-): UseTargetSelector => {
+): UseTarget => {
   const [target, setTarget] = useStoreState<Target | undefined>(
     "target",
     undefined,

@@ -1,19 +1,12 @@
-import {
-  Edit as EditIcon,
-  FindInPage as FindInPageIcon,
-  Flag as FlagIcon,
-  Usb as UsbIcon,
-  UsbOff as UsbOffIcon,
-} from "@mui/icons-material";
 import { Box } from "@mui/joy";
 import { useCallback, useEffect, useState } from "react";
 
 import { CommandInput } from "components/CommandInput";
-import { ControlButton } from "components/ControlButton";
 import { Log } from "components/Log";
 import { SourceCodeTab } from "components/SourceCodeTab";
 import { UnsupportedBrowserModal } from "components/UnsupportedBrowserModal";
 import { useCompiler } from "hooks/useCompiler";
+import { useControlButtons } from "hooks/useControlButtons";
 import { useMrbwrite } from "hooks/useMrbwrite";
 import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
@@ -21,7 +14,7 @@ import { useTarget } from "hooks/useTarget";
 import { useTranslation } from "react-i18next";
 
 export const Home = () => {
-  const [t, i18n] = useTranslation("ns1");
+  const { i18n } = useTranslation("ns1");
   const query = useQuery();
   const id = query.get("id") ?? undefined;
 
@@ -31,7 +24,7 @@ export const Home = () => {
   const [TargetSelector, { target }] = useTarget((target) =>
     connector.setTarget(target)
   );
-  const [OptionList, { autoScroll, autoConnect, autoVerify }] = useOption();
+  const [OptionList, option] = useOption();
 
   const { connector, method } = useMrbwrite({
     target,
@@ -51,18 +44,29 @@ export const Home = () => {
     [method]
   );
 
+  const [ControlButtons] = useControlButtons(
+    code,
+    target,
+    compileStatus,
+    option,
+    connector,
+    method,
+    startConnection
+  );
+
   useEffect(() => {
-    if (!autoConnect) return;
+    if (!option.autoConnect) return;
 
     const tryAutoConnect = async () => {
       const ports = await navigator.serial.getPorts();
+      console.log(ports);
       if (ports.length == 0) return;
 
       startConnection(async () => ports[0]);
     };
 
     tryAutoConnect();
-  }, [autoConnect, startConnection]);
+  }, [option.autoConnect, startConnection]);
 
   useEffect(() => {
     const locale = localStorage.getItem("locale");
@@ -112,56 +116,8 @@ export const Home = () => {
             gap: "1rem",
           }}
         >
-          <Log log={log} autoScroll={autoScroll} />
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "right",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
-            <ControlButton
-              label={t("接続")}
-              icon={<UsbIcon />}
-              onClick={() => startConnection()}
-              disabled={!target || connector.isConnected}
-            />
-            <ControlButton
-              label={t("書き込み")}
-              icon={<EditIcon />}
-              onClick={() => code && method.writeCode(code, { autoVerify })}
-              disabled={
-                compileStatus.status !== "success" || !connector.isWriteMode
-              }
-            />
-            <ControlButton
-              label={t("検証")}
-              icon={<FindInPageIcon />}
-              onClick={() => code && method.verify(code)}
-              disabled={
-                compileStatus.status !== "success" || !connector.isWriteMode
-              }
-            />
-            <ControlButton
-              label={t("実行")}
-              icon={<FlagIcon />}
-              onClick={() =>
-                method.sendCommand("execute", { ignoreResponse: true })
-              }
-              disabled={!connector.isWriteMode}
-              color="success"
-            />
-            <ControlButton
-              label={t("切断")}
-              icon={<UsbOffIcon />}
-              onClick={() => method.disconnect()}
-              disabled={!connector.isConnected}
-              color="danger"
-            />
-          </Box>
+          <Log log={log} autoScroll={option.autoScroll} />
+          <ControlButtons />
           <CommandInput
             onSubmit={(command) =>
               method.sendCommand(command, { force: true, ignoreResponse: true })

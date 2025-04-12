@@ -9,10 +9,11 @@ const getItem = <T>(key: string, fallback: T, validator?: Validator<T>): T => {
 
   try {
     const value: unknown = JSON.parse(json);
-    if (!validator?.(value)) return fallback;
+    if (validator && !validator(value)) return fallback;
 
     return value as T;
-  } catch {
+  } catch (err) {
+    console.error(err);
     return fallback;
   }
 };

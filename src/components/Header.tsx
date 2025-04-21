@@ -1,6 +1,5 @@
 import { GitHub, Translate } from "@mui/icons-material";
-import { Button, Sheet } from "@mui/joy";
-import { AppBar, Box, Link, Toolbar } from "@mui/material";
+import { Box, Button, Link, Sheet } from "@mui/joy";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import icon from "/images/logo.png";
@@ -26,144 +25,119 @@ export const Header = () => {
   );
 
   return (
-    <AppBar
-      position="static"
-      id={"header"}
+    <Sheet
+      component="header"
+      id="header"
       sx={{
-        "--header-bg": "#ff3227",
+        position: "static",
         height: "4rem",
-        backgroundColor: "var(--header-bg)",
         width: "100%",
         whiteSpace: "nowrap",
+        backgroundColor: "#ff3227",
+        display: "flex",
+        alignItems: "center",
+        color: "white",
+        boxShadow: "0px 4px 5px rgba(0,0,0,0.25)",
+        gap: "2rem",
+        pr: "2rem",
       }}
     >
-      <Toolbar
-        disableGutters
+      <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
+          height: "100%",
+          gap: "0.4rem",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: "22rem",
+        <img
+          src={icon}
+          alt={t("RubyCity松江のロゴ")}
+          style={{
             height: "100%",
-            gap: "0.4rem",
+          }}
+        />
+        <Link
+          href={import.meta.env.VITE_BASE_URL}
+          fontSize="2.125rem"
+          underline="none"
+          sx={{ color: "inherit" }}
+        >
+          {t("書き込みツール")}
+        </Link>
+      </Box>
+      <Box flex={1} />
+      <Link
+        href={import.meta.env.VITE_REFERENCE_URL}
+        textColor="inherit"
+        underline="none"
+        target="_blank"
+      >
+        {t("参考資料")}
+      </Link>
+      <Box
+        sx={{
+          display: "flex",
+          position: "relative",
+          "&:hover > div": {
+            opacity: 1,
+            visibility: "visible",
+          },
+        }}
+      >
+        <Translate fontSize="large" />
+        <Sheet
+          sx={{
+            width: "7rem",
+            position: "absolute",
+            top: "calc(1.5rem + 50%)",
+            left: "calc(-3.5rem + 50%)",
+            zIndex: "1",
+            background: "transparent",
+            transition: "all 100ms ease-in-out",
+            opacity: 0,
+            visibility: "hidden",
           }}
         >
-          <img
-            src={icon}
-            alt={t("RubyCity松江のロゴ")}
-            style={{
-              margin: 0,
-              padding: 0,
-              height: "100%",
-            }}
-          />
-          <Link
-            href={import.meta.env.VITE_BASE_URL}
-            variant="h4"
-            underline="none"
-            color="inherit"
-            sx={{ ":hover": { color: "inherit" } }}
-          >
-            {t("書き込みツール")}
-          </Link>
-        </Box>
-        <Box
-          sx={{
-            height: "100%",
-            mr: "2rem",
-            display: "flex",
-            gap: "2rem",
-            alignItems: "center",
-          }}
-        >
-          <Link
-            href={import.meta.env.VITE_REFERENCE_URL}
-            variant="body1"
-            underline="none"
-            color="inherit"
-            target="_blank"
-            sx={{
-              ":hover": { color: "inherit" },
-            }}
-          >
-            {t("参考資料")}
-          </Link>
-          <Box
+          <Sheet
             sx={{
               display: "flex",
-              position: "relative",
-              "&:hover > div": {
-                opacity: 1,
-                visibility: "visible",
-              },
+              flexDirection: "column",
+              background: "white",
+              boxShadow: "lg",
+              borderRadius: "0.2rem",
             }}
           >
-            <Translate fontSize="large" />
-            <Sheet
-              sx={{
-                width: "7rem",
-                position: "absolute",
-                top: "calc(1.5rem + 50%)",
-                left: "calc(-3.5rem + 50%)",
-                zIndex: "1",
-                background: "transparent",
-                transition: "all 100ms ease-in-out",
-                opacity: 0,
-                visibility: "hidden",
-              }}
-            >
-              <Sheet
+            {languages.map(({ locale, name }) => (
+              <Button
+                variant="plain"
+                onClick={() => setLanguage(locale)}
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  background: "white",
-                  boxShadow: "lg",
-                  borderRadius: "0.2rem",
+                  color: "black",
+                  transition: "all 100ms ease-in-out",
+                  ":hover": {
+                    background: "white",
+                    color: "var(--header-bg)",
+                  },
                 }}
+                key={locale}
               >
-                {languages.map(({ locale, name }) => (
-                  <Button
-                    variant="plain"
-                    onClick={() => setLanguage(locale)}
-                    sx={{
-                      color: "black",
-                      transition: "all 100ms ease-in-out",
-                      ":hover": {
-                        background: "white",
-                        color: "var(--header-bg)",
-                      },
-                    }}
-                    key={locale}
-                  >
-                    {name}
-                  </Button>
-                ))}
-              </Sheet>
-            </Sheet>
-          </Box>
-          <Link
-            href={`https://github.com/${
-              import.meta.env.VITE_WRITER_REPOSITORY_PATH
-            }`}
-            target="_blank"
-            variant="body1"
-            underline="none"
-            color="inherit"
-            sx={{
-              ":hover": { color: "inherit" },
-              display: "flex",
-            }}
-          >
-            <GitHub fontSize="large" />
-          </Link>
-        </Box>
-      </Toolbar>
-    </AppBar>
+                {name}
+              </Button>
+            ))}
+          </Sheet>
+        </Sheet>
+      </Box>
+      <Link
+        href={`https://github.com/${
+          import.meta.env.VITE_WRITER_REPOSITORY_PATH
+        }`}
+        textColor="inherit"
+        underline="none"
+        target="_blank"
+      >
+        <GitHub fontSize="large" />
+      </Link>
+    </Sheet>
   );
 };

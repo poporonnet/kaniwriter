@@ -27,16 +27,15 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
   return (
     <Box
       sx={{
-        minWidth: "45rem",
+        minWidth: "41rem",
         maxWidth: "65rem",
-        width: "max(100vw, 100dvw, 45rem)",
+        width: "100%",
         mb: isOpen ? "2rem" : "0",
       }}
     >
       <Card
         sx={{
           borderRadius: isOpen ? "1rem" : "1rem 1rem 0 0",
-          margin: "0 2rem",
         }}
       >
         <Button

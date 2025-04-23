@@ -37,7 +37,7 @@ importers:
         version: 25.0.1(typescript@5.8.3)
       isbot:
         specifier: ^5
-        version: 5.1.25
+        version: 5.1.26
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -1254,8 +1254,8 @@ packages:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
 
-  isbot@5.1.25:
-    resolution: {integrity: sha512-mqU76fmT7cpGG0JX1EzhCZIC+xovpH6TD2SAK18alonk0RG/RgChpGduJTYzRaq9a0COoFA99M9JVtEUOcScIw==}
+  isbot@5.1.26:
+    resolution: {integrity: sha512-3wqJEYSIm59dYQjEF7zJ7T42aqaqxbCyJQda5rKCudJykuAnISptCHR/GSGpOnw8UrvU+mGueNLRJS5HXnbsXQ==}
     engines: {node: '>=18'}
 
   isexe@2.0.0:
@@ -2969,7 +2969,7 @@ snapshots:
 
   is-fullwidth-code-point@3.0.0: {}
 
-  isbot@5.1.25: {}
+  isbot@5.1.26: {}
 
   isexe@2.0.0: {}
 

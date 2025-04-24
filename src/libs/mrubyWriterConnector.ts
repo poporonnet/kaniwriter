@@ -265,8 +265,6 @@ export class MrubyWriterConnector {
     if (option?.autoVerify) {
       const verifyRes = await this.verify(binary);
       if (verifyRes.isFailure()) {
-        const clearRes = await this.sendCommand("clear");
-        if (clearRes.isFailure()) return clearRes;
         return Failure.error("Failed to verify.");
       }
     }

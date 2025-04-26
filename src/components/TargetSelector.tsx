@@ -10,8 +10,8 @@ import {
 } from "@mui/joy";
 import { Target } from "libs/mrubyWriterConnector";
 import { useTranslation } from "react-i18next";
-import ESP32 from "/images/ESP32.png";
-import RBoard from "/images/Rboard.png";
+import ESP32 from "/images/ESP32.webp";
+import RBoard from "/images/Rboard.webp";
 
 export const targets = [
   {

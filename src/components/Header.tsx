@@ -2,7 +2,7 @@ import { GitHub, Translate } from "@mui/icons-material";
 import { Box, Button, Link, Sheet } from "@mui/joy";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import icon from "/images/logo.png";
+import icon from "/images/logo.webp";
 
 export const Header = () => {
   const [t, i18n] = useTranslation();

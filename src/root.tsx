@@ -6,7 +6,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
   <html lang="ja">
     <head>
       <meta charSet="UTF-8" />
-      <link rel="icon" type="image/svg+xml" href="images/logo.png" />
+      <link rel="icon" type="image/svg+xml" href="images/logo.webp" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link
         rel="preload"
@@ -22,7 +22,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         href="fonts/NotoSansMono/NotoSansMono-Regular.woff2"
         crossOrigin="anonymous"
       />
-      <title>Matz葉がにロボコン 書き込みツール</title>
+      <title>kaniwriter | mruby/c書き込みツール</title>
       <style>
         {`
           @font-face {

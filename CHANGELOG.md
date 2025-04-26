@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/poporonnet/kaniwriter/compare/v1.0.0...v1.1.0) (2025-04-26)
+
+
+### Features
+
+* Browser RouterからFramework Routerに移行 ([#474](https://github.com/poporonnet/kaniwriter/issues/474)) ([a309cec](https://github.com/poporonnet/kaniwriter/commit/a309ceccb69ecee4fd86869115bd8465876d4092))
+
+
+### Bug Fixes
+
+* ベースURLを変更した場合にもURLが正しく解決されるよう修正 ([#533](https://github.com/poporonnet/kaniwriter/issues/533)) ([f760e81](https://github.com/poporonnet/kaniwriter/commit/f760e812dfcc32811ebf4dde6100279391c6d077))
+* 自動検証が失敗したときにclearしていたのを削除 ([#530](https://github.com/poporonnet/kaniwriter/issues/530)) ([9f640d9](https://github.com/poporonnet/kaniwriter/commit/9f640d9f70a3483fb724a4390013ff96d215f7f8))
+
 ## [1.0.0](https://github.com/poporonnet/kaniwriter/compare/v0.2.0...v1.0.0) (2025-03-18)
 
 

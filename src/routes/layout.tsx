@@ -28,6 +28,7 @@ const Layout = () => (
         flexDirection: "column",
         alignItems: "center",
         gap: "2.5rem",
+        flexGrow: 1,
       }}
     >
       <Outlet />

@@ -5,7 +5,7 @@
 
 ### Bug Fixes
 
-* メインのBoxの高さをflexGrowで伸ばす ([#541](https://github.com/poporonnet/kaniwriter/issues/541)) ([da4c94e](https://github.com/poporonnet/kaniwriter/commit/da4c94e208e7ed5beffce30aa343d4d7eadc4b38))
+* 画面高が大きい場合にソースコードタブが画面下に揃わない問題を修正 ([#541](https://github.com/poporonnet/kaniwriter/issues/541)) ([da4c94e](https://github.com/poporonnet/kaniwriter/commit/da4c94e208e7ed5beffce30aa343d4d7eadc4b38))
 
 ## [1.1.0](https://github.com/poporonnet/kaniwriter/compare/v1.0.0...v1.1.0) (2025-04-26)
 

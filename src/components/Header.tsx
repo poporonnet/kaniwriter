@@ -63,7 +63,7 @@ export const Header = () => {
           underline="none"
           sx={{ color: "inherit" }}
         >
-          {t("書き込みツール")}
+          {t("kaniwriter")}
         </Link>
       </Box>
       <Box flex={1} />

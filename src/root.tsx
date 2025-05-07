@@ -1,6 +1,12 @@
 import { ReactNode } from "react";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import { App } from "./App.client";
+import * as Sentry from "@sentry/react";
+
+Sentry.init({
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  sendDefaultPii: true
+});
 
 export const Layout = ({ children }: { children: ReactNode }) => (
   <html lang="ja">

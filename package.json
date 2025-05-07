@@ -19,6 +19,7 @@
     "@mui/joy": "5.0.0-beta.52",
     "@mui/material": "^7.0.0",
     "@react-router/node": "^7.4.0",
+    "@sentry/react": "^9.15.0",
     "anser": "^2.1.1",
     "base64-js": "^1.5.1",
     "i18next": "^25.0.0",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@react-router/dev": "^7.4.0",
+    "@sentry/vite-plugin": "^3.4.0",
     "@shikijs/langs-precompiled": "^3.0.0",
     "@shikijs/themes": "^3.0.0",
     "@types/node": "^22.0.0",

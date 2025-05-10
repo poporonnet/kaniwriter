@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/poporonnet/kaniwriter/compare/v1.1.1...v1.2.0) (2025-05-10)
+
+
+### Features
+
+* **experiment:** Sentryを試験的に導入 ([#549](https://github.com/poporonnet/kaniwriter/issues/549)) ([87edb35](https://github.com/poporonnet/kaniwriter/commit/87edb351155626ae01bda427cf3da6074a7dab47))
+
+
+### Bug Fixes
+
+* アップロード後にソースマップを削除する設定を追加 ([#553](https://github.com/poporonnet/kaniwriter/issues/553)) ([89dfbdd](https://github.com/poporonnet/kaniwriter/commit/89dfbddd0f3b008684966910d767fd8ff0635a6d))
+
 ## [1.1.1](https://github.com/poporonnet/kaniwriter/compare/v1.1.0...v1.1.1) (2025-05-01)
 
 

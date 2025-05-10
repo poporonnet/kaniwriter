@@ -17,6 +17,9 @@ export default defineConfig(({ mode }) => {
         authToken: process.env.SENTRY_AUTH_TOKEN,
         org: "poporon-network",
         project: "kaniwriter",
+        sourcemaps: {
+          filesToDeleteAfterUpload: "dist/**/*.js.map"
+        }
       }),
     ],
     base: process.env.VITE_BASE_URL,

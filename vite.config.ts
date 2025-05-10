@@ -7,6 +7,9 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
 
   return {
+    build: {
+      sourcemap: true,
+    },
     plugins: [reactRouter()],
     base: process.env.VITE_BASE_URL,
     resolve: {

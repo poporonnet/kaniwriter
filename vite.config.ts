@@ -18,8 +18,8 @@ export default defineConfig(({ mode }) => {
         org: "poporon-network",
         project: "kaniwriter",
         sourcemaps: {
-          filesToDeleteAfterUpload: "dist/**/*.js.map"
-        }
+          filesToDeleteAfterUpload: "dist/**/*.js.map",
+        },
       }),
     ],
     base: process.env.VITE_BASE_URL,

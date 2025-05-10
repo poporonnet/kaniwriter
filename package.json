@@ -32,7 +32,6 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@react-router/dev": "^7.4.0",
-    "@sentry/vite-plugin": "^3.4.0",
     "@shikijs/langs-precompiled": "^3.0.0",
     "@shikijs/themes": "^3.0.0",
     "@types/node": "^22.0.0",

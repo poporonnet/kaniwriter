@@ -1,7 +1,7 @@
 {
   "name": "kaniwriter",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
@@ -19,6 +19,8 @@
     "@mui/joy": "5.0.0-beta.52",
     "@mui/material": "^7.0.0",
     "@react-router/node": "^7.4.0",
+    "@sentry/react": "^9.15.0",
+    "@sentry/vite-plugin": "^3.4.0",
     "anser": "^2.1.1",
     "base64-js": "^1.5.1",
     "i18next": "^25.0.0",

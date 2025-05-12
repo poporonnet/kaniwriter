@@ -1,5 +1,6 @@
 import path from "path";
 import { reactRouter } from "@react-router/dev/vite";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { defineConfig, loadEnv } from "vite";
 
 // https://vitejs.dev/config/
@@ -7,7 +8,20 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
 
   return {
-    plugins: [reactRouter()],
+    build: {
+      sourcemap: true,
+    },
+    plugins: [
+      reactRouter(),
+      sentryVitePlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: "poporon-network",
+        project: "kaniwriter",
+        sourcemaps: {
+          filesToDeleteAfterUpload: "dist/**/*.js.map",
+        },
+      }),
+    ],
     base: process.env.VITE_BASE_URL,
     resolve: {
       alias: {

@@ -1,10 +1,8 @@
 import { FileCopy } from "@mui/icons-material";
 import { Box, Button, Card, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
-import { useNotify } from "hooks/useNotify";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ControlButton } from "./ControlButton";
 
 interface CodeProps {
   sourceCode: string;
@@ -16,7 +14,6 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [t] = useTranslation();
   const highlighter = useHighlighter();
-  const notify = useNotify();
   // ソースコードをシンタックスハイライト付きのHTMLに変換
   useEffect(() => {
     if (!highlighter) return;
@@ -49,7 +46,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
             variant="plain"
             onClick={() => setIsOpen(!isOpen)}
             sx={{
-              width: isOpen ? "90%": "100%",
+              width: isOpen ? "90%" : "100%",
               height: "2rem",
               pr: isOpen ? "3rem" : undefined,
             }}
@@ -59,26 +56,26 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
             </Typography>
           </Button>
           {isOpen && (
-            <ControlButton
-              label={""}
-              icon={<FileCopy />}
+            <Button
               onClick={() => {
-                navigator.clipboard.writeText(sourceCode),
-                  notify({
-                    title: t("コピーしました。"),
-                    message: t(
-                      "ソースコードをクリップボードにコピーしました。"
-                    ),
-                    type: "success",
-                  });
+                navigator.clipboard.writeText(sourceCode);
               }}
               disabled={!sourceCode}
               sx={{
                 position: "absolute",
                 left: "90%",
                 height: "2rem",
+                minWidth: "2rem",
+                padding: 0,
+                backgroundColor: "transparent",
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                },
               }}
-            />
+              variant="plain"
+            >
+              <FileCopy />
+            </Button>
           )}
         </Box>
 

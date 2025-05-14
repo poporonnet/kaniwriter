@@ -49,7 +49,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
             variant="plain"
             onClick={() => setIsOpen(!isOpen)}
             sx={{
-              width: "90%",
+              width: isOpen ? "90%": "100%",
               height: "2rem",
               pr: isOpen ? "3rem" : undefined,
             }}

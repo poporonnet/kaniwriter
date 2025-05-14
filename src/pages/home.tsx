@@ -1,6 +1,5 @@
 import { Box } from "@mui/joy";
 import { useCallback, useEffect, useState } from "react";
-
 import { CommandInput } from "components/CommandInput";
 import { Log } from "components/Log";
 import { SourceCodeTab } from "components/SourceCodeTab";

@@ -2,6 +2,8 @@ import { Box, Button, Card, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FileCopy } from "@mui/icons-material";
+import { ControlButton } from "./ControlButton";
 
 interface CodeProps {
   sourceCode: string;
@@ -13,7 +15,6 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [t] = useTranslation();
   const highlighter = useHighlighter();
-
   // ソースコードをシンタックスハイライト付きのHTMLに変換
   useEffect(() => {
     if (!highlighter) return;
@@ -38,17 +39,38 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
           borderRadius: isOpen ? "1rem" : "1rem 1rem 0 0",
         }}
       >
-        <Button
+        <Box
           sx={{
-            height: "2rem",
+            display: "flex",
           }}
-          variant="plain"
-          onClick={() => setIsOpen(!isOpen)}
         >
-          <Typography color="primary">
-            {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
-          </Typography>
-        </Button>
+          <Button
+            variant="plain"
+            onClick={() => setIsOpen(!isOpen)}
+            sx={{
+              width: "90%",
+              height: "2rem",
+              pr: isOpen ? "3rem" : undefined,
+            }}
+          >
+            <Typography color="primary">
+              {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
+            </Typography>
+          </Button>
+          {isOpen && (
+            <ControlButton
+              label={""}
+              icon={<FileCopy />}
+              onClick={() => navigator.clipboard.writeText(sourceCode)}
+              disabled={!sourceCode}
+              sx={{
+                position: "absolute",
+                left: "90%",
+                height: "2rem",
+              }}
+            />
+          )}
+        </Box>
 
         {isOpen && (
           <Box

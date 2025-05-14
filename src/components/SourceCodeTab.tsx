@@ -65,8 +65,10 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
               onClick={() => {
                 navigator.clipboard.writeText(sourceCode),
                   notify({
-                    title: "コピーしました",
-                    message: "ソースコードをクリップボードにコピーしました。",
+                    title: t("コピーしました。"),
+                    message: t(
+                      "ソースコードをクリップボードにコピーしました。"
+                    ),
                     type: "success",
                   });
               }}

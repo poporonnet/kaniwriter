@@ -29,5 +29,7 @@
   "検証": "Verify",
   "自動検証(Experimental)": "Auto verify (Experimental)",
   "このブラウザはサポートされていません": "This Browser is Not Supported",
-  "対応するブラウザを使ってください": "Your current browser does not support some of the features of this website.\nTo use all the features of this site, please use a desktop version of Google Chrome or Microsoft Edge."
+  "対応するブラウザを使ってください": "Your current browser does not support some of the features of this website.\nTo use all the features of this site, please use a desktop version of Google Chrome or Microsoft Edge.",
+  "コピーしました。": "Copied.",
+  "ソースコードをクリップボードにコピーしました。": "source code has been copied to the clipboard."
 }

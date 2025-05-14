@@ -1,8 +1,9 @@
+import { FileCopy } from "@mui/icons-material";
 import { Box, Button, Card, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
+import { useNotify } from "hooks/useNotify";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FileCopy } from "@mui/icons-material";
 import { ControlButton } from "./ControlButton";
 
 interface CodeProps {
@@ -15,6 +16,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [t] = useTranslation();
   const highlighter = useHighlighter();
+  const notify = useNotify();
   // ソースコードをシンタックスハイライト付きのHTMLに変換
   useEffect(() => {
     if (!highlighter) return;
@@ -24,7 +26,6 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
     });
     setHtml(html);
   }, [sourceCode, highlighter]);
-
   return (
     <Box
       sx={{
@@ -61,7 +62,14 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
             <ControlButton
               label={""}
               icon={<FileCopy />}
-              onClick={() => navigator.clipboard.writeText(sourceCode)}
+              onClick={() => {
+                navigator.clipboard.writeText(sourceCode),
+                  notify({
+                    title: "コピーしました",
+                    message: "ソースコードをクリップボードにコピーしました。",
+                    type: "success",
+                  });
+              }}
               disabled={!sourceCode}
               sx={{
                 position: "absolute",

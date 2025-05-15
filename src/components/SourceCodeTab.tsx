@@ -80,7 +80,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
               disabled={!sourceCode}
               sx={{
                 position: "absolute",
-                right: "1rem",
+                right: "2.5rem",
                 height: "2rem",
                 minWidth: "2rem",
                 padding: 0,
@@ -92,18 +92,18 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
               variant="plain"
             >
               <FileCopy />
+              <Snackbar
+                open={copied}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                sx={{
+                  position: "absolute",
+                  top: "3rem",
+                }}
+              >
+                {t("コピーしました")}
+              </Snackbar>
             </Button>
-            <Snackbar
-              open={copied}
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              sx={{
-                position: "absolute",
-                top: "3rem",
-                transform: "translateX(-50%)",
-              }}
-            >
-              コピーしました
-            </Snackbar>
+
             <div
               style={{
                 width: "100%",

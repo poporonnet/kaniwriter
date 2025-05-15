@@ -72,8 +72,8 @@ pnpm preview
 
 ### コードチェック
 
+- Biomeによるformatとlintが自動修正付きで実行されます
+
 ```
 pnpm check
 ```
-
-- Biomeによるformatとlintが自動修正付きで実行されます

@@ -18,7 +18,7 @@
 
 ## 環境構築 (初回のみ)
 
-- Node.js (LTS) をインストールしてください
+- [Node.js (LTS)](https://nodejs.org) をインストールしてください
 - 以下のコマンドを実行してください
   ```bash
   corepack enable
@@ -28,7 +28,7 @@
   ```bash
   pnpm dev
   ```
-  - 起動後、`http://localhost:5173`が表示できることを確認してください
+  - 起動後、[`http://localhost:5173`](http://localhost:5173)が表示できることを確認してください
 
 ## コマンド
 

@@ -5,38 +5,7 @@ Matz葉がにロボコン マイコン書き込みツール
 
 ## 開発者向け情報
 
-### requires
-
-- Node.js(latest)
-- pnpm(latest)
-
-依存関係のインストール
-
-```bash
-pnpm i
-```
-
-サーバの起動(開発モード)
-```bash
-pnpm dev
-```
-
-ビルド(プロダクション用)
-
-⚠️**デプロイ先がドメイン直下(`/`)でないと動作しません。**  
-⚠️**パスを掘る場合は個別のビルド設定が必要です(ceres用はこの下にあります)。**
-
-```bash
-pnpm build
-```
-
-ビルド(ceres用)
-
-⚠️**デプロイ先が`/writer`でないと動作しません。**
-
-```bash
-pnpm build:ceres
-```
+- [開発環境](docs/DEVELOPMENT.md)
 
 ### Authors
 

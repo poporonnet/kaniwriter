@@ -1,5 +1,5 @@
 import { FileCopy } from "@mui/icons-material";
-import { Box, Button, Card, Snackbar, Typography } from "@mui/joy";
+import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,8 +17,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
   const handleCopy = () => {
     if (!sourceCode) return;
     navigator.clipboard.writeText(sourceCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setShowCopied(true);
   };
 
   // ソースコードをシンタックスハイライト付きのHTMLに変換
@@ -30,7 +29,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
     });
     setHtml(html);
   }, [sourceCode, highlighter]);
-  const [copied, setCopied] = useState(false);
+  const [showCopied, setShowCopied] = useState(false);
 
   return (
     <Box
@@ -46,25 +45,19 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
           borderRadius: isOpen ? "1rem" : "1rem 1rem 0 0",
         }}
       >
-        <Box
+        <Button
+          variant="plain"
+          onClick={() => setIsOpen(!isOpen)}
           sx={{
-            display: "flex",
+            width: "100%",
+            height: "2rem",
+            pr: isOpen ? "3rem" : undefined,
           }}
         >
-          <Button
-            variant="plain"
-            onClick={() => setIsOpen(!isOpen)}
-            sx={{
-              width: "100%",
-              height: "2rem",
-              pr: isOpen ? "3rem" : undefined,
-            }}
-          >
-            <Typography color="primary">
-              {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
-            </Typography>
-          </Button>
-        </Box>
+          <Typography color="primary">
+            {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
+          </Typography>
+        </Button>
 
         {isOpen && (
           <Box
@@ -75,16 +68,13 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
               overflow: "auto",
             }}
           >
-            <Button
+            <IconButton
               onClick={() => handleCopy()}
               disabled={!sourceCode}
+              color="primary"
               sx={{
                 position: "absolute",
                 right: "2.5rem",
-                height: "2rem",
-                minWidth: "2rem",
-                padding: 0,
-                backgroundColor: "transparent",
                 "&:hover": {
                   backgroundColor: "rgba(0, 0, 0, 0.04)",
                 },
@@ -93,7 +83,9 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
             >
               <FileCopy />
               <Snackbar
-                open={copied}
+                open={showCopied}
+                onClose={() => setShowCopied(false)}
+                autoHideDuration={2000}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 sx={{
                   position: "absolute",
@@ -102,7 +94,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
               >
                 {t("コピーしました")}
               </Snackbar>
-            </Button>
+            </IconButton>
 
             <div
               style={{

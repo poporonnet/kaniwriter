@@ -1,7 +1,6 @@
 import { FileCopy } from "@mui/icons-material";
 import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
-import { wrap } from "module";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 interface CodeProps {

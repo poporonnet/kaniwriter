@@ -49,9 +49,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
           variant="plain"
           onClick={() => setIsOpen(!isOpen)}
           sx={{
-            width: "100%",
             height: "2rem",
-            pr: isOpen ? "3rem" : undefined,
           }}
         >
           <Typography color="primary">
@@ -89,7 +87,10 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 sx={{
                   position: "absolute",
-                  top: "3rem",
+                  top: "2rem",
+                  minWidth: "9rem",
+                  px: "1rem",
+                  py: "0.5rem",
                 }}
               >
                 {t("コピーしました")}

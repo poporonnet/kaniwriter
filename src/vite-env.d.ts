@@ -6,7 +6,6 @@ interface ImportMetaEnv {
   readonly VITE_WRITER_REPOSITORY_PATH: string;
   readonly VITE_REFERENCE_URL: string;
   readonly VITE_COMPILER_VERSION_FALLBACK: string;
-  readonly VITE_SENTRY_DSN: string;
 }
 
 interface ImportMeta {

@@ -1,6 +1,7 @@
 import { FileCopy } from "@mui/icons-material";
 import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
+import { wrap } from "module";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 interface CodeProps {
@@ -88,8 +89,8 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
                 sx={{
                   position: "absolute",
                   top: "2rem",
-                  minWidth: "9rem",
-                  px: "1rem",
+                  minWidth: "fit-content",
+                  whiteSpace: "nowrap",
                   py: "0.5rem",
                 }}
               >

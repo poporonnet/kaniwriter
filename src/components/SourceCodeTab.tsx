@@ -1,8 +1,8 @@
-import { Box, Button, Card, Typography } from "@mui/joy";
+import { FileCopy } from "@mui/icons-material";
+import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 interface CodeProps {
   sourceCode: string;
 }
@@ -14,6 +14,12 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
   const [t] = useTranslation();
   const highlighter = useHighlighter();
 
+  const handleCopy = () => {
+    if (!sourceCode) return;
+    navigator.clipboard.writeText(sourceCode);
+    setShowCopied(true);
+  };
+
   // ソースコードをシンタックスハイライト付きのHTMLに変換
   useEffect(() => {
     if (!highlighter) return;
@@ -23,6 +29,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
     });
     setHtml(html);
   }, [sourceCode, highlighter]);
+  const [showCopied, setShowCopied] = useState(false);
 
   return (
     <Box
@@ -39,11 +46,11 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
         }}
       >
         <Button
+          variant="plain"
+          onClick={() => setIsOpen(!isOpen)}
           sx={{
             height: "2rem",
           }}
-          variant="plain"
-          onClick={() => setIsOpen(!isOpen)}
         >
           <Typography color="primary">
             {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
@@ -59,6 +66,37 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
               overflow: "auto",
             }}
           >
+            <IconButton
+              onClick={() => handleCopy()}
+              disabled={!sourceCode}
+              color="primary"
+              sx={{
+                position: "absolute",
+                right: "2.5rem",
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                },
+              }}
+              variant="plain"
+            >
+              <FileCopy />
+              <Snackbar
+                open={showCopied}
+                onClose={() => setShowCopied(false)}
+                autoHideDuration={2000}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                sx={{
+                  position: "absolute",
+                  top: "2rem",
+                  minWidth: "fit-content",
+                  whiteSpace: "nowrap",
+                  py: "0.5rem",
+                }}
+              >
+                {t("コピーしました")}
+              </Snackbar>
+            </IconButton>
+
             <div
               style={{
                 width: "100%",

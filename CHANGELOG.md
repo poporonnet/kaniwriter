@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/poporonnet/kaniwriter/compare/v1.2.0...v1.3.0) (2025-05-18)
+
+
+### Features
+
+* ソースコードをコピーできるようにした ([#559](https://github.com/poporonnet/kaniwriter/issues/559)) ([1c5e9d0](https://github.com/poporonnet/kaniwriter/commit/1c5e9d04df2b09e5a73d74c8f102e6e77164d916))
+
 ## [1.2.0](https://github.com/poporonnet/kaniwriter/compare/v1.1.1...v1.2.0) (2025-05-10)
 
 

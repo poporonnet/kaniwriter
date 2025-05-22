@@ -42,7 +42,7 @@ kaniwriterはあなたのIssueを歓迎します！
 - **コードベースへの貢献**: 新機能の実装、または既存のIssueに取り組む
 
 以下に続く命名規則やルールは主に開発メンバー向けであり、すべてを無理に守ろうとする必要はありません。
-また、質問や問題が急を要する場合、[@poporonnet/kaniwriter-maintainer](https://github.com/orgs/poporonnet/teams/kaniwriter-maintainer) をメンションしてもらうと通常よりも早くメンテナーが反応できるかもしれません ( 保証はできません )。
+また、質問や問題が急を要する場合、@poporonnet/kaniwriter-maintainer をメンションしてもらうと通常よりも早くメンテナーが反応できるかもしれません ( 保証はできません )。
 
 ### タイトル
 

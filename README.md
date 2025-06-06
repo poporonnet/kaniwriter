@@ -5,6 +5,7 @@ Matz葉がにロボコン マイコン書き込みツール
 
 ## 開発者向け情報
 
+- [コントリビューションガイド](docs/CONTRIBUTING.md)
 - [開発環境](docs/DEVELOPMENT.md)
 
 ### Authors

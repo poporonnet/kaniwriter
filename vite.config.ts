@@ -22,6 +22,11 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+    define: {
+      "import.meta.env.NPM_PACKAGE_VERSION": JSON.stringify(
+        process.env.npm_package_version
+      ),
+    },
     base: process.env.VITE_BASE_URL,
     resolve: {
       alias: {

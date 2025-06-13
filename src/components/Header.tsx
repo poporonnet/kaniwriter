@@ -1,5 +1,5 @@
 import { GitHub, Translate } from "@mui/icons-material";
-import { Box, Button, Link, Sheet } from "@mui/joy";
+import { Box, Button, Link, Sheet, Typography } from "@mui/joy";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import icon from "/images/logo.webp";
@@ -59,11 +59,15 @@ export const Header = () => {
         />
         <Link
           href={import.meta.env.VITE_BASE_URL}
-          fontSize="2.125rem"
           underline="none"
           sx={{ color: "inherit" }}
         >
-          {t("kaniwriter")}
+          <Typography fontSize="2.125rem">
+            {t("kaniwriter")}
+            <Typography fontSize="1.2rem" textColor="#DDD">
+              {` ${import.meta.env.NPM_PACKAGE_VERSION}`}
+            </Typography>
+          </Typography>
         </Link>
       </Box>
       <Box flex={1} />

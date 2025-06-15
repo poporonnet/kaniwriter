@@ -35,7 +35,7 @@
     "@react-router/dev": "^7.4.0",
     "@shikijs/langs-precompiled": "^3.0.0",
     "@shikijs/themes": "^3.0.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/w3c-web-serial": "^1.0.6",

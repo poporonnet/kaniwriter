@@ -1,6 +1,6 @@
-import path from "path";
 import { reactRouter } from "@react-router/dev/vite";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
+import path from "path";
 import { defineConfig, loadEnv } from "vite";
 
 // https://vitejs.dev/config/

@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { type CompileStatus, useCompile } from "./useCompile";
-import { Version, useVersions } from "./useVersions";
+import { useVersions, Version } from "./useVersions";
 
 type UseCompiler = [
   card: ComponentType,

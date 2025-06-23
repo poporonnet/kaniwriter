@@ -1,5 +1,4 @@
-import { MrubyWriterConnector } from "libs/mrubyWriterConnector";
-import { Config } from "libs/mrubyWriterConnector";
+import { Config, MrubyWriterConnector } from "libs/mrubyWriterConnector";
 import { Result, Success } from "libs/result";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";

@@ -3,6 +3,7 @@ import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 interface CodeProps {
   sourceCode: string;
 }

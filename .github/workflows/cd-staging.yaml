@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy (Staging)
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy-staging:
+    name: Deploy (Staging)
     runs-on: ubuntu-latest
     env:
       DEPLOY_TARGET_DIR: ${{ secrets.DEPLOY_TARGET_DIR }}

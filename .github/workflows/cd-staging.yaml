@@ -33,5 +33,5 @@ jobs:
             pnpm install --frozen-lockfile
             pnpm build:ceres
 
-            find "${DEPLOY_TARGET_DIR}" -type f -print0 | xargs -0 rm -rf
-            cp -r "${DEPLOY_BUILD_OUTPUT_DIR}/*" "${DEPLOY_TARGET_DIR}"
+            find ${DEPLOY_TARGET_DIR} -type f -print0 | xargs -0 rm -rf
+            cp -r ${DEPLOY_BUILD_OUTPUT_DIR}/* ${DEPLOY_TARGET_DIR}

@@ -1,14 +1,14 @@
 import "../i18n/i18n";
 import {
   CssVarsProvider,
-  THEME_ID as JOY_THEME_ID,
   extendTheme,
+  THEME_ID as JOY_THEME_ID,
 } from "@mui/joy/styles";
 import {
   CssBaseline,
+  createTheme,
   THEME_ID as MATERIAL_THEME_ID,
   ThemeProvider,
-  createTheme,
 } from "@mui/material";
 import { NotificationProvider } from "components/NotificationProvider";
 import { Outlet } from "react-router";

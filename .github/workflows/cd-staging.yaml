@@ -10,7 +10,9 @@ jobs:
   deploy-staging:
     name: Deploy (Staging)
     runs-on: ubuntu-latest
-    environment: Staging
+    environment:
+      name: Staging
+      url: ${{ vars.DEPLOY_STAGING_URL }}
     steps:
       - name: deploy
         uses: appleboy/ssh-action@v1

@@ -23,6 +23,8 @@ jobs:
           key: ${{ secrets.DEPLOY_SECRET_KEY }}
           envs: DEPLOY_TARGET_DIR,DEPLOY_BUILD_OUTPUT_DIR
           script: |
+            source ~/.bash_profile
+
             set -euxo pipefail
 
             cd kaniwriter

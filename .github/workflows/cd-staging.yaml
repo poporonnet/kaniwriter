@@ -15,8 +15,8 @@ jobs:
       - name: deploy
         uses: appleboy/ssh-action@v1
         env:
-          DEPLOY_TARGET_DIR: ${{ vars.DEPLOY_TARGET_DIR }}
-          DEPLOY_BUILD_OUTPUT_DIR: ${{ vars.DEPLOY_BUILD_OUTPUT_DIR }}
+          DEPLOY_TARGET_DIR: ${{ secrets.DEPLOY_TARGET_DIR }}
+          DEPLOY_BUILD_OUTPUT_DIR: ${{ secrets.DEPLOY_BUILD_OUTPUT_DIR }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}

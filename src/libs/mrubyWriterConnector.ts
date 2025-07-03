@@ -177,6 +177,13 @@ export class MrubyWriterConnector {
         .pipeThrough(decodeStream, this.aborter)
         .pipeTo(logStream, this.aborter);
 
+      // フリーズ回避のため最初のバーストを捨てる
+      this.currentSubReader = subReadable.getReader();
+      for (const _ of new Array(3).keys()) {
+        await this.read(this.currentSubReader);
+      }
+      this.currentSubReader.releaseLock();
+
       while (this.port.readable) {
         if (this.aborter.signal.aborted) {
           return Success.value(null);

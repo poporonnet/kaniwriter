@@ -341,7 +341,10 @@ export class MrubyWriterConnector {
     }
 
     try {
-      await this.port.open({ baudRate: baudRates[this.target] });
+      await this.port.open({
+        baudRate: baudRates[this.target],
+        bufferSize: 2047, // 2kB
+      });
       return Success.value(null);
     } catch (error) {
       return Failure.error("Failed to open serial port.", { cause: error });

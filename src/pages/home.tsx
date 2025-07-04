@@ -9,6 +9,7 @@ import { useControlButtons } from "hooks/useControlButtons";
 import { useMrbwrite } from "hooks/useMrbwrite";
 import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
+import { useStoreState } from "hooks/useStoreState";
 import { useTarget } from "hooks/useTarget";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -32,7 +33,10 @@ const Home = () => {
     onListen: (buffer) => setLog([...buffer]),
   });
 
-  const [connectionDelaySec, setConnectionDelaySec] = useState(3);
+  const [connectionDelaySec, setConnectionDelaySec] = useStoreState(
+    "connectionDelaySec",
+    3
+  );
 
   const startConnection = useCallback(
     async (port?: () => Promise<SerialPort>) => {

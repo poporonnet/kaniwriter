@@ -1,4 +1,5 @@
-import { Box } from "@mui/joy";
+import { Box, Input } from "@mui/joy";
+import { FormControl, FormLabel } from "@mui/material";
 import { CommandInput } from "components/CommandInput";
 import { Log } from "components/Log";
 import { SourceCodeTab } from "components/SourceCodeTab";
@@ -31,16 +32,25 @@ const Home = () => {
     onListen: (buffer) => setLog([...buffer]),
   });
 
+  const [connectionDelaySec, setConnectionDelaySec] = useState(3);
+
   const startConnection = useCallback(
     async (port?: () => Promise<SerialPort>) => {
       const res = await method.connect(
-        port ?? (() => navigator.serial.requestPort())
+        port ??
+          (async () => {
+            const port = await navigator.serial.requestPort();
+            await new Promise((resolve) =>
+              setTimeout(resolve, connectionDelaySec * 1000)
+            );
+            return port;
+          })
       );
       if (res.isFailure()) return;
 
       await Promise.all([method.startListen(), method.startEnter(1000)]);
     },
-    [method]
+    [method, connectionDelaySec]
   );
 
   const [ControlButtons] = useControlButtons(
@@ -115,6 +125,16 @@ const Home = () => {
         >
           <Log log={log} autoScroll={option.autoScroll} />
           <ControlButtons />
+          <FormControl sx={{ width: "15rem", alignSelf: "flex-end" }}>
+            <FormLabel>Connection delay ( second )</FormLabel>
+            <Input
+              type="number"
+              value={connectionDelaySec}
+              onChange={(event) =>
+                setConnectionDelaySec(parseFloat(event.target.value))
+              }
+            />
+          </FormControl>
           <CommandInput
             onSubmit={(command) =>
               method.sendCommand(command, { force: true, ignoreResponse: true })

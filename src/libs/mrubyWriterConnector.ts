@@ -343,7 +343,7 @@ export class MrubyWriterConnector {
     try {
       await this.port.open({
         baudRate: baudRates[this.target],
-        bufferSize: 2047, // 2kB
+        bufferSize: 2097151, // 2MB
       });
       return Success.value(null);
     } catch (error) {

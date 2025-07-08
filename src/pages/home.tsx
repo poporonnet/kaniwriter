@@ -1,4 +1,5 @@
-import { Box } from "@mui/joy";
+import { Box, Input } from "@mui/joy";
+import { FormControl, FormLabel } from "@mui/material";
 import { CommandInput } from "components/CommandInput";
 import { Log } from "components/Log";
 import { SourceCodeTab } from "components/SourceCodeTab";
@@ -8,6 +9,7 @@ import { useControlButtons } from "hooks/useControlButtons";
 import { useMrbwrite } from "hooks/useMrbwrite";
 import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
+import { useStoreState } from "hooks/useStoreState";
 import { useTarget } from "hooks/useTarget";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,6 +33,21 @@ const Home = () => {
     onListen: (buffer) => setLog([...buffer]),
   });
 
+  const [connectButtonDelaySec, setConnectButtonDelaySec] = useStoreState(
+    "connectButtonDelaySec",
+    5
+  );
+  const [connectable, setConnectable] = useState(false);
+
+  useEffect(() => {
+    setConnectable(false);
+    const timeout = setTimeout(
+      () => setConnectable(true),
+      connectButtonDelaySec * 1000
+    );
+    return () => clearTimeout(timeout);
+  }, [connectButtonDelaySec]);
+
   const startConnection = useCallback(
     async (port?: () => Promise<SerialPort>) => {
       const res = await method.connect(
@@ -50,7 +67,8 @@ const Home = () => {
     option,
     connector,
     method,
-    startConnection
+    startConnection,
+    { connect: !connectable }
   );
 
   useEffect(() => {
@@ -115,6 +133,16 @@ const Home = () => {
         >
           <Log log={log} autoScroll={option.autoScroll} />
           <ControlButtons />
+          <FormControl sx={{ width: "15rem", alignSelf: "flex-end" }}>
+            <FormLabel>Connection button delay [s]</FormLabel>
+            <Input
+              type="number"
+              value={connectButtonDelaySec}
+              onChange={(event) =>
+                setConnectButtonDelaySec(parseFloat(event.target.value))
+              }
+            />
+          </FormControl>
           <CommandInput
             onSubmit={(command) =>
               method.sendCommand(command, { force: true, ignoreResponse: true })

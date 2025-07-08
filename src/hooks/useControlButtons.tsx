@@ -14,14 +14,15 @@ export const useControlButtons = (
   option: Option,
   connector: MrubyWriterConnector,
   method: Method,
-  startConnection: () => void
+  startConnection: () => void,
+  disable: { connect: boolean }
 ): UseControlButtons => {
   return [
     () => (
       <ControlButtons
         connect={{
           onClick: () => startConnection(),
-          disabled: !target || connector.isConnected,
+          disabled: !target || connector.isConnected || disable.connect,
         }}
         write={{
           onClick: () =>

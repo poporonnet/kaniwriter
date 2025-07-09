@@ -1,6 +1,6 @@
-import path from "path";
 import { reactRouter } from "@react-router/dev/vite";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
+import path from "path";
 import { defineConfig, loadEnv } from "vite";
 
 // https://vitejs.dev/config/
@@ -22,6 +22,11 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+    define: {
+      "import.meta.env.NPM_PACKAGE_VERSION": JSON.stringify(
+        process.env.npm_package_version
+      ),
+    },
     base: process.env.VITE_BASE_URL,
     resolve: {
       alias: {

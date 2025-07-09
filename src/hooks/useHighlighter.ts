@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HighlighterCore, createHighlighterCore } from "shiki/core";
+import { createHighlighterCore, HighlighterCore } from "shiki/core";
 import { createJavaScriptRawEngine } from "shiki/engine/javascript";
 
 // カスタムフックの定義

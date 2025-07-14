@@ -17,7 +17,7 @@ type Props = Record<
     onClick: () => void;
     disabled: boolean;
     color?: "primary" | "success" | "warning" | "danger";
-  }
+  } & { connect: { role: "connect" | "disconnect" } }
 >;
 export const ControlButtons = ({ connect, write, verify, execute }: Props) => {
   const [t] = useTranslation();
@@ -33,7 +33,7 @@ export const ControlButtons = ({ connect, write, verify, execute }: Props) => {
       }}
     >
       <ControlButton
-        label={connect.color === "danger" ? t("切断") : t("接続")}
+        label={connect.connect.role === "connect" ? t("接続") : t("切断")}
         icon={connect.color === "danger" ? <UsbOffIcon /> : <UsbIcon />}
         {...connect}
       />

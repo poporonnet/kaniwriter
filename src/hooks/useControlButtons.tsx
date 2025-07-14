@@ -20,8 +20,13 @@ export const useControlButtons = (
     () => (
       <ControlButtons
         connect={{
-          onClick: () => startConnection(),
-          disabled: !target || connector.isConnected,
+          onClick: () => {
+            target && !connector.isConnected
+              ? startConnection()
+              : method.disconnect();
+          },
+          disabled: !target,
+          color: target && !connector.isConnected ? "primary" : "danger",
         }}
         write={{
           onClick: () =>
@@ -38,10 +43,6 @@ export const useControlButtons = (
           onClick: () =>
             method.sendCommand("execute", { ignoreResponse: true }),
           disabled: !connector.isWriteMode,
-        }}
-        disconnect={{
-          onClick: () => method.disconnect(),
-          disabled: !connector.isConnected,
         }}
       />
     ),

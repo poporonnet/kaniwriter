@@ -9,31 +9,18 @@ import { Box } from "@mui/joy";
 import { useTranslation } from "react-i18next";
 import { ControlButton } from "./ControlButton";
 
-const buttons = [
-  "connect",
-  "write",
-  "verify",
-  "execute",
-  "disconnect",
-] as const;
+const buttons = ["connect", "write", "verify", "execute"] as const;
 
 type Props = Record<
   (typeof buttons)[number],
   {
     onClick: () => void;
     disabled: boolean;
+    color?: "primary" | "success" | "warning" | "danger";
   }
 >;
-
-export const ControlButtons = ({
-  connect,
-  write,
-  verify,
-  execute,
-  disconnect,
-}: Props) => {
+export const ControlButtons = ({ connect, write, verify, execute }: Props) => {
   const [t] = useTranslation();
-
   return (
     <Box
       sx={{
@@ -45,7 +32,11 @@ export const ControlButtons = ({
         gap: "1rem",
       }}
     >
-      <ControlButton label={t("接続")} icon={<UsbIcon />} {...connect} />
+      <ControlButton
+        label={connect.color === "danger" ? t("切断") : t("接続")}
+        icon={connect.color === "danger" ? <UsbOffIcon /> : <UsbIcon />}
+        {...connect}
+      />
       <ControlButton label={t("書き込み")} icon={<EditIcon />} {...write} />
       <ControlButton label={t("検証")} icon={<FindInPageIcon />} {...verify} />
       <ControlButton
@@ -53,12 +44,6 @@ export const ControlButtons = ({
         icon={<FlagIcon />}
         color="success"
         {...execute}
-      />
-      <ControlButton
-        label={t("切断")}
-        icon={<UsbOffIcon />}
-        color="danger"
-        {...disconnect}
       />
     </Box>
   );

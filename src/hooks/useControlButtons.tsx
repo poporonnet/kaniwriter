@@ -26,29 +26,23 @@ export const useControlButtons = (
               : method.disconnect();
           },
           disabled: !target,
-          color: target && !connector.isConnected ? "primary" : "danger",
-          connect: {
-            role: target && connector.isConnected ? "disconnect" : "connect",
-          },
+          role: target && connector.isConnected ? "disconnect" : "connect",
         }}
         write={{
           onClick: () =>
             code && method.writeCode(code, { autoVerify: option.autoVerify }),
           disabled:
             compileStatus.status !== "success" || !connector.isWriteMode,
-          connect: { role: "connect" },
         }}
         verify={{
           onClick: () => code && method.verify(code),
           disabled:
             compileStatus.status !== "success" || !connector.isWriteMode,
-          connect: { role: "connect" },
         }}
         execute={{
           onClick: () =>
             method.sendCommand("execute", { ignoreResponse: true }),
           disabled: !connector.isWriteMode,
-          connect: { role: "connect" },
         }}
       />
     ),

@@ -31,7 +31,7 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
     setHtml(html);
   }, [sourceCode, highlighter]);
   const [showCopied, setShowCopied] = useState(false);
-
+  const isCode = sourceCode ? true : false;
   return (
     <Box
       sx={{
@@ -52,8 +52,9 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
           sx={{
             height: "2rem",
           }}
+          disabled={!isCode}
         >
-          <Typography color="primary">
+          <Typography color={isCode ? "primary" : "neutral"}>
             {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
           </Typography>
         </Button>

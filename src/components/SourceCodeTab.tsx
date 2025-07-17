@@ -70,7 +70,6 @@ export const SourceCodeTab = ({ sourceCode }: CodeProps) => {
           >
             <IconButton
               onClick={() => handleCopy()}
-              disabled={!sourceCode}
               color="primary"
               sx={{
                 position: "absolute",

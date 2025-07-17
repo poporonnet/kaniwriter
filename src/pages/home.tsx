@@ -122,7 +122,7 @@ const Home = () => {
           />
         </Box>
       </Box>
-      <SourceCodeTab sourceCode={sourceCode} />
+      <SourceCodeTab sourceCode={sourceCode} disable={!id} />
     </>
   );
 };

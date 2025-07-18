@@ -1,0 +1,6 @@
+# これは Release Please App の設定です
+# 注: `.yml` しか受け付けないため、拡張子を変更しないでください
+
+primaryBranch: main
+handleGHRelease: true
+manifest: true

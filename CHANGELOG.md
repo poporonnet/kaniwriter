@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/poporonnet/kaniwriter/compare/v1.4.0...v1.5.0) (2025-07-18)
+
+
+### Features
+
+* プログラムがない場合はソースコードタブを開けなくした ([#662](https://github.com/poporonnet/kaniwriter/issues/662)) ([137c274](https://github.com/poporonnet/kaniwriter/commit/137c27415d7d9fd8864ab4c077874615b0310d31))
+* 接続ボタンと切断ボタンを統合した ([#657](https://github.com/poporonnet/kaniwriter/issues/657)) ([78c5fbf](https://github.com/poporonnet/kaniwriter/commit/78c5fbfed10c9fdcd24c4bc03213f6b6012c7754))
+
 ## [1.4.0](https://github.com/poporonnet/kaniwriter/compare/v1.3.0...v1.4.0) (2025-06-27)
 
 

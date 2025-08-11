@@ -28,7 +28,7 @@ importers:
         version: 7.8.0(react-router@7.8.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.2)
       '@sentry/react':
         specifier: ^9.15.0
-        version: 9.44.2(react@19.1.1)
+        version: 9.45.0(react@19.1.1)
       '@sentry/vite-plugin':
         specifier: ^3.4.0
         version: 3.6.1
@@ -891,28 +891,28 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@sentry-internal/browser-utils@9.44.2':
-    resolution: {integrity: sha512-VvaSk8DDV8fsUZf+bnbjziyu4RJgSNAxZ4jFo5Jq7Z/SXc7uciOGElpEzgALcY0uMbFA/0IsXQKpB1s01ZsoZQ==}
+  '@sentry-internal/browser-utils@9.45.0':
+    resolution: {integrity: sha512-L1+lak0ZBCfaGBW37NxRDsl1Gbu5edMsCT/TcWlNfexFRWka3mYwOAqpdIIHD+uDbcSe/U06+oVQHoGM64habg==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/feedback@9.44.2':
-    resolution: {integrity: sha512-EVyTIc/V2p3aK2GwMk1/r192C8uxLipJXYB+nQCIqYTduuvdg9jCUFsK90FbRCbIqQtglcvVYmyNZwY4IaMxoQ==}
+  '@sentry-internal/feedback@9.45.0':
+    resolution: {integrity: sha512-nirzAIAnS0CAmBZ6ZNEPfeKoR7v2jyipTLt2RAdLZAZv2ZPTVeUaVPjbUdBlmDx9Rp622vUDVtlESDXrNLkDMg==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/replay-canvas@9.44.2':
-    resolution: {integrity: sha512-49wOCuXz5qf507BW6UuGOFGSxCGke84rreglLRr+N/8n3Ag2GQC7zcxn25SwidVsWYQo70GxSqzAwZVrOCe6Vw==}
+  '@sentry-internal/replay-canvas@9.45.0':
+    resolution: {integrity: sha512-gHlR5D5zy8e0macrOBqD+x11sdHyX5Xgkh7NCft1H5LXOtvp6dMSafLRidpFltZWFjsUhLQ8/O1bXyzNuDIq9Q==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/replay@9.44.2':
-    resolution: {integrity: sha512-LALsZg8n0F5OsOUELByXnCxPdovwl7eJja903fjamzC1MoWtTB06RXiZHqv/E1+HuTsseR2EggS0dLXfptximg==}
+  '@sentry-internal/replay@9.45.0':
+    resolution: {integrity: sha512-HrSenUmkGX++53pbF2veaC2JodYLAmFOQHKiJyhmmQuNpAwncdIAQ3An3VIb4A3qXrPTEincWZrgNH896JaKeA==}
     engines: {node: '>=18'}
 
   '@sentry/babel-plugin-component-annotate@3.6.1':
     resolution: {integrity: sha512-zmvUa4RpzDG3LQJFpGCE8lniz8Rk1Wa6ZvvK+yEH+snZeaHHRbSnAQBMR607GOClP+euGHNO2YtaY4UAdNTYbg==}
     engines: {node: '>= 14'}
 
-  '@sentry/browser@9.44.2':
-    resolution: {integrity: sha512-m5oMprtmPTeZB9PFrQfWmRQglSgzozAUFUFiQdL0g2QJkmyNL4LzEE2L88dxGSbnABLRu0MI1ySiEQTFa7ZSbw==}
+  '@sentry/browser@9.45.0':
+    resolution: {integrity: sha512-7h9X7CmT6dI/cjzz6MdkHm7Qp6QAf4o/qPrHh47u1ZWJi4B4OxGnCTjVoOoIcwPdSNfXsl0q8LpaJa9wHXrVbQ==}
     engines: {node: '>=18'}
 
   '@sentry/bundler-plugin-core@3.6.1':
@@ -971,12 +971,12 @@ packages:
     engines: {node: '>= 10'}
     hasBin: true
 
-  '@sentry/core@9.44.2':
-    resolution: {integrity: sha512-4wduCY9vz+VRMZXTT1dzk08L2nReeR+lzpY8hCcc+Wu100BoJR+TNlrSn1rG5iIo98NDW860JsRA7SVDUDOiNQ==}
+  '@sentry/core@9.45.0':
+    resolution: {integrity: sha512-yTpB53fBEWTMzltD/8f/qI2MFTwgd2vSkn7pOZQusSOMtyt0Bsm/77oqXldIt+eMBAImZalzZaxmaN7RyiRKWQ==}
     engines: {node: '>=18'}
 
-  '@sentry/react@9.44.2':
-    resolution: {integrity: sha512-VHD5Qqb+HsGfVmEv3FkggPtS6tzIRDTu5/Y4YvV3KlfEypqXZeNoJw8J4y9N6fSNHPxRrxrLwNq846E6Vnxbkg==}
+  '@sentry/react@9.45.0':
+    resolution: {integrity: sha512-Sma+x1r0KNoTJe1AFXWeBbeh9W3jFuT+X7s02JBe2NP3sCB2mrOBTzGWNCojrD5T4hW9vkkToY+iNRFzZdeFEA==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^16.14.0 || 17.x || 18.x || 19.x
@@ -2784,33 +2784,33 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.46.2':
     optional: true
 
-  '@sentry-internal/browser-utils@9.44.2':
+  '@sentry-internal/browser-utils@9.45.0':
     dependencies:
-      '@sentry/core': 9.44.2
+      '@sentry/core': 9.45.0
 
-  '@sentry-internal/feedback@9.44.2':
+  '@sentry-internal/feedback@9.45.0':
     dependencies:
-      '@sentry/core': 9.44.2
+      '@sentry/core': 9.45.0
 
-  '@sentry-internal/replay-canvas@9.44.2':
+  '@sentry-internal/replay-canvas@9.45.0':
     dependencies:
-      '@sentry-internal/replay': 9.44.2
-      '@sentry/core': 9.44.2
+      '@sentry-internal/replay': 9.45.0
+      '@sentry/core': 9.45.0
 
-  '@sentry-internal/replay@9.44.2':
+  '@sentry-internal/replay@9.45.0':
     dependencies:
-      '@sentry-internal/browser-utils': 9.44.2
-      '@sentry/core': 9.44.2
+      '@sentry-internal/browser-utils': 9.45.0
+      '@sentry/core': 9.45.0
 
   '@sentry/babel-plugin-component-annotate@3.6.1': {}
 
-  '@sentry/browser@9.44.2':
+  '@sentry/browser@9.45.0':
     dependencies:
-      '@sentry-internal/browser-utils': 9.44.2
-      '@sentry-internal/feedback': 9.44.2
-      '@sentry-internal/replay': 9.44.2
-      '@sentry-internal/replay-canvas': 9.44.2
-      '@sentry/core': 9.44.2
+      '@sentry-internal/browser-utils': 9.45.0
+      '@sentry-internal/feedback': 9.45.0
+      '@sentry-internal/replay': 9.45.0
+      '@sentry-internal/replay-canvas': 9.45.0
+      '@sentry/core': 9.45.0
 
   '@sentry/bundler-plugin-core@3.6.1':
     dependencies:
@@ -2870,12 +2870,12 @@ snapshots:
       - encoding
       - supports-color
 
-  '@sentry/core@9.44.2': {}
+  '@sentry/core@9.45.0': {}
 
-  '@sentry/react@9.44.2(react@19.1.1)':
+  '@sentry/react@9.45.0(react@19.1.1)':
     dependencies:
-      '@sentry/browser': 9.44.2
-      '@sentry/core': 9.44.2
+      '@sentry/browser': 9.45.0
+      '@sentry/core': 9.45.0
       hoist-non-react-statics: 3.3.2
       react: 19.1.1
 

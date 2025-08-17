@@ -40,7 +40,7 @@ importers:
         version: 1.5.1
       i18next:
         specifier: ^25.0.0
-        version: 25.3.4(typescript@5.9.2)
+        version: 25.3.5(typescript@5.9.2)
       isbot:
         specifier: ^5
         version: 5.1.29
@@ -52,7 +52,7 @@ importers:
         version: 19.1.1(react@19.1.1)
       react-i18next:
         specifier: ^15.0.0
-        version: 15.6.1(i18next@25.3.4(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
+        version: 15.6.1(i18next@25.3.5(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
       react-router:
         specifier: ^7.4.0
         version: 7.8.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -269,6 +269,10 @@ packages:
 
   '@babel/runtime@7.28.2':
     resolution: {integrity: sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.28.3':
+    resolution: {integrity: sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.2':
@@ -1400,8 +1404,8 @@ packages:
     resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
     engines: {node: '>= 6'}
 
-  i18next@25.3.4:
-    resolution: {integrity: sha512-AHklEYFLiRRxW1Cb6zE9lfnEtYvsydRC8nRS3RSKGX3zCqZ8nLZwMaUsrb80YuccPNv2RNokDL8LkTNnp+6mDw==}
+  i18next@25.3.5:
+    resolution: {integrity: sha512-Il+IVs84WbFXlw+NMoIZFX4VisuY+D7xxjfwI4IvOuYTPWnvnKkBBtpqVJl+ORiFjBmJ2NcNnxN4/NW0JRi53A==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -2289,6 +2293,8 @@ snapshots:
   '@babel/runtime@7.27.6': {}
 
   '@babel/runtime@7.28.2': {}
+
+  '@babel/runtime@7.28.3': {}
 
   '@babel/template@7.27.2':
     dependencies:
@@ -3435,9 +3441,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  i18next@25.3.4(typescript@5.9.2):
+  i18next@25.3.5(typescript@5.9.2):
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
     optionalDependencies:
       typescript: 5.9.2
 
@@ -3703,11 +3709,11 @@ snapshots:
       react: 19.1.1
       scheduler: 0.26.0
 
-  react-i18next@15.6.1(i18next@25.3.4(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2):
+  react-i18next@15.6.1(i18next@25.3.5(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2):
     dependencies:
       '@babel/runtime': 7.28.2
       html-parse-stringify: 3.0.1
-      i18next: 25.3.4(typescript@5.9.2)
+      i18next: 25.3.5(typescript@5.9.2)
       react: 19.1.1
     optionalDependencies:
       react-dom: 19.1.1(react@19.1.1)

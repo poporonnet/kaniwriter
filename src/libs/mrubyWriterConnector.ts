@@ -102,16 +102,7 @@ export class MrubyWriterConnector {
     try {
       this.handleText("\r\n\u001b[32m> try to disconnect...\u001b[0m\r\n");
 
-      this.aborter?.abort(new Error("disconnect is called."));
-      await this.mainReadableStreamClosed?.catch(() => undefined);
-
-      await this.currentSubReader?.cancel(() => undefined);
-      this.currentSubReader?.releaseLock();
-
-      await this.mainReadable?.cancel().catch(() => undefined);
-      await this.subReadable?.cancel().catch(() => undefined);
-      await this.port.writable?.abort().catch(() => undefined);
-
+      await this.abortStreams();
       const res = await this.close();
       if (res.isFailure()) {
         this.handleText(
@@ -527,5 +518,17 @@ export class MrubyWriterConnector {
       this.handleText("\r\n\u001b[31m failed to verify. \r\n");
       return Failure.error("Failed to verify.");
     }
+  }
+
+  private async abortStreams(): Promise<void> {
+    this.aborter?.abort(new Error("disconnect is called."));
+    await this.mainReadableStreamClosed?.catch(console.warn);
+
+    await this.currentSubReader?.cancel().catch(console.warn);
+    this.currentSubReader?.releaseLock();
+
+    await this.mainReadable?.cancel().catch(console.warn);
+    await this.subReadable?.cancel().catch(console.warn);
+    await this.port?.writable?.abort().catch(console.warn);
   }
 }

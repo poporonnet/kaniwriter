@@ -138,44 +138,57 @@ export class MrubyWriterConnector {
     }
 
     try {
-      const [mainReadable, subReadable] = this.port.readable.tee();
-      this.mainReadable = mainReadable;
-      this.subReadable = subReadable;
-      this.aborter = new AbortController();
-
-      const decode = (data: Uint8Array) => this.decoder.decode(data);
-      const handleText = (text: string) => this.handleText(text);
-      const log = this.log;
-      const handleEvent = (event: Event | null) => this.handleEvent(event);
-      const decodeStream = new TransformStream<Uint8Array, string>({
-        transform(chunk, controller) {
-          controller.enqueue(decode(chunk));
-        },
-      });
-      const logStream = new WritableStream<string>({
-        async write(chunk) {
-          log("Received", { chunk });
-
-          const event = handleText(chunk);
-          if (event.value.event) log("Event detected", event.value);
-
-          const res = await handleEvent(event.value.event);
-          if (res) log("Event handled", res);
-        },
-      });
-
-      this.mainReadableStreamClosed = mainReadable
-        .pipeThrough(decodeStream, this.aborter)
-        .pipeTo(logStream, this.aborter);
-
       while (this.port.readable) {
+        const [mainReadable, subReadable] = this.port.readable.tee();
+        this.mainReadable = mainReadable;
+        this.subReadable = subReadable;
+        this.aborter = new AbortController();
+
+        const decode = (data: Uint8Array) =>
+          this.decoder.decode(data, { stream: true });
+        const handleText = (text: string) => this.handleText(text);
+        const log = this.log;
+        const handleEvent = (event: Event | null) => this.handleEvent(event);
+        const decodeStream = new TransformStream<Uint8Array, string>({
+          transform(chunk, controller) {
+            controller.enqueue(decode(chunk));
+          },
+        });
+        const logStream = new WritableStream<string>({
+          async write(chunk) {
+            log("Received", { chunk });
+
+            const event = handleText(chunk);
+            if (event.value.event) log("Event detected", event.value);
+
+            const res = await handleEvent(event.value.event);
+            if (res) log("Event handled", res);
+          },
+        });
+
+        this.mainReadableStreamClosed = mainReadable
+          .pipeThrough(decodeStream, this.aborter)
+          .pipeTo(logStream, this.aborter);
+
+        while (true) {
+          if (this.aborter.signal.aborted) break;
+
+          this.currentSubReader = subReadable.getReader();
+          const res = await this.read(this.currentSubReader);
+          if (res.isFailure()) {
+            console.error(res);
+            break;
+          }
+
+          await this.completeJobs();
+          this.currentSubReader.releaseLock();
+        }
+
         if (this.aborter.signal.aborted) {
           return Success.value(null);
+        } else {
+          await this.abortStreams();
         }
-        this.currentSubReader = subReadable.getReader();
-        await this.read(this.currentSubReader);
-        await this.completeJobs();
-        this.currentSubReader.releaseLock();
       }
     } catch (error) {
       return Failure.error("Error excepted while reading.", { cause: error });

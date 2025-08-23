@@ -403,7 +403,7 @@ export class MrubyWriterConnector {
 
           enqueue(value);
         } catch (error) {
-          console.error(error);
+          console.warn(error);
           break;
         }
       }

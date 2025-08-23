@@ -365,22 +365,6 @@ export class MrubyWriterConnector {
     }
   }
 
-  private getSubReader(): Result<Reader, Error> {
-    if (!this.port) {
-      return Failure.error("No port.");
-    }
-    if (!this.subReadable) {
-      return Failure.error("Cannot read serial port.");
-    }
-
-    try {
-      this.currentSubReader?.releaseLock();
-      return Success.value(this.subReadable.getReader());
-    } catch (error) {
-      return Failure.error("Failed to get reader.", { cause: error });
-    }
-  }
-
   private getWriter(): Result<Writer, Error> {
     if (!this.port) {
       return Failure.error("No port.");
@@ -434,9 +418,6 @@ export class MrubyWriterConnector {
     if (this._writeMode) {
       return Failure.error("Already write mode.");
     }
-    if (!this.subReadable) {
-      return Failure.error("Cannot read serial port.");
-    }
     if (!this.port.writable) {
       return Failure.error("Cannot write serial port.");
     }
@@ -447,19 +428,6 @@ export class MrubyWriterConnector {
   private async onExitWriteMode(): Promise<Success<null>> {
     this._writeMode = false;
     return Success.value(null);
-  }
-
-  private async read(reader: Reader): Promise<Result<string, Error>> {
-    try {
-      const { done, value } = await reader.read();
-      if (done) {
-        return Failure.error("Reader is canceled.");
-      }
-
-      return Success.value(this.decoder.decode(value));
-    } catch (error) {
-      return Failure.error("Error excepted while reading.", { cause: error });
-    }
   }
 
   private async write(

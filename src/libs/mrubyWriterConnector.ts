@@ -215,7 +215,7 @@ export class MrubyWriterConnector {
 
     await this.completeJobs();
     this.handleText(`\r\n> ${command}\r\n`);
-    console.log("Send", { command });
+    this.log("Send", { command });
 
     return this.sendData(this.encoder.encode(`${command}\r\n`), {
       ignoreResponse: option?.ignoreResponse,
@@ -257,7 +257,7 @@ export class MrubyWriterConnector {
     const clearRes = await this.sendCommand("clear");
     if (clearRes.isFailure()) return clearRes;
 
-    console.log(clearRes);
+    this.log("Clear", clearRes);
     const writeSizeRes = await this.sendCommand(`write ${binary.byteLength}`);
     if (writeSizeRes.isFailure()) return writeSizeRes;
 

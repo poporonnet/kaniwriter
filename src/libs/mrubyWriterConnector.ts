@@ -33,16 +33,21 @@ export class MrubyWriterConnector {
   private port: SerialPort | undefined;
   private log: Logger;
   private onListen: Listener | undefined;
-  private mainReadable: ReadableStream<Uint8Array> | undefined;
-  private subReadable: ReadableStream<Uint8Array> | undefined;
-  private mainReadableStreamClosed: Promise<void> | undefined;
-  private aborter: AbortController | undefined;
+
+  private readable: ReadableStream<string> | undefined;
+  private sourceReader: Reader | undefined;
+
+  private sourceClosed: Promise<void> | undefined;
+  private sinkClosed: Promise<void> | undefined;
+
+  private sourceAborter: AbortController | undefined;
+  private sinkAborter: AbortController | undefined;
+
   private _writeMode: boolean;
   private encoder: TextEncoder;
   private decoder: TextDecoder;
   private buffer: string[];
   private target: Target | undefined;
-  private currentSubReader: Reader | undefined;
   private jobQueue: Job[];
 
   constructor(config: Config) {
@@ -138,68 +143,71 @@ export class MrubyWriterConnector {
     }
 
     try {
-      while (this.port.readable) {
-        const [mainReadable, subReadable] = this.port.readable.tee();
-        this.mainReadable = mainReadable;
-        this.subReadable = subReadable;
-        this.aborter = new AbortController();
+      const port = this.port;
+      const sourceAborter = new AbortController();
+      this.sourceAborter = sourceAborter;
 
-        const decode = (data: Uint8Array) =>
-          this.decoder.decode(data, { stream: true });
-        const handleText = (text: string) => this.handleText(text);
-        const log = this.log;
-        const handleEvent = (event: Event | null) => this.handleEvent(event);
-        const decodeStream = new TransformStream<Uint8Array, string>({
-          transform(chunk, controller) {
-            controller.enqueue(decode(chunk));
+      const listenInfinity = (enqueue: (value: Uint8Array) => void) =>
+        this.listen(
+          sourceAborter,
+          () => port.readable ?? undefined,
+          (reader) => {
+            this.sourceReader = reader;
           },
-        });
-        const logStream = new WritableStream<string>({
-          async write(chunk) {
-            log("Received", { chunk });
+          enqueue
+        );
+      const cancel = () => this.sourceReader?.releaseLock();
+      const sourceReadable = new ReadableStream({
+        start: async (controller) => {
+          await listenInfinity((value) => controller.enqueue(value));
+          controller.error("Error occurred while listening.");
+        },
+        cancel,
+      });
 
-            const event = handleText(chunk);
-            if (event.value.event) log("Event detected", event.value);
+      const decode = (data: Uint8Array) =>
+        this.decoder.decode(data, { stream: true });
+      const handleText = (text: string) => this.handleText(text);
+      const log = this.log;
+      const handleEvent = (event: Event | null) => this.handleEvent(event);
+      const decodeStream = new TransformStream<Uint8Array, string>({
+        transform: (chunk, controller) => controller.enqueue(decode(chunk)),
+      });
+      const logStream = new TransformStream<string, string>({
+        transform: async (chunk, controller) => {
+          log("Received", { chunk });
 
-            const res = await handleEvent(event.value.event);
-            if (res) log("Event handled", res);
-          },
-        });
+          const event = handleText(chunk);
+          if (event.value.event) log("Event detected", event.value);
 
-        this.mainReadableStreamClosed = mainReadable
-          .pipeThrough(decodeStream, this.aborter)
-          .pipeTo(logStream, this.aborter);
+          const res = await handleEvent(event.value.event);
+          if (res) log("Event handled", res);
 
-        while (true) {
-          if (this.aborter.signal.aborted) break;
+          controller.enqueue(chunk);
+        },
+      });
 
-          this.currentSubReader = subReadable.getReader();
-          const res = await this.read(this.currentSubReader);
-          if (res.isFailure()) {
-            console.error(res);
-            break;
-          }
+      this.readable = sourceReadable
+        .pipeThrough(decodeStream, sourceAborter)
+        .pipeThrough(logStream, sourceAborter);
 
-          await this.completeJobs();
-          this.currentSubReader.releaseLock();
-        }
+      const setRes = this.setSink(new WritableStream<string>());
+      if (setRes.isFailure()) return setRes;
 
-        if (this.aborter.signal.aborted) {
-          return Success.value(null);
-        } else {
-          await this.abortStreams();
-        }
-      }
+      await new Promise<void>((resolve) =>
+        sourceAborter.signal.addEventListener("abort", () => resolve(), {
+          once: true,
+        })
+      );
+
+      return Success.value(null);
     } catch (error) {
       return Failure.error("Error excepted while reading.", { cause: error });
     } finally {
-      this.currentSubReader?.releaseLock();
-      if (!this.aborter?.signal.aborted) {
+      if (!this.sourceAborter?.signal.aborted) {
         await this.close();
       }
     }
-
-    return Failure.error("Reader is canceled.");
   }
 
   async sendCommand(
@@ -303,13 +311,7 @@ export class MrubyWriterConnector {
       if (option?.ignoreResponse) {
         return Success.value("");
       }
-      const readerRes = this.getSubReader();
-      if (readerRes.isFailure()) {
-        return readerRes;
-      }
-      this.currentSubReader = readerRes.value;
-      const response = await this.readLine(this.currentSubReader);
-      this.currentSubReader.releaseLock();
+      const response = await this.readLine();
 
       if (response.isFailure()) {
         return response;
@@ -377,6 +379,35 @@ export class MrubyWriterConnector {
       return Success.value(this.port.writable.getWriter());
     } catch (error) {
       return Failure.error("Failed to get writer.", { cause: error });
+    }
+  }
+
+  private async listen(
+    aborter: AbortController,
+    getReadable: () => ReadableStream<Uint8Array> | undefined,
+    setReader: (reader: Reader) => void,
+    enqueue: (value: Uint8Array) => void
+  ): Promise<void> {
+    while (!aborter.signal.aborted) {
+      const readable = getReadable();
+      if (!readable) break;
+
+      const reader = readable.getReader();
+      setReader(reader);
+      while (true) {
+        try {
+          const { value, done } = await reader.read();
+          if (done) {
+            break;
+          }
+
+          enqueue(value);
+        } catch (error) {
+          console.error(error);
+          break;
+        }
+      }
+      reader.releaseLock();
     }
   }
 
@@ -463,17 +494,35 @@ export class MrubyWriterConnector {
     }
   }
 
-  private async readLine(reader: Reader): Promise<Result<string, Error>> {
-    let line = "";
-    while (!line.endsWith("\r\n")) {
-      const res = await this.read(reader);
-      if (res.isFailure()) return res;
+  private async readLine(): Promise<Result<string, Error>> {
+    try {
+      const removeRes = await this.removeSink();
+      if (removeRes.isFailure()) return removeRes;
 
-      line += res.value;
+      const value = await new Promise<string>((resolve, reject) => {
+        let line = "";
+        const reader = new WritableStream({
+          write(chunk) {
+            line += chunk;
+            if (line.endsWith("\r\n")) {
+              resolve(line);
+            }
+          },
+        });
+
+        const setRes = this.setSink(reader);
+        if (setRes.isFailure()) reject(setRes);
+      });
+
+      const changeRes = await this.changeSink(new WritableStream<string>());
+      if (changeRes.isFailure()) return changeRes;
+
+      return Success.value(value);
+    } catch (error) {
+      return Failure.error("Error excepted while reading.", { cause: error });
     }
-
-    return Success.value(line);
   }
+
   async verify(code: Uint8Array): Promise<Result<void, Error>> {
     const correctHash = calculateCrc8(code);
     const verifyRes = await this.sendCommand("verify");

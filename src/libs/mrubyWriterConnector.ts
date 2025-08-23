@@ -544,4 +544,49 @@ export class MrubyWriterConnector {
     await this.subReadable?.cancel().catch(console.warn);
     await this.port?.writable?.abort().catch(console.warn);
   }
+
+  private async changeSink(
+    sink: WritableStream<string>
+  ): Promise<Result<null, Error>> {
+    const removeRes = await this.removeSink();
+    if (removeRes.isFailure()) return removeRes;
+
+    const setRes = this.setSink(sink);
+    if (setRes.isFailure()) return setRes;
+
+    return Success.value(null);
+  }
+
+  private async removeSink(): Promise<Result<null, Error>> {
+    if (!this.sinkAborter) {
+      return Failure.error("No sink aborter.");
+    }
+
+    try {
+      this.sinkAborter.abort("removeSink");
+      await this.sinkClosed?.catch(console.warn);
+
+      return Success.value(null);
+    } catch (error) {
+      return Failure.error("Failed to remove sink.", { cause: error });
+    }
+  }
+
+  private setSink(sink: WritableStream<string>): Result<null, Error> {
+    if (!this.readable) {
+      return Failure.error("No readable.");
+    }
+
+    try {
+      this.sinkAborter = new AbortController();
+      this.sinkClosed = this.readable.pipeTo(sink, {
+        signal: this.sinkAborter.signal,
+        preventCancel: true,
+      });
+
+      return Success.value(null);
+    } catch (error) {
+      return Failure.error("Failed to set sink.", { cause: error });
+    }
+  }
 }

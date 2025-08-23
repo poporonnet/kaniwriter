@@ -534,14 +534,18 @@ export class MrubyWriterConnector {
   }
 
   private async abortStreams(): Promise<void> {
-    this.aborter?.abort(new Error("disconnect is called."));
-    await this.mainReadableStreamClosed?.catch(console.warn);
+    this.sinkAborter?.abort("abortStreams");
+    await this.sinkClosed?.catch(console.warn);
 
-    await this.currentSubReader?.cancel().catch(console.warn);
-    this.currentSubReader?.releaseLock();
+    this.sourceAborter?.abort("abortStreams");
+    await this.sourceClosed?.catch(console.warn);
 
-    await this.mainReadable?.cancel().catch(console.warn);
-    await this.subReadable?.cancel().catch(console.warn);
+    await this.sourceReader?.cancel().catch(console.warn);
+    this.sourceReader?.releaseLock();
+
+    await this.readable?.cancel().catch(console.warn);
+
+    await this.port?.readable?.cancel().catch(console.warn);
     await this.port?.writable?.abort().catch(console.warn);
   }
 

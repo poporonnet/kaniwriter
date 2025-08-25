@@ -32,6 +32,10 @@ jobs:
             cd kaniwriter
             git checkout main
             git pull
+
+            mise install
+            mise prune --yes
+
             pnpm install --frozen-lockfile
             pnpm build:ceres
 

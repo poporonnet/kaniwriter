@@ -7,11 +7,6 @@
 
 * 接続直後にフリーズすることがある問題を修正 ([#717](https://github.com/poporonnet/kaniwriter/issues/717)) ([071f4ec](https://github.com/poporonnet/kaniwriter/commit/071f4ec48748def28b6946fc8793b4731998d0ae))
 
-
-### Miscellaneous Chores
-
-* Release as 1.6.0 ([#734](https://github.com/poporonnet/kaniwriter/issues/734)) ([dda87c5](https://github.com/poporonnet/kaniwriter/commit/dda87c57b42ec9491fa687b3ef489574dd3fe3f1))
-
 ## [1.5.0](https://github.com/poporonnet/kaniwriter/compare/v1.4.0...v1.5.0) (2025-07-18)
 
 

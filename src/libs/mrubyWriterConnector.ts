@@ -147,20 +147,35 @@ export class MrubyWriterConnector {
       const sourceAborter = new AbortController();
       this.sourceAborter = sourceAborter;
 
-      const listenInfinity = (enqueue: (value: Uint8Array) => void) =>
+      const listenInfinity = (
+        enqueue: (value: Uint8Array) => void,
+        onError: (error: Error) => void
+      ) =>
         this.listen(
           sourceAborter,
           () => port.readable ?? undefined,
           (reader) => {
             this.sourceReader = reader;
           },
-          enqueue
+          enqueue,
+          onError
         );
       const cancel = () => this.sourceReader?.releaseLock();
       const sourceReadable = new ReadableStream({
         start: async (controller) => {
-          await listenInfinity((value) => controller.enqueue(value));
-          controller.error("Error occurred while listening.");
+          await listenInfinity(
+            (value) => controller.enqueue(value),
+            (error) => {
+              controller.error(error);
+              this.sourceAborter?.abort(error);
+
+              this._writeMode = false;
+              this.port = undefined;
+              this.handleText(
+                "\r\n\u001b[31m> port disconnected unexpectedly.\u001b[0m\r\n"
+              );
+            }
+          );
         },
         cancel,
       });
@@ -386,11 +401,15 @@ export class MrubyWriterConnector {
     aborter: AbortController,
     getReadable: () => ReadableStream<Uint8Array> | undefined,
     setReader: (reader: Reader) => void,
-    enqueue: (value: Uint8Array) => void
+    enqueue: (value: Uint8Array) => void,
+    onError: (error: Error) => void
   ): Promise<void> {
     while (!aborter.signal.aborted) {
       const readable = getReadable();
-      if (!readable) break;
+      if (!readable) {
+        onError(new Error("Cannot read serial port."));
+        break;
+      }
 
       const reader = readable.getReader();
       setReader(reader);

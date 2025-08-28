@@ -386,11 +386,15 @@ export class MrubyWriterConnector {
     aborter: AbortController,
     getReadable: () => ReadableStream<Uint8Array> | undefined,
     setReader: (reader: Reader) => void,
-    enqueue: (value: Uint8Array) => void
+    enqueue: (value: Uint8Array) => void,
+    onError: (error: Error) => void
   ): Promise<void> {
     while (!aborter.signal.aborted) {
       const readable = getReadable();
-      if (!readable) break;
+      if (!readable) {
+        onError(new Error("Cannot read serial port."));
+        break;
+      }
 
       const reader = readable.getReader();
       setReader(reader);

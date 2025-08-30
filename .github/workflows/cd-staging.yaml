@@ -1,0 +1,43 @@
+name: Deploy (Staging)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    name: Deploy (Staging)
+    runs-on: ubuntu-latest
+    environment:
+      name: Staging
+      url: ${{ vars.DEPLOY_STAGING_URL }}
+    steps:
+      - name: deploy
+        uses: appleboy/ssh-action@v1
+        env:
+          DEPLOY_TARGET_DIR: ${{ secrets.DEPLOY_TARGET_DIR }}
+          DEPLOY_BUILD_OUTPUT_DIR: ${{ secrets.DEPLOY_BUILD_OUTPUT_DIR }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          key: ${{ secrets.DEPLOY_SECRET_KEY }}
+          envs: DEPLOY_TARGET_DIR,DEPLOY_BUILD_OUTPUT_DIR
+          script: |
+            source ~/.bash_profile
+
+            set -euxo pipefail
+
+            cd kaniwriter
+            git checkout main
+            git pull
+
+            mise install
+            mise prune --yes
+
+            pnpm install --frozen-lockfile
+            pnpm build:ceres
+
+            find ${DEPLOY_TARGET_DIR} -type f -print0 | xargs -0 rm -rf
+            cp -r ${DEPLOY_BUILD_OUTPUT_DIR}/* ${DEPLOY_TARGET_DIR}

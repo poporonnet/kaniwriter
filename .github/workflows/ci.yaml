@@ -3,6 +3,7 @@ name: Format and Lint
 on:
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
 
 jobs:
   format_and_lint:
@@ -11,7 +12,7 @@ jobs:
 
     steps:
      - name: Checkout Repository
-       uses: actions/checkout@v4
+       uses: actions/checkout@v5
 
      - name: Set up bun
        uses: oven-sh/setup-bun@v2

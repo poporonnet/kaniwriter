@@ -1,6 +1,8 @@
 import { ReactNode, useCallback, useState } from "react";
-import { NotificationContext } from "../contexts/NotificationContext";
-import { Notification } from "../contexts/NotificationContext";
+import {
+  Notification,
+  NotificationContext,
+} from "../contexts/NotificationContext";
 import { NotificationBar } from "./NotificationBar";
 
 export const NotificationProvider = ({ children }: { children: ReactNode }) => {

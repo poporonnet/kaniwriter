@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.6.0](https://github.com/poporonnet/kaniwriter/compare/v1.5.0...v1.6.0) (2025-08-27)
+
+
+### Bug Fixes
+
+* 接続直後にフリーズすることがある問題を修正 ([#717](https://github.com/poporonnet/kaniwriter/issues/717)) ([071f4ec](https://github.com/poporonnet/kaniwriter/commit/071f4ec48748def28b6946fc8793b4731998d0ae))
+
+## [1.5.0](https://github.com/poporonnet/kaniwriter/compare/v1.4.0...v1.5.0) (2025-07-18)
+
+
+### Features
+
+* プログラムがない場合はソースコードタブを開けなくした ([#662](https://github.com/poporonnet/kaniwriter/issues/662)) ([137c274](https://github.com/poporonnet/kaniwriter/commit/137c27415d7d9fd8864ab4c077874615b0310d31))
+* 接続ボタンと切断ボタンを統合した ([#657](https://github.com/poporonnet/kaniwriter/issues/657)) ([78c5fbf](https://github.com/poporonnet/kaniwriter/commit/78c5fbfed10c9fdcd24c4bc03213f6b6012c7754))
+
+## [1.4.0](https://github.com/poporonnet/kaniwriter/compare/v1.3.0...v1.4.0) (2025-06-27)
+
+
+### Features
+
+* バージョン番号をヘッダーに表示 ([#592](https://github.com/poporonnet/kaniwriter/issues/592)) ([463f7e5](https://github.com/poporonnet/kaniwriter/commit/463f7e5c08364daa996141707c75959e0f26bbf2))
+
+
+### Bug Fixes
+
+* SSH時に環境変数が読み込まれない問題の修正 ([#617](https://github.com/poporonnet/kaniwriter/issues/617)) ([975992a](https://github.com/poporonnet/kaniwriter/commit/975992a2a5d1e7306b8d18d9cd8bbf98de9ab692))
+* スクリプトのパスを修正 ([#618](https://github.com/poporonnet/kaniwriter/issues/618)) ([f29df8e](https://github.com/poporonnet/kaniwriter/commit/f29df8e3eab791b7cfc8d30fb19f317cf9d97062))
+
 ## [1.3.0](https://github.com/poporonnet/kaniwriter/compare/v1.2.0...v1.3.0) (2025-05-18)
 
 

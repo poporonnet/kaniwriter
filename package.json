@@ -1,7 +1,7 @@
 {
   "name": "kaniwriter",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.6.0",
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
@@ -11,7 +11,7 @@
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"
   },
-  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac",
+  "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -19,8 +19,8 @@
     "@mui/joy": "5.0.0-beta.52",
     "@mui/material": "^7.0.0",
     "@react-router/node": "^7.4.0",
-    "@sentry/react": "^9.15.0",
-    "@sentry/vite-plugin": "^3.4.0",
+    "@sentry/react": "^10.0.0",
+    "@sentry/vite-plugin": "^4.0.0",
     "anser": "^2.1.1",
     "base64-js": "^1.5.1",
     "i18next": "^25.0.0",
@@ -31,19 +31,19 @@
     "react-router": "^7.4.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.2.2",
     "@react-router/dev": "^7.4.0",
     "@shikijs/langs-precompiled": "^3.0.0",
     "@shikijs/themes": "^3.0.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/w3c-web-serial": "^1.0.6",
-    "@vitejs/plugin-react": "^4.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "path": "^0.12.7",
     "shiki": "^3.0.0",
     "typescript": "^5.0.2",
-    "vite": "^6.0.0"
+    "vite": "^7.0.0"
   },
   "engines": {
     "node": ">=20.0.0"

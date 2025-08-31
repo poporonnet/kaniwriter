@@ -36,6 +36,12 @@ export const Layout = ({ children }: { children: ReactNode }) => (
             font-display: swap; src:
             url("fonts/NotoSansMono/NotoSansMono-Regular.woff2") format("woff2");
           }
+          
+          @font-face {
+            font-family: "Inter"; font-style: normal; font-weight: 400;
+            font-display: swap; src:
+            url("fonts/Inter/Inter-VariableFont_opsz,wght.woff2") format("woff2");
+          }
         `}
       </style>
       <Meta />

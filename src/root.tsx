@@ -22,6 +22,13 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         href="fonts/NotoSansMono/NotoSansMono-Regular.woff2"
         crossOrigin="anonymous"
       />
+      <link
+        rel="preload"
+        as="font"
+        type="font/woff2"
+        href="fonts/Inter-VariableFont_opsz,wght.woff2"
+        crossOrigin="anonymous"
+      />
       <title>kaniwriter | mruby/c書き込みツール</title>
       <style>
         {`

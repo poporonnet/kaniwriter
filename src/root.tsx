@@ -26,7 +26,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         rel="preload"
         as="font"
         type="font/woff2"
-        href="fonts/Inter-Regular.woff2"
+        href="fonts/Inter/Inter-Regular.woff2"
         crossOrigin="anonymous"
       />
       <title>kaniwriter | mruby/c書き込みツール</title>

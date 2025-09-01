@@ -26,7 +26,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         rel="preload"
         as="font"
         type="font/woff2"
-        href="fonts/Inter-VariableFont_opsz,wght.woff2"
+        href="fonts/Inter-Regular.woff2"
         crossOrigin="anonymous"
       />
       <title>kaniwriter | mruby/c書き込みツール</title>
@@ -47,7 +47,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
           @font-face {
             font-family: "Inter"; font-style: normal; font-weight: 400;
             font-display: swap; src:
-            url("fonts/Inter/Inter-VariableFont_opsz,wght.woff2") format("woff2");
+            url("fonts/Inter/Inter-Regular.woff2") format("woff2");
           }
         `}
       </style>

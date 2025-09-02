@@ -116,6 +116,11 @@ export const TargetSelectModal: FC<TargetSelectModalProps> = ({
                   id={value.title}
                   value={value.title}
                   checkedIcon={<CheckCircleRoundedIcon />}
+                  onClick={() => {
+                    if (value.title === target) {
+                      setOpen(false);
+                    }
+                  }}
                 />
                 <FormLabel htmlFor={value.title}>
                   <Typography>{value.title}</Typography>

@@ -1,0 +1,2 @@
+[tools]
+node = { version = "22.19.0", postinstall = "corepack enable; corepack install" }

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "tsc && react-router build",
-    "build:ceres": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres",
+    "build:ceres-staging": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-staging",
+    "build:ceres-production": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-production",
     "preview": "vite preview",
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"

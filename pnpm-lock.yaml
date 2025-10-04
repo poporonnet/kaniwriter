@@ -25,7 +25,7 @@ importers:
         version: 7.3.2(@emotion/react@11.14.0(@types/react@19.1.16)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.16)(react@19.1.1))(@types/react@19.1.16)(react@19.1.1))(@types/react@19.1.16)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@react-router/node':
         specifier: ^7.4.0
-        version: 7.9.3(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.2)
+        version: 7.9.3(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3)
       '@sentry/react':
         specifier: ^10.0.0
         version: 10.17.0(react@19.1.1)
@@ -40,7 +40,7 @@ importers:
         version: 1.5.1
       i18next:
         specifier: ^25.0.0
-        version: 25.5.2(typescript@5.9.2)
+        version: 25.5.2(typescript@5.9.3)
       isbot:
         specifier: ^5
         version: 5.1.31
@@ -52,7 +52,7 @@ importers:
         version: 19.1.1(react@19.1.1)
       react-i18next:
         specifier: ^15.0.0
-        version: 15.7.4(i18next@25.5.2(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
+        version: 15.7.4(i18next@25.5.2(typescript@5.9.3))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.3)
       react-router:
         specifier: ^7.4.0
         version: 7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -62,7 +62,7 @@ importers:
         version: 2.2.4
       '@react-router/dev':
         specifier: ^7.4.0
-        version: 7.9.3(@types/node@24.6.1)(@vitejs/plugin-rsc@0.4.11(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vite@7.1.7(@types/node@24.6.1)))(babel-plugin-macros@3.1.0)(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.2)(vite@7.1.7(@types/node@24.6.1))
+        version: 7.9.3(@types/node@24.6.1)(@vitejs/plugin-rsc@0.4.11(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vite@7.1.7(@types/node@24.6.1)))(babel-plugin-macros@3.1.0)(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3)(vite@7.1.7(@types/node@24.6.1))
       '@shikijs/langs-precompiled':
         specifier: ^3.0.0
         version: 3.13.0
@@ -92,7 +92,7 @@ importers:
         version: 3.13.0
       typescript:
         specifier: ^5.0.2
-        version: 5.9.2
+        version: 5.9.3
       vite:
         specifier: ^7.0.0
         version: 7.1.7(@types/node@24.6.1)
@@ -1864,8 +1864,8 @@ packages:
   turbo-stream@3.1.0:
     resolution: {integrity: sha512-tVI25WEXl4fckNEmrq70xU1XumxUwEx/FZD5AgEcV8ri7Wvrg2o7GEq8U7htrNx3CajciGm+kDyhRf5JB6t7/A==}
 
-  typescript@5.9.2:
-    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2689,7 +2689,7 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@react-router/dev@7.9.3(@types/node@24.6.1)(@vitejs/plugin-rsc@0.4.11(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vite@7.1.7(@types/node@24.6.1)))(babel-plugin-macros@3.1.0)(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.2)(vite@7.1.7(@types/node@24.6.1))':
+  '@react-router/dev@7.9.3(@types/node@24.6.1)(@vitejs/plugin-rsc@0.4.11(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vite@7.1.7(@types/node@24.6.1)))(babel-plugin-macros@3.1.0)(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3)(vite@7.1.7(@types/node@24.6.1))':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/generator': 7.28.3
@@ -2699,7 +2699,7 @@ snapshots:
       '@babel/traverse': 7.28.4
       '@babel/types': 7.28.4
       '@npmcli/package-json': 4.0.1
-      '@react-router/node': 7.9.3(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.2)
+      '@react-router/node': 7.9.3(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3)
       '@remix-run/node-fetch-server': 0.9.0
       arg: 5.0.2
       babel-dead-code-elimination: 1.0.10
@@ -2717,12 +2717,12 @@ snapshots:
       react-router: 7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       semver: 7.7.2
       tinyglobby: 0.2.15
-      valibot: 0.41.0(typescript@5.9.2)
+      valibot: 0.41.0(typescript@5.9.3)
       vite: 7.1.7(@types/node@24.6.1)
       vite-node: 3.2.4(@types/node@24.6.1)
     optionalDependencies:
       '@vitejs/plugin-rsc': 0.4.11(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vite@7.1.7(@types/node@24.6.1))
-      typescript: 5.9.2
+      typescript: 5.9.3
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -2739,12 +2739,12 @@ snapshots:
       - tsx
       - yaml
 
-  '@react-router/node@7.9.3(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.2)':
+  '@react-router/node@7.9.3(react-router@7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3)':
     dependencies:
       '@mjackson/node-fetch-server': 0.2.0
       react-router: 7.9.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     optionalDependencies:
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   '@remix-run/node-fetch-server@0.9.0': {}
 
@@ -3337,11 +3337,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  i18next@25.5.2(typescript@5.9.2):
+  i18next@25.5.2(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.4
     optionalDependencies:
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   import-fresh@3.3.1:
     dependencies:
@@ -3606,15 +3606,15 @@ snapshots:
       react: 19.1.1
       scheduler: 0.26.0
 
-  react-i18next@15.7.4(i18next@25.5.2(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2):
+  react-i18next@15.7.4(i18next@25.5.2(typescript@5.9.3))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.4
       html-parse-stringify: 3.0.1
-      i18next: 25.5.2(typescript@5.9.2)
+      i18next: 25.5.2(typescript@5.9.3)
       react: 19.1.1
     optionalDependencies:
       react-dom: 19.1.1(react@19.1.1)
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   react-is@16.13.1: {}
 
@@ -3791,7 +3791,7 @@ snapshots:
   turbo-stream@3.1.0:
     optional: true
 
-  typescript@5.9.2: {}
+  typescript@5.9.3: {}
 
   undici-types@7.13.0: {}
 
@@ -3835,9 +3835,9 @@ snapshots:
     dependencies:
       inherits: 2.0.3
 
-  valibot@0.41.0(typescript@5.9.2):
+  valibot@0.41.0(typescript@5.9.3):
     optionalDependencies:
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   validate-npm-package-license@3.0.4:
     dependencies:

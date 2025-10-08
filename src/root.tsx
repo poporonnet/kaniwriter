@@ -38,7 +38,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         {`
           @font-face {
             font-family: "Kosugi Maru"; font-style: normal; font-weight: 400;
-             font-display: swap; src:
+            font-display: swap; src:
             url("fonts/KosugiMaru/KosugiMaru-Regular.woff2") format("woff2");
           }
 

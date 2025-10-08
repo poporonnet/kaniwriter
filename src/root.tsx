@@ -30,10 +30,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         crossOrigin="anonymous"
       />
       <title>kaniwriter | mruby/c書き込みツール</title>
-      <meta
-        name="description"
-        content="mruby/c 書き込み用ブラウザツール"
-      ></meta>
+      <meta name="description" content="mruby/c 書き込み用ブラウザツール" />
       <style>
         {`
           @font-face {

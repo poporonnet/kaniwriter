@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/poporonnet/kaniwriter/compare/v1.7.0...v1.8.0) (2025-11-01)
+
+
+### Features
+
+* root.tsxにメタディスクリプションを追加 ([#814](https://github.com/poporonnet/kaniwriter/issues/814)) ([6921556](https://github.com/poporonnet/kaniwriter/commit/6921556b71af1218c582d03f50fa9706fb5bad07))
+
 ## [1.7.0](https://github.com/poporonnet/kaniwriter/compare/v1.6.0...v1.7.0) (2025-09-01)
 
 

@@ -1,21 +1,20 @@
-name: Deploy (Staging)
+name: Deploy (Production)
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [released]
   workflow_dispatch:
 
 concurrency:
   group: deploy
 
 jobs:
-  deploy-staging:
-    name: Deploy (Staging)
+  deploy-production:
+    name: Deploy (Production)
     runs-on: ubuntu-latest
     environment:
-      name: Staging
-      url: ${{ vars.DEPLOY_STAGING_URL }}
+      name: Production
+      url: ${{ vars.DEPLOY_PRODUCTION_URL }}
     steps:
       - name: deploy
         uses: appleboy/ssh-action@v1
@@ -40,7 +39,7 @@ jobs:
             mise prune --yes
 
             pnpm install --frozen-lockfile
-            pnpm build:ceres-staging
+            pnpm build:ceres-production
 
             find ${DEPLOY_TARGET_DIR} -type f -print0 | xargs -0 rm -rf
             cp -r ${DEPLOY_BUILD_OUTPUT_DIR}/* ${DEPLOY_TARGET_DIR}

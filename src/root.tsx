@@ -30,11 +30,12 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         crossOrigin="anonymous"
       />
       <title>kaniwriter | mruby/c書き込みツール</title>
+      <meta name="description" content="mruby/c 書き込み用ブラウザツール" />
       <style>
         {`
           @font-face {
             font-family: "Kosugi Maru"; font-style: normal; font-weight: 400;
-             font-display: swap; src:
+            font-display: swap; src:
             url("fonts/KosugiMaru/KosugiMaru-Regular.woff2") format("woff2");
           }
 

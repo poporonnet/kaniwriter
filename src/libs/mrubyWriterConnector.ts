@@ -29,6 +29,8 @@ const exitWriteModeKeyword: Record<Target, RegExp> = {
   RBoard: /\+OK Execute mruby\/c\./,
 } as const;
 
+const abortReason = "abortStream" as const;
+
 export class MrubyWriterConnector {
   private port: SerialPort | undefined;
   private log: Logger;
@@ -159,8 +161,12 @@ export class MrubyWriterConnector {
       const cancel = () => this.sourceReader?.releaseLock();
       const sourceReadable = new ReadableStream({
         start: async (controller) => {
-          await listenInfinity((value) => controller.enqueue(value));
-          controller.error("Error occurred while listening.");
+          await listenInfinity((value) => controller.enqueue(value)).catch(
+            (error) => {
+              controller.error(error);
+              this.sourceAborter?.abort(error);
+            }
+          );
         },
         cancel,
       });
@@ -200,8 +206,20 @@ export class MrubyWriterConnector {
         })
       );
 
+      await this.sinkClosed?.catch((reason) => {
+        if (reason == abortReason) return;
+
+        this.handleText(
+          "\r\n\u001b[31m> port closed unexpectedly.\u001b[0m\r\n"
+        );
+        throw reason;
+      });
+
       return Success.value(null);
     } catch (error) {
+      this._writeMode = false;
+      this.port = undefined;
+
       return Failure.error("Error excepted while reading.", { cause: error });
     } finally {
       if (!this.sourceAborter?.signal.aborted) {
@@ -390,7 +408,9 @@ export class MrubyWriterConnector {
   ): Promise<void> {
     while (!aborter.signal.aborted) {
       const readable = getReadable();
-      if (!readable) break;
+      if (!readable) {
+        throw new Error("Cannot read serial port.");
+      }
 
       const reader = readable.getReader();
       setReader(reader);
@@ -551,10 +571,10 @@ export class MrubyWriterConnector {
   }
 
   private async abortStreams(): Promise<void> {
-    this.sinkAborter?.abort("abortStreams");
+    this.sinkAborter?.abort(abortReason);
     await this.sinkClosed?.catch(console.warn);
 
-    this.sourceAborter?.abort("abortStreams");
+    this.sourceAborter?.abort(abortReason);
     await this.sourceClosed?.catch(console.warn);
 
     await this.sourceReader?.cancel().catch(console.warn);

@@ -55,16 +55,15 @@ export const TargetSelector = ({
           height: "3.5rem",
           fontWeight: 700,
           display: "flex",
-          alignContent: "center",
+          alignItems: "center",
         }}
-        aria-label={t("書き込みターゲットを選択してください")}
       >
         {target ? (
           <>
             <Box
               sx={{
                 display: "flex",
-                alignContent: "center",
+                alignItems: "center",
               }}
             >
               <img
@@ -77,7 +76,7 @@ export const TargetSelector = ({
                   marginRight: "1rem",
                 }}
               />
-              <Typography level="title-md" sx={{ alignContent: "center" }}>
+              <Typography level="title-md" sx={{ alignItems: "center" }}>
                 {target}
               </Typography>
             </Box>

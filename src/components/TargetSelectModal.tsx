@@ -99,7 +99,7 @@ export const TargetSelectModal = ({
                 boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
                 transition: "box-shadow 0.2s",
                 "&:hover": {
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
                 },
               }}
             >

@@ -65,7 +65,6 @@ export const TargetSelector = ({
               sx={{
                 display: "flex",
                 alignContent: "center",
-                width: "object-fit",
               }}
             >
               <img

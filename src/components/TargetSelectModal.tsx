@@ -55,9 +55,6 @@ export const TargetSelectModal = ({
           {t("書き込みターゲットを選択してください")}
         </Typography>
         <RadioGroup
-          aria-label="platform"
-          name="Website"
-          orientation="horizontal"
           value={target}
           onChange={(event) => onChangeTarget(event.target.value as Target)}
           sx={{
@@ -127,7 +124,7 @@ export const TargetSelectModal = ({
                   width: "5.5rem",
                   margin: "0 auto",
                 }}
-              />{" "}
+              />
             </Sheet>
           ))}
         </RadioGroup>

@@ -76,9 +76,7 @@ export const TargetSelector = ({
                   marginRight: "1rem",
                 }}
               />
-              <Typography level="title-md" sx={{ alignItems: "center" }}>
-                {target}
-              </Typography>
+              <Typography level="title-md">{target}</Typography>
             </Box>
             <DeviceHubIcon />
           </>

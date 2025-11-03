@@ -55,6 +55,7 @@ export const TargetSelectModal = ({
           {t("書き込みターゲットを選択してください")}
         </Typography>
         <RadioGroup
+          orientation="horizontal"
           value={target}
           onChange={(event) => onChangeTarget(event.target.value as Target)}
           sx={{
@@ -82,10 +83,10 @@ export const TargetSelectModal = ({
             },
           }}
         >
-          {targets.map((value, index) => (
+          {targets.map((value) => (
             <Sheet
               variant="outlined"
-              key={index}
+              key={value.title}
               sx={{
                 position: "relative",
                 borderRadius: "md",

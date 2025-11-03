@@ -22,12 +22,20 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         href="fonts/NotoSansMono/NotoSansMono-Regular.woff2"
         crossOrigin="anonymous"
       />
+      <link
+        rel="preload"
+        as="font"
+        type="font/woff2"
+        href="fonts/Inter/Inter-Regular.woff2"
+        crossOrigin="anonymous"
+      />
       <title>kaniwriter | mruby/c書き込みツール</title>
+      <meta name="description" content="mruby/c 書き込み用ブラウザツール" />
       <style>
         {`
           @font-face {
             font-family: "Kosugi Maru"; font-style: normal; font-weight: 400;
-             font-display: swap; src:
+            font-display: swap; src:
             url("fonts/KosugiMaru/KosugiMaru-Regular.woff2") format("woff2");
           }
 
@@ -35,6 +43,12 @@ export const Layout = ({ children }: { children: ReactNode }) => (
             font-family: "Noto Sans Mono"; font-style: normal; font-weight: 400;
             font-display: swap; src:
             url("fonts/NotoSansMono/NotoSansMono-Regular.woff2") format("woff2");
+          }
+          
+          @font-face {
+            font-family: "Inter"; font-style: normal; font-weight: 400;
+            font-display: swap; src:
+            url("fonts/Inter/Inter-Regular.woff2") format("woff2");
           }
         `}
       </style>

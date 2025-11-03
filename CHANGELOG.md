@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/poporonnet/kaniwriter/compare/v1.6.0...v1.7.0) (2025-09-01)
+
+
+### Features
+
+* Interのフォントファイルを追加した ([#744](https://github.com/poporonnet/kaniwriter/issues/744)) ([ea126f5](https://github.com/poporonnet/kaniwriter/commit/ea126f593a6281099ed377a168a1982187ce3654))
+* 切断操作をせずケーブルを抜いた場合でも正常な状態に回復できるように ([#736](https://github.com/poporonnet/kaniwriter/issues/736)) ([9c1b4e6](https://github.com/poporonnet/kaniwriter/commit/9c1b4e63af1585dcf6f2d1b8c8acd61874ea21f1))
+
 ## [1.6.0](https://github.com/poporonnet/kaniwriter/compare/v1.5.0...v1.6.0) (2025-08-27)
 
 

@@ -109,9 +109,7 @@ export const TargetSelectModal = ({
                 value={value.title}
                 checkedIcon={<CheckCircleRoundedIcon />}
                 onClick={() => {
-                  if (value.title === target) {
-                    setOpen(false);
-                  }
+                  setOpen(false);
                 }}
               />
               <FormLabel htmlFor={value.title}>

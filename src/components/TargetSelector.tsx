@@ -1,4 +1,7 @@
-import { DeviceHub as DeviceHubIcon } from "@mui/icons-material";
+import {
+  DeviceHub as DeviceHubIcon,
+  NorthWest as NorthWestIcon,
+} from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/joy";
 import { Target } from "libs/mrubyWriterConnector";
 import React from "react";
@@ -6,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import ESP32 from "/images/ESP32.webp";
 import RBoard from "/images/Rboard.webp";
 import { TargetSelectModal } from "./TargetSelectModal";
+
 export const targets = [
   {
     title: "RBoard",
@@ -53,34 +57,39 @@ export const TargetSelector = ({
           display: "flex",
           alignContent: "center",
         }}
-        aria-label={t("書き込みターゲットを選択してください。")}
+        aria-label={t("書き込みターゲットを選択してください")}
       >
         {target ? (
-          <Box
-            sx={{
-              display: "flex",
-              alignContent: "center",
-              width: "object-fit",
-            }}
-          >
-            <img
-              src={targets.find((t) => t.title === target)?.image}
-              alt={target}
-              style={{
-                width: "2.25rem",
-                height: "2.25rem",
-                borderRadius: "0.25rem",
-                marginRight: "1rem",
+          <>
+            <Box
+              sx={{
+                display: "flex",
+                alignContent: "center",
+                width: "object-fit",
               }}
-            />
-            <Typography level="title-md" sx={{ alignContent: "center" }}>
-              {target}
-            </Typography>
-          </Box>
+            >
+              <img
+                src={targets.find((t) => t.title === target)?.image}
+                alt={target}
+                style={{
+                  width: "2.25rem",
+                  height: "2.25rem",
+                  borderRadius: "0.25rem",
+                  marginRight: "1rem",
+                }}
+              />
+              <Typography level="title-md" sx={{ alignContent: "center" }}>
+                {target}
+              </Typography>
+            </Box>
+            <DeviceHubIcon />
+          </>
         ) : (
-          t("書き込みターゲットを選択してください。")
+          <>
+            {t("書き込みターゲットを選択")}
+            <NorthWestIcon />
+          </>
         )}
-        <DeviceHubIcon />
       </Button>
       <TargetSelectModal
         open={open}

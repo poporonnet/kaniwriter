@@ -1,5 +1,5 @@
 import {
-  DeviceHub as DeviceHubIcon,
+  DeveloperBoard as DeveloperBoardIcon,
   NorthWest as NorthWestIcon,
 } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/joy";
@@ -78,7 +78,7 @@ export const TargetSelector = ({
               />
               <Typography level="title-md">{target}</Typography>
             </Box>
-            <DeviceHubIcon />
+            <DeveloperBoardIcon />
           </>
         ) : (
           <>

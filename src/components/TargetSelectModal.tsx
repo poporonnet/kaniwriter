@@ -74,8 +74,7 @@ export const TargetSelectModal = ({
               "& > svg": {
                 zIndex: 2,
                 position: "absolute",
-                top: "-0.5rem",
-                right: "-0.5rem",
+                right: "1rem",
                 borderRadius: "50%",
               },
             },

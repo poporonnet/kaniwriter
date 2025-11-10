@@ -1,5 +1,5 @@
 import { CheckCircleRounded as CheckCircleRoundedIcon } from "@mui/icons-material";
-import { FormLabel, Radio, Sheet, Typography, radioClasses } from "@mui/joy";
+import { FormLabel, Radio, radioClasses, Sheet, Typography } from "@mui/joy";
 import { Target } from "libs/mrubyWriterConnector";
 
 type TargetCardProps = {
@@ -26,23 +26,6 @@ export const TargetCard = (props: TargetCardProps) => {
         transition: "box-shadow 0.2s",
         "&:hover": {
           boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
-        },
-        [`& .${radioClasses.checked}`]: {
-          [`& .${radioClasses.action}`]: {
-            border: "3px solid",
-            borderColor: "primary.500",
-          },
-        },
-        [`& .${radioClasses.radio}`]: {
-          display: "contents",
-          "& > svg": {
-            zIndex: 2,
-            position: "absolute",
-            bgcolor: "white",
-            top: "-0.4rem",
-            right: "-0.4rem",
-            borderRadius: "50%",
-          },
         },
       }}
     >

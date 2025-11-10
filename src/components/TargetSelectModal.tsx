@@ -1,11 +1,4 @@
-import {
-  Modal,
-  ModalClose,
-  RadioGroup,
-  radioClasses,
-  Sheet,
-  Typography,
-} from "@mui/joy";
+import { Modal, ModalClose, RadioGroup, Sheet, Typography } from "@mui/joy";
 import { Target } from "libs/mrubyWriterConnector";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";
@@ -63,22 +56,6 @@ export const TargetSelectModal = ({
             alignItems: "stretch",
             justifyContent: "center",
             flexWrap: "wrap",
-            [`& .${radioClasses.checked}`]: {
-              [`& .${radioClasses.action}`]: {
-                border: "3px solid",
-                borderColor: "primary.500",
-              },
-            },
-            [`& .${radioClasses.radio}`]: {
-              display: "contents",
-              "& > svg": {
-                zIndex: 2,
-                position: "absolute",
-                top: "0.5rem",
-                right: "0.5rem",
-                borderRadius: "50%",
-              },
-            },
           }}
         >
           {targets.map((value) => (

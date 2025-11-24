@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/poporonnet/kaniwriter/compare/v1.8.0...v1.8.1) (2025-11-24)
+
+
+### Bug Fixes
+
+* Update reference PDF URL to 2025 version ([#900](https://github.com/poporonnet/kaniwriter/issues/900)) ([f1bfb01](https://github.com/poporonnet/kaniwriter/commit/f1bfb019e8e5350dde663367e3086d03af7d3df9))
+
 ## [1.8.0](https://github.com/poporonnet/kaniwriter/compare/v1.7.0...v1.8.0) (2025-11-10)
 
 

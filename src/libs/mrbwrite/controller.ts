@@ -103,6 +103,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
       return closeRes;
     }
 
+    this._writeMode = false;
     this.handleText("\r\n\u001b[32m> successfully disconnected.\u001b[0m\r\n");
     return Success.value(null);
   }

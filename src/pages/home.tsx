@@ -9,6 +9,8 @@ import { useMrbwrite } from "hooks/useMrbwrite";
 import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
+import { serialAdapter } from "libs/mrbwrite/adapter";
+import { esp32, rboard } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,21 +23,24 @@ const Home = () => {
 
   const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(id);
   const [TargetSelector, { target }] = useTarget((target) =>
-    connector.setTarget(target)
+    connector.setProfile(target == "ESP32" ? esp32 : rboard)
   );
   const [OptionList, option] = useOption();
 
-  const { connector, method } = useMrbwrite({
-    target,
-    log: (message, params) => console.log(message, params),
-    onListen: (buffer) => setLog([...buffer]),
-  });
+  const { connector, method } = useMrbwrite(
+    {
+      profile: target == "ESP32" ? esp32 : rboard,
+      log: (message, params) => console.log(message, params),
+      onListen: (buffer) => setLog([...buffer]),
+    },
+    serialAdapter
+  );
 
   const startConnection = useCallback(
-    async (port?: () => Promise<SerialPort>) => {
-      const res = await method.connect(
-        port ?? (() => navigator.serial.requestPort())
-      );
+    async (request?: () => Promise<SerialPort>) => {
+      const res = await method.connect({
+        request,
+      });
       if (res.isFailure()) return;
 
       await Promise.all([method.startListen(), method.startEnter(1000)]);

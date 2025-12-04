@@ -1,9 +1,10 @@
 import { ControlButtons } from "components/ControlButtons";
-import { MrubyWriterConnector, Target } from "libs/mrubyWriterConnector";
 import { ComponentType } from "react";
 import { CompileStatus } from "./useCompile";
 import { Method } from "./useMrbwrite";
 import { Option } from "./useOption";
+import { MrbwriteController, Target } from "libs/mrbwrite/controller";
+import { MrbwriteAdapter } from "libs/mrbwrite/adapter";
 
 type UseControlButtons = [buttons: ComponentType];
 
@@ -12,8 +13,8 @@ export const useControlButtons = (
   target: Target | undefined,
   compileStatus: CompileStatus,
   option: Option,
-  connector: MrubyWriterConnector,
-  method: Method,
+  mrbwriteController: MrbwriteController<MrbwriteAdapter<unknown>>,
+  method: Method<MrbwriteAdapter<unknown>>,
   startConnection: () => void
 ): UseControlButtons => {
   return [
@@ -21,28 +22,31 @@ export const useControlButtons = (
       <ControlButtons
         connect={{
           onClick: () => {
-            target && !connector.isConnected
+            target && !mrbwriteController.isConnected
               ? startConnection()
               : method.disconnect();
           },
           disabled: !target,
-          role: target && connector.isConnected ? "disconnect" : "connect",
+          role:
+            target && mrbwriteController.isConnected ? "disconnect" : "connect",
         }}
         write={{
           onClick: () =>
             code && method.writeCode(code, { autoVerify: option.autoVerify }),
           disabled:
-            compileStatus.status !== "success" || !connector.isWriteMode,
+            compileStatus.status !== "success" ||
+            !mrbwriteController.isWriteMode,
         }}
         verify={{
           onClick: () => code && method.verify(code),
           disabled:
-            compileStatus.status !== "success" || !connector.isWriteMode,
+            compileStatus.status !== "success" ||
+            !mrbwriteController.isWriteMode,
         }}
         execute={{
           onClick: () =>
             method.sendCommand("execute", { ignoreResponse: true }),
-          disabled: !connector.isWriteMode,
+          disabled: !mrbwriteController.isWriteMode,
         }}
       />
     ),

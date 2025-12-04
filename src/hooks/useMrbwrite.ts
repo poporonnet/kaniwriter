@@ -1,37 +1,49 @@
-import { Config, MrubyWriterConnector } from "libs/mrubyWriterConnector";
 import { Result, Success } from "libs/result";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useNotify } from "./useNotify";
+import { MrbwriteAdapter } from "libs/mrbwrite/adapter";
+import { MrbwriteController } from "libs/mrbwrite/controller";
 
-export type Method = {
+export type Method<Adapter extends MrbwriteAdapter<unknown>> = {
   connect: (
-    ...props: Parameters<MrubyWriterConnector["connect"]>
+    ...props: Parameters<MrbwriteController<Adapter>["connect"]>
   ) => Promise<Result<void, Error>>;
   disconnect: () => Promise<Result<void, Error>>;
   startListen: () => Promise<Result<void, Error>>;
   tryEnterWriteMode: () => Promise<Result<void, Error>>;
   startEnter: (intervalMs: number) => Promise<Result<void, Error>>;
   sendCommand: (
-    ...props: Parameters<MrubyWriterConnector["sendCommand"]>
+    ...props: Parameters<MrbwriteController<Adapter>["sendCommand"]>
   ) => Promise<Result<void, Error>>;
   writeCode: (
-    ...props: Parameters<MrubyWriterConnector["writeCode"]>
+    ...props: Parameters<MrbwriteController<Adapter>["writeCode"]>
   ) => Promise<Result<void, Error>>;
   verify: (
-    ...props: Parameters<MrubyWriterConnector["verify"]>
+    ...props: Parameters<MrbwriteController<Adapter>["verify"]>
   ) => Promise<Result<void, Error>>;
 };
 
-type UseMrbwrite = { connector: MrubyWriterConnector; method: Method };
+type UseMrbwrite<Adapter extends MrbwriteAdapter<unknown>> = {
+  connector: MrbwriteController<Adapter>;
+  method: Method<Adapter>;
+};
 
-export const useMrbwrite = (config: Config): UseMrbwrite => {
+export const useMrbwrite = <Target>(
+  ...params: ConstructorParameters<
+    typeof MrbwriteController<MrbwriteAdapter<Target>>
+  >
+): // config: Config,
+// adaptor: MrbwriteAdapter<Target>
+UseMrbwrite<MrbwriteAdapter<Target>> => {
+  type Adapter = MrbwriteAdapter<Target>;
+
   const [t] = useTranslation("ns1");
   const notify = useNotify();
 
   // インスタンスは1つだけ作られる
   // biome-ignore lint: correctness/useExhaustiveDependencies
-  const connector = useMemo(() => new MrubyWriterConnector(config), []);
+  const connector = useMemo(() => new MrbwriteController(...params), []);
 
   const notifyError = useCallback(
     (title: string, error: Error) =>
@@ -55,7 +67,7 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
 
   const connect = useCallback(
     async (
-      ...props: Parameters<MrubyWriterConnector["connect"]>
+      ...props: Parameters<MrbwriteController<Adapter>["connect"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.connect(...props);
       if (res.isFailure()) {
@@ -114,7 +126,7 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
 
   const sendCommand = useCallback(
     async (
-      ...props: Parameters<MrubyWriterConnector["sendCommand"]>
+      ...props: Parameters<MrbwriteController<Adapter>["sendCommand"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.sendCommand(...props);
       if (res.isFailure()) {
@@ -129,7 +141,7 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
 
   const writeCode = useCallback(
     async (
-      ...props: Parameters<MrubyWriterConnector["writeCode"]>
+      ...props: Parameters<MrbwriteController<Adapter>["writeCode"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.writeCode(...props);
       if (res.isFailure()) {
@@ -144,7 +156,7 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
 
   const verify = useCallback(
     async (
-      ...props: Parameters<MrubyWriterConnector["verify"]>
+      ...props: Parameters<MrbwriteController<Adapter>["verify"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.verify(...props);
       if (res.isFailure()) {
@@ -165,7 +177,7 @@ export const useMrbwrite = (config: Config): UseMrbwrite => {
   );
 
   const method = useMemo(
-    (): Method => ({
+    (): Method<Adapter> => ({
       connect,
       disconnect,
       startListen,

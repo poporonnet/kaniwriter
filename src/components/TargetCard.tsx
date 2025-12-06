@@ -1,6 +1,6 @@
 import { CheckCircleRounded as CheckCircleRoundedIcon } from "@mui/icons-material";
 import { FormLabel, Radio, radioClasses, Sheet, Typography } from "@mui/joy";
-import { Target } from "libs/mrubyWriterConnector";
+import { Target } from "libs/mrbwrite/controller";
 
 type TargetCardProps = {
   title: Target;

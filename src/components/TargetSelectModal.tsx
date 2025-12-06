@@ -1,5 +1,5 @@
 import { Modal, ModalClose, RadioGroup, Sheet, Typography } from "@mui/joy";
-import { Target } from "libs/mrubyWriterConnector";
+import { Target } from "libs/mrbwrite/controller";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";
 import { targets } from "./TargetSelector";

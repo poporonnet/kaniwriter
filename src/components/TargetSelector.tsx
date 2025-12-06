@@ -3,7 +3,7 @@ import {
   NorthWest as NorthWestIcon,
 } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/joy";
-import { Target } from "libs/mrubyWriterConnector";
+import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ESP32 from "/images/ESP32.webp";

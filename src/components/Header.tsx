@@ -62,19 +62,18 @@ export const Header = () => {
           underline="none"
           sx={{ color: "inherit" }}
         >
-          <Typography fontSize="2.125rem">
-            {t("kaniwriter")}
-            <Link
-              fontSize="1.2rem"
-              textColor="#DDD"
-              href="https://github.com/poporonnet/kaniwriter/releases"
-              target="_blank"
-              underline="none"
-              pl="1rem"
-            >
-              {` ${import.meta.env.NPM_PACKAGE_VERSION}`}
-            </Link>
-          </Typography>
+          <Typography fontSize="2.125rem">{t("kaniwriter")}</Typography>
+        </Link>
+        <Link
+          fontSize="1.2rem"
+          textColor="#DDD"
+          href="https://github.com/poporonnet/kaniwriter/releases"
+          target="_blank"
+          underline="none"
+          ml="0.5rem"
+          pt="0.7rem"
+        >
+          {` ${import.meta.env.NPM_PACKAGE_VERSION}`}
         </Link>
       </Box>
       <Box flex={1} />

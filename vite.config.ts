@@ -20,6 +20,8 @@ export default defineConfig(({ mode }) => {
         sourcemaps: {
           filesToDeleteAfterUpload: "dist/**/*.js.map",
         },
+        disable: process.env.NODE_ENV !== "production",
+        silent: process.env.NODE_ENV !== "production",
       }),
     ],
     define: {

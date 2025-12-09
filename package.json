@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "tsc && react-router build",
-    "build:ceres-staging": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-staging",
-    "build:ceres-production": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-production",
+    "build": "tsgo && react-router build",
+    "build:ceres-staging": "tsgo && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-staging",
+    "build:ceres-production": "tsgo && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-production",
     "preview": "vite preview",
     "check": "biome check --write",
-    "check:ci": "biome ci && tsc -p . --noEmit"
+    "check:ci": "biome ci && tsgo -p . --noEmit"
   },
   "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a",
   "dependencies": {

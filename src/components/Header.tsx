@@ -57,18 +57,28 @@ export const Header = () => {
             height: "100%",
           }}
         />
-        <Link
-          href={import.meta.env.VITE_BASE_URL}
-          underline="none"
-          sx={{ color: "inherit" }}
-        >
-          <Typography fontSize="2.125rem">
+
+        <Typography textColor="inherit" fontSize="2.125rem">
+          <Link
+            href={import.meta.env.VITE_BASE_URL}
+            underline="none"
+            textColor="inherit"
+          >
             {t("kaniwriter")}
-            <Typography fontSize="1.2rem" textColor="#DDD">
-              {` ${import.meta.env.NPM_PACKAGE_VERSION}`}
-            </Typography>
-          </Typography>
-        </Link>
+          </Link>
+          <Link
+            ml="0.5rem"
+            fontSize="1.2rem"
+            textColor="#DDD"
+            href={`https://github.com/${
+              import.meta.env.VITE_WRITER_REPOSITORY_PATH
+            }/releases`}
+            target="_blank"
+            underline="none"
+          >
+            {`${import.meta.env.NPM_PACKAGE_VERSION}`}
+          </Link>
+        </Typography>
       </Box>
       <Box flex={1} />
       <Link

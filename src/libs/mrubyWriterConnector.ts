@@ -1,4 +1,5 @@
 import { calculateCrc8 } from "../utils/calculateCrc8";
+import { green, red } from "./color";
 import { Failure, Result, Success } from "./result";
 
 export const targets = ["ESP32", "RBoard"] as const;
@@ -81,22 +82,20 @@ export class MrubyWriterConnector {
     }
 
     try {
-      this.handleText("\r\n\u001b[32m> try to connect...\u001b[0m\r\n");
+      this.handleText(`\r\n${green("> try to connect...")}\r\n`);
       this.port = await port();
       const res = await this.open();
       if (res.isFailure()) {
         this.port = undefined;
-        this.handleText(
-          "\r\n\u001b[31m> failed to open serial port.\u001b[0m\r\n"
-        );
+        this.handleText(`\r\n${red("> failed to open serial port.")}\r\n`);
         return Failure.error("Failed to open serial port.");
       }
 
-      this.handleText("\r\n\u001b[32m> connection established.\u001b[0m\r\n");
+      this.handleText(`\r\n${green("> connection established.")}\r\n`);
       return Success.value(null);
     } catch (error) {
       this.port = undefined;
-      this.handleText("\r\n\u001b[31m> failed to connect.\u001b[0m\r\n");
+      this.handleText(`\r\n${red("> failed to connect.")}\r\n`);
       return Failure.error("Cannot get serial port.", { cause: error });
     }
   }
@@ -107,28 +106,22 @@ export class MrubyWriterConnector {
     }
 
     try {
-      this.handleText("\r\n\u001b[32m> try to disconnect...\u001b[0m\r\n");
+      this.handleText(`\r\n${green("> try to disconnect...")}\r\n`);
 
       await this.abortStreams();
       const res = await this.close();
       if (res.isFailure()) {
-        this.handleText(
-          "\r\n\u001b[31m> failed to close serial port.\u001b[0m\r\n"
-        );
+        this.handleText(`\r\n${red("> failed to close serial port.")}\r\n`);
         return res;
       }
 
       this.port = undefined;
       this._writeMode = false;
 
-      this.handleText(
-        "\r\n\u001b[32m> successfully disconnected.\u001b[0m\r\n"
-      );
+      this.handleText(`\r\n${green("> successfully disconnected.")}\r\n`);
       return Success.value(null);
     } catch (error) {
-      this.handleText(
-        "\r\n\u001b[31m> failed to close serial port.\u001b[0m\r\n"
-      );
+      this.handleText(`\r\n${red("> failed to close serial port.")}\r\n`);
       return Failure.error("Cannot disconnect serial port.", { cause: error });
     }
   }
@@ -209,9 +202,7 @@ export class MrubyWriterConnector {
       await this.sinkClosed?.catch((reason) => {
         if (reason == abortReason) return;
 
-        this.handleText(
-          "\r\n\u001b[31m> port closed unexpectedly.\u001b[0m\r\n"
-        );
+        this.handleText(`\r\n${red("> port closed unexpectedly.")}\r\n`);
         throw reason;
       });
 
@@ -257,9 +248,7 @@ export class MrubyWriterConnector {
     }
 
     await this.completeJobs();
-    this.handleText(
-      `\r\n\u001b[32m> try to enter command mode...\u001b[0m\r\n`
-    );
+    this.handleText(`\r\n${green("> try to enter command mode...")}\r\n`);
 
     // 改行文字(CRLF)のみを送信
     return this.sendData(this.encoder.encode("\r\n"), {
@@ -552,7 +541,7 @@ export class MrubyWriterConnector {
       /^\+OK (?<hash>[0-9a-zA-Z]+)\r?\n$/
     )?.groups?.hash;
     if (!targetHash) {
-      this.handleText("\r\n\u001b[31m failed to verify. \r\n");
+      this.handleText(`\r\n${red(" failed to verify. ")}\r\n`);
       return Failure.error("Target hash is not found.");
     }
     this.log(
@@ -562,10 +551,10 @@ export class MrubyWriterConnector {
       parseInt(targetHash, 16)
     );
     if (correctHash === parseInt(targetHash, 16)) {
-      this.handleText("\r\n\u001b[32m verify succeeded. \u001b[0m\r\n");
+      this.handleText(`\r\n${green(" verify succeeded. ")}\r\n`);
       return Success.value(undefined);
     } else {
-      this.handleText("\r\n\u001b[31m failed to verify. \r\n");
+      this.handleText(`\r\n${red(" failed to verify. ")}\r\n`);
       return Failure.error("Failed to verify.");
     }
   }

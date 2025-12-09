@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.8.1](https://github.com/poporonnet/kaniwriter/compare/v1.8.0...v1.8.1) (2025-11-24)
+
+
+### Bug Fixes
+
+* Update reference PDF URL to 2025 version ([#900](https://github.com/poporonnet/kaniwriter/issues/900)) ([f1bfb01](https://github.com/poporonnet/kaniwriter/commit/f1bfb019e8e5350dde663367e3086d03af7d3df9))
+
+## [1.8.0](https://github.com/poporonnet/kaniwriter/compare/v1.7.0...v1.8.0) (2025-11-10)
+
+
+### Features
+
+* root.tsxにメタディスクリプションを追加 ([#814](https://github.com/poporonnet/kaniwriter/issues/814)) ([6921556](https://github.com/poporonnet/kaniwriter/commit/6921556b71af1218c582d03f50fa9706fb5bad07))
+* マイコン選択をモーダルで行い表示面積を削減 ([#739](https://github.com/poporonnet/kaniwriter/issues/739)) ([35a459f](https://github.com/poporonnet/kaniwriter/commit/35a459f34e7c6c6598fccbc0843da853e49d5302))
+
 ## [1.7.0](https://github.com/poporonnet/kaniwriter/compare/v1.6.0...v1.7.0) (2025-09-01)
 
 

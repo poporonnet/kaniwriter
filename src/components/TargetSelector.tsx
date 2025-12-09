@@ -1,17 +1,14 @@
-import { CheckCircleRounded as CheckCircleRoundedIcon } from "@mui/icons-material";
 import {
-  Box,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  radioClasses,
-  Sheet,
-  Typography,
-} from "@mui/joy";
+  DeveloperBoard as DeveloperBoardIcon,
+  NorthWest as NorthWestIcon,
+} from "@mui/icons-material";
+import { Box, Button, Typography } from "@mui/joy";
 import { Target } from "libs/mrubyWriterConnector";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import ESP32 from "/images/ESP32.webp";
 import RBoard from "/images/Rboard.webp";
+import { TargetSelectModal } from "./TargetSelectModal";
 
 export const targets = [
   {
@@ -32,82 +29,70 @@ export const TargetSelector = ({
   onChangeTarget: (target: Target) => void;
 }) => {
   const [t] = useTranslation();
+  const [open, setOpen] = React.useState(false);
 
   return (
     <Box
       sx={{
         width: "100%",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+        borderRadius: "0.5rem",
+        transition: "box-shadow 0.2s",
+        "&:hover": {
+          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
+        },
       }}
     >
-      {!target && (
-        <Typography textColor="red">
-          {t("書き込みターゲットを選択してください。")}
-        </Typography>
-      )}
-      <RadioGroup
-        aria-label="platform"
-        defaultValue="Website"
-        overlay
-        name="platform"
+      <Button
+        color={target ? "primary" : "neutral"}
+        variant="outlined"
+        onClick={() => setOpen(true)}
+        fullWidth
         sx={{
-          width: "100%",
-          gap: "1rem",
-          [`& .${radioClasses.checked}`]: {
-            [`& .${radioClasses.action}`]: {
-              inset: -1,
-              border: "3px solid",
-              borderColor: "primary.500",
-            },
-          },
-          [`& .${radioClasses.radio}`]: {
-            display: "contents",
-            "& > svg": {
-              zIndex: 2,
-              position: "absolute",
-              top: "-0.5rem",
-              right: "-0.5rem",
-              bgcolor: "background.surface",
-              borderRadius: "50%",
-            },
-          },
+          justifyContent: "space-between",
+          gap: target ? 1.5 : 0,
+          p: 1.25,
+          height: "3.5rem",
+          fontWeight: 700,
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        {targets.map((value, index) => (
-          <Sheet
-            key={index}
-            variant="outlined"
-            sx={{
-              borderRadius: "md",
-              boxShadow: "sm",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: "1rem",
-              p: "1rem",
-            }}
-          >
-            <Radio
-              id={value.title}
-              value={value.title}
-              checkedIcon={<CheckCircleRoundedIcon />}
-              checked={target === value.title}
-              onChange={() => onChangeTarget(value.title)}
-            />
-            <FormLabel htmlFor={value.title}>
-              <Typography>{value.title}</Typography>
-            </FormLabel>
-            <img
-              src={value.image}
-              alt={value.title}
-              style={{
-                aspectRatio: "1/1",
-                width: "6rem",
-                margin: "0 auto",
+        {target ? (
+          <>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
               }}
-            />
-          </Sheet>
-        ))}
-      </RadioGroup>
+            >
+              <img
+                src={targets.find((t) => t.title === target)?.image}
+                alt={target}
+                style={{
+                  width: "2.25rem",
+                  height: "2.25rem",
+                  borderRadius: "0.25rem",
+                  marginRight: "1rem",
+                }}
+              />
+              <Typography level="title-md">{target}</Typography>
+            </Box>
+            <DeveloperBoardIcon />
+          </>
+        ) : (
+          <>
+            {t("書き込みターゲットを選択")}
+            <NorthWestIcon />
+          </>
+        )}
+      </Button>
+      <TargetSelectModal
+        open={open}
+        setOpen={setOpen}
+        target={target}
+        onChangeTarget={onChangeTarget}
+      />
     </Box>
   );
 };

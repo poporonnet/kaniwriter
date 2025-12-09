@@ -88,6 +88,7 @@ const Home = () => {
           flexGrow: "1",
           gap: "1rem",
           alignSelf: "center",
+          minHeight: "35rem",
         }}
       >
         <Box

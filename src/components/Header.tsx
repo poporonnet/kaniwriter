@@ -64,9 +64,16 @@ export const Header = () => {
         >
           <Typography fontSize="2.125rem">
             {t("kaniwriter")}
-            <Typography fontSize="1.2rem" textColor="#DDD">
+            <Link
+              fontSize="1.2rem"
+              textColor="#DDD"
+              href="https://github.com/poporonnet/kaniwriter/releases"
+              target="_blank"
+              underline="none"
+              pl="1rem"
+            >
               {` ${import.meta.env.NPM_PACKAGE_VERSION}`}
-            </Typography>
+            </Link>
           </Typography>
         </Link>
       </Box>

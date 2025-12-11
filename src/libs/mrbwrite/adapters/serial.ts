@@ -6,10 +6,10 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
   private profile: Profile | undefined;
   private port: SerialPort | undefined;
   private originReader: ReadableStreamDefaultReader<Uint8Array> | undefined;
-  private readonly defaultRequest: () => Promise<SerialPort>;
+  private readonly serial: Serial;
 
-  constructor(defaultRequest: () => Promise<SerialPort>) {
-    this.defaultRequest = defaultRequest;
+  constructor(serial: Serial) {
+    this.serial = serial;
   }
 
   getProfile(): Profile | undefined {
@@ -24,13 +24,14 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
     return this.port?.connected ?? false;
   }
 
-  async request(option?: { request?: () => Promise<SerialPort> }) {
+  async request(option?: { customRequest?: () => Promise<SerialPort> }) {
     if (this.port) {
       return Failure.error("Already has a port.");
     }
 
     try {
-      const request = option?.request ?? this.defaultRequest;
+      const request =
+        option?.customRequest ?? (() => this.serial.requestPort());
       this.port = await request();
       return Success.value(undefined);
     } catch (error) {
@@ -152,6 +153,4 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
   }
 }
 
-export const serialAdapter = new MrbwriteSerialAdapter(() =>
-  navigator.serial.requestPort()
-);
+export const serialAdapter = new MrbwriteSerialAdapter(navigator.serial);

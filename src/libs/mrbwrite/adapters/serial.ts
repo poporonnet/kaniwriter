@@ -88,7 +88,7 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
         if (listenRes.isFailure()) {
           controller.error(listenRes.error);
           aborter.abort(listenRes.error);
-          await this.close();
+          this.port = undefined;
         }
       };
       const cancel = () => {

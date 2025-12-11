@@ -78,13 +78,13 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
     }
 
     try {
-      const start = (
+      const start = async (
         controller: ReadableStreamDefaultController<Uint8Array>
       ) => {
-        this.listen(aborter, (value) => controller.enqueue(value)).catch(
+        await this.listen(aborter, (value) => controller.enqueue(value)).catch(
           (error) => {
             controller.error(error);
-            aborter.abort();
+            aborter.abort(error);
           }
         );
       };

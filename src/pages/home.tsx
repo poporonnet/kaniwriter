@@ -37,9 +37,9 @@ const Home = () => {
   );
 
   const startConnection = useCallback(
-    async (request?: () => Promise<SerialPort>) => {
+    async (customRequest?: () => Promise<SerialPort>) => {
       const res = await method.connect({
-        request,
+        customRequest,
       });
       if (res.isFailure()) return;
 

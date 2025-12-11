@@ -8,7 +8,7 @@ export interface MrbwriteAdapter<Target> {
   isConnected(): boolean;
 
   request(option?: {
-    request?: () => Promise<Target>;
+    customRequest?: () => Promise<Target>;
   }): Promise<Result<void, Error>>;
   open(): Promise<Result<void, Error>>;
   close(): Promise<Result<void, Error>>;

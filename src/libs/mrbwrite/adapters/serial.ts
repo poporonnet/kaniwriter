@@ -126,11 +126,11 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
   private async listen(
     aborter: AbortController,
     enqueue: (value: Uint8Array) => void
-  ): Promise<void> {
+  ): Promise<Result<void, Error>> {
     while (!aborter.signal.aborted) {
       const readable = this.port?.readable;
       if (!readable) {
-        throw new Error("Cannot read serial port.");
+        return Failure.error("Cannot read serial port.");
       }
 
       const reader = readable.getReader();
@@ -150,6 +150,8 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
       }
       reader.releaseLock();
     }
+
+    return Success.value(undefined);
   }
 }
 

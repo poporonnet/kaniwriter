@@ -33,9 +33,7 @@ export const useMrbwrite = <Target>(
   ...params: ConstructorParameters<
     typeof MrbwriteController<MrbwriteAdapter<Target>>
   >
-): // config: Config,
-// adaptor: MrbwriteAdapter<Target>
-UseMrbwrite<MrbwriteAdapter<Target>> => {
+): UseMrbwrite<MrbwriteAdapter<Target>> => {
   type Adapter = MrbwriteAdapter<Target>;
 
   const [t] = useTranslation("ns1");

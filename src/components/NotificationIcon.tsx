@@ -1,21 +1,21 @@
-import {
-  CheckCircleOutline,
-  ErrorOutline,
-  InfoOutlined,
-  WarningAmberOutlined,
-} from "@mui/icons-material";
 import { ColorPaletteProp } from "@mui/joy";
+import {
+  MdCheckCircleOutline as CheckCircleOutlineIcon,
+  MdErrorOutline as ErrorOutlineIcon,
+  MdOutlineInfo as InfoOutlineIcon,
+  MdOutlineWarningAmber as WarningAmberOutlineIcon,
+} from "react-icons/md";
 
 export const NotificationIcon = ({ type }: { type: ColorPaletteProp }) => {
   switch (type) {
     case "success":
-      return <CheckCircleOutline />;
+      return <CheckCircleOutlineIcon />;
     case "danger":
-      return <ErrorOutline />;
+      return <ErrorOutlineIcon />;
     case "warning":
-      return <WarningAmberOutlined />;
+      return <WarningAmberOutlineIcon />;
     case "primary":
-      return <InfoOutlined />;
+      return <InfoOutlineIcon />;
     default:
       return <></>;
   }

@@ -44,7 +44,9 @@ export const CompileStatus = ({
       {status === "success" && (
         <>
           {t("コンパイル完了")}
-          <SvgIcon children={<CheckIcon />} color="success" />
+          <SvgIcon color="success">
+            <CheckIcon />
+          </SvgIcon>
         </>
       )}
       {status === "error" && (
@@ -58,7 +60,9 @@ export const CompileStatus = ({
         >
           <Box display="flex" justifyContent="center">
             {t("コンパイル失敗")}
-            <SvgIcon children={<ErrorOutlineIcon />} color="danger" />
+            <SvgIcon color="danger">
+              <ErrorOutlineIcon />
+            </SvgIcon>
           </Box>
           {errorBody ? (
             <>

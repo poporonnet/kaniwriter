@@ -1,11 +1,11 @@
-import {
-  DeveloperBoard as DeveloperBoardIcon,
-  NorthWest as NorthWestIcon,
-} from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/joy";
 import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import {
+  MdDeveloperBoard as DeveloperBoardIcon,
+  MdNorthWest as NorthWestIcon,
+} from "react-icons/md";
 import ESP32 from "/images/ESP32.webp";
 import RBoard from "/images/Rboard.webp";
 import { TargetSelectModal } from "./TargetSelectModal";

@@ -1,6 +1,6 @@
-import { CheckCircleRounded as CheckCircleRoundedIcon } from "@mui/icons-material";
 import { FormLabel, Radio, radioClasses, Sheet, Typography } from "@mui/joy";
 import { Target } from "libs/mrbwrite/controller";
+import { MdCheckCircle as CheckCircleIcon } from "react-icons/md";
 
 type TargetCardProps = {
   title: Target;
@@ -50,7 +50,7 @@ export const TargetCard = (props: TargetCardProps) => {
         overlay
         id={props.title}
         value={props.title}
-        checkedIcon={<CheckCircleRoundedIcon />}
+        checkedIcon={<CheckCircleIcon />}
         onClick={() => {
           props.setOpen(false);
         }}

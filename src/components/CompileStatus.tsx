@@ -1,11 +1,11 @@
-import {
-  Check as CheckIcon,
-  ErrorOutline as ErrorOutlineIcon,
-} from "@mui/icons-material";
-import { Box, CircularProgress, Typography } from "@mui/joy";
+import { Box, CircularProgress, SvgIcon, Typography } from "@mui/joy";
 import { CompileStatus as CompileStatusType } from "hooks/useCompile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  MdCheck as CheckIcon,
+  MdErrorOutline as ErrorOutlineIcon,
+} from "react-icons/md";
 import { ErrorDetailModal } from "./ErrorMessageModal";
 
 export const CompileStatus = ({
@@ -44,7 +44,9 @@ export const CompileStatus = ({
       {status === "success" && (
         <>
           {t("コンパイル完了")}
-          <CheckIcon color="success" />
+          <SvgIcon color="success">
+            <CheckIcon />
+          </SvgIcon>
         </>
       )}
       {status === "error" && (
@@ -58,7 +60,9 @@ export const CompileStatus = ({
         >
           <Box display="flex" justifyContent="center">
             {t("コンパイル失敗")}
-            <ErrorOutlineIcon color="error" />
+            <SvgIcon color="danger">
+              <ErrorOutlineIcon />
+            </SvgIcon>
           </Box>
           {errorBody ? (
             <>

@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "tsc && react-router build",
-    "build:ceres-staging": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-staging",
-    "build:ceres-production": "tsc && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-production",
+    "build": "tsgo && react-router build",
+    "build:ceres-staging": "tsgo && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-staging",
+    "build:ceres-production": "tsgo && NODE_OPTIONS=--max-old-space-size=4096 react-router build --mode ceres-production",
     "preview": "vite preview",
     "check": "biome check --write",
-    "check:ci": "biome ci && tsc -p . --noEmit"
+    "check:ci": "biome ci && tsgo -p . --noEmit"
   },
   "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
   "dependencies": {
@@ -39,10 +39,10 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/w3c-web-serial": "^1.0.6",
+    "@typescript/native-preview": "7.0.0-dev.20251209.1",
     "@vitejs/plugin-react": "^5.0.0",
     "path": "^0.12.7",
     "shiki": "^3.0.0",
-    "typescript": "^5.0.2",
     "vite": "npm:rolldown-vite@7.2.10"
   },
   "engines": {

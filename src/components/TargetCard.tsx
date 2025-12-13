@@ -1,5 +1,5 @@
 import { FormLabel, Radio, radioClasses, Sheet, Typography } from "@mui/joy";
-import { Target } from "libs/mrubyWriterConnector";
+import { Target } from "libs/mrbwrite/controller";
 import { MdCheckCircle as CheckCircleIcon } from "react-icons/md";
 
 type TargetCardProps = {

@@ -1,12 +1,12 @@
-import {
-  Edit as EditIcon,
-  FindInPage as FindInPageIcon,
-  Flag as FlagIcon,
-  Usb as UsbIcon,
-  UsbOff as UsbOffIcon,
-} from "@mui/icons-material";
 import { Box } from "@mui/joy";
 import { useTranslation } from "react-i18next";
+import {
+  MdEdit as EditIcon,
+  MdFindInPage as FindInPageIcon,
+  MdFlag as FlagIcon,
+  MdUsb as UsbIcon,
+  MdUsbOff as UsbOffIcon,
+} from "react-icons/md";
 import { ControlButton } from "./ControlButton";
 
 const buttons = ["connect", "write", "verify", "execute"] as const;

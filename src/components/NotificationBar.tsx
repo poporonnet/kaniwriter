@@ -1,4 +1,3 @@
-import { Close } from "@mui/icons-material";
 import { IconButton, Snackbar, Stack, Typography } from "@mui/joy";
 import {
   Dispatch,
@@ -8,6 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { MdClose as CloseIcon } from "react-icons/md";
 import { Notification } from "../contexts/NotificationContext";
 import { NotificationIcon } from "./NotificationIcon";
 
@@ -46,7 +46,7 @@ export const NotificationBar = ({
       startDecorator={<NotificationIcon type={type} />}
       endDecorator={
         <IconButton onClick={close} color={type} size="sm">
-          <Close />
+          <CloseIcon />
         </IconButton>
       }
       sx={{ alignItems: "flex-start", width: "22rem" }}

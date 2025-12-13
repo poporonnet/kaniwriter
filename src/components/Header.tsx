@@ -1,7 +1,8 @@
-import { GitHub, Translate } from "@mui/icons-material";
 import { Box, Button, Link, Sheet, Typography } from "@mui/joy";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { MdTranslate as TranslateIcon } from "react-icons/md";
+import { VscGithubInverted as GitHubIcon } from "react-icons/vsc";
 import icon from "/images/logo.webp";
 
 export const Header = () => {
@@ -57,18 +58,28 @@ export const Header = () => {
             height: "100%",
           }}
         />
-        <Link
-          href={import.meta.env.VITE_BASE_URL}
-          underline="none"
-          sx={{ color: "inherit" }}
-        >
-          <Typography fontSize="2.125rem">
+
+        <Typography textColor="inherit" fontSize="2.125rem">
+          <Link
+            href={import.meta.env.VITE_BASE_URL}
+            underline="none"
+            textColor="inherit"
+          >
             {t("kaniwriter")}
-            <Typography fontSize="1.2rem" textColor="#DDD">
-              {` ${import.meta.env.NPM_PACKAGE_VERSION}`}
-            </Typography>
-          </Typography>
-        </Link>
+          </Link>
+          <Link
+            ml="0.5rem"
+            fontSize="1.2rem"
+            textColor="#DDD"
+            href={`https://github.com/${
+              import.meta.env.VITE_WRITER_REPOSITORY_PATH
+            }/releases`}
+            target="_blank"
+            underline="none"
+          >
+            {`${import.meta.env.NPM_PACKAGE_VERSION}`}
+          </Link>
+        </Typography>
       </Box>
       <Box flex={1} />
       <Link
@@ -89,7 +100,7 @@ export const Header = () => {
           },
         }}
       >
-        <Translate fontSize="large" />
+        <TranslateIcon size="35px" />
         <Sheet
           sx={{
             width: "7rem",
@@ -140,7 +151,7 @@ export const Header = () => {
         underline="none"
         target="_blank"
       >
-        <GitHub fontSize="large" />
+        <GitHubIcon size="35px" />
       </Link>
     </Sheet>
   );

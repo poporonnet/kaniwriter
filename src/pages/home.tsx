@@ -10,7 +10,8 @@ import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
 import { serialAdapter } from "libs/mrbwrite/adapter";
-import { esp32, rboard } from "libs/mrbwrite/profile";
+import { Target } from "libs/mrbwrite/controller";
+import { esp32, Profile, rboard } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,14 +23,22 @@ const Home = () => {
   const [log, setLog] = useState<string[]>([]);
 
   const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(id);
+  const getProfile = useCallback((target: Target): Profile => {
+    switch (target) {
+      case "ESP32":
+        return esp32;
+      case "RBoard":
+        return rboard;
+    }
+  }, []);
   const [TargetSelector, { target }] = useTarget((target) =>
-    connector.setProfile(target == "ESP32" ? esp32 : rboard)
+    connector.setProfile(getProfile(target))
   );
   const [OptionList, option] = useOption();
 
   const { connector, method } = useMrbwrite(
     {
-      profile: target == "ESP32" ? esp32 : rboard,
+      profile: target && getProfile(target),
       log: (message, params) => console.log(message, params),
       onListen: (buffer) => setLog([...buffer]),
     },

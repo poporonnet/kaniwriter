@@ -59,7 +59,7 @@ importers:
         version: 2.3.8
       '@react-router/dev':
         specifier: ^7.4.0
-        version: 7.10.1(@types/node@24.10.3)(@vitejs/plugin-rsc@0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)))(babel-plugin-macros@3.1.0)(lightningcss@1.30.2)(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))(typescript@5.9.3)
+        version: 7.10.1(@types/node@24.10.3)(@vitejs/plugin-rsc@0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)))(babel-plugin-macros@3.1.0)(lightningcss@1.30.2)(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))(typescript@5.9.3)
       '@shikijs/langs-precompiled':
         specifier: ^3.0.0
         version: 3.19.0
@@ -80,7 +80,7 @@ importers:
         version: 1.0.8
       '@vitejs/plugin-react':
         specifier: ^5.0.0
-        version: 5.1.2(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))
+        version: 5.1.2(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))
       path:
         specifier: ^0.12.7
         version: 0.12.7
@@ -91,8 +91,8 @@ importers:
         specifier: ^5.0.2
         version: 5.9.3
       vite:
-        specifier: npm:rolldown-vite@7.2.10
-        version: rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)
+        specifier: npm:rolldown-vite@7.2.11
+        version: rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)
 
 packages:
 
@@ -1757,8 +1757,8 @@ packages:
     engines: {node: '>= 0.4'}
     hasBin: true
 
-  rolldown-vite@7.2.10:
-    resolution: {integrity: sha512-v2ekZjuVLfumjp1Cr7LSQM1n2oOo3+gMruhOgT0Q4/cQ2J3nkTDLTAWLQQ86UHMbFYyVIN1wGh8BEZbvjkyctg==}
+  rolldown-vite@7.2.11:
+    resolution: {integrity: sha512-WwCantGLbztBNipg+WwcA+a1c3Mo9LPY0VZ35IFXnUsQyZzsMHtzmy+H5PqELPj3AOauI9L/HMCjoJZp3i9eFg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -2621,7 +2621,7 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@react-router/dev@7.10.1(@types/node@24.10.3)(@vitejs/plugin-rsc@0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)))(babel-plugin-macros@3.1.0)(lightningcss@1.30.2)(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))(typescript@5.9.3)':
+  '@react-router/dev@7.10.1(@types/node@24.10.3)(@vitejs/plugin-rsc@0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)))(babel-plugin-macros@3.1.0)(lightningcss@1.30.2)(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))(typescript@5.9.3)':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
@@ -2651,10 +2651,10 @@ snapshots:
       semver: 7.7.3
       tinyglobby: 0.2.15
       valibot: 1.2.0(typescript@5.9.3)
-      vite: rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)
+      vite: rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)
       vite-node: 3.2.4(@types/node@24.10.3)(lightningcss@1.30.2)
     optionalDependencies:
-      '@vitejs/plugin-rsc': 0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))
+      '@vitejs/plugin-rsc': 0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))
       typescript: 5.9.3
     transitivePeerDependencies:
       - '@types/node'
@@ -2988,7 +2988,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-react@5.1.2(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))':
+  '@vitejs/plugin-react@5.1.2(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.5)
@@ -2996,11 +2996,11 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.53
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)
+      vite: rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-rsc@0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))':
+  '@vitejs/plugin-rsc@0.4.11(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))':
     dependencies:
       '@mjackson/node-fetch-server': 0.7.0
       es-module-lexer: 1.7.0
@@ -3010,8 +3010,8 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
       turbo-stream: 3.1.0
-      vite: rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)
-      vitefu: 1.1.1(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12))
+      vite: rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)
+      vitefu: 1.1.1(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12))
     optional: true
 
   acorn@8.15.0: {}
@@ -3634,7 +3634,7 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12):
+  rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12):
     dependencies:
       '@oxc-project/runtime': 0.101.0
       fdir: 6.5.0(picomatch@4.0.3)
@@ -3872,9 +3872,9 @@ snapshots:
       fsevents: 2.3.3
       lightningcss: 1.30.2
 
-  vitefu@1.1.1(rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)):
+  vitefu@1.1.1(rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)):
     optionalDependencies:
-      vite: rolldown-vite@7.2.10(@types/node@24.10.3)(esbuild@0.25.12)
+      vite: rolldown-vite@7.2.11(@types/node@24.10.3)(esbuild@0.25.12)
     optional: true
 
   void-elements@3.1.0: {}

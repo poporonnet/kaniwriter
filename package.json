@@ -12,7 +12,7 @@
     "check": "biome check --write",
     "check:ci": "biome ci && tsc -p . --noEmit"
   },
-  "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
+  "packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -31,7 +31,7 @@
     "react-router": "^7.4.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.8",
+    "@biomejs/biome": "2.3.9",
     "@react-router/dev": "^7.4.0",
     "@shikijs/langs-precompiled": "^3.0.0",
     "@shikijs/themes": "^3.0.0",
@@ -43,7 +43,7 @@
     "path": "^0.12.7",
     "shiki": "^3.0.0",
     "typescript": "^5.0.2",
-    "vite": "^7.0.0"
+    "vite": "npm:rolldown-vite@7.2.11"
   },
   "engines": {
     "node": ">=20.0.0"

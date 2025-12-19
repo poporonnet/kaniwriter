@@ -28,7 +28,7 @@ importers:
         version: 4.6.1
       anser:
         specifier: ^2.1.1
-        version: 2.3.3
+        version: 2.3.5
       base64-js:
         specifier: ^1.5.1
         version: 1.5.1
@@ -1087,8 +1087,8 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
 
-  anser@2.3.3:
-    resolution: {integrity: sha512-QGY1oxYE7/kkeNmbtY/2ZjQ07BCG3zYdz+k/+sf69kMzEIxb93guHkPnIXITQ+BYi61oQwG74twMOX1tD4aesg==}
+  anser@2.3.5:
+    resolution: {integrity: sha512-vcZjxvvVoxTeR5XBNJB38oTu/7eDCZlwdz32N1eNgpyPF7j/Z7Idf+CUwQOkKKpJ7RJyjxgLHCM7vdIK0iCNMQ==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -3022,7 +3022,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  anser@2.3.3: {}
+  anser@2.3.5: {}
 
   ansi-regex@5.0.1: {}
 

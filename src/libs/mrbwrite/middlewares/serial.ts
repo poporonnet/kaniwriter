@@ -1,8 +1,10 @@
 import { Failure, Result, Success } from "libs/result";
-import { MrbwriteAdapter } from "../adapter";
+import { MrbwriteMiddleware } from "../middleware";
 import { Profile } from "../profile";
 
-export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
+export class MrbwriteSerialMiddleware
+  implements MrbwriteMiddleware<SerialPort>
+{
   private profile: Profile | undefined;
   private port: SerialPort | undefined;
   private originReader: ReadableStreamDefaultReader<Uint8Array> | undefined;
@@ -157,4 +159,4 @@ export class MrbwriteSerialAdapter implements MrbwriteAdapter<SerialPort> {
   }
 }
 
-export const serialAdapter = new MrbwriteSerialAdapter(navigator.serial);
+export const serialMiddleware = new MrbwriteSerialMiddleware(navigator.serial);

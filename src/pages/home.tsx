@@ -9,7 +9,7 @@ import { useMrbwrite } from "hooks/useMrbwrite";
 import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
-import { serialAdapter } from "libs/mrbwrite/adapter";
+import { serialMiddleware } from "libs/mrbwrite/middleware";
 import { Target } from "libs/mrbwrite/controller";
 import { esp32, Profile, rboard } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
@@ -42,7 +42,7 @@ const Home = () => {
       log: (message, params) => console.log(message, params),
       onListen: (buffer) => setLog([...buffer]),
     },
-    serialAdapter
+    serialMiddleware
   );
 
   const startConnection = useCallback(

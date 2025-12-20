@@ -1,40 +1,40 @@
-import { MrbwriteAdapter } from "libs/mrbwrite/adapter";
+import { MrbwriteMiddleware } from "libs/mrbwrite/middleware";
 import { MrbwriteController } from "libs/mrbwrite/controller";
 import { Result, Success } from "libs/result";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useNotify } from "./useNotify";
 
-export type Method<Adapter extends MrbwriteAdapter<unknown>> = {
+export type Method<Middleware extends MrbwriteMiddleware<unknown>> = {
   connect: (
-    ...props: Parameters<MrbwriteController<Adapter>["connect"]>
+    ...props: Parameters<MrbwriteController<Middleware>["connect"]>
   ) => Promise<Result<void, Error>>;
   disconnect: () => Promise<Result<void, Error>>;
   startListen: () => Promise<Result<void, Error>>;
   tryEnterWriteMode: () => Promise<Result<void, Error>>;
   startEnter: (intervalMs: number) => Promise<Result<void, Error>>;
   sendCommand: (
-    ...props: Parameters<MrbwriteController<Adapter>["sendCommand"]>
+    ...props: Parameters<MrbwriteController<Middleware>["sendCommand"]>
   ) => Promise<Result<void, Error>>;
   writeCode: (
-    ...props: Parameters<MrbwriteController<Adapter>["writeCode"]>
+    ...props: Parameters<MrbwriteController<Middleware>["writeCode"]>
   ) => Promise<Result<void, Error>>;
   verify: (
-    ...props: Parameters<MrbwriteController<Adapter>["verify"]>
+    ...props: Parameters<MrbwriteController<Middleware>["verify"]>
   ) => Promise<Result<void, Error>>;
 };
 
-type UseMrbwrite<Adapter extends MrbwriteAdapter<unknown>> = {
-  connector: MrbwriteController<Adapter>;
-  method: Method<Adapter>;
+type UseMrbwrite<Middleware extends MrbwriteMiddleware<unknown>> = {
+  connector: MrbwriteController<Middleware>;
+  method: Method<Middleware>;
 };
 
 export const useMrbwrite = <Target>(
   ...params: ConstructorParameters<
-    typeof MrbwriteController<MrbwriteAdapter<Target>>
+    typeof MrbwriteController<MrbwriteMiddleware<Target>>
   >
-): UseMrbwrite<MrbwriteAdapter<Target>> => {
-  type Adapter = MrbwriteAdapter<Target>;
+): UseMrbwrite<MrbwriteMiddleware<Target>> => {
+  type Middleware = MrbwriteMiddleware<Target>;
 
   const [t] = useTranslation("ns1");
   const notify = useNotify();
@@ -65,7 +65,7 @@ export const useMrbwrite = <Target>(
 
   const connect = useCallback(
     async (
-      ...props: Parameters<MrbwriteController<Adapter>["connect"]>
+      ...props: Parameters<MrbwriteController<Middleware>["connect"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.connect(...props);
       if (res.isFailure()) {
@@ -124,7 +124,7 @@ export const useMrbwrite = <Target>(
 
   const sendCommand = useCallback(
     async (
-      ...props: Parameters<MrbwriteController<Adapter>["sendCommand"]>
+      ...props: Parameters<MrbwriteController<Middleware>["sendCommand"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.sendCommand(...props);
       if (res.isFailure()) {
@@ -139,7 +139,7 @@ export const useMrbwrite = <Target>(
 
   const writeCode = useCallback(
     async (
-      ...props: Parameters<MrbwriteController<Adapter>["writeCode"]>
+      ...props: Parameters<MrbwriteController<Middleware>["writeCode"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.writeCode(...props);
       if (res.isFailure()) {
@@ -154,7 +154,7 @@ export const useMrbwrite = <Target>(
 
   const verify = useCallback(
     async (
-      ...props: Parameters<MrbwriteController<Adapter>["verify"]>
+      ...props: Parameters<MrbwriteController<Middleware>["verify"]>
     ): Promise<Result<void, Error>> => {
       const res = await connector.verify(...props);
       if (res.isFailure()) {
@@ -175,7 +175,7 @@ export const useMrbwrite = <Target>(
   );
 
   const method = useMemo(
-    (): Method<Adapter> => ({
+    (): Method<Middleware> => ({
       connect,
       disconnect,
       startListen,

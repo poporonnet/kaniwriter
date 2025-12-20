@@ -1,7 +1,7 @@
 import { calculateCrc8 } from "../../utils/calculateCrc8";
 import { green, red } from "../color";
 import { Failure, Result, Success } from "../result";
-import { MrbwriteAdapter } from "./adapter";
+import { MrbwriteMiddleware } from "./middleware";
 import { Profile } from "./profile";
 
 export const targets = ["ESP32", "RBoard"] as const;
@@ -17,7 +17,7 @@ export type Config = { profile?: Profile; log: Logger; onListen?: Listener };
 
 const abortReason = "abortStream" as const;
 
-export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
+export class MrbwriteController<Middleware extends MrbwriteMiddleware<unknown>> {
   private log: Logger;
   private onListen: Listener | undefined;
 
@@ -35,9 +35,9 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
   private buffer: string[];
   private jobQueue: Job[];
 
-  private adapter: Adapter;
+  private middleware: Middleware;
 
-  constructor(config: Config, adapter: Adapter) {
+  constructor(config: Config, middleware: Middleware) {
     this.log = config.log;
     this.onListen = config.onListen;
     this.buffer = [];
@@ -45,13 +45,13 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
     this.encoder = new TextEncoder();
     this.decoder = new TextDecoder();
     this.jobQueue = [];
-    this.adapter = adapter;
+    this.middleware = middleware;
 
-    adapter.setProfile(config.profile);
+    middleware.setProfile(config.profile);
   }
 
   public get isConnected(): boolean {
-    return this.adapter.isConnected();
+    return this.middleware.isConnected();
   }
 
   public get isWriteMode(): boolean {
@@ -59,21 +59,21 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
   }
 
   setProfile(profile: Profile) {
-    this.adapter.setProfile(profile);
+    this.middleware.setProfile(profile);
   }
 
   async connect(
-    option?: Parameters<Adapter["request"]>[0]
+    option?: Parameters<Middleware["request"]>[0]
   ): Promise<Result<null, Error>> {
     this.handleText(`\r\n${green("> try to connect...")}\r\n`);
 
-    const requestRes = await this.adapter.request(option);
+    const requestRes = await this.middleware.request(option);
     if (requestRes.isFailure()) {
       this.handleText(`\r\n${red("> failed to connect.")}\r\n`);
       return requestRes;
     }
 
-    const openRes = await this.adapter.open();
+    const openRes = await this.middleware.open();
     if (openRes.isFailure()) {
       this.handleText(`\r\n${red("> failed to open serial port.")}\r\n`);
 
@@ -93,7 +93,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
       return abortRes;
     }
 
-    const closeRes = await this.adapter.close();
+    const closeRes = await this.middleware.close();
     if (closeRes.isFailure()) {
       this.handleText(`\r\n${red("> failed to close serial port.")}\r\n`);
       return closeRes;
@@ -109,7 +109,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
       const sourceAborter = new AbortController();
       this.sourceAborter = sourceAborter;
 
-      const readableRes = this.adapter.getReadable(sourceAborter);
+      const readableRes = this.middleware.getReadable(sourceAborter);
       if (readableRes.isFailure()) {
         return readableRes;
       }
@@ -173,7 +173,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
     command: string,
     option?: Partial<{ force: boolean; ignoreResponse: boolean }>
   ): Promise<Result<string, Error>> {
-    if (!this.adapter.isConnected()) {
+    if (!this.middleware.isConnected()) {
       return Failure.error("Not connected.");
     }
     if (!option?.force && !this._writeMode) {
@@ -190,7 +190,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
   }
 
   async tryEnterWriteMode(): Promise<Result<string, Error>> {
-    if (!this.adapter.isConnected()) {
+    if (!this.middleware.isConnected()) {
       return Failure.error("Not connected.");
     }
     if (this._writeMode) {
@@ -210,7 +210,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
     binary: Uint8Array,
     option?: Partial<{ execute: boolean; autoVerify: boolean }>
   ): Promise<Result<string, Error>> {
-    if (!this.adapter.isConnected()) {
+    if (!this.middleware.isConnected()) {
       return Failure.error("Not connected.");
     }
     if (!this._writeMode) {
@@ -248,7 +248,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
     chunk: Uint8Array,
     option?: Partial<{ ignoreResponse: boolean }>
   ): Promise<Result<string, Error>> {
-    if (!this.adapter.isConnected()) {
+    if (!this.middleware.isConnected()) {
       return Failure.error("Not connected.");
     }
 
@@ -296,7 +296,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
   }
 
   private async close(): Promise<Result<null, Error>> {
-    const closeRes = await this.adapter.close();
+    const closeRes = await this.middleware.close();
     if (closeRes.isFailure()) {
       return closeRes;
     }
@@ -305,7 +305,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
   }
 
   private getWriter(): Result<WritableStreamDefaultWriter<Uint8Array>, Error> {
-    const writableRes = this.adapter.getWritable();
+    const writableRes = this.middleware.getWritable();
     if (writableRes.isFailure()) {
       return writableRes;
     }
@@ -339,7 +339,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
   }
 
   private detectEvent(text: string): Success<{ event: Event | null }> {
-    const profile = this.adapter.getProfile();
+    const profile = this.middleware.getProfile();
     if (profile && text.match(profile.keyword.enterWriteMode)) {
       return Success.value({ event: "SuccessToEnterWriteMode" });
     }
@@ -350,7 +350,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
     return Success.value({ event: null });
   }
   private async onEnterWriteMode(): Promise<Result<null, Error>> {
-    if (!this.adapter.isConnected()) {
+    if (!this.middleware.isConnected()) {
       return Failure.error("Not connected.");
     }
     if (this._writeMode) {
@@ -465,7 +465,7 @@ export class MrbwriteController<Adapter extends MrbwriteAdapter<unknown>> {
 
       await this.readable?.cancel().catch(console.warn);
 
-      await this.adapter.cancel();
+      await this.middleware.cancel();
 
       return Success.value(undefined);
     } catch (error) {

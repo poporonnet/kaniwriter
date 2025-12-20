@@ -1,7 +1,7 @@
 import { Result } from "libs/result";
 import { Profile } from "./profile";
 
-export interface MrbwriteAdapter<Device> {
+export interface MrbwriteMiddleware<Device> {
   getProfile(): Profile | undefined;
   setProfile(profile: Profile | undefined): void;
 
@@ -21,4 +21,4 @@ export interface MrbwriteAdapter<Device> {
   cancel(): Promise<Result<void, Error>>;
 }
 
-export { serialAdapter } from "./adapters/serial";
+export { serialMiddleware } from "./middlewares/serial";

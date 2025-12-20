@@ -1,5 +1,5 @@
 import { ControlButtons } from "components/ControlButtons";
-import { MrbwriteAdapter } from "libs/mrbwrite/adapter";
+import { MrbwriteMiddleware } from "libs/mrbwrite/middleware";
 import { MrbwriteController, Target } from "libs/mrbwrite/controller";
 import { ComponentType } from "react";
 import { CompileStatus } from "./useCompile";
@@ -13,8 +13,8 @@ export const useControlButtons = (
   target: Target | undefined,
   compileStatus: CompileStatus,
   option: Option,
-  mrbwriteController: MrbwriteController<MrbwriteAdapter<unknown>>,
-  method: Method<MrbwriteAdapter<unknown>>,
+  mrbwriteController: MrbwriteController<MrbwriteMiddleware<unknown>>,
+  method: Method<MrbwriteMiddleware<unknown>>,
   startConnection: () => void
 ): UseControlButtons => {
   return [

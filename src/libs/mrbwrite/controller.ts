@@ -22,7 +22,7 @@ export type Config = {
 const abortReason = "abortStream" as const;
 
 export class MrbwriteController<
-  Middleware extends MrbwriteMiddleware<unknown>
+  Middleware extends MrbwriteMiddleware<unknown>,
 > {
   private log: Logger;
   private onListen: Listener | undefined;

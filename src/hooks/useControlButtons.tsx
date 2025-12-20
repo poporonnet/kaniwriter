@@ -1,6 +1,6 @@
 import { ControlButtons } from "components/ControlButtons";
-import { MrbwriteMiddleware } from "libs/mrbwrite/middleware";
 import { MrbwriteController, Target } from "libs/mrbwrite/controller";
+import { MrbwriteMiddleware } from "libs/mrbwrite/middleware";
 import { ComponentType } from "react";
 import { CompileStatus } from "./useCompile";
 import { Method } from "./useMrbwrite";

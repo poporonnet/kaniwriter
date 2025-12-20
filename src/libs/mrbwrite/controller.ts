@@ -2,7 +2,7 @@ import { calculateCrc8 } from "../../utils/calculateCrc8";
 import { green, red } from "../color";
 import { Failure, Result, Success } from "../result";
 import { MrbwriteMiddleware } from "./middleware";
-import { Profile } from "./profile";
+import { MrbwriteProfile } from "./profile";
 
 export const targets = ["ESP32", "RBoard"] as const;
 export type Target = (typeof targets)[number];
@@ -13,11 +13,17 @@ type Listener = (buffer: string[]) => void;
 type Event = "SuccessToEnterWriteMode" | "SuccessToExitWriteMode";
 type Job = { job: Promise<Result<unknown, Error>>; description: string };
 
-export type Config = { profile?: Profile; log: Logger; onListen?: Listener };
+export type Config = {
+  profile?: MrbwriteProfile;
+  log: Logger;
+  onListen?: Listener;
+};
 
 const abortReason = "abortStream" as const;
 
-export class MrbwriteController<Middleware extends MrbwriteMiddleware<unknown>> {
+export class MrbwriteController<
+  Middleware extends MrbwriteMiddleware<unknown>
+> {
   private log: Logger;
   private onListen: Listener | undefined;
 
@@ -58,7 +64,7 @@ export class MrbwriteController<Middleware extends MrbwriteMiddleware<unknown>> 
     return this._writeMode;
   }
 
-  setProfile(profile: Profile) {
+  setProfile(profile: MrbwriteProfile) {
     this.middleware.setProfile(profile);
   }
 

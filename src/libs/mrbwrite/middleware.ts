@@ -1,9 +1,9 @@
 import { Result } from "libs/result";
-import { Profile } from "./profile";
+import { MrbwriteProfile } from "./profile";
 
 export interface MrbwriteMiddleware<Device> {
-  getProfile(): Profile | undefined;
-  setProfile(profile: Profile | undefined): void;
+  getProfile(): MrbwriteProfile | undefined;
+  setProfile(profile: MrbwriteProfile | undefined): void;
 
   isConnected(): boolean;
 

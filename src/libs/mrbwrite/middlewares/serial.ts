@@ -1,11 +1,11 @@
 import { Failure, Result, Success } from "libs/result";
 import { MrbwriteMiddleware } from "../middleware";
-import { Profile } from "../profile";
+import { MrbwriteProfile } from "../profile";
 
 export class MrbwriteSerialMiddleware
   implements MrbwriteMiddleware<SerialPort>
 {
-  private profile: Profile | undefined;
+  private profile: MrbwriteProfile | undefined;
   private port: SerialPort | undefined;
   private originReader: ReadableStreamDefaultReader<Uint8Array> | undefined;
   private readonly serial: Serial;
@@ -14,11 +14,11 @@ export class MrbwriteSerialMiddleware
     this.serial = serial;
   }
 
-  getProfile(): Profile | undefined {
+  getProfile(): MrbwriteProfile | undefined {
     return this.profile;
   }
 
-  setProfile(profile: Profile): void {
+  setProfile(profile: MrbwriteProfile): void {
     this.profile = profile;
   }
 

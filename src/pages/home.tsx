@@ -11,7 +11,7 @@ import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
 import { serialMiddleware } from "libs/mrbwrite/middleware";
 import { Target } from "libs/mrbwrite/controller";
-import { esp32, Profile, rboard } from "libs/mrbwrite/profile";
+import { esp32, MrbwriteProfile, rboard } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +23,7 @@ const Home = () => {
   const [log, setLog] = useState<string[]>([]);
 
   const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(id);
-  const getProfile = useCallback((target: Target): Profile => {
+  const getProfile = useCallback((target: Target): MrbwriteProfile => {
     switch (target) {
       case "ESP32":
         return esp32;

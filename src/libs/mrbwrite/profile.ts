@@ -1,4 +1,4 @@
-export type Profile = {
+export type MrbwriteProfile = {
   baudRate: number;
   keyword: {
     enterWriteMode: RegExp;
@@ -6,7 +6,8 @@ export type Profile = {
   };
 };
 
-const defineProfile = <const P extends Profile>(profile: P): P => profile;
+const defineProfile = <const P extends MrbwriteProfile>(profile: P): P =>
+  profile;
 
 // TODO: 将来的にはボードごとに異なるキーワードを使わないようにする;
 

@@ -5,8 +5,10 @@ on:
     types: [opened, synchronize]
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
     steps:
     - uses: actions/checkout@v6
     - uses: actions/setup-node@v4

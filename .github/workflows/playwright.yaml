@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.57.0-noble
-      options: --user 1001
+    env:
+      HOME: /root
     steps:
     - uses: actions/checkout@v6
+    - run: npm install -g corepack
     - run: corepack enable
     - uses: actions/setup-node@v4
       with:

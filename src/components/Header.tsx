@@ -1,4 +1,14 @@
-import { Box, Button, Link, Sheet, Typography } from "@mui/joy";
+import {
+  Anchor,
+  Button,
+  Group,
+  HoverCard,
+  Image,
+  Space,
+  Stack,
+  Text,
+  useCombobox,
+} from "@mantine/core";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { MdTranslate as TranslateIcon } from "react-icons/md";
@@ -24,135 +34,96 @@ export const Header = () => {
     },
     [i18n]
   );
+  const languageCombobox = useCombobox({
+    onDropdownClose: () => languageCombobox.resetSelectedOption(),
+  });
 
   return (
-    <Sheet
-      component="header"
-      id="header"
-      sx={{
-        position: "static",
-        height: "4rem",
-        width: "100%",
-        whiteSpace: "nowrap",
-        backgroundColor: "#ff3227",
-        display: "flex",
-        alignItems: "center",
-        color: "white",
-        boxShadow: "0px 4px 5px rgba(0,0,0,0.25)",
-        gap: "2rem",
-        pr: "2rem",
+    <Group
+      h="100%"
+      bg="#FF3227"
+      c="white"
+      gap="xl"
+      pr="xl"
+      style={{
+        boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.25)",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          height: "100%",
-          gap: "0.4rem",
-        }}
-      >
-        <img
-          src={icon}
-          alt={t("RubyCity松江のロゴ")}
-          style={{
-            height: "100%",
-          }}
-        />
+      <Group h="100%" gap="0.4rem" wrap="nowrap">
+        <Image src={icon} alt={t("RubyCity松江のロゴ")} h="100%" />
 
-        <Typography textColor="inherit" fontSize="2.125rem">
-          <Link
+        <Text>
+          <Anchor
             href={import.meta.env.VITE_BASE_URL}
-            underline="none"
-            textColor="inherit"
+            underline="never"
+            c="inherit"
+            fz="2.125rem"
           >
             {t("kaniwriter")}
-          </Link>
-          <Link
-            ml="0.5rem"
-            fontSize="1.2rem"
-            textColor="#DDD"
+          </Anchor>
+          <Anchor
             href={`https://github.com/${
               import.meta.env.VITE_WRITER_REPOSITORY_PATH
             }/releases`}
             target="_blank"
-            underline="none"
+            underline="never"
+            ml="0.5rem"
+            fz="1.2rem"
+            c="#DDDDDD"
           >
-            {`${import.meta.env.NPM_PACKAGE_VERSION}`}
-          </Link>
-        </Typography>
-      </Box>
-      <Box flex={1} />
-      <Link
+            {import.meta.env.NPM_PACKAGE_VERSION}
+          </Anchor>
+        </Text>
+      </Group>
+
+      <Space flex={1} />
+
+      <Anchor
         href={import.meta.env.VITE_REFERENCE_URL}
-        textColor="inherit"
-        underline="none"
         target="_blank"
+        underline="never"
+        c="inherit"
       >
         {t("参考資料")}
-      </Link>
-      <Box
-        sx={{
-          display: "flex",
-          position: "relative",
-          "&:hover > div": {
-            opacity: 1,
-            visibility: "visible",
-          },
-        }}
+      </Anchor>
+
+      <HoverCard
+        width="7rem"
+        shadow="lg"
+        radius="0.2rem"
+        transitionProps={{ duration: 100 }}
+        offset={7}
       >
-        <TranslateIcon size="35px" />
-        <Sheet
-          sx={{
-            width: "7rem",
-            position: "absolute",
-            top: "calc(1.5rem + 50%)",
-            left: "calc(-3.5rem + 50%)",
-            zIndex: "1",
-            background: "transparent",
-            transition: "all 100ms ease-in-out",
-            opacity: 0,
-            visibility: "hidden",
-          }}
-        >
-          <Sheet
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              background: "white",
-              boxShadow: "lg",
-              borderRadius: "0.2rem",
-            }}
-          >
+        <HoverCard.Target>
+          <TranslateIcon size="35px" />
+        </HoverCard.Target>
+
+        <HoverCard.Dropdown p={0} bd={0}>
+          <Stack gap={0}>
             {languages.map(({ locale, name }) => (
               <Button
-                variant="plain"
                 onClick={() => setLanguage(locale)}
-                sx={{
-                  color: "black",
-                  transition: "all 100ms ease-in-out",
-                  ":hover": {
-                    background: "white",
-                    color: "var(--header-bg)",
-                  },
-                }}
+                variant="transparent"
+                c="black"
                 key={locale}
               >
                 {name}
               </Button>
             ))}
-          </Sheet>
-        </Sheet>
-      </Box>
-      <Link
+          </Stack>
+        </HoverCard.Dropdown>
+      </HoverCard>
+
+      <Anchor
         href={`https://github.com/${
           import.meta.env.VITE_WRITER_REPOSITORY_PATH
         }`}
-        textColor="inherit"
-        underline="none"
+        c="inherit"
+        h="35px"
         target="_blank"
       >
         <GitHubIcon size="35px" />
-      </Link>
-    </Sheet>
+      </Anchor>
+    </Group>
   );
 };

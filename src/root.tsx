@@ -1,9 +1,10 @@
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { ReactNode } from "react";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import { App } from "./App.client";
 
 export const Layout = ({ children }: { children: ReactNode }) => (
-  <html lang="ja">
+  <html lang="ja" {...mantineHtmlProps}>
     <head>
       <meta charSet="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="images/logo.webp" />
@@ -52,6 +53,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
           }
         `}
       </style>
+      <ColorSchemeScript />
       <Meta />
       <Links />
     </head>

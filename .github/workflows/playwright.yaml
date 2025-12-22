@@ -41,13 +41,15 @@ jobs:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         command: versions upload --assets=playwright-report --name=kaniwriter-playwright --compatibility-date=2025-12-22
     - name: Create comment
+      if: ${{ !cancelled() }}
       run: |
         cat << EOF > comment
         ## ${{ steps.playwright-test.outcome == 'success' && '✅ Playwright test succeeded' || '❌ Playwright test failed' }}
-        View report: ${{ steps.upload-report.outputs.deployment-url }}
+        View report: ${{ steps.upload-report.outputs.deployment-url || '**⚠️Deployment failed.**' }}
         EOF
     - name: Setup github cli
       uses: sersoft-gmbh/setup-gh-cli-action@v3
+      if: ${{ !cancelled() }}
       with:
         version: stable
     - name: Comment report

@@ -51,6 +51,6 @@ jobs:
       with:
         version: stable
     - name: Comment report
-      run: gh pr comment ${{ github.event.number }} --body-file comment --edit-last --create-if-none
+      run: gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file comment --edit-last --create-if-none
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

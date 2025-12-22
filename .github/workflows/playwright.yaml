@@ -37,10 +37,10 @@ jobs:
       uses: cloudflare/wrangler-action@v3
       if: ${{ !cancelled() }}
       with:
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         command: versions upload --assets=playwright-report --name=kaniwriter-playwright --compatibility-date=2025-12-22
     - name: Create comment
-      if: ${{ !cancelled() }}
       run: |
         cat << EOF > comment
         ## ${{ steps.playwright-test.outcome == 'success' && '✅ Playwright test succeeded' || '❌ Playwright test failed' }}

@@ -1,4 +1,4 @@
-import { Box } from "@mui/joy";
+import { Stack } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { OptionCheckbox } from "./OptionCheckbox";
 
@@ -22,16 +22,7 @@ export const OptionList = ({
   const [t] = useTranslation();
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        px: "0.5rem",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "left",
-        gap: "1rem",
-      }}
-    >
+    <Stack w="100%" px="0.5rem">
       <OptionCheckbox
         label={t("自動スクロール")}
         value={autoScroll}
@@ -47,6 +38,6 @@ export const OptionList = ({
         value={autoVerify}
         setValue={setAutoVerify}
       />
-    </Box>
+    </Stack>
   );
 };

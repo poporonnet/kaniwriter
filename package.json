@@ -16,6 +16,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@mantine/core": "^8.3.10",
+    "@mantine/hooks": "^8.3.10",
     "@mui/joy": "5.0.0-beta.52",
     "@react-router/node": "^7.4.0",
     "@sentry/react": "^10.0.0",

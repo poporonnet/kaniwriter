@@ -9,6 +9,9 @@ import { useMrbwrite } from "hooks/useMrbwrite";
 import { useOption } from "hooks/useOption";
 import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
+import { Target } from "libs/mrbwrite/controller";
+import { serialMiddleware } from "libs/mrbwrite/middleware";
+import { esp32, MrbwriteProfile, rboard } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,22 +23,31 @@ const Home = () => {
   const [log, setLog] = useState<string[]>([]);
 
   const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(id);
+  const getProfile = useCallback((target: Target): MrbwriteProfile => {
+    switch (target) {
+      case "ESP32":
+        return esp32;
+      case "RBoard":
+        return rboard;
+    }
+  }, []);
   const [TargetSelector, { target }] = useTarget((target) =>
-    connector.setTarget(target)
+    connector.setProfile(getProfile(target))
   );
   const [OptionList, option] = useOption();
 
-  const { connector, method } = useMrbwrite({
-    target,
-    log: (message, params) => console.log(message, params),
-    onListen: (buffer) => setLog([...buffer]),
-  });
+  const { connector, method } = useMrbwrite(
+    {
+      profile: target && getProfile(target),
+      log: (message, params) => console.log(message, params),
+      onListen: (buffer) => setLog([...buffer]),
+    },
+    serialMiddleware
+  );
 
   const startConnection = useCallback(
-    async (port?: () => Promise<SerialPort>) => {
-      const res = await method.connect(
-        port ?? (() => navigator.serial.requestPort())
-      );
+    async (customRequest?: () => Promise<SerialPort>) => {
+      const res = await method.connect({ customRequest });
       if (res.isFailure()) return;
 
       await Promise.all([method.startListen(), method.startEnter(1000)]);

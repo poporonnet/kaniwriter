@@ -1,6 +1,8 @@
-import { calculateCrc8 } from "../utils/calculateCrc8";
-import { green, red } from "./color";
-import { Failure, Result, Success } from "./result";
+import { calculateCrc8 } from "../../utils/calculateCrc8";
+import { green, red } from "../color";
+import { Failure, Result, Success } from "../result";
+import { MrbwriteMiddleware } from "./middleware";
+import { MrbwriteProfile } from "./profile";
 
 export const targets = ["ESP32", "RBoard"] as const;
 export type Target = (typeof targets)[number];
@@ -8,37 +10,24 @@ export type Target = (typeof targets)[number];
 type Logger = (message: string, ...params: unknown[]) => void;
 type Listener = (buffer: string[]) => void;
 
-type Reader = ReadableStreamDefaultReader<Uint8Array>;
-type Writer = WritableStreamDefaultWriter<Uint8Array>;
 type Event = "SuccessToEnterWriteMode" | "SuccessToExitWriteMode";
 type Job = { job: Promise<Result<unknown, Error>>; description: string };
 
-export type Config = { target?: Target; log: Logger; onListen?: Listener };
-
-const baudRates: Record<Target, number> = {
-  ESP32: 115200,
-  RBoard: 19200,
-} as const;
-//TODO: 将来的にはボードごとに異なるキーワードを使わないようにする
-const enterWriteModeKeyword: Record<Target, RegExp> = {
-  ESP32: /\+OK mruby\/c/,
-  RBoard: /\+OK mruby\/c/,
-} as const;
-
-const exitWriteModeKeyword: Record<Target, RegExp> = {
-  ESP32: /mruby\/c v\d(.\d+)* start/, // ESP32は終了時メッセージが出ないため、再起動時の開始時メッセージで判定
-  RBoard: /\+OK Execute mruby\/c\./,
-} as const;
+export type Config = {
+  profile?: MrbwriteProfile;
+  log: Logger;
+  onListen?: Listener;
+};
 
 const abortReason = "abortStream" as const;
 
-export class MrubyWriterConnector {
-  private port: SerialPort | undefined;
+export class MrbwriteController<
+  Middleware extends MrbwriteMiddleware<unknown>,
+> {
   private log: Logger;
   private onListen: Listener | undefined;
 
   private readable: ReadableStream<string> | undefined;
-  private sourceReader: Reader | undefined;
 
   private sourceClosed: Promise<void> | undefined;
   private sinkClosed: Promise<void> | undefined;
@@ -50,11 +39,11 @@ export class MrubyWriterConnector {
   private encoder: TextEncoder;
   private decoder: TextDecoder;
   private buffer: string[];
-  private target: Target | undefined;
   private jobQueue: Job[];
 
-  constructor(config: Config) {
-    this.target = config.target;
+  private middleware: Middleware;
+
+  constructor(config: Config, middleware: Middleware) {
     this.log = config.log;
     this.onListen = config.onListen;
     this.buffer = [];
@@ -62,107 +51,75 @@ export class MrubyWriterConnector {
     this.encoder = new TextEncoder();
     this.decoder = new TextDecoder();
     this.jobQueue = [];
+    this.middleware = middleware;
+
+    middleware.setProfile(config.profile);
   }
 
   public get isConnected(): boolean {
-    return this.port != null;
+    return this.middleware.isConnected();
   }
 
   public get isWriteMode(): boolean {
     return this._writeMode;
   }
 
-  setTarget(target: Target) {
-    this.target = target;
+  setProfile(profile: MrbwriteProfile) {
+    this.middleware.setProfile(profile);
   }
 
-  async connect(port: () => Promise<SerialPort>): Promise<Result<null, Error>> {
-    if (this.port) {
-      return Failure.error("Already connected.");
-    }
+  async connect(
+    option?: Parameters<Middleware["request"]>[0]
+  ): Promise<Result<null, Error>> {
+    this.handleText(`\r\n${green("> try to connect...")}\r\n`);
 
-    try {
-      this.handleText(`\r\n${green("> try to connect...")}\r\n`);
-      this.port = await port();
-      const res = await this.open();
-      if (res.isFailure()) {
-        this.port = undefined;
-        this.handleText(`\r\n${red("> failed to open serial port.")}\r\n`);
-        return Failure.error("Failed to open serial port.");
-      }
-
-      this.handleText(`\r\n${green("> connection established.")}\r\n`);
-      return Success.value(null);
-    } catch (error) {
-      this.port = undefined;
+    const requestRes = await this.middleware.request(option);
+    if (requestRes.isFailure()) {
       this.handleText(`\r\n${red("> failed to connect.")}\r\n`);
-      return Failure.error("Cannot get serial port.", { cause: error });
+      return requestRes;
     }
+
+    const openRes = await this.middleware.open();
+    if (openRes.isFailure()) {
+      this.handleText(`\r\n${red("> failed to open serial port.")}\r\n`);
+
+      return openRes;
+    }
+
+    this.handleText(`\r\n${green("> connection established.")}\r\n`);
+    return Success.value(null);
   }
 
   async disconnect(): Promise<Result<null, Error>> {
-    if (!this.port) {
-      return Failure.error("Not connected.");
-    }
+    this.handleText(`\r\n${green("> try to disconnect...")}\r\n`);
 
-    try {
-      this.handleText(`\r\n${green("> try to disconnect...")}\r\n`);
-
-      await this.abortStreams();
-      const res = await this.close();
-      if (res.isFailure()) {
-        this.handleText(`\r\n${red("> failed to close serial port.")}\r\n`);
-        return res;
-      }
-
-      this.port = undefined;
-      this._writeMode = false;
-
-      this.handleText(`\r\n${green("> successfully disconnected.")}\r\n`);
-      return Success.value(null);
-    } catch (error) {
+    const abortRes = await this.abortStreams();
+    if (abortRes.isFailure()) {
       this.handleText(`\r\n${red("> failed to close serial port.")}\r\n`);
-      return Failure.error("Cannot disconnect serial port.", { cause: error });
+      return abortRes;
     }
+
+    const closeRes = await this.middleware.close();
+    if (closeRes.isFailure()) {
+      this.handleText(`\r\n${red("> failed to close serial port.")}\r\n`);
+      return closeRes;
+    }
+
+    this._writeMode = false;
+    this.handleText(`\r\n${green("> successfully disconnected.")}\r\n`);
+    return Success.value(null);
   }
 
   async startListen(): Promise<Result<null, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
-    }
-    if (!this.port.readable) {
-      return Failure.error("Cannot read serial port.");
-    }
-    if (!this.port.writable) {
-      return Failure.error("Cannot write serial port.");
-    }
-
     try {
-      const port = this.port;
       const sourceAborter = new AbortController();
       this.sourceAborter = sourceAborter;
 
-      const listenInfinity = (enqueue: (value: Uint8Array) => void) =>
-        this.listen(
-          sourceAborter,
-          () => port.readable ?? undefined,
-          (reader) => {
-            this.sourceReader = reader;
-          },
-          enqueue
-        );
-      const cancel = () => this.sourceReader?.releaseLock();
-      const sourceReadable = new ReadableStream({
-        start: async (controller) => {
-          await listenInfinity((value) => controller.enqueue(value)).catch(
-            (error) => {
-              controller.error(error);
-              this.sourceAborter?.abort(error);
-            }
-          );
-        },
-        cancel,
-      });
+      const readableRes = this.middleware.getReadable(sourceAborter);
+      if (readableRes.isFailure()) {
+        return readableRes;
+      }
+      const sourceReadable = readableRes.value;
 
       const decode = (data: Uint8Array) =>
         this.decoder.decode(data, { stream: true });
@@ -209,7 +166,6 @@ export class MrubyWriterConnector {
       return Success.value(null);
     } catch (error) {
       this._writeMode = false;
-      this.port = undefined;
 
       return Failure.error("Error excepted while reading.", { cause: error });
     } finally {
@@ -223,8 +179,8 @@ export class MrubyWriterConnector {
     command: string,
     option?: Partial<{ force: boolean; ignoreResponse: boolean }>
   ): Promise<Result<string, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
+    if (!this.middleware.isConnected()) {
+      return Failure.error("Not connected.");
     }
     if (!option?.force && !this._writeMode) {
       return Failure.error("Not write mode now.");
@@ -240,8 +196,8 @@ export class MrubyWriterConnector {
   }
 
   async tryEnterWriteMode(): Promise<Result<string, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
+    if (!this.middleware.isConnected()) {
+      return Failure.error("Not connected.");
     }
     if (this._writeMode) {
       return Failure.error("Already write mode.");
@@ -260,8 +216,8 @@ export class MrubyWriterConnector {
     binary: Uint8Array,
     option?: Partial<{ execute: boolean; autoVerify: boolean }>
   ): Promise<Result<string, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
+    if (!this.middleware.isConnected()) {
+      return Failure.error("Not connected.");
     }
     if (!this._writeMode) {
       return Failure.error("Not write mode now.");
@@ -298,8 +254,8 @@ export class MrubyWriterConnector {
     chunk: Uint8Array,
     option?: Partial<{ ignoreResponse: boolean }>
   ): Promise<Result<string, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
+    if (!this.middleware.isConnected()) {
+      return Failure.error("Not connected.");
     }
 
     const send = async (): Promise<Result<string, Error>> => {
@@ -345,78 +301,25 @@ export class MrubyWriterConnector {
     this.jobQueue = [];
   }
 
-  private async open(): Promise<Result<null, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
-    }
-    if (!this.target) {
-      return Failure.error("No target selected.");
-    }
-
-    try {
-      await this.port.open({ baudRate: baudRates[this.target] });
-      return Success.value(null);
-    } catch (error) {
-      return Failure.error("Failed to open serial port.", { cause: error });
-    }
-  }
-
   private async close(): Promise<Result<null, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
+    const closeRes = await this.middleware.close();
+    if (closeRes.isFailure()) {
+      return closeRes;
     }
 
-    try {
-      await this.port.close();
-      return Success.value(null);
-    } catch (error) {
-      return Failure.error("Failed to close serial port.", { cause: error });
-    }
+    return Success.value(null);
   }
 
-  private getWriter(): Result<Writer, Error> {
-    if (!this.port) {
-      return Failure.error("No port.");
-    }
-    if (!this.port.writable) {
-      return Failure.error("Cannot write serial port.");
+  private getWriter(): Result<WritableStreamDefaultWriter<Uint8Array>, Error> {
+    const writableRes = this.middleware.getWritable();
+    if (writableRes.isFailure()) {
+      return writableRes;
     }
 
     try {
-      return Success.value(this.port.writable.getWriter());
+      return Success.value(writableRes.value.getWriter());
     } catch (error) {
       return Failure.error("Failed to get writer.", { cause: error });
-    }
-  }
-
-  private async listen(
-    aborter: AbortController,
-    getReadable: () => ReadableStream<Uint8Array> | undefined,
-    setReader: (reader: Reader) => void,
-    enqueue: (value: Uint8Array) => void
-  ): Promise<void> {
-    while (!aborter.signal.aborted) {
-      const readable = getReadable();
-      if (!readable) {
-        throw new Error("Cannot read serial port.");
-      }
-
-      const reader = readable.getReader();
-      setReader(reader);
-      while (true) {
-        try {
-          const { value, done } = await reader.read();
-          if (done) {
-            break;
-          }
-
-          enqueue(value);
-        } catch (error) {
-          console.warn(error);
-          break;
-        }
-      }
-      reader.releaseLock();
     }
   }
 
@@ -442,25 +345,24 @@ export class MrubyWriterConnector {
   }
 
   private detectEvent(text: string): Success<{ event: Event | null }> {
-    if (this.target && text.match(enterWriteModeKeyword[this.target])) {
+    const profile = this.middleware.getProfile();
+    if (profile && text.match(profile.keyword.enterWriteMode)) {
       return Success.value({ event: "SuccessToEnterWriteMode" });
     }
-    if (this.target && text.match(exitWriteModeKeyword[this.target])) {
+    if (profile && text.match(profile.keyword.exitWriteMode)) {
       return Success.value({ event: "SuccessToExitWriteMode" });
     }
 
     return Success.value({ event: null });
   }
   private async onEnterWriteMode(): Promise<Result<null, Error>> {
-    if (!this.port) {
-      return Failure.error("No port.");
+    if (!this.middleware.isConnected()) {
+      return Failure.error("Not connected.");
     }
     if (this._writeMode) {
       return Failure.error("Already write mode.");
     }
-    if (!this.port.writable) {
-      return Failure.error("Cannot write serial port.");
-    }
+
     this._writeMode = true;
     return Success.value(null);
   }
@@ -471,7 +373,7 @@ export class MrubyWriterConnector {
   }
 
   private async write(
-    writer: Writer,
+    writer: WritableStreamDefaultWriter<Uint8Array>,
     chunk: Uint8Array
   ): Promise<Result<null, Error>> {
     const divisionSize = 1024;
@@ -559,20 +461,22 @@ export class MrubyWriterConnector {
     }
   }
 
-  private async abortStreams(): Promise<void> {
-    this.sinkAborter?.abort(abortReason);
-    await this.sinkClosed?.catch(console.warn);
+  private async abortStreams(): Promise<Result<void, Error>> {
+    try {
+      this.sinkAborter?.abort(abortReason);
+      await this.sinkClosed?.catch(console.warn);
 
-    this.sourceAborter?.abort(abortReason);
-    await this.sourceClosed?.catch(console.warn);
+      this.sourceAborter?.abort(abortReason);
+      await this.sourceClosed?.catch(console.warn);
 
-    await this.sourceReader?.cancel().catch(console.warn);
-    this.sourceReader?.releaseLock();
+      await this.readable?.cancel().catch(console.warn);
 
-    await this.readable?.cancel().catch(console.warn);
+      await this.middleware.cancel();
 
-    await this.port?.readable?.cancel().catch(console.warn);
-    await this.port?.writable?.abort().catch(console.warn);
+      return Success.value(undefined);
+    } catch (error) {
+      return Failure.error("Failure to abort streams.", { cause: error });
+    }
   }
 
   private async changeSink(

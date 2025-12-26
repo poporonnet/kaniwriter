@@ -1,8 +1,8 @@
 import { Box } from "@mui/joy";
 import { Header } from "components/Header";
-import { Outlet } from "react-router";
+import { ReactNode } from "react";
 
-const Layout = () => (
+export const Layout = ({ children }: { children: ReactNode }) => (
   <Box
     sx={{
       width: "100%",
@@ -31,9 +31,7 @@ const Layout = () => (
         flexGrow: 1,
       }}
     >
-      <Outlet />
+      {children}
     </Box>
   </Box>
 );
-
-export default Layout;

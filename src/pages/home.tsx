@@ -15,7 +15,7 @@ import { esp32, MrbwriteProfile, rboard } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const Home = () => {
+export const Home = () => {
   const { i18n } = useTranslation("ns1");
   const query = useQuery();
   const id = query.get("id") ?? undefined;
@@ -139,5 +139,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;

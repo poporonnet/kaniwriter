@@ -2,8 +2,9 @@ import "../i18n/i18n";
 import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import { NotificationProvider } from "components/NotificationProvider";
+import { Home } from "pages/home";
 import { IconContext } from "react-icons";
-import { Outlet } from "react-router";
+import { Layout } from "./layouts/layout";
 
 const theme = extendTheme({
   fontFamily: {
@@ -18,7 +19,9 @@ export const App = () => (
     <CssBaseline />
     <IconContext.Provider value={{ size: "1.5rem" }}>
       <NotificationProvider>
-        <Outlet />
+        <Layout>
+          <Home />
+        </Layout>
       </NotificationProvider>
     </IconContext.Provider>
   </CssVarsProvider>

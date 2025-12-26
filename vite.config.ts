@@ -1,5 +1,5 @@
-import { reactRouter } from "@react-router/dev/vite";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
+import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig, loadEnv } from "vite";
 
@@ -10,9 +10,25 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       sourcemap: true,
+      rolldownOptions: {
+        output: {
+          advancedChunks: {
+            groups: [
+              {
+                test: /node_modules\/react/,
+                name: "react",
+              },
+              {
+                test: /node_modules\/@mui\/joy/,
+                name: "@mui/joy",
+              },
+            ],
+          },
+        },
+      },
     },
     plugins: [
-      reactRouter(),
+      react(),
       sentryVitePlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
         org: "poporon-network",

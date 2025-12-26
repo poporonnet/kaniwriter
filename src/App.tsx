@@ -108,9 +108,9 @@ export const App = () => (
       <IconContext.Provider value={{ size: "1.5rem" }}>
         <NotificationProvider>
           <Layout>
-          <Home />
+            <Home />
           </Layout>
-      </NotificationProvider>
+        </NotificationProvider>
       </IconContext.Provider>
     </MantineProvider>
   </CssVarsProvider>

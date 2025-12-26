@@ -53,6 +53,7 @@ jobs:
       with:
         version: stable
     - name: Comment report
+      if: ${{ !cancelled() }}
       run: gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file comment --edit-last --create-if-none
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

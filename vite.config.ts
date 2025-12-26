@@ -10,6 +10,22 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       sourcemap: true,
+      rolldownOptions: {
+        output: {
+          advancedChunks: {
+            groups: [
+              {
+                test: /node_modules\/react/,
+                name: "react",
+              },
+              {
+                test: /node_modules\/@mui\/joy/,
+                name: "@mui/joy",
+              },
+            ],
+          },
+        },
+      },
     },
     plugins: [
       react(),

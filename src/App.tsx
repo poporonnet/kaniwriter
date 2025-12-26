@@ -7,8 +7,9 @@ import {
 import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import { NotificationProvider } from "components/NotificationProvider";
+import { Home } from "pages/home";
 import { IconContext } from "react-icons";
-import { Outlet } from "react-router";
+import { Layout } from "./layouts/layout";
 import "@mantine/core/styles.css";
 
 const theme = extendTheme({
@@ -106,8 +107,10 @@ export const App = () => (
     <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
       <IconContext.Provider value={{ size: "1.5rem" }}>
         <NotificationProvider>
-          <Outlet />
-        </NotificationProvider>
+          <Layout>
+          <Home />
+          </Layout>
+      </NotificationProvider>
       </IconContext.Provider>
     </MantineProvider>
   </CssVarsProvider>

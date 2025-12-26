@@ -1,5 +1,5 @@
 import { TargetSelector } from "components/TargetSelector";
-import { Target } from "libs/mrubyWriterConnector";
+import { Target } from "libs/mrbwrite/controller";
 import { isTarget } from "libs/utility";
 import { ComponentType } from "react";
 import { useStoreState } from "./useStoreState";

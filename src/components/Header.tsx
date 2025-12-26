@@ -61,7 +61,7 @@ export const Header = () => {
 
         <Typography textColor="inherit" fontSize="2.125rem">
           <Link
-            href={import.meta.env.VITE_BASE_URL}
+            href={import.meta.env.BASE_URL}
             underline="none"
             textColor="inherit"
           >

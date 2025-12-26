@@ -45,7 +45,7 @@ export default defineConfig(({ mode }) => {
         process.env.npm_package_version
       ),
     },
-    base: process.env.VITE_BASE_URL,
+    base: "./",
     resolve: {
       alias: {
         components: path.resolve(__dirname, "src/components"),

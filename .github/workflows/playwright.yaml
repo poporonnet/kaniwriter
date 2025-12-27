@@ -1,0 +1,59 @@
+name: Playwright Tests
+on:
+  pull_request:
+    branches: [main, develop/replace-ui] # TODO: 移行できたらmainのみにする
+    types: [opened, synchronize]
+jobs:
+  test:
+    name: Playwright Tests
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+    env:
+      HOME: /root
+    steps:
+    - uses: actions/checkout@v6
+    - run: npm install -g corepack
+    - run: corepack enable
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.x
+        registry-url: https://registry.npmjs.org/
+        cache: pnpm
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    - name: Run Playwright tests
+      run: pnpm test:e2e
+      id: playwright-test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+    - name: Upload report
+      id: upload-report
+      uses: cloudflare/wrangler-action@v3
+      if: ${{ !cancelled() }}
+      with:
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        command: versions upload --assets=playwright-report --name=kaniwriter-playwright --compatibility-date=2025-12-22
+    - name: Create comment
+      if: ${{ !cancelled() }}
+      run: |
+        cat << EOF > comment
+        ## ${{ steps.playwright-test.outcome == 'success' && '✅ Playwright test succeeded' || '❌ Playwright test failed' }}
+        View report: ${{ steps.upload-report.outputs.deployment-url || '**⚠️Deployment failed.**' }}
+        EOF
+    - name: Setup github cli
+      uses: sersoft-gmbh/setup-gh-cli-action@v3
+      if: ${{ !cancelled() }}
+      with:
+        version: stable
+    - name: Comment report
+      if: ${{ !cancelled() }}
+      run: gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file comment --edit-last --create-if-none
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

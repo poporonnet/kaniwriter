@@ -1,30 +1,20 @@
-import { Box } from "@mui/joy";
+import { AppShell } from "@mantine/core";
 import { Header } from "components/Header";
 import { ReactNode } from "react";
 
 export const Layout = ({ children }: { children: ReactNode }) => (
-  <Box
-    sx={{
-      width: "100%",
-      minHeight: "100vh",
-      minWidth: "44rem",
-      "&": {
-        minHeight: "100dvh",
-      },
-      background: "white",
-      display: "flex",
-      flexDirection: "column",
-      gap: "2rem",
-      alignItems: "center",
-    }}
-  >
-    <Header />
-    <Box
-      sx={{
-        width: "100%",
-        pl: "2rem",
-        pr: "1rem",
-        display: "flex",
+  <AppShell header={{ height: "4rem", offset: false }} mih="100vh" miw="44rem">
+    <AppShell.Header pos="static" bd={0}>
+      <Header />
+    </AppShell.Header>
+
+    <AppShell.Main
+      display="flex"
+      pt="2rem"
+      pl="2rem"
+      pr="1rem"
+      style={{
+        minHeight: "unset",
         flexDirection: "column",
         alignItems: "center",
         gap: "2.5rem",
@@ -32,6 +22,6 @@ export const Layout = ({ children }: { children: ReactNode }) => (
       }}
     >
       {children}
-    </Box>
-  </Box>
+    </AppShell.Main>
+  </AppShell>
 );

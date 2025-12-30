@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/poporonnet/kaniwriter/compare/v1.8.1...v1.9.0) (2025-12-25)
+
+
+### Features
+
+* **refactor:** MrubyWriterConnector から Web Serial API に依存する部分を分離 ([#914](https://github.com/poporonnet/kaniwriter/issues/914)) ([d2818cb](https://github.com/poporonnet/kaniwriter/commit/d2818cba14910b20f53d7d3d48df27db053f2072))
+
 ## [1.8.1](https://github.com/poporonnet/kaniwriter/compare/v1.8.0...v1.8.1) (2025-11-24)
 
 

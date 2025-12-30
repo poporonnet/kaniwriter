@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/joy";
-import { Target } from "libs/mrubyWriterConnector";
+import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {

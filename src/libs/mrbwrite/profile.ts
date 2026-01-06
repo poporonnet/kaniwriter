@@ -26,3 +26,11 @@ export const rboard = defineProfile({
     exitWriteMode: /\+OK Execute mruby\/c\./,
   },
 });
+
+export const rp2040 = defineProfile({
+  baudRate: 19200,
+  keyword: {
+    enterWriteMode: /\+OK mruby\/c/,
+    exitWriteMode: /\+OK/,
+  },
+});

@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import ESP32 from "/images/ESP32.webp";
 import RBoard from "/images/Rboard.webp";
-import RP2040 from "/images/rp2040.webp"
+import RP2040 from "/images/rp2040.webp";
 import { TargetSelectModal } from "./TargetSelectModal";
 
 export const targets = [
@@ -23,7 +23,7 @@ export const targets = [
   {
     title: "RP2040",
     image: RP2040,
-  }
+  },
 ] as const satisfies readonly { title: Target; image: string }[];
 
 export const TargetSelector = ({

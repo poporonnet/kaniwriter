@@ -1,4 +1,4 @@
-import { Box, CircularProgress, SvgIcon, Typography } from "@mui/joy";
+import { Button, Group, Loader, Stack, Text, ThemeIcon } from "@mantine/core";
 import { CompileStatus as CompileStatusType } from "hooks/useCompile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,80 +17,72 @@ export const CompileStatus = ({
   const [isOpenErrorDetail, setIsOpenErrorDetail] = useState(false);
 
   return (
-    <Box
-      sx={{
-        p: "0.5rem 1.5rem",
-        width: "100%",
-        boxSizing: "border-box",
-        display: "flex",
-        flexWrap: "wrap",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Group gap={0} py="0.5rem" px="1.5rem" w="100%" justify="center">
       {status === "idle" && (
         <>
           {t("コンパイル待機中")}
-          <CircularProgress size="sm" thickness={2} sx={{ ml: "1rem" }} />
+          <Loader size="sm" color="primary.5" ml="md" />
         </>
       )}
       {status === "compile" && (
         <>
           {t("コンパイル中")}
-          <CircularProgress size="sm" thickness={2} sx={{ ml: "1rem" }} />
+          <Loader size="sm" color="primary.5" ml="md" />
         </>
       )}
       {status === "success" && (
         <>
           {t("コンパイル完了")}
-          <SvgIcon color="success">
+          <ThemeIcon
+            variant="transparent"
+            c="success.5"
+            size="fit-content"
+            bd={0}
+          >
             <CheckIcon />
-          </SvgIcon>
+          </ThemeIcon>
         </>
       )}
       {status === "error" && (
-        <Box
-          display="flex"
-          flexDirection="column"
-          flex="1"
-          alignItems="center"
-          justifyContent="center"
-          textAlign="center"
-        >
-          <Box display="flex" justifyContent="center">
+        <Stack gap={0} flex={1} ta="center" align="center">
+          <Group gap={0}>
             {t("コンパイル失敗")}
-            <SvgIcon color="danger">
+            <ThemeIcon
+              variant="transparent"
+              c="danger.5"
+              size="fit-content"
+              bd={0}
+            >
               <ErrorOutlineIcon />
-            </SvgIcon>
-          </Box>
+            </ThemeIcon>
+          </Group>
           {errorBody ? (
             <>
-              <Box
-                display="flex"
-                flexDirection="column"
-                textAlign="center"
-                width="100%"
-                py="0.2rem"
-                sx={{
-                  userSelect: "none",
-                  ":hover": {
-                    background: "#FFEEEE",
-                  },
-                  ":active": {
-                    background: "#FFDDDD",
+              <Button
+                onClick={() => setIsOpenErrorDetail((prev) => !prev)}
+                variant="subtle"
+                c="dark"
+                color="danger.4"
+                h="auto"
+                p="0.2rem 0"
+                bd={0}
+                bdrs="md"
+                styles={{
+                  label: {
+                    textWrap: "wrap",
+                    display: "flex",
+                    flexDirection: "column",
+                    userSelect: "none",
                   },
                 }}
-                borderRadius="0.5rem"
-                onClick={() => setIsOpenErrorDetail((prev) => !prev)}
               >
-                <code>{errorName ?? "unknown error"}</code>
-                <Typography fontSize="0.8rem" color="danger">
+                <Text component="code">{errorName ?? "unknown error"}</Text>
+                <Text fz="0.8rem" c="danger.5">
                   {isOpenErrorDetail
                     ? t("クリックして閉じる")
                     : t("エラーの詳細を見る")}
-                </Typography>
-              </Box>
+                </Text>
+              </Button>
               <ErrorDetailModal
                 error={errorBody}
                 isOpen={isOpenErrorDetail}
@@ -98,10 +90,10 @@ export const CompileStatus = ({
               />
             </>
           ) : (
-            <code>{errorName ?? "unknown error"}</code>
+            <Text component="code">{errorName ?? "unknown error"}</Text>
           )}
-        </Box>
+        </Stack>
       )}
-    </Box>
+    </Group>
   );
 };

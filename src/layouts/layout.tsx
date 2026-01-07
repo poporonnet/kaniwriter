@@ -3,7 +3,13 @@ import { Header } from "components/Header";
 import { ReactNode } from "react";
 
 export const Layout = ({ children }: { children: ReactNode }) => (
-  <AppShell header={{ height: "4rem", offset: false }} mih="100vh" miw="44rem">
+  <AppShell
+    header={{ height: "4rem", offset: false }}
+    mih="100vh"
+    miw="44rem"
+    display="flex"
+    style={{ flexDirection: "column" }}
+  >
     <AppShell.Header pos="static" bd={0}>
       <Header />
     </AppShell.Header>

@@ -1,4 +1,4 @@
-import { Box } from "@mui/joy";
+import { Group } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import {
   MdEdit as EditIcon,
@@ -22,16 +22,7 @@ type Props = Record<
 export const ControlButtons = ({ connect, write, verify, execute }: Props) => {
   const [t] = useTranslation();
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "right",
-        alignItems: "center",
-        gap: "1rem",
-      }}
-    >
+    <Group justify="right">
       <ControlButton
         label={connect.role === "connect" ? t("接続") : t("切断")}
         icon={connect.role === "connect" ? <UsbIcon /> : <UsbOffIcon />}
@@ -46,6 +37,6 @@ export const ControlButtons = ({ connect, write, verify, execute }: Props) => {
         color="success"
         {...execute}
       />
-    </Box>
+    </Group>
   );
 };

@@ -16,4 +16,4 @@ Matz葉がにロボコン マイコン書き込みツール
 
 ### Credits
 
-This project was inspired by https://github.com/Tanabe-Yumi/kanicon-compile-server and https://github.com/nodered-mrubyc/mrubyc-writer, and developed with the total cooperation of @sugiymki. Thanks to all contributors!
+This project was inspired by [Tanabe-Yumi/kanicon-compile-server](https://github.com/Tanabe-Yumi/kanicon-compile-server) and [nodered-mrubyc/mrubyc-writer](https://github.com/nodered-mrubyc/mrubyc-writer), and developed with the total cooperation of [@sugiymki](https://github.com/sugiymki). Thanks to all contributors!

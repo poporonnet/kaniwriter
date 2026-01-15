@@ -1,8 +1,8 @@
 import { AppShell } from "@mantine/core";
 import { Header } from "components/Header";
-import { Outlet } from "react-router";
+import { ReactNode } from "react";
 
-const Layout = () => (
+export const Layout = ({ children }: { children: ReactNode }) => (
   <AppShell header={{ height: "4rem", offset: false }} mih="100vh" miw="44rem">
     <AppShell.Header pos="static" bd={0}>
       <Header />
@@ -21,9 +21,7 @@ const Layout = () => (
         flexGrow: 1,
       }}
     >
-      <Outlet />
+      {children}
     </AppShell.Main>
   </AppShell>
 );
-
-export default Layout;

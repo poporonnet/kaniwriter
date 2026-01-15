@@ -54,7 +54,7 @@ export const Header = () => {
 
         <Text>
           <Anchor
-            href={import.meta.env.VITE_BASE_URL}
+            href={import.meta.env.BASE_URL}
             underline="never"
             c="inherit"
             fz="2.125rem"

@@ -34,9 +34,6 @@ export const Header = () => {
     },
     [i18n]
   );
-  const languageCombobox = useCombobox({
-    onDropdownClose: () => languageCombobox.resetSelectedOption(),
-  });
 
   return (
     <Group

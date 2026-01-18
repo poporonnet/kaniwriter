@@ -1,28 +1,35 @@
-import { Button, ButtonProps } from "@mui/joy";
+import { Button } from "@mantine/core";
 
 type Props = {
   label: string;
   icon: React.ReactNode;
-  onClick: NonNullable<ButtonProps["onClick"]>;
-  disabled: NonNullable<ButtonProps["disabled"]>;
-  color?: NonNullable<ButtonProps["color"]>;
-  sx?: ButtonProps["sx"];
+  onClick: () => void;
+  disabled: boolean;
+  color?: "neutral" | "primary" | "success" | "warning" | "danger";
 };
 
-export const ControlButton = (props: Props) => (
+export const ControlButton = ({
+  label,
+  icon,
+  onClick,
+  disabled,
+  color = "primary",
+}: Props) => (
   <Button
-    onClick={props.onClick}
-    disabled={props.disabled}
-    color={props.color}
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "0.3rem",
-      ...props.sx,
+    onClick={onClick}
+    disabled={disabled}
+    px="1rem"
+    radius="6px"
+    color={`${color}.5`}
+    bd={0}
+    lh="1.5"
+    rightSection={icon}
+    styles={{
+      section: {
+        marginLeft: "0.3rem",
+      },
     }}
   >
-    {props.label}
-    {props.icon}
+    {label}
   </Button>
 );

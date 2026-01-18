@@ -1,4 +1,4 @@
-import { Box, Sheet, Typography } from "@mui/joy";
+import { Box, Stack, Text } from "@mantine/core";
 import { CompileStatus as CompileStatusType } from "hooks/useCompile";
 import { Status as GetVersionsStatus, Version } from "hooks/useVersions";
 import { useTranslation } from "react-i18next";
@@ -21,33 +21,30 @@ export const CompilerCard = ({
   const [t] = useTranslation();
 
   return (
-    <Sheet
-      variant="outlined"
-      sx={{
-        pt: "1rem",
-        pb: "0.5rem",
-        width: "100%",
-        boxSizing: "border-box",
-        borderRadius: "sm",
+    <Stack
+      gap="0.5rem"
+      pt="md"
+      pb="0.5rem"
+      w="100%"
+      bdrs="6px"
+      bg="neutral.0"
+      style={{
+        border: "1px solid",
         borderColor:
           getVersionsStatus == "error" || compileStatus.status == "error"
             ? "red"
             : "lightgrey",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "0.5rem",
       }}
     >
-      <Box sx={{ width: "calc(100% - 2rem)" }}>
-        <Typography level="body-xs">{t("コンパイラバージョン")}</Typography>
+      <Box w="100%" px="1rem">
+        <Text fz="xs" c="neutral.6">
+          {t("コンパイラバージョン")}
+        </Text>
         <CompilerSelector
           versions={versions.sort()}
           version={version || ""}
           disabled={getVersionsStatus != "success"}
           onChange={onChangeVersion}
-          sx={{ width: "100%" }}
         />
       </Box>
       <CompileStatus
@@ -59,6 +56,6 @@ export const CompilerCard = ({
         }
         errorBody={compileStatus.errorBody}
       />
-    </Sheet>
+    </Stack>
   );
 };

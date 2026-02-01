@@ -18,6 +18,7 @@ body {
 }
 
 /* shiki.jsのフォント指定 */
-code {
+.mantine-CodeHighlight-code {
   font-family: "Noto Sans Mono", monospace;
+  font-size: medium;
 }

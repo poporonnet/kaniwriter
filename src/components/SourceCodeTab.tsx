@@ -1,8 +1,7 @@
-import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
-import { useHighlighter } from "hooks/useHighlighter";
-import { useEffect, useState } from "react";
+import { CodeHighlight } from "@mantine/code-highlight";
+import { Box, Button, Card, Typography } from "@mui/joy";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MdFileCopy as FileCopyIcon } from "react-icons/md";
 
 interface CodeProps {
   sourceCode: string;
@@ -10,28 +9,9 @@ interface CodeProps {
 }
 
 export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
-  const [html, setHtml] = useState<string>("");
   // 送信したmruby/cのソースコードを表示するかどうか
   const [isOpen, setIsOpen] = useState(false);
   const [t] = useTranslation();
-  const highlighter = useHighlighter();
-
-  const handleCopy = () => {
-    if (!sourceCode) return;
-    navigator.clipboard.writeText(sourceCode);
-    setShowCopied(true);
-  };
-
-  // ソースコードをシンタックスハイライト付きのHTMLに変換
-  useEffect(() => {
-    if (!highlighter) return;
-    const html = highlighter.codeToHtml(sourceCode, {
-      lang: "ruby",
-      theme: "github-light",
-    });
-    setHtml(html);
-  }, [sourceCode, highlighter]);
-  const [showCopied, setShowCopied] = useState(false);
 
   return (
     <Box
@@ -65,53 +45,15 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
         </Button>
 
         {isOpen && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              maxHeight: "30rem",
-              overflow: "auto",
-            }}
-          >
-            <IconButton
-              onClick={() => handleCopy()}
-              disabled={!sourceCode}
-              color="primary"
-              sx={{
-                position: "absolute",
-                right: "2.5rem",
-                "&:hover": {
-                  backgroundColor: "rgba(0, 0, 0, 0.04)",
-                },
-              }}
-              variant="plain"
-            >
-              <FileCopyIcon />
-              <Snackbar
-                open={showCopied}
-                onClose={() => setShowCopied(false)}
-                autoHideDuration={2000}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                sx={{
-                  position: "absolute",
-                  top: "2rem",
-                  minWidth: "fit-content",
-                  whiteSpace: "nowrap",
-                  py: "0.5rem",
-                }}
-              >
-                {t("コピーしました")}
-              </Snackbar>
-            </IconButton>
-
-            <div
-              style={{
-                width: "100%",
-                overflowX: "scroll",
-              }}
-              dangerouslySetInnerHTML={{ __html: html }}
-            ></div>
-          </Box>
+          <CodeHighlight
+            code={sourceCode}
+            language="ruby"
+            w="100%"
+            mah="30rem"
+            style={{ overflow: "auto" }}
+            copiedLabel={t("コピーしました")}
+            copyLabel={t("コピーする")}
+          />
         )}
       </Card>
     </Box>

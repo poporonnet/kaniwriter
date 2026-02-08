@@ -1,5 +1,5 @@
 import { CodeHighlight } from "@mantine/code-highlight";
-import { Button, Box, Typography, Card } from "@mantine/core";
+import { Box, Button, Card, Typography } from "@mantine/core";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,7 +20,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
           variant="subtle"
           onClick={() => setIsOpen(!isOpen)}
           h="2rem"
-          bg={disable ? "transparent": ""}
+          bg={disable ? "transparent" : ""}
           disabled={disable}
         >
           <Typography color="inherit">

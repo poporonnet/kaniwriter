@@ -5,9 +5,6 @@ Sentry.init({
   ignoreErrors: [
     "Already write mode.",
     "No port.",
-    "The device has been lost.",
-    "Cannot write serial port.",
-    "Error excepted while writing.",
   ],
   sendDefaultPii: true,
 });

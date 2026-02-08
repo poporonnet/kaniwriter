@@ -1,5 +1,5 @@
 import { CodeHighlight } from "@mantine/code-highlight";
-import { Box, Button, Card, Typography } from "@mui/joy";
+import { Button, Box, Typography, Card } from "@mantine/core";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,32 +14,16 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
   const [t] = useTranslation();
 
   return (
-    <Box
-      sx={{
-        minWidth: "41rem",
-        maxWidth: "65rem",
-        width: "100%",
-        mb: isOpen ? "2rem" : "0",
-      }}
-    >
-      <Card
-        sx={{
-          borderRadius: isOpen ? "1rem" : "1rem 1rem 0 0",
-        }}
-      >
+    <Box miw="41rem" maw="65rem" w="100%" mb={isOpen ? "2rem" : "0"}>
+      <Card radius={isOpen ? "1rem" : "1rem 1rem 0 0"} withBorder>
         <Button
-          variant="plain"
+          variant="subtle"
           onClick={() => setIsOpen(!isOpen)}
-          sx={{
-            height: "2rem",
-          }}
+          h="2rem"
+          bg={disable ? "transparent": ""}
           disabled={disable}
         >
-          <Typography
-            sx={{
-              color: "inherit",
-            }}
-          >
+          <Typography color="inherit">
             {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
           </Typography>
         </Button>

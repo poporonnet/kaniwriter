@@ -1,4 +1,4 @@
-import { Button, Group,Text } from "@mantine/core";
+import { Button, Group, Text } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -37,11 +37,6 @@ export const TargetSelector = ({
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
         transition: "box-shadow 0.2s",
         borderRadius: "0.5rem",
-        root: {
-          "&:hover": {
-            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
-          },
-        },
       }}
     >
       <Button
@@ -50,14 +45,13 @@ export const TargetSelector = ({
         onClick={() => setOpen(true)}
         fullWidth
         h={"3.5rem"}
-        w="100%"
+        px="xs"
         styles={{
           label: {
             width: "100%",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: 1.25,
             fontWeight: 700,
           },
         }}
@@ -77,7 +71,6 @@ export const TargetSelector = ({
                   width: "2.25rem",
                   height: "2.25rem",
                   borderRadius: "0.25rem",
-                  marginRight: "1rem",
                 }}
               />
               <Text fz="md" c={"dark"}>

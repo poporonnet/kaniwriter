@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/joy";
+import { Box, Button, Group, Paper, Text } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -30,38 +30,42 @@ export const TargetSelector = ({
 }) => {
   const [t] = useTranslation();
   const [open, setOpen] = React.useState(false);
-
   return (
-    <Box
-      sx={{
-        width: "100%",
+    <Group
+      w={"100%"}
+      style={{
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        borderRadius: "0.5rem",
         transition: "box-shadow 0.2s",
-        "&:hover": {
-          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
+        borderRadius: "0.5rem",
+        root: {
+          "&:hover": {
+            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
+          },
         },
       }}
     >
       <Button
         color={target ? "primary" : "neutral"}
-        variant="outlined"
+        variant="outline"
         onClick={() => setOpen(true)}
         fullWidth
-        sx={{
-          justifyContent: "space-between",
-          gap: target ? 1.5 : 0,
-          p: 1.25,
-          height: "3.5rem",
-          fontWeight: 700,
-          display: "flex",
-          alignItems: "center",
+        h={"3.5rem"}
+        w="100%"
+        styles={{
+          label: {
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: 1.25,
+            fontWeight: 700,
+          },
         }}
       >
         {target ? (
           <>
-            <Box
-              sx={{
+            <Group
+              style={{
                 display: "flex",
                 alignItems: "center",
               }}
@@ -76,8 +80,10 @@ export const TargetSelector = ({
                   marginRight: "1rem",
                 }}
               />
-              <Typography level="title-md">{target}</Typography>
-            </Box>
+              <Text fz="md" c={"dark"}>
+                {target}
+              </Text>
+            </Group>
             <DeveloperBoardIcon />
           </>
         ) : (
@@ -93,6 +99,6 @@ export const TargetSelector = ({
         target={target}
         onChangeTarget={onChangeTarget}
       />
-    </Box>
+    </Group>
   );
 };

@@ -106,13 +106,7 @@ const resolver: CSSVariablesResolver = (theme) => ({
 export const App = () => (
   <CssVarsProvider theme={theme}>
     <CssBaseline />
-    <MantineProvider
-      theme={mantineTheme}
-      cssVariablesResolver={resolver}
-      withCssVariables
-      withStaticClasses
-      withGlobalClasses
-    >
+    <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
       <IconContext.Provider value={{ size: "1.5rem" }}>
         <NotificationProvider>
           <Layout>

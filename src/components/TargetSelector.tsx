@@ -77,7 +77,7 @@ export const TargetSelector = ({
           </>
         ) : (
           <>
-            <Text fz={"sm"} c={"dark"} >
+            <Text fz={"sm"} c={"dark"}>
               {t("書き込みターゲットを選択")}
             </Text>
             <NorthWestIcon color="black" />

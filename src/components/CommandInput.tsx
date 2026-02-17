@@ -41,6 +41,7 @@ export const CommandInput = ({
         variant="unstyled"
         withScrollArea={false}
         clearable
+        selectFirstOptionOnChange
         h="100%"
         w="12rem"
         comboboxProps={{

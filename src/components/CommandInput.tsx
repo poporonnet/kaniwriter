@@ -69,6 +69,7 @@ export const CommandInput = ({
           option: {
             padding: "0 0.75rem",
             height: "2.25rem",
+            borderRadius: 0,
           },
         }}
       />

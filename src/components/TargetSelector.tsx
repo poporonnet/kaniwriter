@@ -1,4 +1,4 @@
-import { Button, Group, Text } from "@mantine/core";
+import { Button, Flex, Group, Text } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -39,12 +39,12 @@ export const TargetSelector = ({
       }}
     >
       <Button
-        color={target ? "primary" : "neutral"}
+        color={target ? "primary" : "gray"}
         variant="outline"
         onClick={() => setOpen(true)}
-        fullWidth
         h={"3.5rem"}
         px="xs"
+        w={"100%"}
         styles={{
           label: {
             width: "100%",
@@ -77,8 +77,10 @@ export const TargetSelector = ({
           </>
         ) : (
           <>
-            {t("書き込みターゲットを選択")}
-            <NorthWestIcon />
+            <Text fz={"sm"} c={"dark"} >
+              {t("書き込みターゲットを選択")}
+            </Text>
+            <NorthWestIcon color="black" />
           </>
         )}
       </Button>

@@ -35,7 +35,6 @@ export const TargetSelector = ({
       w={"100%"}
       style={{
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        transition: "box-shadow 0.2s",
         borderRadius: "0.5rem",
       }}
     >
@@ -49,10 +48,7 @@ export const TargetSelector = ({
         styles={{
           label: {
             width: "100%",
-            display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            fontWeight: 700,
           },
         }}
       >

@@ -118,7 +118,7 @@ async function loadShiki() {
 
   const shiki = await createHighlighterCore({
     langs: [ruby.default],
-    themes: [],
+    themes: ["github-light"],
     engine: createJavaScriptRegexEngine(),
   });
   return shiki;

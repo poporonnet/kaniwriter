@@ -1,4 +1,4 @@
-import { Flex, Modal, RadioGroup } from "@mantine/core";
+import { Group, Modal, Radio } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";
@@ -29,15 +29,21 @@ export const TargetSelectModal = ({
         blur: 8,
       }}
       centered
+      styles={{
+        title: {
+          width: "100%",
+          textAlign: "center",
+        },
+      }}
     >
-      <RadioGroup
+      <Radio.Group
         value={target}
         onChange={(event) => {
           onChangeTarget(event as Target);
         }}
         variant="horizontal"
       >
-        <Flex gap="xl" p="xs" align="stretch" justify="center" wrap="wrap">
+        <Group gap="xl" p="xs" align="stretch" justify="center" wrap="nowrap">
           {targets.map((value) => (
             <TargetCard
               key={value.title}
@@ -47,8 +53,8 @@ export const TargetSelectModal = ({
               setOpen={setOpen}
             />
           ))}
-        </Flex>
-      </RadioGroup>
+        </Group>
+      </Radio.Group>
     </Modal>
   );
 };

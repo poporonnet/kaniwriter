@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Input } from "@mui/joy";
+import { Autocomplete, Button, Flex } from "@mantine/core";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,70 +19,72 @@ export const CommandInput = ({
 }: {
   onSubmit: (command: string) => void;
 }) => {
-  // コマンド入力フィールドのエンターキーで確定された現在の値
-  const [commandValue, setCommandValue] = useState("");
-  // コマンド入力フィールドに現在入力されている文字列
-  const [commandInput, setCommandInput] = useState("");
+  const [command, setCommand] = useState("");
 
   const [t] = useTranslation();
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "right",
+    <Flex
+      ml="auto"
+      w="fit-content"
+      style={{
+        height: "2.25rem",
+        boxSizing: "border-box",
+        borderBottom: "solid 1px rgba(0, 0, 0, 0.42)",
       }}
     >
       <Autocomplete
+        data={commands}
+        value={command}
+        onChange={setCommand}
         placeholder={t("コマンド")}
-        options={commands}
-        variant="plain"
-        color="neutral"
-        value={commandValue}
-        inputValue={commandInput}
-        onChange={(_, v) => setCommandValue(v ?? "")}
-        onInputChange={(_, v) => setCommandInput(v ?? "")}
-        autoHighlight
-        autoComplete
-        freeSolo
-        sx={{
-          borderRadius: "0",
-          borderBottom: "solid",
-          borderWidth: "1px",
-          borderColor: "rgba(0, 0, 0, 0.42)",
-          width: "12rem",
+        variant="unstyled"
+        withScrollArea={false}
+        clearable
+        selectFirstOptionOnChange
+        h="100%"
+        w="12rem"
+        comboboxProps={{
+          size: "md",
+          shadow: "sm",
+          offset: 1,
         }}
-      />
-      <Input
-        type="submit"
-        onClick={() => onSubmit(commandInput)}
-        value="Send"
-        variant="plain"
-        sx={{
-          padding: 0,
-          borderRadius: 0,
-          "--_Input-focusedHighlight": "transparent",
-          "::before": {
-            transform: "scaleX(0)",
-            transition: "transform 200ms",
+        styles={{
+          wrapper: {
+            height: "100%",
           },
-          "::after": {
-            content: "''",
-            position: "absolute",
-            inset: 0,
-            borderBottom: "1px solid rgba(0,0,0,0.42)",
-            transition: "border-color 200ms",
+          input: {
+            padding: "0 12px",
+            fontSize: "1rem",
+            height: "100%",
+            minHeight: 0,
+            border: 0,
           },
-          ":hover::after": {
-            borderBottom: "2px solid black",
+          dropdown: {
+            overflowY: "auto",
+            padding: "0.25rem 0",
+            border: 0,
+            maxHeight: "40dvh",
           },
-          ":is(.Mui-focused)::before": {
-            borderBottom: "2px solid #1976d2",
-            transform: "scaleX(1) translateX(0)",
+          option: {
+            padding: "0 0.75rem",
+            height: "2.25rem",
+            borderRadius: 0,
           },
         }}
       />
-    </Box>
+      <Button
+        onClick={() => onSubmit(command)}
+        variant="transparent"
+        h="2.25rem"
+        p={0}
+        size="md"
+        bd={0}
+        bdrs={0}
+        c="neutral.7"
+      >
+        Send
+      </Button>
+    </Flex>
   );
 };

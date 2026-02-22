@@ -92,11 +92,13 @@ const resolver: CSSVariablesResolver = (theme) => ({
   light: {
     "--mantine-color-disabled": theme.colors.neutral[1],
     "--mantine-color-disabled-color": theme.colors.neutral[4],
+    "--mantine-color-placeholder": theme.colors.neutral[5],
     "--text-lh": "1.5", // TODO: Mantineへの移行が完了したらデフォルトに戻す
   },
   dark: {
     "--mantine-color-disabled": theme.colors.neutral[1],
     "--mantine-color-disabled-color": theme.colors.neutral[4],
+    "--mantine-color-placeholder": theme.colors.neutral[5],
     "--text-lh": "1.5", // TODO: Mantineへの移行が完了したらデフォルトに戻す
   },
 });

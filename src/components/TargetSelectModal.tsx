@@ -1,4 +1,4 @@
-import { Modal, RadioGroup, Flex } from "@mantine/core";
+import { Flex, Modal, RadioGroup } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";

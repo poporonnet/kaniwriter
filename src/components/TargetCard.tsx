@@ -1,4 +1,4 @@
-import { FormLabel, Radio, radioClasses, Sheet, Typography } from "@mui/joy";
+import { Box, Radio, Text } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { MdCheckCircle as CheckCircleIcon } from "react-icons/md";
 
@@ -10,54 +10,61 @@ type TargetCardProps = {
 };
 
 export const TargetCard = (props: TargetCardProps) => {
+  const isChecked = props.target === props.title;
+
   return (
-    <Sheet
-      variant="outlined"
-      key={props.title}
-      sx={{
-        borderRadius: "md",
+    <Box
+      component="label"
+      onClick={() => {
+        props.setOpen(false);
+      }}
+      style={{
+        position: "relative",
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
         gap: "0.75rem",
-        p: "0.75rem 2rem",
-        m: 1,
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        transition: "box-shadow 0.2s",
-        "&:hover": {
-          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
-        },
-        [`& .${radioClasses.checked}`]: {
-          [`& .${radioClasses.action}`]: {
-            border: "3px solid",
-            borderColor: "primary.500",
-          },
-        },
-        [`& .${radioClasses.radio}`]: {
-          display: "contents",
-          "& > svg": {
-            zIndex: 2,
-            position: "absolute",
-            bgcolor: "white",
-            top: "-0.4rem",
-            right: "-0.4rem",
-            borderRadius: "50%",
-          },
-        },
+        padding: "0.75rem 2rem",
+        margin: "0.5rem",
+        borderRadius: "var(--mantine-radius-md)",
+        border: isChecked
+          ? "3px solid var(--mantine-color-blue-filled)"
+          : "1px solid var(--mantine-color-default-border)",
+        boxShadow: isChecked
+          ? "0 4px 16px rgba(0, 0, 0, 0.18)"
+          : "0 2px 8px rgba(0, 0, 0, 0.12)",
+        cursor: "pointer",
+        transition: "box-shadow 0.2s, border 0.2s",
+        backgroundColor: "var(--mantine-color-body)",
+      }}
+      onMouseEnter={(e) => {
+        if (!isChecked)
+          e.currentTarget.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.18)";
+      }}
+      onMouseLeave={(e) => {
+        if (!isChecked)
+          e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.12)";
       }}
     >
-      <Radio
-        overlay
-        id={props.title}
-        value={props.title}
-        checkedIcon={<CheckCircleIcon />}
-        onClick={() => {
-          props.setOpen(false);
-        }}
-      />
-      <FormLabel htmlFor={props.title}>
-        <Typography>{props.title}</Typography>
-      </FormLabel>
+      <Radio value={props.title} display="none" />
+      {isChecked && (
+        <Box
+          style={{
+            position: "absolute",
+            top: "-0.4rem",
+            right: "-0.4rem",
+            backgroundColor: "white",
+            borderRadius: "50%",
+            zIndex: 2,
+            display: "flex",
+            color: "var(--mantine-color-blue-filled)",
+          }}
+        >
+          <CheckCircleIcon size={24} />
+        </Box>
+      )}
+
+      <Text>{props.title}</Text>
       <img
         src={props.image}
         alt={props.title}
@@ -66,6 +73,6 @@ export const TargetCard = (props: TargetCardProps) => {
           width: "5.5rem",
         }}
       />
-    </Sheet>
+    </Box>
   );
 };

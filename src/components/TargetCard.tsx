@@ -13,8 +13,8 @@ export const TargetCard = (props: TargetCardProps) => {
   const isChecked = props.target === props.title;
 
   return (
-    <Box
-      component="label"
+    <Radio.Card
+      value={props.title}
       onClick={() => {
         props.setOpen(false);
       }}
@@ -46,7 +46,6 @@ export const TargetCard = (props: TargetCardProps) => {
           e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.12)";
       }}
     >
-      <Radio value={props.title} display="none" />
       {isChecked && (
         <Box
           style={{
@@ -73,6 +72,6 @@ export const TargetCard = (props: TargetCardProps) => {
           width: "5.5rem",
         }}
       />
-    </Box>
+    </Radio.Card>
   );
 };

@@ -106,35 +106,32 @@ const resolver: CSSVariablesResolver = (theme) => ({
   },
 });
 
-async function loadShiki() {
-  const { createHighlighterCore } = await import("shiki/core");
-  const { createJavaScriptRegexEngine } = await import(
-    "shiki/engine/javascript"
+export const App = () => {
+  async function loadShiki() {
+    const { createHighlighter } = await import("shiki");
+    const shiki = await createHighlighter({
+      langs: ["ruby"],
+      themes: ["github-light"],
+    });
+    return shiki;
+  }
+
+  const shikiAdapter = createShikiAdapter(loadShiki);
+
+  return (
+    <CssVarsProvider theme={theme}>
+      <CssBaseline />
+      <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
+        <CodeHighlightAdapterProvider adapter={shikiAdapter}>
+          <IconContext.Provider value={{ size: "1.5rem" }}>
+            <NotificationProvider>
+              <Layout>
+                <Home />
+              </Layout>
+            </NotificationProvider>
+          </IconContext.Provider>
+        </CodeHighlightAdapterProvider>
+      </MantineProvider>
+    </CssVarsProvider>
   );
-  const ruby = await import("@shikijs/langs-precompiled/ruby");
-
-  const shiki = await createHighlighterCore({
-    langs: [ruby.default],
-    themes: ["github-light"],
-    engine: createJavaScriptRegexEngine(),
-  });
-  return shiki;
-}
-const shikiAdapter = createShikiAdapter(loadShiki);
-
-export const App = () => (
-  <CssVarsProvider theme={theme}>
-    <CssBaseline />
-    <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
-      <CodeHighlightAdapterProvider adapter={shikiAdapter}>
-        <IconContext.Provider value={{ size: "1.5rem" }}>
-          <NotificationProvider>
-            <Layout>
-              <Home />
-            </Layout>
-          </NotificationProvider>
-        </IconContext.Provider>
-      </CodeHighlightAdapterProvider>
-    </MantineProvider>
-  </CssVarsProvider>
-);
+};

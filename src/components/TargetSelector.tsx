@@ -54,12 +54,7 @@ export const TargetSelector = ({
       >
         {target ? (
           <>
-            <Group
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+            <Group>
               <Image
                 src={targets.find((t) => t.title === target)?.image}
                 alt={target}

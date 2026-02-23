@@ -66,7 +66,7 @@ export const TargetSelector = ({
                 {target}
               </Text>
             </Group>
-            <ThemeIcon variant="white" color="primary">
+            <ThemeIcon variant="transparent" c="primary.5">
               <DeveloperBoardIcon />
             </ThemeIcon>
           </>
@@ -75,7 +75,12 @@ export const TargetSelector = ({
             <Text fz="sm" c="neutral.7">
               {t("書き込みターゲットを選択")}
             </Text>
-            <ThemeIcon variant="white" color="neutral.7" ml={"1.5rem"}>
+            <ThemeIcon
+              variant="transparent"
+              c="neutral.7"
+              bd="none"
+              size="1.5rem"
+            >
               <NorthWestIcon />
             </ThemeIcon>
           </>

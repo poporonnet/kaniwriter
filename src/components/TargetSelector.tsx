@@ -1,4 +1,4 @@
-import { Button, Group, Text } from "@mantine/core";
+import { Box, Button, Group, Image, Text, ThemeIcon } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -31,20 +31,20 @@ export const TargetSelector = ({
   const [t] = useTranslation();
   const [open, setOpen] = React.useState(false);
   return (
-    <Group
-      w={"100%"}
+    <Box
+      w="100%"
+      bdrs="0.5rem"
       style={{
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        borderRadius: "0.5rem",
       }}
     >
       <Button
-        color={target ? "primary" : "gray"}
+        color={target ? "primary.3" : "neutral.3"}
         variant="outline"
         onClick={() => setOpen(true)}
-        h={"3.5rem"}
+        fullWidth
+        h="3.5rem"
         px="xs"
-        w={"100%"}
         styles={{
           label: {
             width: "100%",
@@ -60,27 +60,29 @@ export const TargetSelector = ({
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src={targets.find((t) => t.title === target)?.image}
                 alt={target}
-                style={{
-                  width: "2.25rem",
-                  height: "2.25rem",
-                  borderRadius: "0.25rem",
-                }}
+                w="2.25rem"
+                h="2.25rem"
+                bdrs="0.25rem"
               />
-              <Text fz="md" c={"dark"}>
+              <Text fz="md" c="neutral.8">
                 {target}
               </Text>
             </Group>
-            <DeveloperBoardIcon />
+            <ThemeIcon variant="white" c="primary">
+              <DeveloperBoardIcon />
+            </ThemeIcon>
           </>
         ) : (
           <>
-            <Text fz={"sm"} c={"dark"}>
+            <Text fz="sm" c="neutral.7">
               {t("書き込みターゲットを選択")}
             </Text>
-            <NorthWestIcon color="black" />
+            <ThemeIcon variant="white" color="neutral.7">
+              <NorthWestIcon />
+            </ThemeIcon>
           </>
         )}
       </Button>
@@ -90,6 +92,6 @@ export const TargetSelector = ({
         target={target}
         onChangeTarget={onChangeTarget}
       />
-    </Group>
+    </Box>
   );
 };

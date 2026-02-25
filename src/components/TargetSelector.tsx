@@ -66,7 +66,12 @@ export const TargetSelector = ({
                 {target}
               </Text>
             </Group>
-            <ThemeIcon variant="transparent" c="primary.5">
+            <ThemeIcon
+              variant="transparent"
+              c="primary.5"
+              bd="none"
+              size="1.5rem"
+            >
               <DeveloperBoardIcon />
             </ThemeIcon>
           </>

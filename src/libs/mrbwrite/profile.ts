@@ -31,6 +31,6 @@ export const rp2040 = defineProfile({
   baudRate: 19200,
   keyword: {
     enterWriteMode: /\+OK mruby\/c/,
-    exitWriteMode: /\+OK/,
+    exitWriteMode: /Kani-Board, End mrbwrite mode/,
   },
 });

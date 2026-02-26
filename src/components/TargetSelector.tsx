@@ -45,6 +45,7 @@ export const TargetSelector = ({
         fullWidth
         h="3.5rem"
         px="xs"
+        bdrs="6px"
         styles={{
           label: {
             width: "100%",

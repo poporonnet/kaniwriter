@@ -1,4 +1,4 @@
-import { Sheet, Typography } from "@mui/joy";
+import { Box, Paper, Text } from "@mantine/core";
 import { ansiToJson } from "anser";
 import { useEffect, useRef } from "react";
 
@@ -14,11 +14,13 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
   });
 
   return (
-    <Sheet
-      variant="outlined"
+    <Paper
+      withBorder
+      radius={0}
       ref={scrollRef}
-      sx={{
-        px: "0.5rem",
+      p="xs"
+      style={{
+        borderColor: "#CDD7E1",
         boxSizing: "border-box",
         width: "100%",
         textAlign: "left",
@@ -27,30 +29,33 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
         minWidth: "inherit",
         maxWidth: "calc(min(100vw, 100dvw) - 20rem)",
         overflow: "auto",
-        flexGrow: "1",
+        flexGrow: 1,
         whiteSpace: "nowrap",
         fontFamily: "'Noto Sans Mono', monospace",
+        backgroundColor: "#FBFCFE",
       }}
     >
-      {props.log.map((log) => (
+      {props.log.map((line, lineIndex) => (
         <>
-          {ansiToJson(log, { remove_empty: true }).map((entry, index) => (
-            <Typography
-              sx={{
-                color: entry.fg ? `rgb(${entry.fg})` : "inherit",
-                backgroundColor: entry.bg ? `rgb(${entry.bg})` : "inherit",
-                display: "inline",
-                fontSize: "0.8rem",
-                fontFamily: "inherit",
-              }}
-              key={`log-${index}`}
-            >
-              {entry.content}
-            </Typography>
-          ))}
-          {log.length > 0 && <br />}
+          <Box key={`line-${lineIndex}`} style={{ display: "block" }}>
+            {ansiToJson(line, { remove_empty: true }).map((entry, index) => (
+              <Text
+                key={`log-${index}`}
+                style={{
+                  color: entry.fg ? `rgb(${entry.fg})` : "inherit",
+                  backgroundColor: entry.bg ? `rgb(${entry.bg})` : "inherit",
+                  display: "inline",
+                  fontSize: "0.8rem",
+                  fontFamily: "inherit",
+                }}
+              >
+                {entry.content}
+              </Text>
+            ))}
+            {line.length > 0 && <br />}
+          </Box>
         </>
       ))}
-    </Sheet>
+    </Paper>
   );
 };

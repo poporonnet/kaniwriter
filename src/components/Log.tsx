@@ -1,4 +1,4 @@
-import { Box, Paper, Text } from "@mantine/core";
+import { Paper, Text } from "@mantine/core";
 import { ansiToJson } from "anser";
 import { useEffect, useRef } from "react";
 
@@ -35,10 +35,9 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
         backgroundColor: "#FBFCFE",
       }}
     >
-      {props.log.map((line, lineIndex) => (
+      {props.log.map((log) => (
         <>
-          <Box key={`line-${lineIndex}`} style={{ display: "block" }}>
-            {ansiToJson(line, { remove_empty: true }).map((entry, index) => (
+          {ansiToJson(log, { remove_empty: true }).map((entry, index) => (
               <Text
                 key={`log-${index}`}
                 style={{
@@ -52,9 +51,7 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
                 {entry.content}
               </Text>
             ))}
-            {line.length > 0 && <br />}
-          </Box>
-        </>
+          {log.length > 0 && <br />}
       ))}
     </Paper>
   );

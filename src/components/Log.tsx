@@ -1,9 +1,10 @@
-import { Paper, Text } from "@mantine/core";
+import { Paper, Text, useMantineTheme } from "@mantine/core";
 import { ansiToJson } from "anser";
 import { useEffect, useRef } from "react";
 
 export const Log = (props: { log: string[]; autoScroll: boolean }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const theme = useMantineTheme();
 
   useEffect(() => {
     if (!props.autoScroll) return;
@@ -16,42 +17,40 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
   return (
     <Paper
       withBorder
-      radius={0}
+      bdrs="0"
       ref={scrollRef}
-      p="xs"
+      px="0.5rem"
+      w="100%"
+      h="20rem"
+      mih="12.5rem"
+      miw="inherit"
+      maw="calc(min(100vw, 100dvw) - 20rem)"
+      ta="left"
+      ff="'Noto Sans Mono', monospace"
+      bg={theme.colors.neutral[0]}
       style={{
-        borderColor: "#CDD7E1",
-        boxSizing: "border-box",
-        width: "100%",
-        textAlign: "left",
-        height: "20rem",
-        minHeight: "12.5rem",
-        minWidth: "inherit",
-        maxWidth: "calc(min(100vw, 100dvw) - 20rem)",
+        borderColor: theme.colors.neutral[3],
         overflow: "auto",
         flexGrow: 1,
         whiteSpace: "nowrap",
-        fontFamily: "'Noto Sans Mono', monospace",
-        backgroundColor: "#FBFCFE",
       }}
     >
       {props.log.map((log) => (
         <>
           {ansiToJson(log, { remove_empty: true }).map((entry, index) => (
-              <Text
-                key={`log-${index}`}
-                style={{
-                  color: entry.fg ? `rgb(${entry.fg})` : "inherit",
-                  backgroundColor: entry.bg ? `rgb(${entry.bg})` : "inherit",
-                  display: "inline",
-                  fontSize: "0.8rem",
-                  fontFamily: "inherit",
-                }}
-              >
-                {entry.content}
-              </Text>
-            ))}
+            <Text
+              key={`log-${index}`}
+              c={entry.fg ? `rgb(${entry.fg})` : "inherit"}
+              bg={entry.bg ? `rgb(${entry.bg})` : "inherit"}
+              display="inline"
+              size="0.8rem"
+              ff="inherit"
+            >
+              {entry.content}
+            </Text>
+          ))}
           {log.length > 0 && <br />}
+        </>
       ))}
     </Paper>
   );

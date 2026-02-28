@@ -17,7 +17,7 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
   return (
     <Paper
       withBorder
-      bdrs="0"
+      radius={0}
       ref={scrollRef}
       px="0.5rem"
       w="100%"

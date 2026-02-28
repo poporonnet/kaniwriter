@@ -27,7 +27,7 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
       maw="calc(min(100vw, 100dvw) - 20rem)"
       ta="left"
       ff="'Noto Sans Mono', monospace"
-      bg={theme.colors.neutral[0]}
+      bg="neutral.0"
       style={{
         borderColor: theme.colors.neutral[3],
         overflow: "auto",

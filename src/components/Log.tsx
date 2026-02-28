@@ -1,9 +1,10 @@
-import { Sheet, Typography } from "@mui/joy";
+import { Paper, Text, useMantineTheme } from "@mantine/core";
 import { ansiToJson } from "anser";
 import { useEffect, useRef } from "react";
 
 export const Log = (props: { log: string[]; autoScroll: boolean }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const theme = useMantineTheme();
 
   useEffect(() => {
     if (!props.autoScroll) return;
@@ -14,43 +15,43 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
   });
 
   return (
-    <Sheet
-      variant="outlined"
+    <Paper
+      withBorder
+      radius={0}
       ref={scrollRef}
-      sx={{
-        px: "0.5rem",
-        boxSizing: "border-box",
-        width: "100%",
-        textAlign: "left",
-        height: "20rem",
-        minHeight: "12.5rem",
-        minWidth: "inherit",
-        maxWidth: "calc(min(100vw, 100dvw) - 20rem)",
+      px="0.5rem"
+      w="100%"
+      h="20rem"
+      mih="12.5rem"
+      miw="inherit"
+      maw="calc(min(100vw, 100dvw) - 20rem)"
+      ta="left"
+      ff="'Noto Sans Mono', monospace"
+      bg="neutral.0"
+      style={{
+        borderColor: theme.colors.neutral[3],
         overflow: "auto",
-        flexGrow: "1",
+        flexGrow: 1,
         whiteSpace: "nowrap",
-        fontFamily: "'Noto Sans Mono', monospace",
       }}
     >
       {props.log.map((log) => (
         <>
           {ansiToJson(log, { remove_empty: true }).map((entry, index) => (
-            <Typography
-              sx={{
-                color: entry.fg ? `rgb(${entry.fg})` : "inherit",
-                backgroundColor: entry.bg ? `rgb(${entry.bg})` : "inherit",
-                display: "inline",
-                fontSize: "0.8rem",
-                fontFamily: "inherit",
-              }}
+            <Text
               key={`log-${index}`}
+              c={entry.fg ? `rgb(${entry.fg})` : "inherit"}
+              bg={entry.bg ? `rgb(${entry.bg})` : "inherit"}
+              display="inline"
+              size="0.8rem"
+              ff="inherit"
             >
               {entry.content}
-            </Typography>
+            </Text>
           ))}
           {log.length > 0 && <br />}
         </>
       ))}
-    </Sheet>
+    </Paper>
   );
 };

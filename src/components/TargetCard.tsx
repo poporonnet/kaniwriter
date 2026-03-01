@@ -1,4 +1,4 @@
-import { Box, Radio, Text } from "@mantine/core";
+import { Radio, Text, ThemeIcon, Image } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { MdCheckCircle as CheckCircleIcon } from "react-icons/md";
 
@@ -18,60 +18,65 @@ export const TargetCard = (props: TargetCardProps) => {
       onClick={() => {
         props.setOpen(false);
       }}
-      style={{
-        position: "relative",
-        display: "flex",
+      pos="relative"
+      display="flex"
+      px="2rem"
+      py="0.75rem"
+      m="0.5rem"
+      bd={isChecked ? "3px solid primary.5" : "1px solid neutral.3"}
+      radius="md"
+      style={(theme) => ({
         alignItems: "center",
         flexDirection: "column",
         gap: "0.75rem",
-        padding: "0.75rem 2rem",
-        margin: "0.5rem",
-        borderRadius: "var(--mantine-radius-md)",
-        border: isChecked
-          ? "3px solid var(--mantine-color-blue-filled)"
-          : "1px solid var(--mantine-color-default-border)",
-        boxShadow: isChecked
-          ? "0 4px 16px rgba(0, 0, 0, 0.18)"
-          : "0 2px 8px rgba(0, 0, 0, 0.12)",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
         cursor: "pointer",
         transition: "box-shadow 0.2s, border 0.2s",
-        backgroundColor: "var(--mantine-color-body)",
-      }}
+        backgroundColor: `${theme.colors.neutral[1]}`,
+      })}
       onMouseEnter={(e) => {
         if (!isChecked)
-          e.currentTarget.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.18)";
+          e.currentTarget.animate(
+            {
+              boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
+            },
+            { duration: 200, fill: "forwards" },
+          );
       }}
       onMouseLeave={(e) => {
         if (!isChecked)
-          e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.12)";
+          e.currentTarget.animate(
+            {
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+            },
+            { duration: 200, fill: "forwards" },
+          );
       }}
     >
       {isChecked && (
-        <Box
+        <ThemeIcon
+          pos="absolute"
+          top="calc(-0.4rem - 2px)"
+          right="calc(-0.4rem - 2px)"
+          bd={0}
+          variant="transparent"
+          c="primary.5"
+          bg="neutral.0"
+          radius="100%"
+          display="block"
+          size={24}
           style={{
-            position: "absolute",
-            top: "-0.4rem",
-            right: "-0.4rem",
-            backgroundColor: "white",
-            borderRadius: "50%",
             zIndex: 2,
-            display: "flex",
-            color: "var(--mantine-color-blue-filled)",
           }}
         >
           <CheckCircleIcon size={24} />
-        </Box>
+        </ThemeIcon>
       )}
 
-      <Text>{props.title}</Text>
-      <img
-        src={props.image}
-        alt={props.title}
-        style={{
-          aspectRatio: "1/1",
-          width: "5.5rem",
-        }}
-      />
+      <Text component="label" htmlFor={props.title}>
+        {props.title}
+      </Text>
+      <Image src={props.image} alt={props.title} h="5.5rem" w="5.5rem" />
     </Radio.Card>
   );
 };

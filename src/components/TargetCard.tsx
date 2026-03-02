@@ -1,4 +1,4 @@
-import { Radio, Text, ThemeIcon, Image } from "@mantine/core";
+import { Image, Radio, Text, ThemeIcon } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { MdCheckCircle as CheckCircleIcon } from "react-icons/md";
 
@@ -42,7 +42,7 @@ export const TargetCard = (props: TargetCardProps) => {
             {
               boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
             },
-            { duration: 200, fill: "forwards" },
+            { duration: 200, fill: "forwards" }
           );
       }}
       onMouseLeave={(e) => {
@@ -51,7 +51,7 @@ export const TargetCard = (props: TargetCardProps) => {
             {
               boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
             },
-            { duration: 200, fill: "forwards" },
+            { duration: 200, fill: "forwards" }
           );
       }}
     >

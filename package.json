@@ -29,15 +29,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.4",
-    "@shikijs/langs-precompiled": "^3.0.0",
-    "@shikijs/themes": "^3.0.0",
+    "@shikijs/langs-precompiled": "^4.0.0",
+    "@shikijs/themes": "^4.0.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/w3c-web-serial": "^1.0.6",
     "@vitejs/plugin-react": "^5.0.0",
     "path": "^0.12.7",
-    "shiki": "^3.0.0",
+    "shiki": "^4.0.0",
     "typescript": "^5.0.2",
     "vite": "npm:rolldown-vite@7.3.1"
   },

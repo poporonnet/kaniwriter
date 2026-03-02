@@ -20,8 +20,10 @@ export const TargetCard = (props: TargetCardProps) => {
       }}
       pos="relative"
       display="flex"
+      w="fit-content"
       px="2rem"
-      py="0.75rem"
+      pt="1.5rem"
+      pb="0.75rem"
       m="0.5rem"
       bd={isChecked ? "3px solid primary.5" : "1px solid neutral.3"}
       radius="md"

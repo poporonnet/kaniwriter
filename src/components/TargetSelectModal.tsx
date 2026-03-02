@@ -1,4 +1,4 @@
-import { Group, Modal, Radio } from "@mantine/core";
+import { CloseButton, Group, Modal, Radio } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";
@@ -23,15 +23,23 @@ export const TargetSelectModal = ({
       opened={open}
       onClose={() => setOpen(false)}
       title={t("書き込みターゲットを選択してください")}
-      size="auto"
       overlayProps={{
-        backgroundOpacity: 0.2,
+        backgroundOpacity: 0.25,
         blur: 8,
       }}
+      closeButtonProps={{
+        icon: <CloseButton size="1.9rem" />,
+        c: "neutral.5",
+        m: 0.5,
+      }}
       centered
+      size="fit-content"
+      radius="md"
+      bg="neutral.5"
       styles={{
         title: {
           width: "100%",
+          height: "1.5rem",
           textAlign: "center",
         },
       }}
@@ -41,9 +49,11 @@ export const TargetSelectModal = ({
         onChange={(event) => {
           onChangeTarget(event as Target);
         }}
+        mah="min(75vh, 40rem)"
         variant="horizontal"
+        p="8px"
       >
-        <Group gap="xl" p="xs" align="stretch" justify="center" wrap="nowrap">
+        <Group gap="sm" align="stretch" justify="center" wrap="wrap">
           {targets.map((value) => (
             <TargetCard
               key={value.title}

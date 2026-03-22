@@ -1,4 +1,4 @@
-import { ColorPaletteProp } from "@mui/joy";
+import { MantineColor } from "@mantine/core";
 import {
   MdCheckCircleOutline as CheckCircleOutlineIcon,
   MdErrorOutline as ErrorOutlineIcon,
@@ -6,7 +6,7 @@ import {
   MdOutlineWarningAmber as WarningAmberOutlineIcon,
 } from "react-icons/md";
 
-export const NotificationIcon = ({ type }: { type: ColorPaletteProp }) => {
+export const NotificationIcon = ({ type }: { type: MantineColor }) => {
   switch (type) {
     case "success":
       return <CheckCircleOutlineIcon />;

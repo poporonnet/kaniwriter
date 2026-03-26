@@ -1,4 +1,4 @@
-import { Modal, Stack, Text } from "@mantine/core";
+import { Modal, ModalClose, Sheet, Typography } from "@mui/joy";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,22 +11,30 @@ export const UnsupportedBrowserModal = ({
 }: UnsupportedBrowserModalProps) => {
   const [open, setOpen] = useState(defaultOpen);
   const [t] = useTranslation();
-
   return (
     <Modal
-      opened={open}
+      open={open}
       onClose={() => setOpen(false)}
-      centered
-      size="xl"
-      w="min(90vw, 60rem)"
-      radius="0.5rem"
-      title={t("このブラウザはサポートされていません")}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "90%",
+        minWidth: "500px",
+        m: "auto",
+        maxWidth: "60rem",
+      }}
     >
-      <Stack gap="xs">
-        <Text size="sm" style={{ whiteSpace: "pre-line" }}>
+      <Sheet variant="outlined" sx={{ borderRadius: "0.5rem" }}>
+        <Typography level="h4" m={1} alignItems="center">
+          {t("このブラウザはサポートされていません")}
+        </Typography>
+        <ModalClose variant="plain" sx={{ m: 0.5 }} />
+
+        <Typography fontSize="sm" m="0.5rem" whiteSpace="pre-line">
           {t("対応するブラウザを使ってください")}
-        </Text>
-      </Stack>
+        </Typography>
+      </Sheet>
     </Modal>
   );
 };

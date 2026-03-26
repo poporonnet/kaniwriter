@@ -108,7 +108,7 @@ export const App = () => (
   <CssVarsProvider theme={theme}>
     <CssBaseline />
     <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
-      <Notifications />
+      <Notifications limit={1} />
       <IconContext.Provider value={{ size: "1.5rem" }}>
         <Layout>
           <Home />

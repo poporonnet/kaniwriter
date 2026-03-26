@@ -17,10 +17,6 @@ export const useNotify = () => {
       color: notification.type,
       autoClose: notification.autoClose ?? false,
       withBorder: true,
-      // icon:
-      //   notification.type && notification.type !== "neutral" ? (
-      //     <NotificationIcon type={notification.type} />
-      //   ) : undefined,
     });
   }, []);
 };

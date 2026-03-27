@@ -1,8 +1,7 @@
-import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
-import { useHighlighter } from "hooks/useHighlighter";
-import { useEffect, useState } from "react";
+import { CodeHighlight } from "@mantine/code-highlight";
+import { Button, Card, Title } from "@mantine/core";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MdFileCopy as FileCopyIcon } from "react-icons/md";
 
 interface CodeProps {
   sourceCode: string;
@@ -10,110 +9,45 @@ interface CodeProps {
 }
 
 export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
-  const [html, setHtml] = useState<string>("");
   // 送信したmruby/cのソースコードを表示するかどうか
   const [isOpen, setIsOpen] = useState(false);
   const [t] = useTranslation();
-  const highlighter = useHighlighter();
-
-  const handleCopy = () => {
-    if (!sourceCode) return;
-    navigator.clipboard.writeText(sourceCode);
-    setShowCopied(true);
-  };
-
-  // ソースコードをシンタックスハイライト付きのHTMLに変換
-  useEffect(() => {
-    if (!highlighter) return;
-    const html = highlighter.codeToHtml(sourceCode, {
-      lang: "ruby",
-      theme: "github-light",
-    });
-    setHtml(html);
-  }, [sourceCode, highlighter]);
-  const [showCopied, setShowCopied] = useState(false);
 
   return (
-    <Box
-      sx={{
-        minWidth: "41rem",
-        maxWidth: "65rem",
-        width: "100%",
-        mb: isOpen ? "2rem" : "0",
-      }}
+    <Card
+      miw="41rem"
+      maw="65rem"
+      w="100%"
+      mb={isOpen ? "2rem" : "0"}
+      radius={isOpen ? "1rem" : "1rem 1rem 0 0"}
+      withBorder
     >
-      <Card
-        sx={{
-          borderRadius: isOpen ? "1rem" : "1rem 1rem 0 0",
-        }}
+      <Button
+        variant="subtle"
+        onClick={() => setIsOpen(!isOpen)}
+        h="2rem"
+        bg={disable ? "transparent" : ""}
+        disabled={disable}
+        pt={6}
+        pb={6}
+        m={isOpen ? "0 0 1rem 0" : "0"}
       >
-        <Button
-          variant="plain"
-          onClick={() => setIsOpen(!isOpen)}
-          sx={{
-            height: "2rem",
-          }}
-          disabled={disable}
-        >
-          <Typography
-            sx={{
-              color: "inherit",
-            }}
-          >
-            {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
-          </Typography>
-        </Button>
+        <Title c="inherit" order={5}>
+          {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
+        </Title>
+      </Button>
 
-        {isOpen && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              maxHeight: "30rem",
-              overflow: "auto",
-            }}
-          >
-            <IconButton
-              onClick={() => handleCopy()}
-              disabled={!sourceCode}
-              color="primary"
-              sx={{
-                position: "absolute",
-                right: "2.5rem",
-                "&:hover": {
-                  backgroundColor: "rgba(0, 0, 0, 0.04)",
-                },
-              }}
-              variant="plain"
-            >
-              <FileCopyIcon />
-              <Snackbar
-                open={showCopied}
-                onClose={() => setShowCopied(false)}
-                autoHideDuration={2000}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                sx={{
-                  position: "absolute",
-                  top: "2rem",
-                  minWidth: "fit-content",
-                  whiteSpace: "nowrap",
-                  py: "0.5rem",
-                }}
-              >
-                {t("コピーしました")}
-              </Snackbar>
-            </IconButton>
-
-            <div
-              style={{
-                width: "100%",
-                overflowX: "scroll",
-              }}
-              dangerouslySetInnerHTML={{ __html: html }}
-            ></div>
-          </Box>
-        )}
-      </Card>
-    </Box>
+      {isOpen && (
+        <CodeHighlight
+          code={sourceCode}
+          language="ruby"
+          w="100%"
+          mah="30rem"
+          style={{ overflow: "auto" }}
+          copiedLabel={t("コピーしました")}
+          copyLabel={t("コピーする")}
+        />
+      )}
+    </Card>
   );
 };

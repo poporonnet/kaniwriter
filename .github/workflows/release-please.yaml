@@ -15,7 +15,7 @@ jobs:
     environment:
       name: Release
     steps:
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@v3
         id: release-token
         with:
           app-id: ${{ vars.RELEASE_APP_ID }}

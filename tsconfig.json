@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["node", "react", "react-dom", "w3c-web-serial"],
     "module": "ESNext",
     "skipLibCheck": true,
     "incremental": true,

@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.10.1](https://github.com/poporonnet/kaniwriter/compare/v1.10.0...v1.10.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* RP2040のキーワードの変更 ([#1100](https://github.com/poporonnet/kaniwriter/issues/1100)) ([a939145](https://github.com/poporonnet/kaniwriter/commit/a939145a180930a0b7999e51da979404362134bf))
+
+## [1.10.0](https://github.com/poporonnet/kaniwriter/compare/v1.9.0...v1.10.0) (2026-01-06)
+
+
+### Features
+
+* 書き込みターゲットにRP2040を追加 ([#1012](https://github.com/poporonnet/kaniwriter/issues/1012)) ([c85a253](https://github.com/poporonnet/kaniwriter/commit/c85a253d16ed10920017d6d0aedd78044b80bd82))
+
 ## [1.9.0](https://github.com/poporonnet/kaniwriter/compare/v1.8.1...v1.9.0) (2025-12-25)
 
 

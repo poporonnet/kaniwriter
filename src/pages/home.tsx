@@ -11,7 +11,7 @@ import { useQuery } from "hooks/useQuery";
 import { useTarget } from "hooks/useTarget";
 import { Target } from "libs/mrbwrite/controller";
 import { serialMiddleware } from "libs/mrbwrite/middleware";
-import { esp32, MrbwriteProfile, rboard } from "libs/mrbwrite/profile";
+import { esp32, MrbwriteProfile, rboard, rp2040 } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -29,6 +29,8 @@ export const Home = () => {
         return esp32;
       case "RBoard":
         return rboard;
+      case "RP2040":
+        return rp2040;
     }
   }, []);
   const [TargetSelector, { target }] = useTarget((target) =>

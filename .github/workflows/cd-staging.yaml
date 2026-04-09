@@ -36,6 +36,8 @@ jobs:
             git checkout main
             git pull
 
+            git checkout ${{ github.ref }}
+
             mise install
             mise prune --yes
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/poporonnet/kaniwriter/compare/v1.10.1...v1.11.0) (2026-04-09)
+
+
+### Features
+
+* ソースコードを表示した際に自動で画面内までスクロールされるように変更 ([#1169](https://github.com/poporonnet/kaniwriter/issues/1169)) ([60c0134](https://github.com/poporonnet/kaniwriter/commit/60c01343d0345d2401c6282f2760ef1bd42b9e0d))
+
 ## [1.10.1](https://github.com/poporonnet/kaniwriter/compare/v1.10.0...v1.10.1) (2026-02-26)
 
 

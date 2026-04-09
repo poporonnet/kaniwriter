@@ -1,6 +1,6 @@
 import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdFileCopy as FileCopyIcon } from "react-icons/md";
 

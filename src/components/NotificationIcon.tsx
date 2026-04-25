@@ -1,23 +1,31 @@
-import { Box } from "@mantine/core";
+import { Box, MantineColor } from "@mantine/core";
 import {
   MdOutlineCheckCircle as CheckCircleOutlineIcon,
   MdOutlineError as ErrorOutlineIcon,
   MdOutlineInfo as InfoOutlineIcon,
-  MdOutlineCircleNotifications as NeutralOutlineIcon,
   MdOutlineWarningAmber as WarningAmberOutlineIcon,
 } from "react-icons/md";
-import type { NotificationColors } from "src/types/notification";
+import {
+  NOTIFICATION_COLORS,
+  type NotificationColors,
+} from "types/notification";
 
 const iconMap: Record<NotificationColors, React.ElementType> = {
   success: CheckCircleOutlineIcon,
   danger: ErrorOutlineIcon,
   warning: WarningAmberOutlineIcon,
   primary: InfoOutlineIcon,
-  neutral: NeutralOutlineIcon,
 };
 
-export const NotificationIcon = ({ type }: { type: NotificationColors }) => {
-  const Icon = iconMap[type];
+export const NotificationIcon = ({ type }: { type: MantineColor }) => {
+  const isNotificationColor = (type: string): type is NotificationColors =>
+    (NOTIFICATION_COLORS as readonly string[]).includes(type);
+
+  if (!isNotificationColor(type)) return <Box size={"1.25rem"} />;
+
+  const Icon = iconMap[type as NotificationColors];
+  if (!Icon) return <Box size={"1.25rem"} />;
+
   return (
     <Box display="flex">
       <Icon

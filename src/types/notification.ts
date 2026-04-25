@@ -1,13 +1,16 @@
-export type NotificationColors =
-  | "primary"
-  | "neutral"
-  | "danger"
-  | "success"
-  | "warning";
+import { MantineColor } from "@mantine/core";
+
+export const NOTIFICATION_COLORS = [
+  "success",
+  "danger",
+  "warning",
+  "primary",
+] as const;
+export type NotificationColors = (typeof NOTIFICATION_COLORS)[number];
 
 export type Notification = {
   title: string;
   message: string;
-  type: NotificationColors;
+  type: MantineColor;
   autoClose?: number | boolean;
 };

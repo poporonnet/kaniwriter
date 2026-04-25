@@ -16,9 +16,8 @@ const iconMap: Record<NotificationColors, React.ElementType> = {
   neutral: NeutralOutlineIcon,
 };
 
-export const NotificationIcon = ({ type }: { type?: NotificationColors }) => {
-  const Icon = type ? iconMap[type] : null;
-  if (!Icon) return <></>;
+export const NotificationIcon = ({ type }: { type: NotificationColors }) => {
+  const Icon = iconMap[type];
   return (
     <Box display="flex">
       <Icon

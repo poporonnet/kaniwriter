@@ -3,8 +3,8 @@ import {
   MdOutlineCheckCircle as CheckCircleOutlineIcon,
   MdOutlineError as ErrorOutlineIcon,
   MdOutlineInfo as InfoOutlineIcon,
-  MdOutlineWarningAmber as WarningAmberOutlineIcon,
   MdOutlineCircleNotifications as NeutralOutlineIcon,
+  MdOutlineWarningAmber as WarningAmberOutlineIcon,
 } from "react-icons/md";
 import type { NotificationColors } from "src/types/notification";
 

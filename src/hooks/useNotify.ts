@@ -1,6 +1,6 @@
 import { notifications } from "@mantine/notifications";
-import { createElement, useCallback } from "react";
 import { NotificationIcon } from "components/NotificationIcon";
+import { createElement, useCallback } from "react";
 import type { Notification } from "src/types/notification";
 
 // Joy UI の各セマンティックカラーは Mantine テーマの同名カラーと同じパレットを参照している

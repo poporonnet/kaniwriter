@@ -4,13 +4,14 @@ import {
   createTheme,
   MantineProvider,
 } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
-import { NotificationProvider } from "components/NotificationProvider";
 import { Home } from "pages/home";
 import { IconContext } from "react-icons";
 import { Layout } from "./layouts/layout";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
 const theme = extendTheme({
   fontFamily: {
@@ -107,12 +108,17 @@ export const App = () => (
   <CssVarsProvider theme={theme}>
     <CssBaseline />
     <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
+      <Notifications
+        limit={1}
+        style={{
+          "--notifications-container-width": "22rem",
+          "--notifications-container-height": "0rem",
+        }}
+      />
       <IconContext.Provider value={{ size: "1.5rem" }}>
-        <NotificationProvider>
-          <Layout>
-            <Home />
-          </Layout>
-        </NotificationProvider>
+        <Layout>
+          <Home />
+        </Layout>
       </IconContext.Provider>
     </MantineProvider>
   </CssVarsProvider>

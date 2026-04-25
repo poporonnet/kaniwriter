@@ -1,4 +1,4 @@
-import { Box, MantineColor } from "@mantine/core";
+import { Box } from "@mantine/core";
 import {
   MdOutlineCheckCircle as CheckCircleOutlineIcon,
   MdOutlineError as ErrorOutlineIcon,
@@ -17,7 +17,7 @@ const iconMap: Record<NotificationColors, React.ElementType> = {
   primary: InfoOutlineIcon,
 };
 
-export const NotificationIcon = ({ type }: { type: MantineColor }) => {
+export const NotificationIcon = ({ type }: { type: NotificationColors }) => {
   const isNotificationColor = (type: string): type is NotificationColors =>
     (NOTIFICATION_COLORS as readonly string[]).includes(type);
 

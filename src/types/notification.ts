@@ -1,5 +1,3 @@
-import { MantineColor } from "@mantine/core";
-
 export const NOTIFICATION_COLORS = [
   "success",
   "danger",
@@ -11,6 +9,6 @@ export type NotificationColors = (typeof NOTIFICATION_COLORS)[number];
 export type Notification = {
   title: string;
   message: string;
-  type: MantineColor;
+  type: NotificationColors;
   autoClose?: number | boolean;
 };

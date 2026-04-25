@@ -25,6 +25,7 @@ export const useNotify = () => {
         root: {
           borderColor: `var(--mantine-color-${notification.type}-5)`,
           boxShadow: "none",
+          width: "22rem",
         },
       },
     });

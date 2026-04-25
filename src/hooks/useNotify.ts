@@ -18,7 +18,7 @@ export const useNotify = () => {
     notifications.show({
       title: notification.title,
       message: notification.message,
-      color: `${notification.type}.5`, // sucess.5, danger.5
+      color: `${notification.type}.5`, // success.5, danger.5
       autoClose: notification.autoClose ?? false,
       withBorder: true,
       styles: {

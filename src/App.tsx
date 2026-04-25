@@ -110,7 +110,10 @@ export const App = () => (
     <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
       <Notifications
         limit={1}
-        style={{ "--notifications-container-width": "22rem" }}
+        style={{
+          "--notifications-container-width": "22rem",
+          "--notifications-container-height": "0rem",
+        }}
       />
       <IconContext.Provider value={{ size: "1.5rem" }}>
         <Layout>

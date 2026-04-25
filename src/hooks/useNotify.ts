@@ -21,6 +21,12 @@ export const useNotify = () => {
       color: `${notification.type}.5`, // sucess.5, danger.5
       autoClose: notification.autoClose ?? false,
       withBorder: true,
+      styles: {
+        root: {
+          borderColor: `var(--mantine-color-${notification.type}-5)`,
+          boxShadow: "none",
+        },
+      },
     });
   }, []);
 };

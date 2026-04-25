@@ -1,6 +1,6 @@
 import { notifications } from "@mantine/notifications";
 import { NotificationIcon } from "components/NotificationIcon";
-import { createElement, useCallback } from "react";
+import { useCallback } from "react";
 import type { Notification } from "src/types/notification";
 
 // Joy UI の各セマンティックカラーは Mantine テーマの同名カラーと同じパレットを参照している
@@ -14,7 +14,7 @@ export const useNotify = () => {
       color: `${notification.type}.5`, // success.5, danger.5
       autoClose: notification.autoClose ?? false,
       withBorder: true,
-      icon: createElement(NotificationIcon, { type: notification.type }),
+      icon: <NotificationIcon type={notification.type} />,
       styles: {
         root: {
           borderColor: `var(--mantine-color-${notification.type}-3)`,

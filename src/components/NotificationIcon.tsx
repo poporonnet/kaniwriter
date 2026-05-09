@@ -15,8 +15,7 @@ const iconMap: Record<NotificationColor, React.ElementType> = {
 };
 
 export const NotificationIcon = ({ type }: { type: NotificationColor }) => {
-  const Icon = iconMap[type as NotificationColor];
-  if (!Icon) return <Box size={"1.25rem"} />;
+  const Icon = iconMap[type];
 
   return (
     <Box display="flex">

@@ -5,25 +5,17 @@ import {
   MdOutlineInfo as InfoOutlineIcon,
   MdOutlineWarningAmber as WarningAmberOutlineIcon,
 } from "react-icons/md";
-import {
-  NOTIFICATION_COLORS,
-  type NotificationColors,
-} from "types/notification";
+import { type NotificationColor } from "types/notification";
 
-const iconMap: Record<NotificationColors, React.ElementType> = {
+const iconMap: Record<NotificationColor, React.ElementType> = {
   success: CheckCircleOutlineIcon,
   danger: ErrorOutlineIcon,
   warning: WarningAmberOutlineIcon,
   primary: InfoOutlineIcon,
 };
 
-export const NotificationIcon = ({ type }: { type: NotificationColors }) => {
-  const isNotificationColor = (type: string): type is NotificationColors =>
-    (NOTIFICATION_COLORS as readonly string[]).includes(type);
-
-  if (!isNotificationColor(type)) return <Box size={"1.25rem"} />;
-
-  const Icon = iconMap[type as NotificationColors];
+export const NotificationIcon = ({ type }: { type: NotificationColor }) => {
+  const Icon = iconMap[type as NotificationColor];
   if (!Icon) return <Box size={"1.25rem"} />;
 
   return (

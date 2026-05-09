@@ -1,14 +1,8 @@
-export const NOTIFICATION_COLORS = [
-  "success",
-  "danger",
-  "warning",
-  "primary",
-] as const;
-export type NotificationColors = (typeof NOTIFICATION_COLORS)[number];
+export type NotificationColor = "success" | "danger" | "warning" | "primary";
 
 export type Notification = {
   title: string;
   message: string;
-  type: NotificationColors;
+  type: NotificationColor;
   autoClose?: number | boolean;
 };

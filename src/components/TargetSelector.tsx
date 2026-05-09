@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/joy";
+import { Box, Button, Group, Image, Text, ThemeIcon } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -30,60 +30,65 @@ export const TargetSelector = ({
 }) => {
   const [t] = useTranslation();
   const [open, setOpen] = React.useState(false);
-
   return (
     <Box
-      sx={{
-        width: "100%",
+      w="100%"
+      bdrs="0.5rem"
+      style={{
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        borderRadius: "0.5rem",
-        transition: "box-shadow 0.2s",
-        "&:hover": {
-          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
-        },
       }}
     >
       <Button
-        color={target ? "primary" : "neutral"}
-        variant="outlined"
+        color={target ? "primary.3" : "neutral.3"}
+        variant="outline"
         onClick={() => setOpen(true)}
         fullWidth
-        sx={{
-          justifyContent: "space-between",
-          gap: target ? 1.5 : 0,
-          p: 1.25,
-          height: "3.5rem",
-          fontWeight: 700,
-          display: "flex",
-          alignItems: "center",
+        h="3.5rem"
+        px="xs"
+        bdrs="6px"
+        styles={{
+          label: {
+            width: "100%",
+            justifyContent: "space-between",
+          },
         }}
       >
         {target ? (
           <>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <img
+            <Group>
+              <Image
                 src={targets.find((t) => t.title === target)?.image}
                 alt={target}
-                style={{
-                  width: "2.25rem",
-                  height: "2.25rem",
-                  borderRadius: "0.25rem",
-                  marginRight: "1rem",
-                }}
+                w="2.25rem"
+                h="2.25rem"
+                bdrs="0.25rem"
               />
-              <Typography level="title-md">{target}</Typography>
-            </Box>
-            <DeveloperBoardIcon />
+              <Text fz="md" c="neutral.8">
+                {target}
+              </Text>
+            </Group>
+            <ThemeIcon
+              variant="transparent"
+              c="primary.5"
+              bd="none"
+              size="1.5rem"
+            >
+              <DeveloperBoardIcon />
+            </ThemeIcon>
           </>
         ) : (
           <>
-            {t("書き込みターゲットを選択")}
-            <NorthWestIcon />
+            <Text fz="sm" c="neutral.7">
+              {t("書き込みターゲットを選択")}
+            </Text>
+            <ThemeIcon
+              variant="transparent"
+              c="neutral.7"
+              bd="none"
+              size="1.5rem"
+            >
+              <NorthWestIcon />
+            </ThemeIcon>
           </>
         )}
       </Button>

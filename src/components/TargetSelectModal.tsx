@@ -29,7 +29,7 @@ export const TargetSelectModal = ({
         blur: 8,
       }}
       closeButtonProps={{
-        icon: <CloseButton size="1.9rem" m={0.5}/>,
+        icon: <CloseButton size="1.9rem" m={0.5} />,
         c: "neutral.5",
         m: 4,
       }}

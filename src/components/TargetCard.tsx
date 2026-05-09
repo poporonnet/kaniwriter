@@ -39,18 +39,18 @@ export const TargetCard = (props: TargetCardProps) => {
       })}
       onMouseEnter={(e) => {
         e.currentTarget.animate(
-            {
-              boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
-            },
-            { duration: 200, fill: "forwards" }
-          );
+          {
+            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
+          },
+          { duration: 200, fill: "forwards" }
+        );
       }}
       onMouseLeave={(e) => {
         e.currentTarget.animate(
-            {
-              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-            },
-            { duration: 200, fill: "forwards" }
+          {
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+          },
+          { duration: 200, fill: "forwards" }
         );
       }}
     >

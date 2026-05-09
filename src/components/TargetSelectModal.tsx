@@ -25,21 +25,23 @@ export const TargetSelectModal = ({
       title={t("書き込みターゲットを選択してください")}
       overlayProps={{
         backgroundOpacity: 0.25,
+        color: "natural.7",
         blur: 8,
       }}
       closeButtonProps={{
-        icon: <CloseButton size="1.9rem" />,
+        icon: <CloseButton size="1.9rem" m={0.5}/>,
         c: "neutral.5",
-        m: 0.5,
+        m: 4,
       }}
       centered
       size="fit-content"
       radius="md"
-      bg="neutral.5"
+      bg="neutral.1"
       styles={{
         title: {
           width: "100%",
           height: "1.5rem",
+          lineHeight: "1.5rem",
           textAlign: "center",
         },
       }}
@@ -53,7 +55,7 @@ export const TargetSelectModal = ({
         variant="horizontal"
         p="8px"
       >
-        <Group gap="sm" align="stretch" justify="center" wrap="wrap">
+        <Group gap="sm" align="stretch" justify="center">
           {targets.map((value) => (
             <TargetCard
               key={value.title}

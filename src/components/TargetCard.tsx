@@ -15,6 +15,7 @@ export const TargetCard = (props: TargetCardProps) => {
   return (
     <Radio.Card
       value={props.title}
+      id={props.title}
       onClick={() => {
         props.setOpen(false);
       }}
@@ -26,19 +27,18 @@ export const TargetCard = (props: TargetCardProps) => {
       pb="0.75rem"
       m="0.5rem"
       bd={isChecked ? "3px solid primary.5" : "1px solid neutral.3"}
+      bg="neutral.0"
       radius="md"
-      style={(theme) => ({
+      style={() => ({
         alignItems: "center",
         flexDirection: "column",
         gap: "0.75rem",
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
         cursor: "pointer",
         transition: "box-shadow 0.2s, border 0.2s",
-        backgroundColor: `${theme.colors.neutral[1]}`,
       })}
       onMouseEnter={(e) => {
-        if (!isChecked)
-          e.currentTarget.animate(
+        e.currentTarget.animate(
             {
               boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
             },
@@ -46,32 +46,27 @@ export const TargetCard = (props: TargetCardProps) => {
           );
       }}
       onMouseLeave={(e) => {
-        if (!isChecked)
-          e.currentTarget.animate(
+        e.currentTarget.animate(
             {
               boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
             },
             { duration: 200, fill: "forwards" }
-          );
+        );
       }}
     >
       {isChecked && (
         <ThemeIcon
           pos="absolute"
-          top="calc(-0.4rem - 2px)"
-          right="calc(-0.4rem - 2px)"
+          top="calc(-0.4rem - 1.5px)"
+          right="calc(-0.4rem - 1.5px)"
           bd={0}
-          variant="transparent"
           c="primary.5"
           bg="neutral.0"
           radius="100%"
           display="block"
           size={24}
-          style={{
-            zIndex: 2,
-          }}
         >
-          <CheckCircleIcon size={24} />
+          <CheckCircleIcon />
         </ThemeIcon>
       )}
 

@@ -29,7 +29,7 @@ export const NotificationIcon = ({ type }: { type: NotificationColors }) => {
   return (
     <Box display="flex">
       <Icon
-        size={"1.25rem"}
+        size="1.25rem"
         style={{
           background: "transparent",
           margin: 0,

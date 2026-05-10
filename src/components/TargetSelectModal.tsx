@@ -1,4 +1,10 @@
-import { CloseButton, Group, Modal, Radio } from "@mantine/core";
+import {
+  CloseButton,
+  Group,
+  Modal,
+  Radio,
+  useMantineTheme,
+} from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";
@@ -18,6 +24,8 @@ export const TargetSelectModal = ({
   onChangeTarget,
 }: TargetSelectModalProps) => {
   const [t] = useTranslation();
+  const theme = useMantineTheme();
+
   return (
     <Modal
       opened={open}
@@ -37,8 +45,6 @@ export const TargetSelectModal = ({
       size="fit-content"
       radius="md"
       bg="neutral.1"
-      styles={{
-        title: {
       padding="md"
       styles={{
         inner: {

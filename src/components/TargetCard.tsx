@@ -29,14 +29,14 @@ export const TargetCard = (props: TargetCardProps) => {
       bd={isChecked ? "3px solid primary.5" : "1px solid neutral.3"}
       bg="neutral.0"
       radius="md"
-      style={() => ({
+      style={{
         alignItems: "center",
         flexDirection: "column",
         gap: "0.75rem",
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
         cursor: "pointer",
         transition: "box-shadow 0.2s, border 0.2s",
-      })}
+      }}
       onMouseEnter={(e) => {
         e.currentTarget.animate(
           {

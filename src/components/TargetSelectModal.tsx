@@ -39,10 +39,27 @@ export const TargetSelectModal = ({
       bg="neutral.1"
       styles={{
         title: {
+      padding="md"
+      styles={{
+        inner: {
+          padding: "8px",
+        },
+        header: {
+          background: "none",
+          padding: "1rem",
+          paddingBottom: "0.75rem",
+          minHeight: "unset",
+        },
+        title: {
           width: "100%",
           height: "1.5rem",
-          lineHeight: "1.5rem",
           textAlign: "center",
+          lineHeight: "1.5rem",
+        },
+        content: {
+          background: theme.colors.neutral[0],
+          border: "solid 0.8px",
+          borderColor: theme.colors.neutral[3],
         },
       }}
     >

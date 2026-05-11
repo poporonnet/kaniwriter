@@ -19,6 +19,7 @@ jobs:
       - name: deploy
         uses: appleboy/ssh-action@v1
         env:
+          CI: true
           DEPLOY_TARGET_DIR: ${{ secrets.DEPLOY_TARGET_DIR }}
           DEPLOY_BUILD_OUTPUT_DIR: ${{ secrets.DEPLOY_BUILD_OUTPUT_DIR }}
         with:

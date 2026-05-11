@@ -27,7 +27,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SECRET_KEY }}
-          envs: DEPLOY_TARGET_DIR,DEPLOY_BUILD_OUTPUT_DIR
+          envs: CI,DEPLOY_TARGET_DIR,DEPLOY_BUILD_OUTPUT_DIR
           script: |
             source ~/.bash_profile
 

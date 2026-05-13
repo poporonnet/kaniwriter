@@ -167,7 +167,7 @@ export const useMrbwrite = <Target>(
         title: "検証に成功しました。",
         message: "プログラムは正しく書き込まれています。",
         type: "success",
-        autoCloseMs: 5000,
+        autoClose: 5000,
       });
       return res;
     },

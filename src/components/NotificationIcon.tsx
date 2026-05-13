@@ -1,22 +1,31 @@
-import { ColorPaletteProp } from "@mui/joy";
+import { Box } from "@mantine/core";
 import {
-  MdCheckCircleOutline as CheckCircleOutlineIcon,
-  MdErrorOutline as ErrorOutlineIcon,
+  MdOutlineCheckCircle as CheckCircleOutlineIcon,
+  MdOutlineError as ErrorOutlineIcon,
   MdOutlineInfo as InfoOutlineIcon,
   MdOutlineWarningAmber as WarningAmberOutlineIcon,
 } from "react-icons/md";
+import { type NotificationColor } from "types/notification";
 
-export const NotificationIcon = ({ type }: { type: ColorPaletteProp }) => {
-  switch (type) {
-    case "success":
-      return <CheckCircleOutlineIcon />;
-    case "danger":
-      return <ErrorOutlineIcon />;
-    case "warning":
-      return <WarningAmberOutlineIcon />;
-    case "primary":
-      return <InfoOutlineIcon />;
-    default:
-      return <></>;
-  }
+const iconMap: Record<NotificationColor, React.ElementType> = {
+  success: CheckCircleOutlineIcon,
+  danger: ErrorOutlineIcon,
+  warning: WarningAmberOutlineIcon,
+  primary: InfoOutlineIcon,
+};
+
+export const NotificationIcon = ({ type }: { type: NotificationColor }) => {
+  const Icon = iconMap[type];
+
+  return (
+    <Box display="flex">
+      <Icon
+        size="1.25rem"
+        style={{
+          background: "transparent",
+          margin: 0,
+        }}
+      />
+    </Box>
+  );
 };

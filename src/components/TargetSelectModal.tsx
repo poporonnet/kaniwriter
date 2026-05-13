@@ -1,4 +1,4 @@
-import { Modal, ModalClose, RadioGroup, Sheet, Typography } from "@mui/joy";
+import { CloseIcon, Group, Modal, Radio, useMantineTheme } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { useTranslation } from "react-i18next";
 import { TargetCard } from "./TargetCard";
@@ -18,46 +18,67 @@ export const TargetSelectModal = ({
   onChangeTarget,
 }: TargetSelectModalProps) => {
   const [t] = useTranslation();
+  const theme = useMantineTheme();
+
   return (
     <Modal
+      opened={open}
       onClose={() => setOpen(false)}
-      open={open}
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        p: 1,
+      title={t("書き込みターゲットを選択してください")}
+      overlayProps={{
+        backgroundOpacity: 0.25,
+        color: theme.colors.neutral[7],
+        blur: 8,
+      }}
+      closeButtonProps={{
+        icon: <CloseIcon size="calc(2rem / 1.5)" />,
+        c: "neutral.5",
+        size: "2rem",
+        m: "4px",
+        px: "4px",
+        pos: "absolute",
+        top: "10px",
+        right: "10px",
+      }}
+      centered
+      size="fit-content"
+      radius="md"
+      bg="neutral.1"
+      padding="md"
+      styles={{
+        inner: {
+          padding: "8px",
+        },
+        header: {
+          background: "none",
+          padding: "1rem",
+          paddingBottom: "0.75rem",
+          minHeight: "unset",
+        },
+        title: {
+          width: "100%",
+          height: "1.5rem",
+          textAlign: "center",
+          lineHeight: "1.5rem",
+        },
+        content: {
+          background: theme.colors.neutral[0],
+          border: "solid 0.8px",
+          borderColor: theme.colors.neutral[3],
+          boxShadow: "none",
+        },
       }}
     >
-      <Sheet
-        variant="outlined"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1.5,
-          p: 2,
-          width: "fit-content",
-          maxHeight: "min(75vh, 40rem)",
-          borderRadius: "0.5rem",
+      <Radio.Group
+        value={target}
+        onChange={(event) => {
+          onChangeTarget(event as Target);
         }}
+        mah="min(75vh, 40rem)"
+        variant="horizontal"
+        p="8px"
       >
-        <ModalClose variant="plain" sx={{ m: 0.5 }} />
-        <Typography sx={{ textAlign: "center" }}>
-          {t("書き込みターゲットを選択してください")}
-        </Typography>
-        <RadioGroup
-          orientation="horizontal"
-          value={target}
-          onChange={(event) => onChangeTarget(event.target.value as Target)}
-          sx={{
-            gap: 1.5,
-            p: 1,
-            width: "auto",
-            alignItems: "stretch",
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
+        <Group gap="sm" align="stretch" justify="center">
           {targets.map((value) => (
             <TargetCard
               key={value.title}
@@ -67,8 +88,8 @@ export const TargetSelectModal = ({
               setOpen={setOpen}
             />
           ))}
-        </RadioGroup>
-      </Sheet>
+        </Group>
+      </Radio.Group>
     </Modal>
   );
 };

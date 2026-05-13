@@ -54,6 +54,7 @@ export default defineConfig(({ mode }) => {
         routes: path.resolve(__dirname, "src/routes"),
         libs: path.resolve(__dirname, "src/libs"),
         hooks: path.resolve(__dirname, "src/hooks"),
+        types: path.resolve(__dirname, "src/types"),
       },
     },
   };

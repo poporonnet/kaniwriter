@@ -42,7 +42,6 @@ export const useNotify = () => {
           closeButton: {
             color: theme.colors[notification.type][5],
             width: "1.5rem",
-            backgroundColor: theme.colors[notification.type][5],
           },
         },
       });

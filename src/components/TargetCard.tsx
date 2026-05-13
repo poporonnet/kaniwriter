@@ -57,14 +57,13 @@ export const TargetCard = (props: TargetCardProps) => {
       {isChecked && (
         <ThemeIcon
           pos="absolute"
-          top="calc(-0.4rem - 1.5px)"
-          right="calc(-0.4rem - 1.5px)"
+          top="-0.5rem"
+          right="-0.5rem"
           bd={0}
           c="primary.5"
           bg="neutral.0"
           radius="100%"
-          display="block"
-          size={24}
+          size="1.5rem"
         >
           <CheckCircleIcon />
         </ThemeIcon>

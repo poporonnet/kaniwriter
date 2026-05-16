@@ -5,13 +5,9 @@ import {
 } from "shiki";
 
 async function createShikiHighlighter() {
-  const [{ default: rubyLangs }, { default: githubLight }] = await Promise.all([
-    import("@shikijs/langs-precompiled/ruby"),
-    import("@shikijs/themes/github-light"),
-  ]);
   return createHighlighterCore({
-    langs: rubyLangs,
-    themes: [githubLight],
+    langs: [import("@shikijs/langs-precompiled/ruby")],
+    themes: [import("@shikijs/themes/github-light")],
     engine: createJavaScriptRegexEngine(),
   });
 }

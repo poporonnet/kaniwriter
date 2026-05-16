@@ -11,7 +11,12 @@ import { Home } from "pages/home";
 import { IconContext } from "react-icons";
 import { Layout } from "./layouts/layout";
 import "@mantine/core/styles.css";
+import "@mantine/code-highlight/styles.css";
 import "@mantine/notifications/styles.css";
+import {
+  CodeHighlightAdapterProvider,
+  createShikiAdapter,
+} from "@mantine/code-highlight";
 
 const theme = extendTheme({
   fontFamily: {
@@ -104,16 +109,34 @@ const resolver: CSSVariablesResolver = (theme) => ({
   },
 });
 
+async function loadShiki() {
+  const { createHighlighterCore } = await import("shiki/core");
+  const { createJavaScriptRegexEngine } = await import(
+    "shiki/engine/javascript"
+  );
+  const ruby = await import("@shikijs/langs-precompiled/ruby");
+
+  const shiki = await createHighlighterCore({
+    langs: [ruby.default],
+    themes: [],
+    engine: createJavaScriptRegexEngine(),
+  });
+  return shiki;
+}
+const shikiAdapter = createShikiAdapter(loadShiki);
+
 export const App = () => (
   <CssVarsProvider theme={theme}>
     <CssBaseline />
     <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
-      <Notifications limit={1} containerWidth="22rem" />
-      <IconContext.Provider value={{ size: "1.5rem" }}>
-        <Layout>
-          <Home />
-        </Layout>
-      </IconContext.Provider>
+      <CodeHighlightAdapterProvider adapter={shikiAdapter}>
+        <Notifications limit={1} containerWidth="22rem" />
+        <IconContext.Provider value={{ size: "1.5rem" }}>
+          <Layout>
+            <Home />
+          </Layout>
+        </IconContext.Provider>
+      </CodeHighlightAdapterProvider>
     </MantineProvider>
   </CssVarsProvider>
 );

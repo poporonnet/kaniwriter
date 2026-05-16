@@ -1,8 +1,5 @@
 import "../i18n/i18n";
-import {
-  CodeHighlightAdapterProvider,
-  createShikiAdapter,
-} from "@mantine/code-highlight";
+import { CodeHighlightAdapterProvider } from "@mantine/code-highlight";
 import {
   CSSVariablesResolver,
   createTheme,
@@ -13,11 +10,8 @@ import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import { Home } from "pages/home";
 import { IconContext } from "react-icons";
-import {
-  createHighlighterCore,
-  createJavaScriptRegexEngine,
-} from "shiki";
 import { Layout } from "./layouts/layout";
+import { shikiAdapter } from "./utils/shikiAdapter";
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
 import "@mantine/notifications/styles.css";
@@ -112,20 +106,6 @@ const resolver: CSSVariablesResolver = (theme) => ({
     "--text-lh": "1.5", // TODO: Mantineへの移行が完了したらデフォルトに戻す
   },
 });
-
-async function loadShiki() {
-  const [{ default: rubyLangs }, { default: githubLight }] = await Promise.all([
-    import("@shikijs/langs-precompiled/ruby"),
-    import("@shikijs/themes/github-light"),
-  ]);
-  return createHighlighterCore({
-    langs: rubyLangs,
-    themes: [githubLight],
-    engine: createJavaScriptRegexEngine(),
-  });
-}
-
-const shikiAdapter = createShikiAdapter(loadShiki);
 
 export const App = () => (
   <CssVarsProvider theme={theme}>

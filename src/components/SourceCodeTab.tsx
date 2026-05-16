@@ -57,7 +57,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
               language="ruby"
               w="100%"
               styles={{
-                code: { padding: 0 },
+                code: { padding: 0, lineHeight: "24px" },
               }}
               withCopyButton={false}
             />

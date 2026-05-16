@@ -1,5 +1,6 @@
 import { CodeHighlight } from "@mantine/code-highlight";
-import { Button, Card, Title, useMantineTheme } from "@mantine/core";
+import { Box, Button, Card, Title, useMantineTheme } from "@mantine/core";
+import { SourceCodeCopyButton } from "components/SourceCodeCopyButton";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,10 +11,10 @@ interface CodeProps {
 
 export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
   const scroll = useCallback((instance: HTMLDivElement | null) => {
-  instance?.scrollIntoView({
-    behavior: "smooth",
-    block: "end",
-  });
+    instance?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   }, []);
   // 送信したmruby/cのソースコードを表示するかどうか
   const [isOpen, setIsOpen] = useState(false);
@@ -46,23 +47,22 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
       </Button>
 
       {isOpen && (
-        <CodeHighlight
-          ref={scroll}
-          code={sourceCode}
-          background="#FFF"
-          codeColorScheme="github-light"
-          language="ruby"
-          w="100%"
-          mt="lg"
-          mah="30rem"
-          style={{
-            overflow: "auto",
-          }}
-          styles={{
-            code: { padding: 0 }
-          }}
-          withCopyButton={false}
-        />
+        <Box ref={scroll} pos="relative" mt="lg" w="100%">
+          <SourceCodeCopyButton text={sourceCode} />
+          <Box mah="30rem" style={{ overflow: "auto" }}>
+            <CodeHighlight
+              code={sourceCode}
+              background="#FFF"
+              codeColorScheme="github-light"
+              language="ruby"
+              w="100%"
+              styles={{
+                code: { padding: 0 },
+              }}
+              withCopyButton={false}
+            />
+          </Box>
+        </Box>
       )}
     </Card>
   );

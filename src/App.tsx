@@ -1,5 +1,9 @@
 import "../i18n/i18n";
 import {
+  CodeHighlightAdapterProvider,
+  createShikiAdapter,
+} from "@mantine/code-highlight";
+import {
   CSSVariablesResolver,
   createTheme,
   MantineProvider,
@@ -9,14 +13,14 @@ import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import { Home } from "pages/home";
 import { IconContext } from "react-icons";
+import {
+  createHighlighterCore,
+  createJavaScriptRegexEngine,
+} from "shiki";
 import { Layout } from "./layouts/layout";
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
 import "@mantine/notifications/styles.css";
-import {
-  CodeHighlightAdapterProvider,
-  createShikiAdapter,
-} from "@mantine/code-highlight";
 
 const theme = extendTheme({
   fontFamily: {
@@ -110,19 +114,17 @@ const resolver: CSSVariablesResolver = (theme) => ({
 });
 
 async function loadShiki() {
-  const { createHighlighterCore } = await import("shiki/core");
-  const { createJavaScriptRegexEngine } = await import(
-    "shiki/engine/javascript"
-  );
-  const ruby = await import("@shikijs/langs-precompiled/ruby");
-
-  const shiki = await createHighlighterCore({
-    langs: [ruby.default],
-    themes: ["github-light"],
+  const [{ default: rubyLangs }, { default: githubLight }] = await Promise.all([
+    import("@shikijs/langs-precompiled/ruby"),
+    import("@shikijs/themes/github-light"),
+  ]);
+  return createHighlighterCore({
+    langs: rubyLangs,
+    themes: [githubLight],
     engine: createJavaScriptRegexEngine(),
   });
-  return shiki;
 }
+
 const shikiAdapter = createShikiAdapter(loadShiki);
 
 export const App = () => (

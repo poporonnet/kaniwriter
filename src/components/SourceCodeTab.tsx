@@ -63,7 +63,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
                 padding: 0,
                 lineHeight: "24px",
                 fontSize: "16px",
-                backgroundColor: "#fff"
+                backgroundColor: "#fff",
               },
             }}
             ff='"Noto Sans Mono", monospace'

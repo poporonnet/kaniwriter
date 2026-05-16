@@ -1,8 +1,5 @@
 import { createShikiAdapter } from "@mantine/code-highlight";
-import {
-  createHighlighterCore,
-  createJavaScriptRegexEngine,
-} from "shiki";
+import { createHighlighterCore, createJavaScriptRegexEngine } from "shiki";
 
 async function createShikiHighlighter() {
   return createHighlighterCore({

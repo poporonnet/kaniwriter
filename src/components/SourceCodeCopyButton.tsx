@@ -62,7 +62,7 @@ export const SourceCodeCopyButton = ({ text }: SourceCodeCopyButtonProps) => {
           styles={{
             root: {
               "&:hover": {
-                backgroundColor: theme.colors.neutral[0]
+                backgroundColor: theme.colors.neutral[0],
               },
             },
           }}

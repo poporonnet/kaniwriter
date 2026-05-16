@@ -1,4 +1,4 @@
-import { FormLabel, Radio, radioClasses, Sheet, Typography } from "@mui/joy";
+import { Image, Radio, Text, ThemeIcon } from "@mantine/core";
 import { Target } from "libs/mrbwrite/controller";
 import { MdCheckCircle as CheckCircleIcon } from "react-icons/md";
 
@@ -10,62 +10,69 @@ type TargetCardProps = {
 };
 
 export const TargetCard = (props: TargetCardProps) => {
+  const isChecked = props.target === props.title;
+
   return (
-    <Sheet
-      variant="outlined"
-      key={props.title}
-      sx={{
-        borderRadius: "md",
-        display: "flex",
+    <Radio.Card
+      value={props.title}
+      id={props.title}
+      onClick={() => {
+        props.setOpen(false);
+      }}
+      pos="relative"
+      display="flex"
+      w="fit-content"
+      px="2rem"
+      pt="1.5rem"
+      pb="0.75rem"
+      m="0.5rem"
+      bd={isChecked ? "3px solid primary.5" : "1px solid neutral.3"}
+      bg="neutral.0"
+      radius="md"
+      style={{
         alignItems: "center",
         flexDirection: "column",
         gap: "0.75rem",
-        p: "0.75rem 2rem",
-        m: 1,
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-        transition: "box-shadow 0.2s",
-        "&:hover": {
-          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
-        },
-        [`& .${radioClasses.checked}`]: {
-          [`& .${radioClasses.action}`]: {
-            border: "3px solid",
-            borderColor: "primary.500",
+        cursor: "pointer",
+        transition: "box-shadow 0.2s, border 0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.animate(
+          {
+            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.18)",
           },
-        },
-        [`& .${radioClasses.radio}`]: {
-          display: "contents",
-          "& > svg": {
-            zIndex: 2,
-            position: "absolute",
-            bgcolor: "white",
-            top: "-0.4rem",
-            right: "-0.4rem",
-            borderRadius: "50%",
+          { duration: 200, fill: "forwards" }
+        );
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.animate(
+          {
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
           },
-        },
+          { duration: 200, fill: "forwards" }
+        );
       }}
     >
-      <Radio
-        overlay
-        id={props.title}
-        value={props.title}
-        checkedIcon={<CheckCircleIcon />}
-        onClick={() => {
-          props.setOpen(false);
-        }}
-      />
-      <FormLabel htmlFor={props.title}>
-        <Typography>{props.title}</Typography>
-      </FormLabel>
-      <img
-        src={props.image}
-        alt={props.title}
-        style={{
-          aspectRatio: "1/1",
-          width: "5.5rem",
-        }}
-      />
-    </Sheet>
+      {isChecked && (
+        <ThemeIcon
+          pos="absolute"
+          top="-0.5rem"
+          right="-0.5rem"
+          bd={0}
+          c="primary.5"
+          bg="neutral.0"
+          radius="100%"
+          size="1.5rem"
+        >
+          <CheckCircleIcon />
+        </ThemeIcon>
+      )}
+
+      <Text component="label" htmlFor={props.title}>
+        {props.title}
+      </Text>
+      <Image src={props.image} alt={props.title} h="5.5rem" w="5.5rem" />
+    </Radio.Card>
   );
 };

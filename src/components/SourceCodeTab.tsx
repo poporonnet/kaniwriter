@@ -29,11 +29,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
       w="100%"
       mb={isOpen ? "2rem" : "0"}
       withBorder
-      bdrs={
-        isOpen
-          ? "16px"
-          : "16px 16px 0px 0px"
-      }
+      bdrs={isOpen ? "16px" : "16px 16px 0px 0px"}
       bd="1px solid #cdd7e1"
     >
       <Button
@@ -65,7 +61,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
                 code: {
                   padding: 0,
                   lineHeight: "24px",
-                  fontSize: "16px"
+                  fontSize: "16px",
                 },
               }}
               ff='"Noto Sans Mono", monospace'

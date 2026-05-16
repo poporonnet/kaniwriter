@@ -16,13 +16,3 @@ body {
   margin: 0;
   padding: 0;
 }
-
-code {
-  font-family: "Noto Sans Mono", monospace;
-}
-
-/* shiki.jsのフォント指定 */
-.mantine-CodeHighlight-code {
-  font-family: "Noto Sans Mono", monospace;
-  font-size: medium;
-}

@@ -62,8 +62,13 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
               language="ruby"
               w="100%"
               styles={{
-                code: { padding: 0, lineHeight: "24px" },
+                code: {
+                  padding: 0,
+                  lineHeight: "24px",
+                  fontSize: "16px"
+                },
               }}
+              ff='"Noto Sans Mono", monospace'
               withCopyButton={false}
             />
           </Box>

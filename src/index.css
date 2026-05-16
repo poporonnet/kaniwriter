@@ -16,3 +16,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
+code {
+  font-family: "Noto Sans Mono", monospace;
+}

@@ -28,8 +28,13 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
       maw="65rem"
       w="100%"
       mb={isOpen ? "2rem" : "0"}
-      radius={isOpen ? "1rem" : "1rem 1rem 0 0"}
       withBorder
+      bdrs={
+        isOpen
+          ? "16px"
+          : "16px 16px 0px 0px"
+      }
+      bd="1px solid #cdd7e1"
     >
       <Button
         variant="subtle"

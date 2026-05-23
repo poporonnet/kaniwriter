@@ -39,7 +39,6 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
         disabled={disable}
         pt={6}
         pb={6}
-        m={isOpen ? "0 0 1rem 0" : "0"}
       >
         <Title c="primary.5" size="1rem">
           {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
@@ -49,27 +48,28 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
       {isOpen && (
         <Box ref={scroll} pos="relative" mt="lg" w="100%">
           <SourceCodeCopyButton text={sourceCode} />
-          <CodeHighlight
-            code={sourceCode}
-            background="neutral.0"
-            codeColorScheme="github-light"
-            language="ruby"
-            w="100%"
-            styles={{
-              scrollarea: {
-                maxHeight: "30rem",
-              },
-              code: {
-                padding: 0,
-                lineHeight: "24px",
-                fontSize: "16px",
-                backgroundColor: "#fff",
-              },
-            }}
-            ff='"Noto Sans Mono", monospace'
-            fz="16px"
-            withCopyButton={false}
-          />
+          <Box mah="24rem" style={{ overflow: "auto" }}>
+            <CodeHighlight
+              code={sourceCode}
+              background="neutral.0"
+              codeColorScheme="github-light"
+              language="ruby"
+              w="100%"
+              styles={{
+                code: {
+                  padding: 0,
+                  lineHeight: "24px",
+                  fontSize: "16px",
+                  backgroundColor: "#fff",
+                  overflow: "auto",
+                  marginTop: "1rem",
+                },
+              }}
+              ff='"Noto Sans Mono", monospace'
+              fz="16px"
+              withCopyButton={false}
+            />
+          </Box>
         </Box>
       )}
     </Card>

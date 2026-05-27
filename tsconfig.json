@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["node", "react", "react-dom", "w3c-web-serial"],
     "module": "ESNext",
     "skipLibCheck": true,
     "incremental": true,
@@ -20,14 +21,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": ".",
     "paths": {
-      "components/*": ["src/components/*"],
-      "css/*": ["src/css/*"],
-      "pages/*": ["src/pages/*"],
-      "routes/*": ["src/routes/*"],
-      "libs/*": ["src/libs/*"],
-      "hooks/*": ["src/hooks/*"]
+      "components/*": ["./src/components/*"],
+      "css/*": ["./src/css/*"],
+      "pages/*": ["./src/pages/*"],
+      "routes/*": ["./src/routes/*"],
+      "libs/*": ["./src/libs/*"],
+      "hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src"],

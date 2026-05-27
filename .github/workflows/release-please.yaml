@@ -15,12 +15,12 @@ jobs:
     environment:
       name: Release
     steps:
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@v3
         id: release-token
         with:
           app-id: ${{ vars.RELEASE_APP_ID }}
           private-key: ${{ secrets.RELEASE_APP_SECRET_KEY }}
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release-please
         with:
           token: ${{ steps.release-token.outputs.token }}

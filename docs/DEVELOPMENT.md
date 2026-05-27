@@ -48,17 +48,11 @@ pnpm dev
 
 #### 通常のビルド
 
-> [!WARNING]
-> デプロイ先がドメイン直下 (`/`) である環境用です。パスを切る場合は個別のビルド設定が必要です。
-
 ```bash
 pnpm build
 ```
 
 #### ceres環境用ビルド
-
-> [!WARNING]
-> ceres環境用です。デプロイ先は`/writer`です。
 
 ```bash
 pnpm build:ceres

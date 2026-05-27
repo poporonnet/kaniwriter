@@ -19,13 +19,14 @@ jobs:
       - name: deploy
         uses: appleboy/ssh-action@v1
         env:
+          CI: true
           DEPLOY_TARGET_DIR: ${{ secrets.DEPLOY_TARGET_DIR }}
           DEPLOY_BUILD_OUTPUT_DIR: ${{ secrets.DEPLOY_BUILD_OUTPUT_DIR }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SECRET_KEY }}
-          envs: DEPLOY_TARGET_DIR,DEPLOY_BUILD_OUTPUT_DIR
+          envs: CI,DEPLOY_TARGET_DIR,DEPLOY_BUILD_OUTPUT_DIR
           script: |
             source ~/.bash_profile
 
@@ -35,11 +36,13 @@ jobs:
             git checkout main
             git pull
 
+            git checkout ${{ github.ref }}
+
             mise install
             mise prune --yes
 
             pnpm install --frozen-lockfile
-            pnpm build:ceres-production
+            pnpm build:ceres
 
             find ${DEPLOY_TARGET_DIR} -type f -print0 | xargs -0 rm -rf
             cp -r ${DEPLOY_BUILD_OUTPUT_DIR}/* ${DEPLOY_TARGET_DIR}

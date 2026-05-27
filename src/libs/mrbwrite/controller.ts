@@ -4,7 +4,7 @@ import { Failure, Result, Success } from "../result";
 import { MrbwriteMiddleware } from "./middleware";
 import { MrbwriteProfile } from "./profile";
 
-export const targets = ["ESP32", "RBoard"] as const;
+export const targets = ["ESP32", "RBoard", "RP2040"] as const;
 export type Target = (typeof targets)[number];
 
 type Logger = (message: string, ...params: unknown[]) => void;

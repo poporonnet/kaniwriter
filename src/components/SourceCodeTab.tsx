@@ -1,6 +1,6 @@
 import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
 import { useHighlighter } from "hooks/useHighlighter";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdFileCopy as FileCopyIcon } from "react-icons/md";
 
@@ -22,6 +22,12 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
     setShowCopied(true);
   };
 
+  const scroll = useCallback((instance: HTMLDivElement | null) => {
+    instance?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }, []);
   // ソースコードをシンタックスハイライト付きのHTMLに変換
   useEffect(() => {
     if (!highlighter) return;
@@ -72,6 +78,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
               maxHeight: "30rem",
               overflow: "auto",
             }}
+            ref={scroll}
           >
             <IconButton
               onClick={() => handleCopy()}

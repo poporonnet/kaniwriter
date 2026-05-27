@@ -157,6 +157,20 @@ export class MrbwriteSerialMiddleware
 
     return Success.value(undefined);
   }
+
+  // FIXME: 仮実装
+  async sendBreak(): Promise<void> {
+    const port = this.port;
+    if (!port) {
+      return;
+    }
+
+    await port.setSignals({ break: true });
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    if (port.connected) {
+      await port.setSignals({ break: false });
+    }
+  }
 }
 
 export const serialMiddleware = new MrbwriteSerialMiddleware(navigator.serial);

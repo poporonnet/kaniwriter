@@ -87,6 +87,12 @@ export class MrbwriteController<
     }
 
     this.handleText(`\r\n${green("> connection established.")}\r\n`);
+
+    // FIXME: 仮実装なので直す
+    if (this.middleware.getProfile()?.name == "RP2040") {
+      await this.sendBreak();
+    }
+
     return Success.value(null);
   }
 
@@ -248,6 +254,11 @@ export class MrbwriteController<
       await this.sendCommand("execute");
     }
     return Success.value(writeRes.value);
+  }
+
+  async sendBreak(): Promise<void> {
+    this.handleText(`\r\n${green("> send break signal.")}\r\n`);
+    await this.middleware.sendBreak?.();
   }
 
   private async sendData(

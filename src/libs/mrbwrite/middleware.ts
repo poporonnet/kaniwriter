@@ -19,6 +19,9 @@ export interface MrbwriteMiddleware<Device> {
   getWritable(): Result<WritableStream<Uint8Array>, Error>;
 
   cancel(): Promise<Result<void, Error>>;
+
+  // FIXME: 仮実装
+  sendBreak?(): Promise<void>;
 }
 
 export { serialMiddleware } from "./middlewares/serial";

@@ -72,13 +72,22 @@ export const Home = () => {
 
     const tryAutoConnect = async () => {
       const ports = await navigator.serial.getPorts();
-      console.log(ports);
-      if (ports.length == 0) return;
+      const port = ports.filter((port) => port.connected).at(0);
+      if (!port) return;
 
-      startConnection(async () => ports[0]);
+      startConnection(async () => port);
     };
-
     tryAutoConnect();
+
+    const onConnect = (event: Event) => {
+      const port = event.target;
+      if (!(port instanceof SerialPort)) return;
+
+      startConnection(async () => port);
+    };
+    navigator.serial.addEventListener("connect", onConnect);
+
+    return () => navigator.serial.removeEventListener("connect", onConnect);
   }, [option.autoConnect, startConnection]);
 
   useEffect(() => {

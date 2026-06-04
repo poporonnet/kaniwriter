@@ -258,7 +258,10 @@ export class MrbwriteController<
 
   async sendBreak(): Promise<void> {
     this.handleText(`\r\n${green("> send break signal.")}\r\n`);
-    await this.middleware.sendBreak?.();
+    const res = await this.middleware.sendBreak?.();
+    if (res?.isFailure()) {
+      console.warn(res.error);
+    }
   }
 
   private async sendData(

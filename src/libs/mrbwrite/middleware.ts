@@ -21,7 +21,7 @@ export interface MrbwriteMiddleware<Device> {
   cancel(): Promise<Result<void, Error>>;
 
   // FIXME: 仮実装
-  sendBreak?(): Promise<void>;
+  sendBreak?(): Promise<Result<void, Error>>;
 }
 
 export { serialMiddleware } from "./middlewares/serial";

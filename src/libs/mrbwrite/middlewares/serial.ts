@@ -159,17 +159,23 @@ export class MrbwriteSerialMiddleware
   }
 
   // FIXME: 仮実装
-  async sendBreak(): Promise<void> {
+  async sendBreak(): Promise<Result<void, Error>> {
     const port = this.port;
     if (!port) {
-      return;
+      return Failure.error("No port.");
     }
 
-    await port.setSignals({ break: true });
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    if (port.connected) {
-      await port.setSignals({ break: false });
+    try {
+      await port.setSignals({ break: true });
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (port.connected) {
+        await port.setSignals({ break: false });
+      }
+    } catch (error) {
+      return Failure.error("Failed to send break signal.", { cause: error });
     }
+
+    return Success.value(undefined);
   }
 }
 

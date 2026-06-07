@@ -1,5 +1,5 @@
-import { OptionList } from "components/OptionList";
 import { ComponentType, useMemo, useState } from "react";
+import { OptionList } from "#/components/OptionList";
 import { useStoreState } from "./useStoreState";
 
 export type Option = {

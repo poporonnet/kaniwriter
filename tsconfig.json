@@ -22,12 +22,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "components/*": ["./src/components/*"],
-      "css/*": ["./src/css/*"],
-      "pages/*": ["./src/pages/*"],
-      "routes/*": ["./src/routes/*"],
-      "libs/*": ["./src/libs/*"],
-      "hooks/*": ["./src/hooks/*"]
+      "#/*": ["./src/*"]
     }
   },
   "include": ["src"],

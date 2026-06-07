@@ -1,4 +1,11 @@
-import { Modal, ModalClose, Sheet, Typography } from "@mui/joy";
+import {
+  CloseButton,
+  Modal,
+  Paper,
+  Text,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,30 +18,51 @@ export const UnsupportedBrowserModal = ({
 }: UnsupportedBrowserModalProps) => {
   const [open, setOpen] = useState(defaultOpen);
   const [t] = useTranslation();
+  const theme = useMantineTheme();
+
   return (
     <Modal
-      open={open}
+      opened={open}
       onClose={() => setOpen(false)}
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "90%",
-        minWidth: "500px",
-        m: "auto",
-        maxWidth: "60rem",
+      centered
+      withCloseButton={false}
+      padding={0}
+      size="70rem"
+      w="100%"
+      maw="calc(100vw - 2rem)"
+      styles={{
+        content: {
+          maxWidth: "calc(100vw - 2rem)",
+          background: "transparent",
+          boxShadow: "none",
+        },
       }}
     >
-      <Sheet variant="outlined" sx={{ borderRadius: "0.5rem" }}>
-        <Typography level="h4" m={1} alignItems="center">
+      <Paper
+        withBorder
+        pos="relative"
+        bg={theme.colors.neutral[0]}
+        style={{
+          borderRadius: "0.5rem",
+          borderColor: theme.colors.neutral[3],
+        }}
+      >
+        <CloseButton
+          variant="subtle"
+          color="gray"
+          onClick={() => setOpen(false)}
+          pos="absolute"
+          top={4}
+          right={4}
+          m="xs"
+        />
+        <Title order={4} m="sm" lh={1.5}>
           {t("このブラウザはサポートされていません")}
-        </Typography>
-        <ModalClose variant="plain" sx={{ m: 0.5 }} />
-
-        <Typography fontSize="sm" m="0.5rem" whiteSpace="pre-line">
+        </Title>
+        <Text fz="sm" m="0.5rem" style={{ whiteSpace: "pre-line" }} lh={1.5}>
           {t("対応するブラウザを使ってください")}
-        </Typography>
-      </Sheet>
+        </Text>
+      </Paper>
     </Modal>
   );
 };

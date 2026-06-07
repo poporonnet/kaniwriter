@@ -1,4 +1,4 @@
-import { Result } from "libs/result";
+import { Result } from "#/libs/result";
 import { MrbwriteProfile } from "./profile";
 
 export interface MrbwriteMiddleware<Device> {

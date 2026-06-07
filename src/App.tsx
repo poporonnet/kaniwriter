@@ -1,9 +1,9 @@
 import "../i18n/i18n";
 import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
-import { NotificationProvider } from "components/NotificationProvider";
-import { Home } from "pages/home";
 import { IconContext } from "react-icons";
+import { NotificationProvider } from "#/components/NotificationProvider";
+import { Home } from "#/pages/home";
 import { Layout } from "./layouts/layout";
 
 const theme = extendTheme({

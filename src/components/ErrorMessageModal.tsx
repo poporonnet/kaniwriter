@@ -1,4 +1,4 @@
-import { Sheet } from "@mui/joy";
+import { Box } from "@mantine/core";
 
 export const ErrorDetailModal = ({
   error,
@@ -12,9 +12,9 @@ export const ErrorDetailModal = ({
   <>
     {isOpen && (
       <>
-        <Sheet
+        <Box
           onClick={() => setIsOpen(false)}
-          sx={{
+          style={{
             top: 0,
             left: 0,
             width: "min(100dvw, 100vw)",
@@ -24,31 +24,32 @@ export const ErrorDetailModal = ({
             zIndex: 3,
           }}
         />
-        <Sheet
-          variant="outlined"
-          sx={{
+        <Box
+          style={{
             textAlign: "left",
-            left: 0,
-            position: "absolute",
-            zIndex: "4",
+            left: "50%",
+            position: "fixed",
+            transform: "translateX(-50%)",
+            zIndex: 4,
             width: "60rem",
             minWidth: "30rem",
             maxWidth: "calc(100vw - 10rem)",
             maxHeight: "30rem",
             overflow: "auto",
             top: "10.5rem",
-            p: "1rem",
+            padding: "1rem",
             borderRadius: "0.3rem",
-            borderColor: "#FFBBBB",
+            border: "1px solid #FFBBBB",
+            background: "white",
             display: "flex",
             flexDirection: "column",
             boxShadow: "0px 3px 10px gray",
           }}
         >
-          {error.split("\n").map((t) => (
-            <code>{t}</code>
+          {error.split("\n").map((t, index) => (
+            <code key={`${index}-${t}`}>{t}</code>
           ))}
-        </Sheet>
+        </Box>
       </>
     )}
   </>

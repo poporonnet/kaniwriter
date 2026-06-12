@@ -1,7 +1,7 @@
 import { Box, Sheet, Typography } from "@mui/joy";
-import { CompileStatus as CompileStatusType } from "hooks/useCompile";
-import { Status as GetVersionsStatus, Version } from "hooks/useVersions";
 import { useTranslation } from "react-i18next";
+import { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
+import { Status as GetVersionsStatus, Version } from "#/hooks/useVersions";
 import { CompilerSelector } from "./CompilerSelector";
 import { CompileStatus } from "./CompileStatus";
 

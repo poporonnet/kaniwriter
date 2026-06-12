@@ -1,4 +1,3 @@
-import { CompilerCard } from "components/CompilerCard";
 import {
   ComponentType,
   useCallback,
@@ -6,6 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { CompilerCard } from "#/components/CompilerCard";
 import { type CompileStatus, useCompile } from "./useCompile";
 import { useVersions, Version } from "./useVersions";
 

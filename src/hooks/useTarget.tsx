@@ -1,7 +1,7 @@
-import { TargetSelector } from "components/TargetSelector";
-import { Target } from "libs/mrbwrite/controller";
-import { isTarget } from "libs/utility";
 import { ComponentType } from "react";
+import { TargetSelector } from "#/components/TargetSelector";
+import { Target } from "#/libs/mrbwrite/controller";
+import { isTarget } from "#/libs/utility";
 import { useStoreState } from "./useStoreState";
 
 type UseTarget = [selector: ComponentType, { target: Target | undefined }];

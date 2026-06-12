@@ -1,19 +1,24 @@
 import { Box, Button } from "@mui/joy";
-import { CommandInput } from "components/CommandInput";
-import { Log } from "components/Log";
-import { SourceCodeTab } from "components/SourceCodeTab";
-import { UnsupportedBrowserModal } from "components/UnsupportedBrowserModal";
-import { useCompiler } from "hooks/useCompiler";
-import { useControlButtons } from "hooks/useControlButtons";
-import { useMrbwrite } from "hooks/useMrbwrite";
-import { useOption } from "hooks/useOption";
-import { useQuery } from "hooks/useQuery";
-import { useTarget } from "hooks/useTarget";
-import { Target } from "libs/mrbwrite/controller";
-import { serialMiddleware } from "libs/mrbwrite/middleware";
-import { esp32, MrbwriteProfile, rboard, rp2040 } from "libs/mrbwrite/profile";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CommandInput } from "#/components/CommandInput";
+import { Log } from "#/components/Log";
+import { SourceCodeTab } from "#/components/SourceCodeTab";
+import { UnsupportedBrowserModal } from "#/components/UnsupportedBrowserModal";
+import { useCompiler } from "#/hooks/useCompiler";
+import { useControlButtons } from "#/hooks/useControlButtons";
+import { useMrbwrite } from "#/hooks/useMrbwrite";
+import { useOption } from "#/hooks/useOption";
+import { useQuery } from "#/hooks/useQuery";
+import { useTarget } from "#/hooks/useTarget";
+import { Target } from "#/libs/mrbwrite/controller";
+import { serialMiddleware } from "#/libs/mrbwrite/middleware";
+import {
+  esp32,
+  MrbwriteProfile,
+  rboard,
+  rp2040,
+} from "#/libs/mrbwrite/profile";
 
 export const Home = () => {
   const { i18n } = useTranslation("ns1");

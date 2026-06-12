@@ -1,4 +1,4 @@
-import { Failure, Result, Success } from "libs/result";
+import { Failure, Result, Success } from "#/libs/result";
 import { MrbwriteMiddleware } from "../middleware";
 import { MrbwriteProfile } from "../profile";
 

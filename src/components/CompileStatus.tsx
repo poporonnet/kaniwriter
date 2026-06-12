@@ -1,11 +1,11 @@
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/joy";
-import { CompileStatus as CompileStatusType } from "hooks/useCompile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   MdCheck as CheckIcon,
   MdErrorOutline as ErrorOutlineIcon,
 } from "react-icons/md";
+import { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
 import { ErrorDetailModal } from "./ErrorMessageModal";
 
 export const CompileStatus = ({

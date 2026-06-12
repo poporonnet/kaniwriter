@@ -1,4 +1,3 @@
-import Base64 from "base64-js";
 import { useCallback, useState } from "react";
 import { Version } from "./useVersions";
 
@@ -57,7 +56,7 @@ export const useCompile = (
       // レスポンスから、送信したmruby/cのソースコードを抽出
       const codeResult = (await codeResponse.json()) as CodeResponse;
       setSourceCode(
-        new TextDecoder().decode(Base64.toByteArray(codeResult.code))
+        new TextDecoder().decode(Uint8Array.fromBase64(codeResult.code))
       );
 
       setStatus({ status: "compile" });
@@ -89,7 +88,7 @@ export const useCompile = (
         return;
       }
 
-      setCode(Base64.toByteArray(compileResult.binary));
+      setCode(Uint8Array.fromBase64(compileResult.binary));
       setStatus({ status: "success" });
     },
     [id, setCode, setSourceCode]

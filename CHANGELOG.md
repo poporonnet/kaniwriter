@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.0](https://github.com/poporonnet/kaniwriter/compare/v1.11.0...v1.12.0) (2026-06-16)
+
+
+### Features
+
+* **experimental:** RP2040 との接続時に Break 信号を送信する機能を実験的に追加 ([#1250](https://github.com/poporonnet/kaniwriter/issues/1250)) ([89faa9e](https://github.com/poporonnet/kaniwriter/commit/89faa9edb157257eebc226b03af7603ca0c30b9b))
+* 自動接続オプションがオンのときに、デバイスを接続すると自動的に通信が開始される機能を追加 ([#1249](https://github.com/poporonnet/kaniwriter/issues/1249)) ([4cb351d](https://github.com/poporonnet/kaniwriter/commit/4cb351d453fbd9259dba2bc5140b5374b783cd6a))
+
 ## [1.11.0](https://github.com/poporonnet/kaniwriter/compare/v1.10.1...v1.11.0) (2026-04-09)
 
 

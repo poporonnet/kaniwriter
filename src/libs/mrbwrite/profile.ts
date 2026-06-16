@@ -1,4 +1,5 @@
 export type MrbwriteProfile = {
+  name: string;
   baudRate: number;
   keyword: {
     enterWriteMode: RegExp;
@@ -12,6 +13,7 @@ const defineProfile = <const P extends MrbwriteProfile>(profile: P): P =>
 // TODO: 将来的にはボードごとに異なるキーワードを使わないようにする;
 
 export const esp32 = defineProfile({
+  name: "ESP32",
   baudRate: 115200,
   keyword: {
     enterWriteMode: /\+OK mruby\/c/,
@@ -20,6 +22,7 @@ export const esp32 = defineProfile({
 });
 
 export const rboard = defineProfile({
+  name: "RBoard",
   baudRate: 19200,
   keyword: {
     enterWriteMode: /\+OK mruby\/c/,
@@ -28,6 +31,7 @@ export const rboard = defineProfile({
 });
 
 export const rp2040 = defineProfile({
+  name: "RP2040",
   baudRate: 19200,
   keyword: {
     enterWriteMode: /\+OK mruby\/c/,

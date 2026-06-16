@@ -157,6 +157,26 @@ export class MrbwriteSerialMiddleware
 
     return Success.value(undefined);
   }
+
+  // FIXME: 仮実装
+  async sendBreak(): Promise<Result<void, Error>> {
+    const port = this.port;
+    if (!port) {
+      return Failure.error("No port.");
+    }
+
+    try {
+      await port.setSignals({ break: true });
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      if (port.connected) {
+        await port.setSignals({ break: false });
+      }
+    } catch (error) {
+      return Failure.error("Failed to send break signal.", { cause: error });
+    }
+
+    return Success.value(undefined);
+  }
 }
 
 export const serialMiddleware = new MrbwriteSerialMiddleware(navigator.serial);

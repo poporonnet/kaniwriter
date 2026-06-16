@@ -22,6 +22,7 @@ export type Method<Middleware extends MrbwriteMiddleware<unknown>> = {
   verify: (
     ...props: Parameters<MrbwriteController<Middleware>["verify"]>
   ) => Promise<Result<void, Error>>;
+  sendBreak: () => Promise<void>;
 };
 
 type UseMrbwrite<Middleware extends MrbwriteMiddleware<unknown>> = {
@@ -174,6 +175,11 @@ export const useMrbwrite = <Target>(
     [connector, notify, notifyError]
   );
 
+  const sendBreak = useCallback(
+    async () => await connector.sendBreak(),
+    [connector.sendBreak]
+  );
+
   const method = useMemo(
     (): Method<Middleware> => ({
       connect,
@@ -184,6 +190,7 @@ export const useMrbwrite = <Target>(
       sendCommand,
       writeCode,
       verify,
+      sendBreak,
     }),
     [
       connect,
@@ -194,6 +201,7 @@ export const useMrbwrite = <Target>(
       sendCommand,
       writeCode,
       verify,
+      sendBreak,
     ]
   );
 

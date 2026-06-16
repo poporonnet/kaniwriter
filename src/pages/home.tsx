@@ -1,4 +1,4 @@
-import { Box } from "@mui/joy";
+import { Box, Button } from "@mui/joy";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CommandInput } from "#/components/CommandInput";
@@ -144,11 +144,32 @@ export const Home = () => {
         >
           <Log log={log} autoScroll={option.autoScroll} />
           <ControlButtons />
-          <CommandInput
-            onSubmit={(command) =>
-              method.sendCommand(command, { force: true, ignoreResponse: true })
-            }
-          />
+          <Box
+            sx={{
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "right",
+            }}
+          >
+            <CommandInput
+              onSubmit={(command) =>
+                method.sendCommand(command, {
+                  force: true,
+                  ignoreResponse: true,
+                })
+              }
+            />
+            {target == "RP2040" && (
+              <Button
+                onClick={() => method.sendBreak()}
+                variant="outlined"
+                color="neutral"
+                size="sm"
+              >
+                Break
+              </Button>
+            )}
+          </Box>
         </Box>
       </Box>
       <SourceCodeTab sourceCode={sourceCode} disable={!id} />

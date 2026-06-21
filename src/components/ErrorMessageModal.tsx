@@ -29,7 +29,12 @@ export const ErrorDetailModal = ({
         mah="30rem"
         p="1rem"
         radius="0.3rem"
-        style={{ zIndex: 201, overflow: "auto", borderColor: "#FFBBBB", transform: "translate(-50%, -50%)" }}
+        style={{
+          zIndex: 201,
+          overflow: "auto",
+          borderColor: "#FFBBBB",
+          transform: "translate(-50%, -50%)",
+        }}
       >
         {error.split("\n").map((t) => (
           <code>{t}</code>

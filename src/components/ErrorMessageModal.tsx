@@ -15,14 +15,14 @@ export const ErrorDetailModal = ({
         fixed
         color="#000"
         backgroundOpacity={0.5}
-        zIndex={200}
+        zIndex="101"
         onClick={() => setIsOpen(false)}
       />
       <Paper
         withBorder
-        pos="fixed"
-        top="50%"
-        left="50%"
+        pos="absolute"
+        top="100%"
+        left={0}
         w="60rem"
         miw="30rem"
         maw="calc(100vw - 10rem)"
@@ -30,14 +30,16 @@ export const ErrorDetailModal = ({
         p="1rem"
         radius="0.3rem"
         style={{
-          zIndex: 201,
+          zIndex: "102",
           overflow: "auto",
           borderColor: "#FFBBBB",
-          transform: "translate(-50%, -50%)",
+          display: "flex",
+          flexDirection: "column",
+          boxShadow: "0px 3px 10px gray",
         }}
       >
         {error.split("\n").map((t) => (
-          <code>{t}</code>
+          <code style={{ textAlign: "left" }}>{t}</code>
         ))}
       </Paper>
     </>

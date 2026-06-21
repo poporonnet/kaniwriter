@@ -22,7 +22,7 @@ export const ErrorDetailModal = ({
         withBorder
         pos="absolute"
         top="100%"
-        left={0}
+        left="0"
         w="60rem"
         miw="30rem"
         maw="calc(100vw - 10rem)"

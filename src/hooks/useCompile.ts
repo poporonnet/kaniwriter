@@ -8,7 +8,7 @@ export type CompileStatus = {
 };
 type Compile = (version: Version) => void;
 type CompileResponse =
-  | { status: "ok"; binary: string } // `200 OK` コンパイル成功
+  | { status: "ok"; binary: string | string[] } // `200 OK` コンパイル成功
   | { status: "error"; error: string } // `200 OK` コンパイル失敗
   | {
       status: "invalid id" | "unknown compiler version";
@@ -16,13 +16,13 @@ type CompileResponse =
     } // `400 Bad Request`
   | { status: "failed to compile"; id: "" }; //`500 Internal Error`
 type CodeResponse = {
-  code: string;
+  code: string | string[];
 };
 
 export const useCompile = (
   id: string | undefined,
-  setCode: (code: Uint8Array) => void,
-  setSourceCode: (sourceCode: string) => void
+  setCode: (code: Uint8Array[]) => void,
+  setSourceCode: (sourceCode: string[]) => void
 ): [status: CompileStatus, compile: Compile] => {
   const [status, setStatus] = useState<CompileStatus>({
     status: "idle",
@@ -55,8 +55,11 @@ export const useCompile = (
 
       // レスポンスから、送信したmruby/cのソースコードを抽出
       const codeResult = (await codeResponse.json()) as CodeResponse;
+      const decoder = new TextDecoder();
       setSourceCode(
-        new TextDecoder().decode(Uint8Array.fromBase64(codeResult.code))
+        [codeResult.code]
+          .flat()
+          .map((code) => decoder.decode(Uint8Array.fromBase64(code)))
       );
 
       setStatus({ status: "compile" });
@@ -88,7 +91,11 @@ export const useCompile = (
         return;
       }
 
-      setCode(Uint8Array.fromBase64(compileResult.binary));
+      setCode(
+        [compileResult.binary]
+          .flat()
+          .map((binary) => Uint8Array.fromBase64(binary))
+      );
       setStatus({ status: "success" });
     },
     [id, setCode, setSourceCode]

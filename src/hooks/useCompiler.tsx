@@ -12,8 +12,8 @@ import { useVersions, Version } from "./useVersions";
 type UseCompiler = [
   card: ComponentType,
   {
-    code: Uint8Array | undefined;
-    sourceCode: string;
+    code: Uint8Array[] | undefined;
+    sourceCode: string[];
     compileStatus: CompileStatus;
   },
 ];
@@ -21,8 +21,8 @@ type UseCompiler = [
 export const useCompiler = (id: string | undefined): UseCompiler => {
   const [version, setVersion] = useState<Version | undefined>();
   const [versions, getVersionsStatus] = useVersions();
-  const [code, setCode] = useState<Uint8Array>();
-  const [sourceCode, setSourceCode] = useState<string>("");
+  const [code, setCode] = useState<Uint8Array[]>();
+  const [sourceCode, setSourceCode] = useState<string[]>([]);
   const [compileStatus, compile] = useCompile(id, setCode, setSourceCode);
 
   const onChangeVersion = useCallback(

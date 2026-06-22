@@ -6,9 +6,13 @@ import { defineConfig, loadEnv } from "vite";
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
 
+  const isSentryEnabled =
+    process.env.NODE_ENV === "production" &&
+    process.env.VITE_SENTRY_ENABLED === "true";
+
   return {
     build: {
-      sourcemap: true,
+      sourcemap: isSentryEnabled,
       rolldownOptions: {
         output: {
           advancedChunks: {
@@ -35,8 +39,8 @@ export default defineConfig(({ mode }) => {
         sourcemaps: {
           filesToDeleteAfterUpload: "dist/**/*.js.map",
         },
-        disable: process.env.NODE_ENV !== "production",
-        silent: process.env.NODE_ENV !== "production",
+        disable: !isSentryEnabled,
+        silent: !isSentryEnabled,
       }),
     ],
     define: {

@@ -34,7 +34,6 @@ export default defineConfig(({ mode }) => {
       react(),
       sentryVitePlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
-        org: "poporon-network",
         project: "kaniwriter",
         sourcemaps: {
           filesToDeleteAfterUpload: "dist/**/*.js.map",

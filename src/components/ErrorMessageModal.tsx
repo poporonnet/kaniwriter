@@ -11,11 +11,7 @@ export const ErrorDetailModal = ({
 }) =>
   isOpen && (
     <>
-      <Overlay
-        fixed
-        backgroundOpacity={0.5}
-        onClick={() => setIsOpen(false)}
-      />
+      <Overlay fixed backgroundOpacity={0.5} onClick={() => setIsOpen(false)} />
       <Paper
         withBorder
         pos="absolute"

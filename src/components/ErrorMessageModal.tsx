@@ -13,9 +13,7 @@ export const ErrorDetailModal = ({
     <>
       <Overlay
         fixed
-        color="#000"
         backgroundOpacity={0.5}
-        zIndex="101"
         onClick={() => setIsOpen(false)}
       />
       <Paper
@@ -29,8 +27,9 @@ export const ErrorDetailModal = ({
         mah="30rem"
         p="1rem"
         radius="0.3rem"
+        ta="left"
         style={{
-          zIndex: "102",
+          zIndex: "var(--mantine-z-index-modal)",
           overflow: "auto",
           borderColor: "#FFBBBB",
           display: "flex",
@@ -38,8 +37,8 @@ export const ErrorDetailModal = ({
           boxShadow: "0px 3px 10px gray",
         }}
       >
-        {error.split("\n").map((t) => (
-          <code style={{ textAlign: "left" }}>{t}</code>
+        {error.split("\n").map((t, i) => (
+          <code key={i}>{t}</code>
         ))}
       </Paper>
     </>

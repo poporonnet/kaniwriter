@@ -219,7 +219,7 @@ export class MrbwriteController<
   }
 
   async writeCode(
-    binary: Uint8Array,
+    binaries: Uint8Array[],
     option?: Partial<{ execute: boolean; autoVerify: boolean }>
   ): Promise<Result<string, Error>> {
     if (!this.middleware.isConnected()) {
@@ -235,16 +235,18 @@ export class MrbwriteController<
     if (clearRes.isFailure()) return clearRes;
 
     this.log("Clear", clearRes);
-    const writeSizeRes = await this.sendCommand(`write ${binary.byteLength}`);
-    if (writeSizeRes.isFailure()) return writeSizeRes;
+    for (const binary of binaries) {
+      const writeSizeRes = await this.sendCommand(`write ${binary.byteLength}`);
+      if (writeSizeRes.isFailure()) return writeSizeRes;
 
-    const writeRes = await this.sendData(binary);
-    if (writeRes.isFailure()) return writeRes;
-    if (writeRes.value.startsWith("-"))
-      return Failure.error("Failed to write.");
+      const writeRes = await this.sendData(binary);
+      if (writeRes.isFailure()) return writeRes;
+      if (writeRes.value.startsWith("-"))
+        return Failure.error("Failed to write.");
+    }
 
     if (option?.autoVerify) {
-      const verifyRes = await this.verify(binary);
+      const verifyRes = await this.verify(binaries[0]); // FIXME: 複数ファイルでの verify をどうするか決める
       if (verifyRes.isFailure()) {
         return Failure.error("Failed to verify.");
       }
@@ -253,7 +255,7 @@ export class MrbwriteController<
     if (option?.execute) {
       await this.sendCommand("execute");
     }
-    return Success.value(writeRes.value);
+    return Success.value("");
   }
 
   async sendBreak(): Promise<void> {

@@ -9,7 +9,7 @@ import { Option } from "./useOption";
 type UseControlButtons = [buttons: ComponentType];
 
 export const useControlButtons = (
-  code: Uint8Array | undefined,
+  code: Uint8Array[] | undefined,
   target: Target | undefined,
   compileStatus: CompileStatus,
   option: Option,
@@ -38,7 +38,7 @@ export const useControlButtons = (
             !mrbwriteController.isWriteMode,
         }}
         verify={{
-          onClick: () => code && method.verify(code),
+          onClick: () => code?.at(0) && method.verify(code[0]),
           disabled:
             compileStatus.status !== "success" ||
             !mrbwriteController.isWriteMode,

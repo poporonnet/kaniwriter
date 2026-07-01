@@ -172,7 +172,7 @@ export const Home = () => {
           </Box>
         </Box>
       </Box>
-      <SourceCodeTab sourceCode={sourceCode} disable={!id} />
+      <SourceCodeTab sourceCode={sourceCode.at(0) ?? ""} disable={!id} />
     </>
   );
 };

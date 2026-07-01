@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.0](https://github.com/poporonnet/kaniwriter/compare/v1.12.0...v1.13.0) (2026-07-01)
+
+
+### Features
+
+* 使用する Sentry の Organization を変更 ([#1297](https://github.com/poporonnet/kaniwriter/issues/1297)) ([d478860](https://github.com/poporonnet/kaniwriter/commit/d47886011cd710e469c24999ef6821cfdb1c6f81))
+* 複数バイナリの書き込みに対応 ([#1300](https://github.com/poporonnet/kaniwriter/issues/1300)) ([7399b2c](https://github.com/poporonnet/kaniwriter/commit/7399b2c3b86efc76df923a4dd73b4a4a8f12241b))
+
 ## [1.12.0](https://github.com/poporonnet/kaniwriter/compare/v1.11.0...v1.12.0) (2026-06-16)
 
 

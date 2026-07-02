@@ -29,7 +29,7 @@ export const UnsupportedBrowserModal = ({
         },
       }}
     >
-      <Title order={4} mt="0.5rem" m="0.5rem" style={{fontWeight: "bold"}}>
+      <Title order={4} fz="1.25rem" mt="0.5rem" m="0.5rem" style={{fontWeight: "bold"}}>
         {t("このブラウザはサポートされていません")}
       </Title>
  
@@ -42,7 +42,7 @@ export const UnsupportedBrowserModal = ({
         m="0.25rem"
       />
 
-      <Text fz="0.8rem" m="0.5rem" style={{ whiteSpace: "pre-line" }}>
+      <Text fz="0.85rem" m="0.5rem" style={{ whiteSpace: "pre-line" }}>
         {t("対応するブラウザを使ってください")}
       </Text>
     </Modal>

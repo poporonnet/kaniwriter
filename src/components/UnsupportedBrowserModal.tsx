@@ -29,10 +29,16 @@ export const UnsupportedBrowserModal = ({
         },
       }}
     >
-      <Title order={4} fz="1.25rem" mt="0.5rem" m="0.5rem" style={{fontWeight: "bold"}}>
+      <Title
+        order={4}
+        fz="1.25rem"
+        mt="0.5rem"
+        m="0.5rem"
+        style={{ fontWeight: "bold" }}
+      >
         {t("このブラウザはサポートされていません")}
       </Title>
- 
+
       <CloseButton
         variant="transparent"
         onClick={() => setOpen(false)}

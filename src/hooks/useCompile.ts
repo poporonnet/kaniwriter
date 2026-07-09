@@ -78,7 +78,7 @@ export const useCompile = (
 
       const compileResult: CompileResponse =
         (await compileResponse.json()) as CompileResponse;
-      if (compileResult.status == "error") {
+      if (compileResult.status === "error") {
         setStatus({
           status: "error",
           errorName: "compile failed",
@@ -86,7 +86,7 @@ export const useCompile = (
         });
         return;
       }
-      if (compileResult.status != "ok") {
+      if (compileResult.status !== "ok") {
         setStatus({ status: "error", errorName: compileResult.status });
         return;
       }

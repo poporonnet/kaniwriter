@@ -159,7 +159,7 @@ export const Home = () => {
                 })
               }
             />
-            {target == "RP2040" && (
+            {target === "RP2040" && (
               <Button
                 onClick={() => method.sendBreak()}
                 variant="outlined"

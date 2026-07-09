@@ -30,7 +30,7 @@ export const CompilerCard = ({
         boxSizing: "border-box",
         borderRadius: "sm",
         borderColor:
-          getVersionsStatus == "error" || compileStatus.status == "error"
+          getVersionsStatus === "error" || compileStatus.status === "error"
             ? "red"
             : "lightgrey",
         display: "flex",
@@ -45,15 +45,15 @@ export const CompilerCard = ({
         <CompilerSelector
           versions={versions.sort()}
           version={version || ""}
-          disabled={getVersionsStatus != "success"}
+          disabled={getVersionsStatus !== "success"}
           onChange={onChangeVersion}
           sx={{ width: "100%" }}
         />
       </Box>
       <CompileStatus
-        status={getVersionsStatus == "error" ? "error" : compileStatus.status}
+        status={getVersionsStatus === "error" ? "error" : compileStatus.status}
         errorName={
-          getVersionsStatus == "error"
+          getVersionsStatus === "error"
             ? "fetching versions failed"
             : compileStatus.errorName
         }

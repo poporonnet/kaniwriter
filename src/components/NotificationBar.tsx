@@ -52,7 +52,7 @@ export const NotificationBar = ({
       sx={{ alignItems: "flex-start", width: "22rem" }}
       autoHideDuration={autoCloseMs}
       onClose={(_, reason) => {
-        if (reason == "clickaway") return;
+        if (reason === "clickaway") return;
         close();
       }}
     >

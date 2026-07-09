@@ -40,7 +40,7 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
   );
 
   useEffect(() => {
-    if (getVersionsStatus != "success") return;
+    if (getVersionsStatus !== "success") return;
     const version =
       localStorage.getItem("compilerVersion") ||
       import.meta.env.VITE_COMPILER_VERSION_FALLBACK;

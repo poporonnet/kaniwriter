@@ -89,7 +89,7 @@ export class MrbwriteController<
     this.handleText(`\r\n${green("> connection established.")}\r\n`);
 
     // FIXME: 仮実装なので直す
-    if (this.middleware.getProfile()?.name == "RP2040") {
+    if (this.middleware.getProfile()?.name === "RP2040") {
       await this.sendBreak();
     }
 
@@ -163,7 +163,7 @@ export class MrbwriteController<
       );
 
       await this.sinkClosed?.catch((reason) => {
-        if (reason == abortReason) return;
+        if (reason === abortReason) return;
 
         this.handleText(`\r\n${red("> port closed unexpectedly.")}\r\n`);
         throw reason;
@@ -407,7 +407,7 @@ export class MrbwriteController<
       for (const idx of [...chunks.map((_, i) => i)]) {
         await writer.ready;
         await writer.write(chunks[idx]);
-        if (idx == chunks.length - 1) break;
+        if (idx === chunks.length - 1) break;
 
         await sleep(waitTimeMs);
       }

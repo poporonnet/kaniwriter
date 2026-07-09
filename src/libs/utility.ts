@@ -2,6 +2,6 @@ import { type Target, targets } from "./mrbwrite/controller";
 
 export const isTarget = (value: unknown): value is Target => {
   return (
-    typeof value == "string" && (targets as readonly string[]).includes(value)
+    typeof value === "string" && (targets as readonly string[]).includes(value)
   );
 };

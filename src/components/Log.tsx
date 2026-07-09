@@ -43,6 +43,7 @@ export const Log = (props: { log: string[]; autoScroll: boolean }) => {
                 fontSize: "0.8rem",
                 fontFamily: "inherit",
               }}
+              // biome-ignore lint/suspicious/noArrayIndexKey: 適切なkeyが設定できない
               key={`log-${index}`}
             >
               {entry.content}

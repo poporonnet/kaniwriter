@@ -17,6 +17,6 @@ export const NotificationIcon = ({ type }: { type: ColorPaletteProp }) => {
     case "primary":
       return <InfoOutlineIcon />;
     default:
-      return <></>;
+      return undefined;
   }
 };

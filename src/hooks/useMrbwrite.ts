@@ -40,8 +40,7 @@ export const useMrbwrite = <Target>(
   const [t] = useTranslation("ns1");
   const notify = useNotify();
 
-  // インスタンスは1つだけ作られる
-  // biome-ignore lint: correctness/useExhaustiveDependencies
+  // biome-ignore lint/correctness/useExhaustiveDependencies: インスタンスは1つだけ作られる
   const connector = useMemo(() => new MrbwriteController(...params), []);
 
   const notifyError = useCallback(

@@ -45,8 +45,9 @@ export const ErrorDetailModal = ({
             boxShadow: "0px 3px 10px gray",
           }}
         >
-          {error.split("\n").map((t) => (
-            <code>{t}</code>
+          {error.split("\n").map((t, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: 適切なkeyが設定できない
+            <code key={index}>{t}</code>
           ))}
         </Sheet>
       </>

@@ -20,77 +20,16 @@
       "react": "recommended"
     },
     "rules": {
-      "recommended": false,
-      "complexity": {
-        "noBannedTypes": "error",
-        "noExtraBooleanCast": "error",
-        "noUselessCatch": "error",
-        "noUselessThisAlias": "error",
-        "noUselessTypeConstraint": "error",
-        "noAdjacentSpacesInRegex": "error"
-      },
+      "preset": "recommended",
       "correctness": {
-        "noConstAssign": "error",
-        "noConstantCondition": "error",
-        "noEmptyCharacterClassInRegex": "error",
-        "noEmptyPattern": "error",
-        "noGlobalObjectCalls": "error",
-        "noInnerDeclarations": "error",
-        "noInvalidConstructorSuper": "error",
-        "noNonoctalDecimalEscape": "error",
-        "noPrecisionLoss": "error",
-        "noSelfAssign": "error",
-        "noSetterReturn": "error",
-        "noSwitchDeclarations": "error",
-        "noUndeclaredVariables": "error",
-        "noUnreachable": "error",
-        "noUnreachableSuper": "error",
-        "noUnsafeFinally": "error",
-        "noUnsafeOptionalChaining": "error",
-        "noUnusedLabels": "error",
-        "noUnusedVariables": "error",
-        "useExhaustiveDependencies": "error",
-        "useHookAtTopLevel": "error",
-        "useIsNan": "error",
-        "useValidForDirection": "error",
-        "useYield": "error",
-        "noInvalidBuiltinInstantiation": "error",
-        "useValidTypeof": "error"
+        "noUndeclaredVariables": "error"
       },
       "style": {
         "noNamespace": "error",
-        "useAsConstAssertion": "error",
-        "useArrayLiterals": "off"
+        "useAsConstAssertion": "error"
       },
       "suspicious": {
-        "noAssignInExpressions": "error",
-        "noAsyncPromiseExecutor": "error",
-        "noCatchAssign": "error",
-        "noClassAssign": "error",
-        "noCompareNegZero": "error",
-        "noControlCharactersInRegex": "error",
-        "noDebugger": "error",
-        "noDuplicateCase": "error",
-        "noDuplicateClassMembers": "error",
-        "noDuplicateObjectKeys": "error",
-        "noDuplicateParameters": "error",
-        "noEmptyBlockStatements": "error",
-        "noExplicitAny": "error",
-        "noExtraNonNullAssertion": "error",
-        "noFallthroughSwitchClause": "error",
-        "noFunctionAssign": "error",
-        "noGlobalAssign": "error",
-        "noImportAssign": "error",
-        "noMisleadingCharacterClass": "error",
-        "noMisleadingInstantiator": "error",
-        "noPrototypeBuiltins": "error",
-        "noRedeclare": "error",
-        "noShadowRestrictedNames": "error",
-        "noSparseArray": "error",
-        "noUnsafeDeclarationMerging": "error",
-        "noUnsafeNegation": "error",
-        "useGetterReturn": "error",
-        "noWith": "error"
+        "noEmptyBlockStatements": "error"
       }
     }
   },

@@ -37,7 +37,6 @@
     "formatter": {
       "trailingCommas": "es5",
       "semicolons": "always"
-    },
-    "globals": ["React"]
+    }
   }
 }

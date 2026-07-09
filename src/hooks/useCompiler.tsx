@@ -1,5 +1,5 @@
 import {
-  ComponentType,
+  type ComponentType,
   useCallback,
   useEffect,
   useMemo,
@@ -7,7 +7,7 @@ import {
 } from "react";
 import { CompilerCard } from "#/components/CompilerCard";
 import { type CompileStatus, useCompile } from "./useCompile";
-import { useVersions, Version } from "./useVersions";
+import { useVersions, type Version } from "./useVersions";
 
 type UseCompiler = [
   card: ComponentType,

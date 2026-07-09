@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Version } from "./useVersions";
+import type { Version } from "./useVersions";
 
 export type CompileStatus = {
   status: "idle" | "compile" | "success" | "error";

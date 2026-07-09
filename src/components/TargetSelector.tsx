@@ -5,7 +5,7 @@ import {
   MdDeveloperBoard as DeveloperBoardIcon,
   MdNorthWest as NorthWestIcon,
 } from "react-icons/md";
-import { Target } from "#/libs/mrbwrite/controller";
+import type { Target } from "#/libs/mrbwrite/controller";
 import ESP32 from "/images/ESP32.webp";
 import RBoard from "/images/Rboard.webp";
 import RP2040 from "/images/rp2040.webp";

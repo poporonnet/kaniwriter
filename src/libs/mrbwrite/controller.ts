@@ -1,8 +1,8 @@
 import { calculateCrc8 } from "../../utils/calculateCrc8";
 import { green, red } from "../color";
-import { Failure, Result, Success } from "../result";
-import { MrbwriteMiddleware } from "./middleware";
-import { MrbwriteProfile } from "./profile";
+import { Failure, type Result, Success } from "../result";
+import type { MrbwriteMiddleware } from "./middleware";
+import type { MrbwriteProfile } from "./profile";
 
 export const targets = ["ESP32", "RBoard", "RP2040"] as const;
 export type Target = (typeof targets)[number];

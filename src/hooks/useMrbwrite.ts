@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { MrbwriteController } from "#/libs/mrbwrite/controller";
-import { MrbwriteMiddleware } from "#/libs/mrbwrite/middleware";
-import { Result, Success } from "#/libs/result";
+import type { MrbwriteMiddleware } from "#/libs/mrbwrite/middleware";
+import { type Result, Success } from "#/libs/result";
 import { useNotify } from "./useNotify";
 
 export type Method<Middleware extends MrbwriteMiddleware<unknown>> = {

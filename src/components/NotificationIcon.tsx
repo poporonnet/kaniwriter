@@ -1,4 +1,4 @@
-import { ColorPaletteProp } from "@mui/joy";
+import type { ColorPaletteProp } from "@mui/joy";
 import {
   MdCheckCircleOutline as CheckCircleOutlineIcon,
   MdErrorOutline as ErrorOutlineIcon,

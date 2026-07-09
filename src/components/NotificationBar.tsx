@@ -1,14 +1,14 @@
 import { IconButton, Snackbar, Stack, Typography } from "@mui/joy";
 import {
-  Dispatch,
-  SetStateAction,
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
 import { MdClose as CloseIcon } from "react-icons/md";
-import { Notification } from "../contexts/NotificationContext";
+import type { Notification } from "../contexts/NotificationContext";
 import { NotificationIcon } from "./NotificationIcon";
 
 export const NotificationBar = ({

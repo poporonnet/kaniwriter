@@ -1,5 +1,5 @@
 import { Box } from "@mui/joy";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Header } from "#/components/Header";
 
 export const Layout = ({ children }: { children: ReactNode }) => (

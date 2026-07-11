@@ -1,5 +1,5 @@
 import {
-  ComponentType,
+  type ComponentType,
   useCallback,
   useEffect,
   useMemo,
@@ -7,7 +7,7 @@ import {
 } from "react";
 import { CompilerCard } from "#/components/CompilerCard";
 import { type CompileStatus, useCompile } from "./useCompile";
-import { useVersions, Version } from "./useVersions";
+import { useVersions, type Version } from "./useVersions";
 
 type UseCompiler = [
   card: ComponentType<{ onClickOpenError: () => void }>,
@@ -40,7 +40,7 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
   );
 
   useEffect(() => {
-    if (getVersionsStatus != "success") return;
+    if (getVersionsStatus !== "success") return;
     const version =
       localStorage.getItem("compilerVersion") ||
       import.meta.env.VITE_COMPILER_VERSION_FALLBACK;

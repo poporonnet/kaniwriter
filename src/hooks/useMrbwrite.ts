@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { MrbwriteController } from "#/libs/mrbwrite/controller";
-import { MrbwriteMiddleware } from "#/libs/mrbwrite/middleware";
-import { Result, Success } from "#/libs/result";
+import type { MrbwriteMiddleware } from "#/libs/mrbwrite/middleware";
+import { type Result, Success } from "#/libs/result";
 import { useNotify } from "./useNotify";
 
 export type Method<Middleware extends MrbwriteMiddleware<unknown>> = {
@@ -40,8 +40,7 @@ export const useMrbwrite = <Target>(
   const [t] = useTranslation("ns1");
   const notify = useNotify();
 
-  // インスタンスは1つだけ作られる
-  // biome-ignore lint: correctness/useExhaustiveDependencies
+  // biome-ignore lint/correctness/useExhaustiveDependencies: インスタンスは1つだけ作られる
   const connector = useMemo(() => new MrbwriteController(...params), []);
 
   const notifyError = useCallback(

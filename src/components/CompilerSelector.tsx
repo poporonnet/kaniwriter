@@ -1,7 +1,7 @@
 import { Option, Select } from "@mui/joy";
-import { SxProps } from "@mui/joy/styles/types";
+import type { SxProps } from "@mui/joy/styles/types";
 import { useTranslation } from "react-i18next";
-import { Version } from "#/hooks/useVersions";
+import type { Version } from "#/hooks/useVersions";
 
 type Props = {
   versions: Version[];

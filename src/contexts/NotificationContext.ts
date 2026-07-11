@@ -1,4 +1,4 @@
-import { ColorPaletteProp } from "@mui/joy";
+import type { ColorPaletteProp } from "@mui/joy";
 import { createContext } from "react";
 
 export type Notify = (notification: Notification) => void;

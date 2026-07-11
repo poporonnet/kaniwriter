@@ -4,7 +4,7 @@ import {
   MdCheck as CheckIcon,
   MdErrorOutline as ErrorOutlineIcon,
 } from "react-icons/md";
-import { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
+import type { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
 
 type CompileStatusProps = CompileStatusType & {
   onClickOpenError: () => void;

@@ -1,5 +1,5 @@
-import { Result } from "#/libs/result";
-import { MrbwriteProfile } from "./profile";
+import type { Result } from "#/libs/result";
+import type { MrbwriteProfile } from "./profile";
 
 export interface MrbwriteMiddleware<Device> {
   getProfile(): MrbwriteProfile | undefined;

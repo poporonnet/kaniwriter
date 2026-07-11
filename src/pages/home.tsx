@@ -11,11 +11,11 @@ import { useMrbwrite } from "#/hooks/useMrbwrite";
 import { useOption } from "#/hooks/useOption";
 import { useQuery } from "#/hooks/useQuery";
 import { useTarget } from "#/hooks/useTarget";
-import { Target } from "#/libs/mrbwrite/controller";
+import type { Target } from "#/libs/mrbwrite/controller";
 import { serialMiddleware } from "#/libs/mrbwrite/middleware";
 import {
   esp32,
-  MrbwriteProfile,
+  type MrbwriteProfile,
   rboard,
   rp2040,
 } from "#/libs/mrbwrite/profile";
@@ -161,7 +161,7 @@ export const Home = () => {
                 })
               }
             />
-            {target == "RP2040" && (
+            {target === "RP2040" && (
               <Button
                 onClick={() => method.sendBreak()}
                 variant="outlined"

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/poporonnet/kaniwriter/compare/v1.13.0...v1.14.0) (2026-07-11)
+
+
+### Features
+
+* コンパイラのエラーメッセージをコードブロック内に表示するように変更 ([#1332](https://github.com/poporonnet/kaniwriter/issues/1332)) ([c7a7e0a](https://github.com/poporonnet/kaniwriter/commit/c7a7e0ac2cb8fb6c296509c60c9fe8cf189ea7f4))
+
 ## [1.13.0](https://github.com/poporonnet/kaniwriter/compare/v1.12.0...v1.13.0) (2026-07-01)
 
 

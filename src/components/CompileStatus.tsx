@@ -1,20 +1,22 @@
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/joy";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   MdCheck as CheckIcon,
   MdErrorOutline as ErrorOutlineIcon,
 } from "react-icons/md";
 import type { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
-import { ErrorDetailModal } from "./ErrorMessageModal";
+
+type CompileStatusProps = CompileStatusType & {
+  onClickOpenError: () => void;
+};
 
 export const CompileStatus = ({
   status,
   errorName,
   errorBody,
-}: CompileStatusType) => {
+  onClickOpenError,
+}: CompileStatusProps) => {
   const [t] = useTranslation();
-  const [isOpenErrorDetail, setIsOpenErrorDetail] = useState(false);
 
   return (
     <Box
@@ -65,38 +67,29 @@ export const CompileStatus = ({
             </SvgIcon>
           </Box>
           {errorBody ? (
-            <>
-              <Box
-                display="flex"
-                flexDirection="column"
-                textAlign="center"
-                width="100%"
-                py="0.2rem"
-                sx={{
-                  userSelect: "none",
-                  ":hover": {
-                    background: "#FFEEEE",
-                  },
-                  ":active": {
-                    background: "#FFDDDD",
-                  },
-                }}
-                borderRadius="0.5rem"
-                onClick={() => setIsOpenErrorDetail((prev) => !prev)}
-              >
-                <code>{errorName ?? "unknown error"}</code>
-                <Typography fontSize="0.8rem" color="danger">
-                  {isOpenErrorDetail
-                    ? t("クリックして閉じる")
-                    : t("エラーの詳細を見る")}
-                </Typography>
-              </Box>
-              <ErrorDetailModal
-                error={errorBody}
-                isOpen={isOpenErrorDetail}
-                setIsOpen={setIsOpenErrorDetail}
-              />
-            </>
+            <Box
+              display="flex"
+              flexDirection="column"
+              textAlign="center"
+              width="100%"
+              py="0.2rem"
+              sx={{
+                userSelect: "none",
+                ":hover": {
+                  background: "#FFEEEE",
+                },
+                ":active": {
+                  background: "#FFDDDD",
+                },
+              }}
+              borderRadius="0.5rem"
+              onClick={() => onClickOpenError()}
+            >
+              <code>{errorName ?? "unknown error"}</code>
+              <Typography fontSize="0.8rem" color="danger">
+                {t("エラーの詳細を見る")}
+              </Typography>
+            </Box>
           ) : (
             <code>{errorName ?? "unknown error"}</code>
           )}

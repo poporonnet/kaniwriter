@@ -20,4 +20,15 @@ body {
 /* shiki.jsのフォント指定 */
 code {
   font-family: "Noto Sans Mono", monospace;
+
+  span.line.highlighted.error {
+    text-decoration: underline wavy red;
+  }
+
+  span.line.error-message {
+    display: inline-block;
+    width: 100%;
+    color: red;
+    background: #ffdddd;
+  }
 }

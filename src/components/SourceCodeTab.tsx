@@ -1,15 +1,21 @@
 import { Box, Button, Card, IconButton, Snackbar, Typography } from "@mui/joy";
+import { transformerNotationErrorLevel } from "@shikijs/transformers";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdFileCopy as FileCopyIcon } from "react-icons/md";
 import { useHighlighter } from "#/hooks/useHighlighter";
+import { embedError } from "#/utils/shikiEmbedError";
+import { transformerErrorMessage } from "#/utils/shikiTransformer";
 
 interface CodeProps {
-  sourceCode: string;
+  source: { code: string; error?: string };
   disable: boolean;
 }
 
-export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
+export const SourceCodeTab = ({
+  source,
+  disable,
+}: CodeProps) => {
   const [html, setHtml] = useState<string>("");
   // 送信したmruby/cのソースコードを表示するかどうか
   const [isOpen, setIsOpen] = useState(false);
@@ -17,8 +23,8 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
   const highlighter = useHighlighter();
 
   const handleCopy = () => {
-    if (!sourceCode) return;
-    navigator.clipboard.writeText(sourceCode);
+    if (!source.code) return;
+    navigator.clipboard.writeText(source.code);
     setShowCopied(true);
   };
 
@@ -31,12 +37,17 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
   // ソースコードをシンタックスハイライト付きのHTMLに変換
   useEffect(() => {
     if (!highlighter) return;
-    const html = highlighter.codeToHtml(sourceCode, {
+    const code = embedError(source.code, source.error ?? ""); // エラーメッセージをソースコードに埋め込む
+    const html = highlighter.codeToHtml(code, {
       lang: "ruby",
       theme: "github-light",
+      transformers: [
+        transformerNotationErrorLevel(),
+        transformerErrorMessage(),
+      ],
     });
     setHtml(html);
-  }, [sourceCode, highlighter]);
+  }, [source.code, source.error, highlighter]);
   const [showCopied, setShowCopied] = useState(false);
 
   return (
@@ -82,7 +93,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
           >
             <IconButton
               onClick={() => handleCopy()}
-              disabled={!sourceCode}
+              disabled={!source.code}
               color="primary"
               sx={{
                 position: "absolute",

@@ -172,7 +172,13 @@ export const Home = () => {
           </Box>
         </Box>
       </Box>
-      <SourceCodeTab sourceCode={sourceCode.at(0) ?? ""} disable={!id} />
+      <SourceCodeTab
+        source={{
+          code: sourceCode.at(0) ?? "",
+          error: compileStatus.errorBody,
+        }}
+        disable={!id}
+      />
     </>
   );
 };

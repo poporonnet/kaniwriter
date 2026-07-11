@@ -17,7 +17,6 @@ body {
   padding: 0;
 }
 
-/* shiki.jsのフォント指定 */
 code {
   font-family: "Noto Sans Mono", monospace;
 }

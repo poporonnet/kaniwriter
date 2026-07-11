@@ -43,6 +43,7 @@ export const SourceCodeTab = ({
     const html = highlighter.codeToHtml(code, {
       lang: "ruby",
       theme: "github-light",
+      mergeWhitespaces: false,
       transformers: [
         transformerNotationErrorLevel(),
         transformerErrorMessage(),

@@ -19,8 +19,8 @@ export const transformerErrorMessage = (): ShikiTransformer => ({
     );
     if (!match?.groups) return;
 
-    const message = match.groups["message"];
-    const column = parseInt(match.groups["column"]);
+    const message = match.groups.message;
+    const column = parseInt(match.groups.column, 10);
     const indent = [...new Array(column).keys()].map(() => " ").join("");
 
     node.children = [

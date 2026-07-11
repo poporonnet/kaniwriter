@@ -67,31 +67,29 @@ export const CompileStatus = ({
             </SvgIcon>
           </Box>
           {errorBody ? (
-            <>
-              <Box
-                display="flex"
-                flexDirection="column"
-                textAlign="center"
-                width="100%"
-                py="0.2rem"
-                sx={{
-                  userSelect: "none",
-                  ":hover": {
-                    background: "#FFEEEE",
-                  },
-                  ":active": {
-                    background: "#FFDDDD",
-                  },
-                }}
-                borderRadius="0.5rem"
-                onClick={() => onClickOpenError()}
-              >
-                <code>{errorName ?? "unknown error"}</code>
-                <Typography fontSize="0.8rem" color="danger">
-                  {t("エラーの詳細を見る")}
-                </Typography>
-              </Box>
-            </>
+            <Box
+              display="flex"
+              flexDirection="column"
+              textAlign="center"
+              width="100%"
+              py="0.2rem"
+              sx={{
+                userSelect: "none",
+                ":hover": {
+                  background: "#FFEEEE",
+                },
+                ":active": {
+                  background: "#FFDDDD",
+                },
+              }}
+              borderRadius="0.5rem"
+              onClick={() => onClickOpenError()}
+            >
+              <code>{errorName ?? "unknown error"}</code>
+              <Typography fontSize="0.8rem" color="danger">
+                {t("エラーの詳細を見る")}
+              </Typography>
+            </Box>
           ) : (
             <code>{errorName ?? "unknown error"}</code>
           )}

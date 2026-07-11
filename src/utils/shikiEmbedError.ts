@@ -10,8 +10,8 @@ export const embedError = (sourceCode: string, error: string) => {
     column: string;
     message: string;
   };
-  const line = parseInt(groups.line);
-  const column = parseInt(groups.column);
+  const line = parseInt(groups.line, 10);
+  const column = parseInt(groups.column, 10);
   const text = lines[line - 1];
   const indentDepth = text.length - text.trimStart().length;
   lines[line - 1] =

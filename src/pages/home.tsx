@@ -72,6 +72,8 @@ export const Home = () => {
     startConnection
   );
 
+  const [sourceCodeOpened, setSourceCodeOpened] = useState(false);
+
   useEffect(() => {
     if (!option.autoConnect) return;
 
@@ -129,7 +131,7 @@ export const Home = () => {
             gap: "1.5rem",
           }}
         >
-          <CompilerCard />
+          <CompilerCard onClickOpenError={() => setSourceCodeOpened(true)} />
           <TargetSelector />
           <OptionList />
         </Box>
@@ -172,7 +174,15 @@ export const Home = () => {
           </Box>
         </Box>
       </Box>
-      <SourceCodeTab sourceCode={sourceCode.at(0) ?? ""} disable={!id} />
+      <SourceCodeTab
+        source={{
+          code: sourceCode.at(0) ?? "",
+          error: compileStatus.errorBody,
+        }}
+        opened={sourceCodeOpened}
+        toggle={() => setSourceCodeOpened((prev) => !prev)}
+        disable={!id}
+      />
     </>
   );
 };

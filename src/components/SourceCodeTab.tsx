@@ -9,16 +9,18 @@ import { transformerErrorMessage } from "#/utils/shikiTransformer";
 
 interface CodeProps {
   source: { code: string; error?: string };
+  opened: boolean;
+  toggle: () => void;
   disable: boolean;
 }
 
 export const SourceCodeTab = ({
   source,
+  opened,
+  toggle,
   disable,
 }: CodeProps) => {
   const [html, setHtml] = useState<string>("");
-  // 送信したmruby/cのソースコードを表示するかどうか
-  const [isOpen, setIsOpen] = useState(false);
   const [t] = useTranslation();
   const highlighter = useHighlighter();
 
@@ -56,17 +58,17 @@ export const SourceCodeTab = ({
         minWidth: "41rem",
         maxWidth: "65rem",
         width: "100%",
-        mb: isOpen ? "2rem" : "0",
+        mb: opened ? "2rem" : "0",
       }}
     >
       <Card
         sx={{
-          borderRadius: isOpen ? "1rem" : "1rem 1rem 0 0",
+          borderRadius: opened ? "1rem" : "1rem 1rem 0 0",
         }}
       >
         <Button
           variant="plain"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggle}
           sx={{
             height: "2rem",
           }}
@@ -77,11 +79,11 @@ export const SourceCodeTab = ({
               color: "inherit",
             }}
           >
-            {isOpen ? t("ソースコードを非表示") : t("ソースコードを表示")}
+            {opened ? t("ソースコードを非表示") : t("ソースコードを表示")}
           </Typography>
         </Button>
 
-        {isOpen && (
+        {opened && (
           <Box
             sx={{
               display: "flex",

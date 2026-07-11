@@ -10,7 +10,7 @@ import { type CompileStatus, useCompile } from "./useCompile";
 import { useVersions, Version } from "./useVersions";
 
 type UseCompiler = [
-  card: ComponentType,
+  card: ComponentType<{ onClickOpenError: () => void }>,
   {
     code: Uint8Array[] | undefined;
     sourceCode: string[];
@@ -49,13 +49,14 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
   }, [versions, getVersionsStatus, onChangeVersion]);
 
   return [
-    () => (
+    ({ onClickOpenError }: { onClickOpenError: () => void }) => (
       <CompilerCard
         versions={versions}
         getVersionsStatus={getVersionsStatus}
         version={version}
         compileStatus={compileStatus}
         onChangeVersion={onChangeVersion}
+        onClickOpenError={onClickOpenError}
       />
     ),
     results,

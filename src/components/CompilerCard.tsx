@@ -11,12 +11,14 @@ export const CompilerCard = ({
   version,
   compileStatus,
   onChangeVersion,
+  onClickOpenError,
 }: {
   versions: Version[];
   getVersionsStatus: GetVersionsStatus;
   version: Version | undefined;
   compileStatus: CompileStatusType;
   onChangeVersion: (version: Version) => void;
+  onClickOpenError: () => void;
 }) => {
   const [t] = useTranslation();
 
@@ -58,6 +60,7 @@ export const CompilerCard = ({
             : compileStatus.errorName
         }
         errorBody={compileStatus.errorBody}
+        onClickOpenError={onClickOpenError}
       />
     </Sheet>
   );

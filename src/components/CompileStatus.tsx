@@ -1,20 +1,22 @@
 import { Box, CircularProgress, SvgIcon, Typography } from "@mui/joy";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   MdCheck as CheckIcon,
   MdErrorOutline as ErrorOutlineIcon,
 } from "react-icons/md";
 import { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
-import { ErrorDetailModal } from "./ErrorMessageModal";
+
+type CompileStatusProps = CompileStatusType & {
+  onClickOpenError: () => void;
+};
 
 export const CompileStatus = ({
   status,
   errorName,
   errorBody,
-}: CompileStatusType) => {
+  onClickOpenError,
+}: CompileStatusProps) => {
   const [t] = useTranslation();
-  const [isOpenErrorDetail, setIsOpenErrorDetail] = useState(false);
 
   return (
     <Box
@@ -82,20 +84,13 @@ export const CompileStatus = ({
                   },
                 }}
                 borderRadius="0.5rem"
-                onClick={() => setIsOpenErrorDetail((prev) => !prev)}
+                onClick={() => onClickOpenError()}
               >
                 <code>{errorName ?? "unknown error"}</code>
                 <Typography fontSize="0.8rem" color="danger">
-                  {isOpenErrorDetail
-                    ? t("クリックして閉じる")
-                    : t("エラーの詳細を見る")}
+                  {t("エラーの詳細を見る")}
                 </Typography>
               </Box>
-              <ErrorDetailModal
-                error={errorBody}
-                isOpen={isOpenErrorDetail}
-                setIsOpen={setIsOpenErrorDetail}
-              />
             </>
           ) : (
             <code>{errorName ?? "unknown error"}</code>

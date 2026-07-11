@@ -1,4 +1,4 @@
-import { ShikiTransformer } from "shiki/core";
+import type { ShikiTransformer } from "shiki/core";
 
 /**
  * `// [!code errorMessage:(列数) (メッセージ)]` という形式で指定した場所にエラーメッセージを表示する

@@ -1,6 +1,6 @@
-import { Failure, Result, Success } from "#/libs/result";
-import { MrbwriteMiddleware } from "../middleware";
-import { MrbwriteProfile } from "../profile";
+import { Failure, type Result, Success } from "#/libs/result";
+import type { MrbwriteMiddleware } from "../middleware";
+import type { MrbwriteProfile } from "../profile";
 
 export class MrbwriteSerialMiddleware
   implements MrbwriteMiddleware<SerialPort>

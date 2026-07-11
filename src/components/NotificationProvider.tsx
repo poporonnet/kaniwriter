@@ -1,6 +1,6 @@
-import { ReactNode, useCallback, useState } from "react";
+import { type ReactNode, useCallback, useState } from "react";
 import {
-  Notification,
+  type Notification,
   NotificationContext,
 } from "../contexts/NotificationContext";
 import { NotificationBar } from "./NotificationBar";

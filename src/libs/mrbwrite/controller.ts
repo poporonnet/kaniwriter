@@ -1,8 +1,8 @@
 import { calculateCrc8 } from "../../utils/calculateCrc8";
 import { green, red } from "../color";
-import { Failure, Result, Success } from "../result";
-import { MrbwriteMiddleware } from "./middleware";
-import { MrbwriteProfile } from "./profile";
+import { Failure, type Result, Success } from "../result";
+import type { MrbwriteMiddleware } from "./middleware";
+import type { MrbwriteProfile } from "./profile";
 
 export const targets = ["ESP32", "RBoard", "RP2040"] as const;
 export type Target = (typeof targets)[number];
@@ -89,7 +89,7 @@ export class MrbwriteController<
     this.handleText(`\r\n${green("> connection established.")}\r\n`);
 
     // FIXME: 仮実装なので直す
-    if (this.middleware.getProfile()?.name == "RP2040") {
+    if (this.middleware.getProfile()?.name === "RP2040") {
       await this.sendBreak();
     }
 
@@ -163,7 +163,7 @@ export class MrbwriteController<
       );
 
       await this.sinkClosed?.catch((reason) => {
-        if (reason == abortReason) return;
+        if (reason === abortReason) return;
 
         this.handleText(`\r\n${red("> port closed unexpectedly.")}\r\n`);
         throw reason;
@@ -407,7 +407,7 @@ export class MrbwriteController<
       for (const idx of [...chunks.map((_, i) => i)]) {
         await writer.ready;
         await writer.write(chunks[idx]);
-        if (idx == chunks.length - 1) break;
+        if (idx === chunks.length - 1) break;
 
         await sleep(waitTimeMs);
       }

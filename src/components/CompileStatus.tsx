@@ -5,7 +5,7 @@ import {
   MdCheck as CheckIcon,
   MdErrorOutline as ErrorOutlineIcon,
 } from "react-icons/md";
-import { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
+import type { CompileStatus as CompileStatusType } from "#/hooks/useCompile";
 import { ErrorDetailModal } from "./ErrorMessageModal";
 
 export const CompileStatus = ({

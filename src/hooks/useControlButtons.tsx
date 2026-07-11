@@ -1,10 +1,10 @@
-import { ComponentType } from "react";
+import type { ComponentType } from "react";
 import { ControlButtons } from "#/components/ControlButtons";
-import { MrbwriteController, Target } from "#/libs/mrbwrite/controller";
-import { MrbwriteMiddleware } from "#/libs/mrbwrite/middleware";
-import { CompileStatus } from "./useCompile";
-import { Method } from "./useMrbwrite";
-import { Option } from "./useOption";
+import type { MrbwriteController, Target } from "#/libs/mrbwrite/controller";
+import type { MrbwriteMiddleware } from "#/libs/mrbwrite/middleware";
+import type { CompileStatus } from "./useCompile";
+import type { Method } from "./useMrbwrite";
+import type { Option } from "./useOption";
 
 type UseControlButtons = [buttons: ComponentType];
 

@@ -116,6 +116,7 @@ export const SourceCodeTab = ({ sourceCode, disable }: CodeProps) => {
                 width: "100%",
                 overflowX: "scroll",
               }}
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: Shikiの正しい使い方
               dangerouslySetInnerHTML={{ __html: html }}
             ></div>
           </Box>

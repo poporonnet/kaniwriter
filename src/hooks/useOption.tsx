@@ -1,4 +1,4 @@
-import { ComponentType, useMemo, useState } from "react";
+import { type ComponentType, useMemo, useState } from "react";
 import { OptionList } from "#/components/OptionList";
 import { useStoreState } from "./useStoreState";
 

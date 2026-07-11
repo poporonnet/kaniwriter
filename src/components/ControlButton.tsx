@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@mui/joy";
+import { Button, type ButtonProps } from "@mui/joy";
 
 type Props = {
   label: string;

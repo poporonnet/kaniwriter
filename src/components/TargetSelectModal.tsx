@@ -1,6 +1,6 @@
 import { Modal, ModalClose, RadioGroup, Sheet, Typography } from "@mui/joy";
 import { useTranslation } from "react-i18next";
-import { Target } from "#/libs/mrbwrite/controller";
+import type { Target } from "#/libs/mrbwrite/controller";
 import { TargetCard } from "./TargetCard";
 import { targets } from "./TargetSelector";
 

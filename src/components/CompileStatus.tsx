@@ -17,7 +17,14 @@ export const CompileStatus = ({
   const [isOpenErrorDetail, setIsOpenErrorDetail] = useState(false);
 
   return (
-    <Group gap={0} py="0.5rem" px="1.5rem" w="100%" justify="center">
+    <Group
+      gap={0}
+      py="0.5rem"
+      px="1.5rem"
+      w="100%"
+      justify="center"
+      pos="relative"
+    >
       {status === "idle" && (
         <>
           {t("コンパイル待機中")}

@@ -1,4 +1,10 @@
-import { CloseButton, Modal, Text, Title } from "@mantine/core";
+import {
+  CloseButton,
+  Modal,
+  Text,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,6 +17,7 @@ export const UnsupportedBrowserModal = ({
 }: UnsupportedBrowserModalProps) => {
   const [open, setOpen] = useState(defaultOpen);
   const [t] = useTranslation();
+  const theme = useMantineTheme();
 
   return (
     <Modal
@@ -23,26 +30,28 @@ export const UnsupportedBrowserModal = ({
       padding={0}
       overlayProps={{
         backgroundOpacity: 0.25,
-        color: "#0B0D0E",
+        color: "#32383e",
         blur: 8,
       }}
       styles={{
         content: {
-          fontSize: "0.875",
-          outline: "3px solid var(--mantine-color-primary-4)",
-          outlineOffset: "0.17rem",
+          boxShadow: "none",
+          minWidth: "500px",
+          fontSize: "0.875rem",
+          outline: `2px solid ${theme.colors.primary[5]}`,
+          border: `1px solid ${theme.colors.neutral[3]}`,
         },
         body: {
           overflow: "visible",
-        }
+        },
       }}
     >
       <Title
         order={4}
         fz="1.25rem"
-        mt="0.5rem"
-        m="8px"
-        style={{ fontWeight: "bold", letterSpacing: "-0.025em" }}
+        lh="1.875rem"
+        m="0.5rem"
+        style={{ fontWeight: 600, letterSpacing: "-0.025em" }}
       >
         {t("このブラウザはサポートされていません")}
       </Title>
@@ -54,6 +63,9 @@ export const UnsupportedBrowserModal = ({
         top="0.75rem"
         right="0.75rem"
         m="0.25rem"
+        style={{
+          outline: "none",
+        }}
       />
 
       <Text fz="0.875rem" m="0.5rem" style={{ whiteSpace: "pre-line" }}>

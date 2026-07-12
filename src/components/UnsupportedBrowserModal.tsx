@@ -21,6 +21,11 @@ export const UnsupportedBrowserModal = ({
       size="fit-content"
       radius="0.5rem"
       padding={0}
+      overlayProps={{
+        backgroundOpacity: 0.25,
+        color: "#0B0D0E",
+        blur: 8,
+      }}
       styles={{
         content: {
           border: "1px solid var(--mantine-color-neutral-3)",

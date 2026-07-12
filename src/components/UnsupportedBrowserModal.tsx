@@ -18,14 +18,13 @@ export const UnsupportedBrowserModal = ({
       onClose={() => setOpen(false)}
       withCloseButton={false}
       centered
-      size="50rem"
+      size="fit-content"
       radius="0.5rem"
       padding={0}
       styles={{
         content: {
-          width: "80%",
-          minWidth: "500px",
           border: "1px solid var(--mantine-color-neutral-3)",
+          fontSize: "0.875"
         },
       }}
     >

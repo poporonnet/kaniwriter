@@ -28,16 +28,20 @@ export const UnsupportedBrowserModal = ({
       }}
       styles={{
         content: {
-          border: "1px solid var(--mantine-color-neutral-3)",
-          fontSize: "0.875"
+          fontSize: "0.875",
+          outline: "3px solid var(--mantine-color-primary-4)",
+          outlineOffset: "0.17rem",
         },
+        body: {
+          overflow: "visible",
+        }
       }}
     >
       <Title
         order={4}
         fz="1.25rem"
         mt="0.5rem"
-        m="0.5rem"
+        m="8px"
         style={{ fontWeight: "bold", letterSpacing: "-0.055em" }}
       >
         {t("このブラウザはサポートされていません")}
@@ -52,7 +56,7 @@ export const UnsupportedBrowserModal = ({
         m="0.25rem"
       />
 
-      <Text fz="0.85rem" m="0.5rem" style={{ whiteSpace: "pre-line" }}>
+      <Text fz="0.875rem" m="0.5rem" style={{ whiteSpace: "pre-line" }}>
         {t("対応するブラウザを使ってください")}
       </Text>
     </Modal>

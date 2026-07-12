@@ -38,7 +38,7 @@ export const UnsupportedBrowserModal = ({
           boxShadow: "none",
           minWidth: "500px",
           fontSize: "0.875rem",
-          outline: `2px solid ${theme.colors.primary[5]}`,
+          outline: `2px solid #0060df`,
           border: `1px solid ${theme.colors.neutral[3]}`,
         },
         body: {

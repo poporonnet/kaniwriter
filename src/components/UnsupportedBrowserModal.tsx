@@ -1,4 +1,5 @@
 import {
+  Box,
   CloseButton,
   Modal,
   Text,
@@ -38,14 +39,23 @@ export const UnsupportedBrowserModal = ({
           boxShadow: "none",
           minWidth: "500px",
           fontSize: "0.875rem",
-          outline: `2px solid #0060df`,
           border: `1px solid ${theme.colors.neutral[3]}`,
+          overflow: "visible",
         },
         body: {
           overflow: "visible",
         },
       }}
     >
+      <Box
+        pos="absolute"
+        inset={-2.8}
+        bd="2px solid #0060df"
+        bdrs="0.625rem"
+        style={{
+          outline: "1px solid white",
+        }}
+      />
       <Title
         order={4}
         fz="1.25rem"

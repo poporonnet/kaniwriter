@@ -33,7 +33,7 @@ export const UnsupportedBrowserModal = ({
         fz="1.25rem"
         mt="0.5rem"
         m="0.5rem"
-        style={{ fontWeight: "bold" }}
+        style={{ fontWeight: "bold", letterSpacing: "-0.055em" }}
       >
         {t("このブラウザはサポートされていません")}
       </Title>

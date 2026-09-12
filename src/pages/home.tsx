@@ -104,8 +104,8 @@ export const Home = () => {
     i18n.changeLanguage(locale);
   }, [i18n]);
 
-  // WebSerialAPIに対応するブラウザかどうかを確認
-  const isSupported = "serial" in navigator;
+  // Web Serial API および Uint8Array.fromBase64 に対応するブラウザかどうかを確認
+  const isSupported = "serial" in navigator && "fromBase64" in Uint8Array;
   return (
     <>
       <UnsupportedBrowserModal defaultOpen={!isSupported} />

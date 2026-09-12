@@ -32,7 +32,7 @@ export const useCompiler = (
     (version: Version) => {
       localStorage.setItem("compilerVersion", version);
       const url = new URL(location.href);
-      url.searchParams.set("version", version);
+      url.searchParams.set("compiler_version", version);
       history.replaceState(null, "", url);
       setVersion(version);
       compile(version);
@@ -53,11 +53,8 @@ export const useCompiler = (
       localStorage.getItem("compilerVersion") ??
       import.meta.env.VITE_COMPILER_VERSION_FALLBACK;
     if (!versions.includes(newVersion)) return;
-    if (queryVersion) {
-      setVersion(newVersion);
-      compile(newVersion);
-      return;
-    }
+    setVersion(newVersion);
+    compile(newVersion);
     onChangeVersion(newVersion);
   }, [
     versions,

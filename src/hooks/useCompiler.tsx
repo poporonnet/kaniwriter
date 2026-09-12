@@ -48,17 +48,17 @@ export const useCompiler = (
   useEffect(() => {
     if (getVersionsStatus !== "success") return;
     if (version !== undefined) return;
-    const nextVersion =
+    const newVersion =
       queryVersion ??
       localStorage.getItem("compilerVersion") ??
       import.meta.env.VITE_COMPILER_VERSION_FALLBACK;
-    if (!versions.includes(nextVersion)) return;
+    if (!versions.includes(newVersion)) return;
     if (queryVersion) {
-      setVersion(nextVersion);
-      compile(nextVersion);
+      setVersion(newVersion);
+      compile(newVersion);
       return;
     }
-    onChangeVersion(nextVersion);
+    onChangeVersion(newVersion);
   }, [
     versions,
     getVersionsStatus,

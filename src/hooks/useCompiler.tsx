@@ -49,8 +49,8 @@ export const useCompiler = (
     if (getVersionsStatus !== "success") return;
     if (version !== undefined) return;
     const nextVersion =
-      queryVersion ||
-      localStorage.getItem("compilerVersion") ||
+      queryVersion ??
+      localStorage.getItem("compilerVersion") ??
       import.meta.env.VITE_COMPILER_VERSION_FALLBACK;
     if (!versions.includes(nextVersion)) return;
     if (queryVersion) {

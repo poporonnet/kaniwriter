@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.0](https://github.com/poporonnet/kaniwriter/compare/v1.14.0...v1.15.0) (2026-09-13)
+
+
+### Features
+
+* ブラウザのサポート確認で Uint8Array の Base64 変換が使用できるかもチェックする ([#1409](https://github.com/poporonnet/kaniwriter/issues/1409)) ([d716a2c](https://github.com/poporonnet/kaniwriter/commit/d716a2c8b2dba8572097907c54cb2b83793a3135))
+
 ## [1.14.0](https://github.com/poporonnet/kaniwriter/compare/v1.13.0...v1.14.0) (2026-07-11)
 
 

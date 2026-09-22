@@ -1,4 +1,5 @@
 import "../i18n/i18n";
+import { CodeHighlightAdapterProvider } from "@mantine/code-highlight";
 import {
   CSSVariablesResolver,
   createTheme,
@@ -10,7 +11,9 @@ import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import { Home } from "pages/home";
 import { IconContext } from "react-icons";
 import { Layout } from "./layouts/layout";
+import { shikiAdapter } from "./utils/shikiAdapter";
 import "@mantine/core/styles.css";
+import "@mantine/code-highlight/styles.css";
 import "@mantine/notifications/styles.css";
 
 const theme = extendTheme({
@@ -108,12 +111,14 @@ export const App = () => (
   <CssVarsProvider theme={theme}>
     <CssBaseline />
     <MantineProvider theme={mantineTheme} cssVariablesResolver={resolver}>
-      <Notifications limit={1} containerWidth="22rem" />
-      <IconContext.Provider value={{ size: "1.5rem" }}>
-        <Layout>
-          <Home />
-        </Layout>
-      </IconContext.Provider>
+      <CodeHighlightAdapterProvider adapter={shikiAdapter}>
+        <Notifications limit={1} containerWidth="22rem" />
+        <IconContext.Provider value={{ size: "1.5rem" }}>
+          <Layout>
+            <Home />
+          </Layout>
+        </IconContext.Provider>
+      </CodeHighlightAdapterProvider>
     </MantineProvider>
   </CssVarsProvider>
 );

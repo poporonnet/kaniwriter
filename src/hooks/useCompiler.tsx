@@ -18,7 +18,10 @@ type UseCompiler = [
   },
 ];
 
-export const useCompiler = (id: string | undefined): UseCompiler => {
+export const useCompiler = (
+  id: string | undefined,
+  queryVersion: string | undefined
+): UseCompiler => {
   const [version, setVersion] = useState<Version | undefined>();
   const [versions, getVersionsStatus] = useVersions();
   const [code, setCode] = useState<Uint8Array[]>();
@@ -28,6 +31,9 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
   const onChangeVersion = useCallback(
     (version: Version) => {
       localStorage.setItem("compilerVersion", version);
+      const url = new URL(location.href);
+      url.searchParams.set("compiler_version", version);
+      history.replaceState(null, "", url);
       setVersion(version);
       compile(version);
     },
@@ -41,12 +47,23 @@ export const useCompiler = (id: string | undefined): UseCompiler => {
 
   useEffect(() => {
     if (getVersionsStatus !== "success") return;
-    const version =
-      localStorage.getItem("compilerVersion") ||
+    if (version !== undefined) return;
+    const newVersion =
+      queryVersion ??
+      localStorage.getItem("compilerVersion") ??
       import.meta.env.VITE_COMPILER_VERSION_FALLBACK;
-    if (!versions.includes(version)) return;
-    onChangeVersion(version);
-  }, [versions, getVersionsStatus, onChangeVersion]);
+    if (!versions.includes(newVersion)) return;
+    setVersion(newVersion);
+    compile(newVersion);
+    onChangeVersion(newVersion);
+  }, [
+    versions,
+    getVersionsStatus,
+    onChangeVersion,
+    queryVersion,
+    compile,
+    version,
+  ]);
 
   return [
     ({ onClickOpenError }: { onClickOpenError: () => void }) => (

@@ -24,10 +24,14 @@ export const Home = () => {
   const { i18n } = useTranslation("ns1");
   const query = useQuery();
   const id = query.get("id") ?? undefined;
+  const compilerVersion = query.get("compiler_version") ?? undefined;
 
   const [log, setLog] = useState<string[]>([]);
 
-  const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(id);
+  const [CompilerCard, { code, sourceCode, compileStatus }] = useCompiler(
+    id,
+    compilerVersion
+  );
   const getProfile = useCallback((target: Target): MrbwriteProfile => {
     switch (target) {
       case "ESP32":

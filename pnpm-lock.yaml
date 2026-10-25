@@ -223,7 +223,7 @@ importers:
         version: 19.3.0(@types/react@19.3.0)
       '@types/w3c-web-serial':
         specifier: ^1.0.6
-        version: 1.0.8
+        version: 1.0.9
       '@vitejs/plugin-react':
         specifier: ^6.0.0
         version: 6.1.2(vite@8.3.5(@types/node@24.19.2))
@@ -825,8 +825,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@types/w3c-web-serial@1.0.8':
-    resolution: {integrity: sha512-QQOT+bxQJhRGXoZDZGLs3ksLud1dMNnMiSQtBA0w8KXvLpXX4oM4TZb6J0GgJ8UbCaHo5s9/4VQT8uXy9JER2A==}
+  '@types/w3c-web-serial@1.0.9':
+    resolution: {integrity: sha512-IVPnnhE1IC3Za0j+ykQDMvRwe3m92hcDIAJjUA4aZW+7f+osL48SDS+02Xsqj5dHluXOCsEA9HS10isX4O59EA==}
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     resolution: {integrity: sha512-MTKKkWB7p/0E9xi1d1tHtZ5PiLkGEMIq88pK2CubZjOsLtYTLqhgIgi6zepFa+9GHZ6h05NMCkQxGKiPXMxXtQ==}
@@ -2166,7 +2166,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@types/w3c-web-serial@1.0.8': {}
+  '@types/w3c-web-serial@1.0.9': {}
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     optional: true

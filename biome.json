@@ -38,7 +38,5 @@
       "trailingCommas": "es5",
       "semicolons": "always"
     }
-  },
-  "markdown": null,
-  "yaml": null
+  }
 }

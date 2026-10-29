@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Checkout Repository
-       uses: actions/checkout@v7
+      - name: Checkout Repository
+        uses: actions/checkout@v7
 
-     - name: Set up bun
-       uses: oven-sh/setup-bun@v2
-       with:
-         bun-version: latest
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
-     - name: Install Dependencies
-       run: bun install
+      - name: Install Dependencies
+        run: bun install
 
-     - name: Test
-       run: bun run ci
+      - name: Test
+        run: bun run ci

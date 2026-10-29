@@ -3,7 +3,7 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/node_modules"]
+    "includes": ["**", "!**/node_modules", "!**/*.md", "!**/*.yaml"]
   },
   "formatter": {
     "enabled": true,
@@ -38,5 +38,7 @@
       "trailingCommas": "es5",
       "semicolons": "always"
     }
-  }
+  },
+  "markdown": null,
+  "yaml": null
 }

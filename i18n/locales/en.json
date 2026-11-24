@@ -30,5 +30,8 @@
   "自動検証(Experimental)": "Auto verify (Experimental)",
   "このブラウザはサポートされていません": "This Browser is Not Supported",
   "対応するブラウザを使ってください": "Your current browser does not support some of the features of this website.\nTo use all the features of this site, please use the latest version of Chrome, Edge, or Firefox.",
-  "コピーしました": "Copied"
+  "コピーしました": "Copied",
+  "検証に失敗しました。": "Verification failed",
+  "検証に成功しました。": "Verification succeeded",
+  "プログラムは正しく書き込まれています。": "Program verified successfully"
 }

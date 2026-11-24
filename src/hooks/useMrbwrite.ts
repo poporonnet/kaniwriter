@@ -50,7 +50,7 @@ export const useMrbwrite = <Target>(
         message: `${error.cause}`,
         type: "danger",
       }),
-    [notify],
+    [notify]
   );
 
   const startListen = useCallback(async (): Promise<Result<void, Error>> => {
@@ -75,7 +75,7 @@ export const useMrbwrite = <Target>(
       }
       return Success.value(undefined);
     },
-    [t, connector, notifyError],
+    [t, connector, notifyError]
   );
 
   const disconnect = useCallback(async (): Promise<Result<void, Error>> => {
@@ -119,7 +119,7 @@ export const useMrbwrite = <Target>(
         }, intervalMs);
       });
     },
-    [connector, tryEnterWriteMode],
+    [connector, tryEnterWriteMode]
   );
 
   const sendCommand = useCallback(
@@ -134,7 +134,7 @@ export const useMrbwrite = <Target>(
       }
       return Success.value(undefined);
     },
-    [t, connector, notifyError],
+    [t, connector, notifyError]
   );
 
   const writeCode = useCallback(
@@ -149,7 +149,7 @@ export const useMrbwrite = <Target>(
       }
       return Success.value(undefined);
     },
-    [t, connector, notifyError],
+    [t, connector, notifyError]
   );
 
   const verify = useCallback(
@@ -171,12 +171,12 @@ export const useMrbwrite = <Target>(
       });
       return res;
     },
-    [t, connector, notify, notifyError],
+    [t, connector, notify, notifyError]
   );
 
   const sendBreak = useCallback(
     async () => await connector.sendBreak(),
-    [connector.sendBreak],
+    [connector.sendBreak]
   );
 
   const method = useMemo(
@@ -201,7 +201,7 @@ export const useMrbwrite = <Target>(
       writeCode,
       verify,
       sendBreak,
-    ],
+    ]
   );
 
   return {

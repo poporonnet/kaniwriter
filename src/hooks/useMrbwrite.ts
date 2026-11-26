@@ -158,20 +158,20 @@ export const useMrbwrite = <Target>(
     ): Promise<Result<void, Error>> => {
       const res = await connector.verify(...props);
       if (res.isFailure()) {
-        notifyError("検証に失敗しました。", res.error);
+        notifyError(t("検証に失敗しました。"), res.error);
         console.error(res.error);
         return res;
       }
 
       notify({
-        title: "検証に成功しました。",
-        message: "プログラムは正しく書き込まれています。",
+        title: t("検証に成功しました。"),
+        message: t("プログラムは正しく書き込まれています。"),
         type: "success",
         autoCloseMs: 5000,
       });
       return res;
     },
-    [connector, notify, notifyError]
+    [t, connector, notify, notifyError]
   );
 
   const sendBreak = useCallback(
